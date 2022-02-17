@@ -1,0 +1,6 @@
+//	handle_arrays.cpp : Implementation of CArrays
+//
+/////////////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "handle_arrays.h"

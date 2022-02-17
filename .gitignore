@@ -1,27 +1,13 @@
-# Do not add ExternalData module staging files
-.ExternalData_*
+# Ignore Everything
+*
 
-# Exclude compiled Python objects.
-*.pyc
-*.pyo
-*checkpoint.ipynb
-__pycache__/
-*/cvs/
-*.sql
-*/vb.net/
-*/xml/
-/.vs/
-/.metadata/
-*/Debug/
-*/msvc7/
-/.ExternalData/config/store
-# Exclude Visual Studio stuff
-
-# Exclude VSCode settings and configuration folder
-*.vscode*
-*.vcxproj*
-.vs*
-*.idb*
-*.pdb*
-*.tlog*
-/ito33/common/cvs/Entries
+# But not .cpp
+!*.cpp
+!*.c
+!*.cxx
+!*.hpp
+!*.h
+# Or directories
+!*/
+!.gitignore
+!README.md

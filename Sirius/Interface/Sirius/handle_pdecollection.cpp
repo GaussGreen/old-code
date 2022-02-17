@@ -1,0 +1,6 @@
+//	handle_pdecollection.cpp : Implementation of CPdeCollection
+//
+/////////////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "handle_pdecollection.h"

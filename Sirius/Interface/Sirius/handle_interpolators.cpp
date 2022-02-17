@@ -1,0 +1,6 @@
+//	handle_interpolators.cpp : Implementation of CInterpolators
+//
+/////////////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "handle_interpolators.h"

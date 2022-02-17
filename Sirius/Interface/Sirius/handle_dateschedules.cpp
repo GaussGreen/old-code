@@ -1,0 +1,6 @@
+//	handle_dateschedules.cpp : Implementation of CDateSchedules
+//
+/////////////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "handle_dateschedules.h"

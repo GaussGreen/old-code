@@ -1,0 +1,6 @@
+//	handle_matrices.cpp : Implementation of CInterfaceMatrices
+//
+/////////////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "handle_matrices.h"

@@ -1,0 +1,6 @@
+//	handle_scenarios.cpp : Implementation of CScenarios
+//
+/////////////////////////////////////////////////////////////////////////////
+
+#include "stdafx.h"
+#include "handle_scenarios.h"
