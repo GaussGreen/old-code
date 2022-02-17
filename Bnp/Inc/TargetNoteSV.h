@@ -3,26 +3,12 @@
 
 #include "TargetNote.h"
 
-// ------------------------------------------------------------------------------------------------------------------- //
+// -------------------------------------------------------------------------------------------------------------------
+// //
 //
 // Wrapper routine for pricing a TargetNote in LGMSV
 //
-char* TargetNoteMC_SV( 
-						char *szUnd,
-						TARN_Struct* tarn,
-						TARN_AUX* aux,
-						double **prod_val
-				  );
-
-
-
-
-
-
-
-
-
-
-
+char *TargetNoteMC_SV(char *szUnd, TARN_Struct *tarn, TARN_AUX *aux,
+                      double **prod_val);
 
 #endif _TARGETNOTE_SV_H_

@@ -1,7 +1,7 @@
 /* ======================================================
    FILENAME:  num_h_indexx.h
-   
-   PURPOSE:   array sortng 
+
+   PURPOSE:   array sortng
    ====================================================== */
 
 #ifndef NUM_H_INDEXX_H

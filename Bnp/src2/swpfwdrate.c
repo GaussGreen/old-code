@@ -1,5 +1,5 @@
 /**********************************************************************
- *      Name: SwpFwdRate.c                                            * 
+ *      Name: SwpFwdRate.c                                            *
  *  Function: Calculates a forward rate                               *
  * Copyright: (C) Paribas Capital Markets Ltd.                        *
  *--------------------------------------------------------------------*
@@ -18,26 +18,17 @@
 
 #include "SwpAccess.h"
 
+char *SwpFwdRate(long start, long nfp_or_end, char *cpdStr, char *basisStr,
+                 char *ycName, char *refRateCode, double *fwdRate) {
+  Err err;
 
-char *SwpFwdRate(long start, long  nfp_or_end,
-                 char *cpdStr, char *basisStr,
-                 char *ycName, char * refRateCode, double *fwdRate)
-{
-Err 	err;
+  /* Compute the Swap rate taking spreads into account */
+  err = swp_f_ForwardRate(start, nfp_or_end, cpdStr, basisStr, ycName,
+                          refRateCode, fwdRate);
+  if (err)
+    return err;
 
-/* Compute the Swap rate taking spreads into account */
-	err = swp_f_ForwardRate(
-		start,
-		nfp_or_end,
-		cpdStr,
-		basisStr,
-		ycName,
-		refRateCode,
-		fwdRate);
-	if (err)
-		return err;
+  /* Return a success message */
+  return NULL;
 
-/* Return a success message */
-	return NULL;
-
-} /* END char *SwpFwdRate(...) */	
+} /* END char *SwpFwdRate(...) */

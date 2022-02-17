@@ -1,6 +1,6 @@
 /******************************************************************************/
 /*                                                                            */
-/*      SYSTEM:         SRT     SORT, Fixed Income 2020 Addins                */
+/*      SYSTEM:         SRT     SORT  , Fixed Income 2020 Addins */
 /*      SUB_SYSTEM:     SWT     Swap Tools                                    */
 /*                                                                            */
 /*      MODULE NAME:    SRT_H_GREEK_TOOLS.H                                   */
@@ -23,27 +23,23 @@
 /*                                                                            */
 /******************************************************************************/
 
-
 #ifndef SRT_H_GREEK_TOOLS_H
 #define SRT_H_GREEK_TOOLS_H
 
+/* -------------------------------------------------------------------------- */
+
+Err srt_f_trinfdup(SrtCheTreInf *trinf, SrtCheTreInf **trinf_dup);
 
 /* -------------------------------------------------------------------------- */
 
-Err srt_f_trinfdup(SrtCheTreInf* trinf, SrtCheTreInf** trinf_dup);
+SrtStpPtr srt_f_copystp(SrtStpPtr input_dest, SrtStpPtr input_source);
 
 /* -------------------------------------------------------------------------- */
 
-SrtStpPtr srt_f_copystp( SrtStpPtr input_dest, SrtStpPtr input_source);
-
-
-/* -------------------------------------------------------------------------- */
-
-Err srt_f_stpdup(SrtStpPtr stp, SrtStpPtr* stp_dup);
+Err srt_f_stpdup(SrtStpPtr stp, SrtStpPtr *stp_dup);
 
 /* -------------------------------------------------------------------------- */
 
 void my_print_Step(SrtStpPtr s, char file_name[], int index);
-
 
 #endif

@@ -1,7 +1,7 @@
 /* ======================================================
    FILENAME:  utstring.h
-   
-   PURPOSE:   A few simple functions when dealing with 
+
+   PURPOSE:   A few simple functions when dealing with
               a string
    ====================================================== */
 
@@ -12,15 +12,14 @@
    VERY USEFUL:   the Tring type is a char *
    -------------------------------------------------------------------------- */
 
-typedef    char      *String;
+typedef char *String;
 
+void strupper(char *s);
+void strip_white_space(char *s);
 
-void 	strupper		(char *s);
-void	strip_white_space	(char *s);
+char *new_string(char *s);
 
-char	*new_string		(char *s);
-
-void	add_tick_string (char *s, long ticker, char *s_tick);
-void	rem_tick_string(char *s_tick, char *s);
+void add_tick_string(char *s, long ticker, char *s_tick);
+void rem_tick_string(char *s_tick, char *s);
 
 #endif

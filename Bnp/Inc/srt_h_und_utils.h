@@ -1,14 +1,14 @@
 /* ===============================================================================
 
    FILENAME	:	srt_h_und_utils.h
-	
+
    PURPOSE:     Utility Functions to deal with underlying for the outside world
-   
-   =============================================================================== */
+
+   ===============================================================================
+ */
 
 #ifndef SRT_H_UND_UTILS_H
 #define SRT_H_UND_UTILS_H
-
 
 SRT_Boolean srt_f_IsUnderlyingDefined(char *und_name);
 

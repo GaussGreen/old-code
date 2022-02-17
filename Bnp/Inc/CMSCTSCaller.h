@@ -3,11 +3,10 @@
 
 #include "CMSCTSProdStruct.h"
 
-Err	CMSCTSAutocal(CMSCTS_MARKET			sMarket,
-				  CMSCTS_DEAL			sDeal,
-				  CMSCTS_CALIB			sCalibration,
-				  CMSCTS_PRICING_PARAMS	sPricingParams,
-				  CMSCTS_OUTPUTS		sOutputs);
+Err CMSCTSAutocal(CMSCTS_MARKET sMarket, CMSCTS_DEAL sDeal,
+                  CMSCTS_CALIB sCalibration,
+                  CMSCTS_PRICING_PARAMS sPricingParams,
+                  CMSCTS_OUTPUTS sOutputs);
 
 void cmscts_market_set_default(CMSCTS_MARKET sMarket);
 void cmscts_deal_set_default(CMSCTS_DEAL sDeal);

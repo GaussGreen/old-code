@@ -1,5 +1,6 @@
 /*-----------------------------------------------------------------
-  DESCRIPTION     :  Grfn include file with all the yacc and lex functions as well.
+  DESCRIPTION     :  Grfn include file with all the yacc and lex functions as
+well.
 ---------------------------------------------------------------------*/
 
 #ifndef GRF_H_LEX_H
@@ -19,10 +20,10 @@ GRFN_YYPARSE_DECL;
 Err grfn_yyerror(const String fmt, GrfnDeal *gd);
 
 /*** WHAT LEX AND YACC CALL IF THERE IS AN ERROR **/
-#define yyerror(fmt) {return grfn_yyerror(fmt,grfndeal);}
+#define yyerror(fmt)                                                           \
+  { return grfn_yyerror(fmt, grfndeal); }
 
 /*--- declarations of lexer ------*/
 int yylex(void);
-
 
 #endif

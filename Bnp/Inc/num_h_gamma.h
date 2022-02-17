@@ -1,7 +1,7 @@
 /* ======================================================
    FILENAME:  num_h_gamma.h
-   
-   PURPOSE:   Broydn 
+
+   PURPOSE:   Broydn
    ====================================================== */
 #ifndef NUM_H_GAMMA_H
 #define NUM_H_GAMMA_H
@@ -20,7 +20,7 @@ double gammq(double a, double x);
 
 double betaincmp(double a, double b, double x);
 
-double betacmp(double alpha,double beta);
+double betacmp(double alpha, double beta);
 
-double   fact(long n);
+double fact(long n);
 #endif

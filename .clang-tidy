@@ -1,0 +1,21 @@
+---
+Checks: "-*,\
+bugprone-*,\
+-bugprone-reserved-identifier,\
+-bugprone-macro-parentheses,\
+-bugprone-easily-swappable-parameters,\
+modernize-*,\
+-modernize-use-trailing-return-type,\
+-modernize-use-nodiscard,\
+-modernize-pass-by-value,\
+-modernize-avoid-c-arrays,\
+readability-*,\
+-readability-else-after-return,\
+-readability-suspicious-call-argument,\
+-readability-braces-around-statements,\
+-readability-magic-numbers,\
+-readability-deleted-default,\
+-readability-function-cognitive-complexity,\
+"
+#WarningsAsErrors: "*"
+...

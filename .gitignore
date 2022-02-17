@@ -1,14 +1,2 @@
 # Ignore Everything
-*
-
-# But not .cpp
-!*.cpp
-!*.c
-!*.cxx
-!*.hpp
-!*.h
-# Or directories
-!*/
-!.gitignore
-!README.md
-/arm/ARMProject/armgenpricer/gp_base/._argconv.cpp
+*._*

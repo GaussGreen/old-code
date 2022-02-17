@@ -3,370 +3,273 @@
 #define LGMSVCLOSEDFORMAPPROX_H
 
 #include "DiagCalibDLM.h"
-#include "LGMSVUtil.h"
 #include "DiagCalibGen.h"
+#include "LGMSVUtil.h"
 
-#define	LGMSV_FIRSTBREAK	10
-#define	LGMSV_LASTBREAK		1000000
+#define LGMSV_FIRSTBREAK 10
+#define LGMSV_LASTBREAK 1000000
 
-void lgmsv_app_set_default_params(	
-								int		*iNbX,
-								double	*iNbSigmaXLeft,
-								double	*iNbSigmaXRight,
-								double	*dIntegParam,
-								int		*iIntegMethod,
-								double	*dVolLimit,
-								int		*iCalibLGM,
-								double	*dMinStd,
-								double	*dMaxStd);
+void lgmsv_app_set_default_params(int *iNbX, double *iNbSigmaXLeft,
+                                  double *iNbSigmaXRight, double *dIntegParam,
+                                  int *iIntegMethod, double *dVolLimit,
+                                  int *iCalibLGM, double *dMinStd,
+                                  double *dMaxStd);
 
-typedef struct
-{
-	int		iNbX;
-	double	dParam1;
-	double	dParam2;
-	double	dIntegParam;
-	double	dVolLimit;
-	int		iCalibLGM;
-	int		iIntegMethod;
+typedef struct {
+  int iNbX;
+  double dParam1;
+  double dParam2;
+  double dIntegParam;
+  double dVolLimit;
+  int iCalibLGM;
+  int iIntegMethod;
 
-	double	dMinStd;
-	double	dMaxStd;
+  double dMinStd;
+  double dMaxStd;
 
 } LGMSV_NumerParams, *LGMSV_NUMERPARAMS;
 
-void lgmsv_app_set_default_params_struct(LGMSV_NUMERPARAMS	NumerParams);
+void lgmsv_app_set_default_params_struct(LGMSV_NUMERPARAMS NumerParams);
 
-void lgmsv_init_numer_params(	LGMSV_NUMERPARAMS	NumerParams,
-								int					iNbX,
-								double				dParam1,
-								double				dParam2,
-								double				dIntegParam,
-								double				dVolLimit,
-								int					iCalibLGM,
-								int					iIntegMethod,
-								double				dMinStd,
-								double				dMaxStd);
+void lgmsv_init_numer_params(LGMSV_NUMERPARAMS NumerParams, int iNbX,
+                             double dParam1, double dParam2, double dIntegParam,
+                             double dVolLimit, int iCalibLGM, int iIntegMethod,
+                             double dMinStd, double dMaxStd);
 
 Err LGMSVCmsRateApprox(
-				char	*und_name,						/*	Name of the underlying */
-				char	*yc_name,						/*	Name of the yield curve */
-				char	*ref_rate_name,					/*	Name of the reference rate */
-				char	*swaption_freq,					/*	Frequency and basis of underlying swaptions */
-				char	*swaption_basis,
+    char *und_name,      /*	Name of the underlying */
+    char *yc_name,       /*	Name of the yield curve */
+    char *ref_rate_name, /*	Name of the reference rate */
+    char *swaption_freq, /*	Frequency and basis of underlying swaptions */
+    char *swaption_basis,
 
-				long	lFixDate,						
-				long	lStartDate,
-				long	lEndDate,
-				long	lPayDate,				
+    long lFixDate, long lStartDate, long lEndDate, long lPayDate,
 
-				/* Parameter of grids */
-				LGMSV_NUMERPARAMS	NumerParams,
+    /* Parameter of grids */
+    LGMSV_NUMERPARAMS NumerParams,
 
-				/* Output */
-				double	*dFwd);
+    /* Output */
+    double *dFwd);
 
 Err LGMSVOptionApprox(
-				char	*und_name,						/*	Name of the underlying */
-				char	*yc_name,						/*	Name of the yield curve */
-				char	*ref_rate_name,					/*	Name of the reference rate */
-				char	*swaption_freq,					/*	Frequency and basis of underlying swaptions */
-				char	*swaption_basis,
+    char *und_name,      /*	Name of the underlying */
+    char *yc_name,       /*	Name of the yield curve */
+    char *ref_rate_name, /*	Name of the reference rate */
+    char *swaption_freq, /*	Frequency and basis of underlying swaptions */
+    char *swaption_basis,
 
-				long	lExDate,
-				long	lStartDate,
-				long	lEndDate,
-				long	lPayDate,
-				int		IsCMS,
-				long	lRStartDate,
-				long	lREndDate,
-				int		iIsRatioNum,
-				int		iNbStrike,
-				double	*dStrike,
-				int		pay_rec,						/*	pay:1 rec:-1 */
+    long lExDate, long lStartDate, long lEndDate, long lPayDate, int IsCMS,
+    long lRStartDate, long lREndDate, int iIsRatioNum, int iNbStrike,
+    double *dStrike, int pay_rec, /*	pay:1 rec:-1 */
 
-				/* Parameter of grids */
-				LGMSV_NUMERPARAMS	NumerParams,
+    /* Parameter of grids */
+    LGMSV_NUMERPARAMS NumerParams,
 
-				/* Output */
-				double	*pSwaptionPrice);
+    /* Output */
+    double *pSwaptionPrice);
 
 Err LGMSVLiborOptionApprox(
-				char	*und_name,						/*	Name of the underlying */
-				char	*yc_name,						/*	Name of the yield curve */
-				char	*swaption_ref_rate_name,		/*	Name of the reference rate */
-				char	*swaption_freq,					/*	Frequency and basis of underlying swaptions */
-				char	*swaption_basis,
-				char	*libor_ref_rate_name,		/*	Name of the reference rate */
-				char	*libor_freq,					/*	Frequency and basis of underlying swaptions */
-				char	*libor_basis,
+    char *und_name,               /*	Name of the underlying */
+    char *yc_name,                /*	Name of the yield curve */
+    char *swaption_ref_rate_name, /*	Name of the reference rate */
+    char *swaption_freq, /*	Frequency and basis of underlying swaptions */
+    char *swaption_basis,
+    char *libor_ref_rate_name, /*	Name of the reference rate */
+    char *libor_freq,          /*	Frequency and basis of underlying swaptions */
+    char *libor_basis,
 
-				long	lExDate,						
-				long	lStartDate,
-				long	lEndDate,
-				long	lPayDate,
-				int		IsCMS,
-				long	lLiborFixDate,
-				long	lLiborStartDate,
-				long	lLiborEndDate,
-				int		iNbStrike,
-				double	*dStrike,
-				int		pay_rec,						/*	pay:1 rec:-1 */
+    long lExDate, long lStartDate, long lEndDate, long lPayDate, int IsCMS,
+    long lLiborFixDate, long lLiborStartDate, long lLiborEndDate, int iNbStrike,
+    double *dStrike, int pay_rec, /*	pay:1 rec:-1 */
 
-				/* Parameter of grids */
-				LGMSV_NUMERPARAMS	NumerParams,
+    /* Parameter of grids */
+    LGMSV_NUMERPARAMS NumerParams,
 
-				/* Output */
-				double	*pSwaptionPrice);
+    /* Output */
+    double *pSwaptionPrice);
 
 Err LGMSVOptionApprox_TS(
-				
-				char	*yc_name,						/*	Name of the yield curve */
-				char	*ref_rate_name,					/*	Name of the reference rate */
-				char	*swaption_freq,					/*	Frequency and basis of underlying swaptions */
-				char	*swaption_basis,
 
-				long	lExDate,						
-				long	lStartDate,
-				long	lEndDate,
-				long	lPayDate,
-				int		IsCMS,				
-				int		iNbStrike,
-				double	*dStrike,
-				int		pay_rec,						/*	pay:1 rec:-1 */
+    char *yc_name,       /*	Name of the yield curve */
+    char *ref_rate_name, /*	Name of the reference rate */
+    char *swaption_freq, /*	Frequency and basis of underlying swaptions */
+    char *swaption_basis,
 
-				double	dLambdaX,
-				int		iNbPWTime,		/* Piece Wise Term Structures  */
-				double	*dPWTime,
-				double	*dSigmaTS,
-				double	*dAlphaTS,
-				double	*dLambdaEpsTS,
-				double	*dRhoTS,
-				double	dTStar,
+    long lExDate, long lStartDate, long lEndDate, long lPayDate, int IsCMS,
+    int iNbStrike, double *dStrike, int pay_rec, /*	pay:1 rec:-1 */
 
-				/* Parameter of grids */
-				LGMSV_NUMERPARAMS	NumerParams,
+    double dLambdaX, int iNbPWTime, /* Piece Wise Term Structures  */
+    double *dPWTime, double *dSigmaTS, double *dAlphaTS, double *dLambdaEpsTS,
+    double *dRhoTS, double dTStar,
 
-				/* Output */
-				double	*pSwaptionPrice);
+    /* Parameter of grids */
+    LGMSV_NUMERPARAMS NumerParams,
+
+    /* Output */
+    double *pSwaptionPrice);
 
 Err LGMSVCmsRateApprox_TS(
-				
-				char	*yc_name,						/*	Name of the yield curve */
-				char	*ref_rate_name,					/*	Name of the reference rate */
-				char	*swaption_freq,					/*	Frequency and basis of underlying swaptions */
-				char	*swaption_basis,
 
-				long	lFixingDate,						
-				long	lStartDate,
-				long	lEndDate,
-				long	lPayDate,											
+    char *yc_name,       /*	Name of the yield curve */
+    char *ref_rate_name, /*	Name of the reference rate */
+    char *swaption_freq, /*	Frequency and basis of underlying swaptions */
+    char *swaption_basis,
 
-				double	dLambdaX,
-				int		iNbPWTime,						/* Piece Wise Term Structures  */
-				double	*dPWTime,
-				double	*dSigmaTS,
-				double	*dAlphaTS,
-				double	*dLambdaEpsTS,
-				double	*dRhoTS,
-				double	dTStar,
+    long lFixingDate, long lStartDate, long lEndDate, long lPayDate,
 
-				/* Parameter of grids */
-				LGMSV_NUMERPARAMS	NumerParams,
+    double dLambdaX, int iNbPWTime, /* Piece Wise Term Structures  */
+    double *dPWTime, double *dSigmaTS, double *dAlphaTS, double *dLambdaEpsTS,
+    double *dRhoTS, double dTStar,
 
-				/* Output */
-				double	*pSwaptionPrice);
+    /* Parameter of grids */
+    LGMSV_NUMERPARAMS NumerParams,
+
+    /* Output */
+    double *pSwaptionPrice);
 
 Err LGMSVLiborOptionApprox_TS(
-				
-				char	*yc_name,						/*	Name of the yield curve */
-				char	*swaption_ref_rate_name,					/*	Name of the reference rate */
-				char	*swaption_freq,					/*	Frequency and basis of underlying swaptions */
-				char	*swaption_basis,
-				char	*libor_ref_rate_name,
-				char	*libor_freq,
-				char	*libor_basis,
 
-				long	lExDate,						
-				long	lStartDate,
-				long	lEndDate,
-				long	lPayDate,
-				int		iIsCMS,
-				long	lLiborFixDate,
-				long	lLiborStartDate,
-				long	lLiborEndDate,
+    char *yc_name,                /*	Name of the yield curve */
+    char *swaption_ref_rate_name, /*	Name of the reference rate */
+    char *swaption_freq, /*	Frequency and basis of underlying swaptions */
+    char *swaption_basis, char *libor_ref_rate_name, char *libor_freq,
+    char *libor_basis,
 
-				int		iNbStrike,
-				double	*dStrike,
-				int		pay_rec,						/*	pay:1 rec:-1 */
+    long lExDate, long lStartDate, long lEndDate, long lPayDate, int iIsCMS,
+    long lLiborFixDate, long lLiborStartDate, long lLiborEndDate,
 
-				double	dLambdaX,
-				int		iNbPWTime,		/* Piece Wise Term Structures  */
-				double	*dPWTime,
-				double	*dSigmaTS,
-				double	*dAlphaTS,
-				double	*dLambdaEpsTS,
-				double	*dRhoTS,
-				double	dTStar,
+    int iNbStrike, double *dStrike, int pay_rec, /*	pay:1 rec:-1 */
 
-				/* Parameter of grids */
-				LGMSV_NUMERPARAMS	NumerParams,
+    double dLambdaX, int iNbPWTime, /* Piece Wise Term Structures  */
+    double *dPWTime, double *dSigmaTS, double *dAlphaTS, double *dLambdaEpsTS,
+    double *dRhoTS, double dTStar,
 
-				/* Output */
-				double	*pSwaptionPrice);
+    /* Parameter of grids */
+    LGMSV_NUMERPARAMS NumerParams,
 
-Err	Calculate_HestonEquivalent_LGMSV(	int		iNbCoupon,
-										long	*lCouponDate,
-										double	*dCouponTime,
-										double	*dCouponCvg,
-										double	*dCouponDf,
-										double	dTPay,
-										int		iIsCMS,
-										long	lToday,
-										char	*cYcName,
-										double	dTau,
-										double	dTStar,
-										double	*dFwdSwapCash,
-										double	*dLevel,
-										double	*dShift,
-										double	*dCoefVol,
-										double	*dCoefMeanRev,
-										double	*dCoefCMS);
+    /* Output */
+    double *pSwaptionPrice);
 
-void LGMSVClosedFormApprox(	
-						/* Parameter of diffusion */
-						/* BE CAREFULL : Alpha and LambdaEps for V=Eps^2 */
-						double	dLambdaX,
-						
-						int		iNbPWTime,		/* Piece Wise Term Structures  */
-						double	*dPWTime,		
-						double	*dSigma,						
-						double	*dAlpha,
-						double	*dLambdaEps,
-						double	*dRho,
-						
-						double	dTStar,			/* Tstar in years from today */
+Err Calculate_HestonEquivalent_LGMSV(
+    int iNbCoupon, long *lCouponDate, double *dCouponTime, double *dCouponCvg,
+    double *dCouponDf, double dTPay, int iIsCMS, long lToday, char *cYcName,
+    double dTau, double dTStar, double *dFwdSwapCash, double *dLevel,
+    double *dShift, double *dCoefVol, double *dCoefMeanRev, double *dCoefCMS);
 
-						/* Product description */						
-						double	dFwd,
-						int		iNbStrike,
-						double	*dStrike,
-						double	dExTime,
-						double	dCoefVol,
+void LGMSVClosedFormApprox(
+    /* Parameter of diffusion */
+    /* BE CAREFULL : Alpha and LambdaEps for V=Eps^2 */
+    double dLambdaX,
 
-						double	dSwitchTime,
-						double	dCoefMeanRev1,
-						double	dCoefCMS1,
-						double	dCoefMeanRev2,
-						double	dCoefCMS2,
+    int iNbPWTime, /* Piece Wise Term Structures  */
+    double *dPWTime, double *dSigma, double *dAlpha, double *dLambdaEps,
+    double *dRho,
 
-						/* Parameter of grids */
-						LGMSV_NUMERPARAMS	NumerParams,
+    double dTStar, /* Tstar in years from today */
 
-						/* Outputs */
-						double	*Price);
+    /* Product description */
+    double dFwd, int iNbStrike, double *dStrike, double dExTime,
+    double dCoefVol,
 
-Err	Construct_Swap_Schedule(long			lTodayDate,
-							char			*cYcName,
-							long			lStartDate,
-							long			lEndDate,
-							SrtCompounding	iFreq,
-							SrtBasisCode	iBasis,
-							int				*iNbCoupon,
-							long			**lCouponDate,
-							double			**dCouponTime,
-							double			**dCouponCvg,
-							double			**dCouponDf);
+    double dSwitchTime, double dCoefMeanRev1, double dCoefCMS1,
+    double dCoefMeanRev2, double dCoefCMS2,
 
+    /* Parameter of grids */
+    LGMSV_NUMERPARAMS NumerParams,
 
-typedef	struct
-{
-	int		iNbCoef;
-	
-	double	*dt;
-	double	*CoefIntT;
-	double	*Coef1ReT;
-	double	*Coef2ReT;
-	double	*Coef2ImT;
-	double	*Coef3ReT;
-	double	*Coef3ImT;
+    /* Outputs */
+    double *Price);
 
-	int		iNbX;
-	double	*X;
-	double	*W;
-	double	*IntRe;
-	double	*IntIm;
+Err Construct_Swap_Schedule(long lTodayDate, char *cYcName, long lStartDate,
+                            long lEndDate, SrtCompounding iFreq,
+                            SrtBasisCode iBasis, int *iNbCoupon,
+                            long **lCouponDate, double **dCouponTime,
+                            double **dCouponCvg, double **dCouponDf);
 
-	/* special case for low volatility */
-	double	*XX;
-	double	*WW;
+typedef struct {
+  int iNbCoef;
 
-	LGMSV_NUMERPARAMS	NumerParams;
+  double *dt;
+  double *CoefIntT;
+  double *Coef1ReT;
+  double *Coef2ReT;
+  double *Coef2ImT;
+  double *Coef3ReT;
+  double *Coef3ImT;
+
+  int iNbX;
+  double *X;
+  double *W;
+  double *IntRe;
+  double *IntIm;
+
+  /* special case for low volatility */
+  double *XX;
+  double *WW;
+
+  LGMSV_NUMERPARAMS NumerParams;
 
 } LGMSV_PricingConst, *LGMSV_PRICINGCONST;
 
-Err Initialise_PricingConst(LGMSV_MODEL			model,
-							LGMSV_NUMERPARAMS	numer_params,
-							LGMSV_PRICINGCONST	PricingConst);
+Err Initialise_PricingConst(LGMSV_MODEL model, LGMSV_NUMERPARAMS numer_params,
+                            LGMSV_PRICINGCONST PricingConst);
 
-void	Free_PricingConst(LGMSV_PRICINGCONST	PricingConst);
+void Free_PricingConst(LGMSV_PRICINGCONST PricingConst);
 
-typedef struct
-{	
-	double	dShift;
-	double	dCoefVol;
-	int		iNegVol;
-		
-	double	dCoefMeanRev;
-	double	dCoefCMS;
-	double	dNewCoefCMS;
+typedef struct {
+  double dShift;
+  double dCoefVol;
+  int iNegVol;
 
-	double	dSwitchTime;
-	double	dCoefMeanRev2;
-	double	dCoefCMS2;
-	double	dNewCoefCMS2;
+  double dCoefMeanRev;
+  double dCoefCMS;
+  double dNewCoefCMS;
 
-	double	dMinStd;
-	double	dMaxStd;
-	double	dATMNormalStd;
-	double	dMinStrike;
-	double	dMaxStrike;
-	double	dMinVol;
-	double	dMaxVol;
+  double dSwitchTime;
+  double dCoefMeanRev2;
+  double dCoefCMS2;
+  double dNewCoefCMS2;
 
-	/* for LGM2F */
-	double	dCoefVol_2F;
+  double dMinStd;
+  double dMaxStd;
+  double dATMNormalStd;
+  double dMinStrike;
+  double dMaxStrike;
+  double dMinVol;
+  double dMaxVol;
 
-	double	dCoefMeanRev_2F;
-	double	dCoefCMS_2F;
-	double	dNewCoefCMS_2F;
-	
-	double	dCoefMeanRev2_2F;
-	double	dCoefCMS2_2F;
-	double	dNewCoefCMS2_2F;
+  /* for LGM2F */
+  double dCoefVol_2F;
 
-	double	dNewCoefCMS_cross_2F;
-	double	dNewCoefCMS2_cross_2F;
+  double dCoefMeanRev_2F;
+  double dCoefCMS_2F;
+  double dNewCoefCMS_2F;
 
-	/* Precalculations for LGM */
-	double	dCpnG1[MAX_CPN];
-	double	dCpnG2[MAX_CPN];
+  double dCoefMeanRev2_2F;
+  double dCoefCMS2_2F;
+  double dNewCoefCMS2_2F;
 
-	double	dExG1;
-	double	dExG2;
+  double dNewCoefCMS_cross_2F;
+  double dNewCoefCMS2_cross_2F;
+
+  /* Precalculations for LGM */
+  double dCpnG1[MAX_CPN];
+  double dCpnG2[MAX_CPN];
+
+  double dExG1;
+  double dExG2;
 
 } LGMSV_HestonInst, *LGMSV_HESTONINST;
 
-typedef struct
-{
-	int		iEndIndex;
-	int		iDoSwitch;
-	int		iSwitchIndex;
-	double	dNewSwitchTime;
-	int		iLiborIndex;	
-	int		iNbStrike;
-	double	dLogShiftFwd;
-	double	*dLogShiftStrike;
+typedef struct {
+  int iEndIndex;
+  int iDoSwitch;
+  int iSwitchIndex;
+  double dNewSwitchTime;
+  int iLiborIndex;
+  int iNbStrike;
+  double dLogShiftFwd;
+  double *dLogShiftStrike;
 
 } LGMSV_NumerInst, *LGMSV_NUMERINST;
 
@@ -374,206 +277,161 @@ struct InstParams;
 typedef struct InstParams InstParams;
 typedef InstParams *INSTPARAMS;
 
-struct InstParams
-{
-	CALIBCPNSCHEDULEDLM	sCalibCpnSchedule;
-	LGMSV_HESTONINST	HestonInst;
-	LGMSV_NUMERINST		NumerInst;
+struct InstParams {
+  CALIBCPNSCHEDULEDLM sCalibCpnSchedule;
+  LGMSV_HESTONINST HestonInst;
+  LGMSV_NUMERINST NumerInst;
 
-	InstParams			*NextInstParams;
-
+  InstParams *NextInstParams;
 };
 
-Err Initialise_NumerInst(	LGMSV_MODEL				model,
-							CALIBINSTRUMENTDLM		CalibInst,
-							LGMSV_HESTONINST		HestonParam,
-							LGMSV_NUMERINST			NumerInst);
+Err Initialise_NumerInst(LGMSV_MODEL model, CALIBINSTRUMENTDLM CalibInst,
+                         LGMSV_HESTONINST HestonParam,
+                         LGMSV_NUMERINST NumerInst);
 
-void Update_NumerInst(	CALIBINSTRUMENTDLM		CalibInst,
-						LGMSV_HESTONINST		HestonParam,
-						LGMSV_NUMERINST			NumerInst);
+void Update_NumerInst(CALIBINSTRUMENTDLM CalibInst,
+                      LGMSV_HESTONINST HestonParam, LGMSV_NUMERINST NumerInst);
 
-Free_NumerInst(LGMSV_NUMERINST	NumerInst);
+Free_NumerInst(LGMSV_NUMERINST NumerInst);
 
+Err Calculate_ShiftAndVol_LGMSV_FromLGM_struct(/* product information */
+                                               CALIBINSTRUMENTDLM CalibInst,
+                                               CALIBCPNSCHEDULEDLM
+                                                   CalibCpnSchedule,
 
-Err	Calculate_ShiftAndVol_LGMSV_FromLGM_struct(	/* product information */
-											CALIBINSTRUMENTDLM	CalibInst,
-											CALIBCPNSCHEDULEDLM	CalibCpnSchedule,
+                                               /* model information */
+                                               LGMSV_MODEL model,
 
-											/* model information */
-											LGMSV_MODEL			model,
-															
-											/* output */
-											LGMSV_HESTONINST	HestonParam);
+                                               /* output */
+                                               LGMSV_HESTONINST HestonParam);
 
-Err	Calculate_HestonEquivalent_LGMSV_FromLGM_struct(	
-											/*	Market information */
-											/* product information */
-											CALIBINSTRUMENTDLM	CalibInst,
-											CALIBCPNSCHEDULEDLM	CalibCpnSchedule,
+Err Calculate_HestonEquivalent_LGMSV_FromLGM_struct(
+    /*	Market information */
+    /* product information */
+    CALIBINSTRUMENTDLM CalibInst, CALIBCPNSCHEDULEDLM CalibCpnSchedule,
 
-											/* model information */
-											LGMSV_MODEL			model,
-															
-											/* output */
-											LGMSV_HESTONINST	HestonParam);
+    /* model information */
+    LGMSV_MODEL model,
 
+    /* output */
+    LGMSV_HESTONINST HestonParam);
 
-void LGMSVClosedFormApprox_struct(	
-						/* Parameter of diffusion */
-						/* BE CAREFULL : Alpha and LambdaEps for V=Eps^2 */
-						LGMSV_MODEL			model,
+void LGMSVClosedFormApprox_struct(
+    /* Parameter of diffusion */
+    /* BE CAREFULL : Alpha and LambdaEps for V=Eps^2 */
+    LGMSV_MODEL model,
 
-						/* Product description */						
-						CALIBINSTRUMENTDLM	CalibInst,
-						LGMSV_HESTONINST	HestonParam,						
+    /* Product description */
+    CALIBINSTRUMENTDLM CalibInst, LGMSV_HESTONINST HestonParam,
 
-						/* Parameter of grids */
-						LGMSV_PRICINGCONST	NumerParams,
-						LGMSV_NUMERINST		InstNumer,
+    /* Parameter of grids */
+    LGMSV_PRICINGCONST NumerParams, LGMSV_NUMERINST InstNumer,
 
-						/* Outputs */
-						double				*Price);
+    /* Outputs */
+    double *Price);
 
-void LGMSVFwdClosedFormApprox_struct(	
-						/* Parameter of diffusion */
-						/* BE CAREFULL : Alpha and LambdaEps for V=Eps^2 */
-						LGMSV_MODEL			model,
+void LGMSVFwdClosedFormApprox_struct(
+    /* Parameter of diffusion */
+    /* BE CAREFULL : Alpha and LambdaEps for V=Eps^2 */
+    LGMSV_MODEL model,
 
-						/* Product description */						
-						CALIBINSTRUMENTDLM	CalibInst,
-						LGMSV_HESTONINST	HestonParam,						
+    /* Product description */
+    CALIBINSTRUMENTDLM CalibInst, LGMSV_HESTONINST HestonParam,
 
-						/* Parameter of grids */
-						LGMSV_PRICINGCONST	NumerParams,
-						LGMSV_NUMERINST		InstNumer,
+    /* Parameter of grids */
+    LGMSV_PRICINGCONST NumerParams, LGMSV_NUMERINST InstNumer,
 
-						/* Outputs */
-						double				*Price);
+    /* Outputs */
+    double *Price);
 
-Err	ConstructSingleInstrumentSchedule(	char				*sYcName,
-										long				lToday,
-										char				*cInstFreq,
-										char				*cInstBasis,
-										long				lExeDate,
-										long				lStartDate,
-										long				lTheoEndDate,
-										CALIBCPNSCHEDULEDLM	CalibCpnSchedule,
-										CALIBEXESCHEDULEDLM	CalibExeSchedule);
+Err ConstructSingleInstrumentSchedule(char *sYcName, long lToday,
+                                      char *cInstFreq, char *cInstBasis,
+                                      long lExeDate, long lStartDate,
+                                      long lTheoEndDate,
+                                      CALIBCPNSCHEDULEDLM CalibCpnSchedule,
+                                      CALIBEXESCHEDULEDLM CalibExeSchedule);
 
 Err LGMSVOptionApprox_new(
-				char	*und_name,						/*	Name of the underlying */
-				char	*yc_name,						/*	Name of the yield curve */
-				char	*ref_rate_name,					/*	Name of the reference rate */
-				char	*swaption_freq,					/*	Frequency and basis of underlying swaptions */
-				char	*swaption_basis,
+    char *und_name,      /*	Name of the underlying */
+    char *yc_name,       /*	Name of the yield curve */
+    char *ref_rate_name, /*	Name of the reference rate */
+    char *swaption_freq, /*	Frequency and basis of underlying swaptions */
+    char *swaption_basis,
 
-				long	lExDate,						
-				long	lStartDate,
-				long	lTheoEndDate,
-				long	lPayDate,
-				int		IsCMS,
-				long	lRStartDate,
-				long	lREndDate,
-				int		iIsRatioNum,
-				int		iNbStrike,
-				double	*dStrike,
-				int		pay_rec,						/*	pay:1 rec:-1 */
+    long lExDate, long lStartDate, long lTheoEndDate, long lPayDate, int IsCMS,
+    long lRStartDate, long lREndDate, int iIsRatioNum, int iNbStrike,
+    double *dStrike, int pay_rec, /*	pay:1 rec:-1 */
 
-				/* Parameter of grids */
-				LGMSV_NUMERPARAMS	NumerParams,
+    /* Parameter of grids */
+    LGMSV_NUMERPARAMS NumerParams,
 
-				/* Output */
-				double	*pSwaptionPrice);
+    /* Output */
+    double *pSwaptionPrice);
 
 Err LGMSVOptionApproxFromModel(
-				LGMSV_model	*sModel,
+    LGMSV_model *sModel,
 
-				char		*yc_name,						/*	Name of the yield curve */
-				char		*ref_rate_name,					/*	Name of the reference rate */
-				char		*swaption_freq,					/*	Frequency and basis of underlying swaptions */
-				char		*swaption_basis,
-							
-				long		lExDate,						
-				long		lStartDate,
-				long		lTheoEndDate,
-				long		lPayDate,
-				int			IsCMS,
-				long		lRStartDate,
-				long		lREndDate,
-				int			iIsRatioNum,
-				int			iNbStrike,
-				double		*dStrike,
-				int			pay_rec,						/*	pay:1 rec:-1 */
+    char *yc_name,       /*	Name of the yield curve */
+    char *ref_rate_name, /*	Name of the reference rate */
+    char *swaption_freq, /*	Frequency and basis of underlying swaptions */
+    char *swaption_basis,
 
-				/* Parameter of grids */
-				LGMSV_NUMERPARAMS	NumerParams,
+    long lExDate, long lStartDate, long lTheoEndDate, long lPayDate, int IsCMS,
+    long lRStartDate, long lREndDate, int iIsRatioNum, int iNbStrike,
+    double *dStrike, int pay_rec, /*	pay:1 rec:-1 */
 
-				/* Output */
-				double	*pSwaptionPrice);
+    /* Parameter of grids */
+    LGMSV_NUMERPARAMS NumerParams,
+
+    /* Output */
+    double *pSwaptionPrice);
 
 Err LGMSVCmsRateApprox_new(
-				char	*und_name,						/*	Name of the underlying */
-				char	*yc_name,						/*	Name of the yield curve */
-				char	*ref_rate_name,					/*	Name of the reference rate */
-				char	*swaption_freq,					/*	Frequency and basis of underlying swaptions */
-				char	*swaption_basis,
+    char *und_name,      /*	Name of the underlying */
+    char *yc_name,       /*	Name of the yield curve */
+    char *ref_rate_name, /*	Name of the reference rate */
+    char *swaption_freq, /*	Frequency and basis of underlying swaptions */
+    char *swaption_basis,
 
-				long	lFixDate,						
-				long	lStartDate,
-				long	lTheoEndDate,
-				long	lPayDate,				
+    long lFixDate, long lStartDate, long lTheoEndDate, long lPayDate,
 
-				/* Parameter of grids */
-				LGMSV_NUMERPARAMS	NumerParams,
+    /* Parameter of grids */
+    LGMSV_NUMERPARAMS NumerParams,
 
-				/* Output */
-				double	*dCmsRate);
+    /* Output */
+    double *dCmsRate);
 
-Err	Calculate_CoefShiftAndVol_LGMSV(	/* product information */											
-										double	dExeTime,
-										int		iNbCoupon,
-										double	*dCouponTime,
-										double	*dCouponCvg,
-										double	*dCouponDf,
+Err Calculate_CoefShiftAndVol_LGMSV(/* product information */
+                                    double dExeTime, int iNbCoupon,
+                                    double *dCouponTime, double *dCouponCvg,
+                                    double *dCouponDf,
 
-										/* model information */
-										double	dTau,
-										int		iNbPWTime,		/* Piece Wise Term Structures  */
-										double	*dPWTime,
-										double	*dSigmaTS,
-										double	dTStar,
-														
-										/* output */
-										double	*dLevel,
-										double	*dSwpCash,
-										double	*dShift,
-										double	*dCoefVol);
+                                    /* model information */
+                                    double dTau,
+                                    int iNbPWTime, /* Piece Wise Term Structures
+                                                    */
+                                    double *dPWTime, double *dSigmaTS,
+                                    double dTStar,
 
-void Calculate_CoefCMSandMeanRev_LGMSV(	/* product information */											
-										int		iNbCoupon,
-										double	*dCouponTime,
-										double	*dCouponCvg,
-										double	*dCouponDf,
-										double	dTPay,
-										int		iIsCMS,
-										double	dTRStart,
-										double	dTREnd,
-										int		iIsRatioNum,
+                                    /* output */
+                                    double *dLevel, double *dSwpCash,
+                                    double *dShift, double *dCoefVol);
 
-										/* model information */
-										double	dTau,
-										double	dTStar,
-										double	dCoefVol,
-														
-										/* output */
-										double	*dCoefMeanRev,
-										double	*dCoefCMS);
+void Calculate_CoefCMSandMeanRev_LGMSV(/* product information */
+                                       int iNbCoupon, double *dCouponTime,
+                                       double *dCouponCvg, double *dCouponDf,
+                                       double dTPay, int iIsCMS,
+                                       double dTRStart, double dTREnd,
+                                       int iIsRatioNum,
 
-void LGMSVConstructLegendreGrid(int		iNbInt,
-								double	*dBreakPoints,
-								int		*iNbPoints,
-								double	*dX,
-								double	*dW);
+                                       /* model information */
+                                       double dTau, double dTStar,
+                                       double dCoefVol,
+
+                                       /* output */
+                                       double *dCoefMeanRev, double *dCoefCMS);
+
+void LGMSVConstructLegendreGrid(int iNbInt, double *dBreakPoints,
+                                int *iNbPoints, double *dX, double *dW);
 
 #endif

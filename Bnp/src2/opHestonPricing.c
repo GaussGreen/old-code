@@ -1,1216 +1,1320 @@
 /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
 
-	Description	:	implementation of the Heston model : Pricing
+        Description	:	implementation of the Heston model : Pricing
 
-				(C) 2002 BNP Paribas.. All rights reserved.
+                                (C) 2002 BNP Paribas.. All rights reserved.
 
-	Author		:	 Stefano Galluccio
+        Author		:	 Stefano Galluccio
 
-	Created		:	14.11.2002
+        Created		:	14.11.2002
 
-	History		:
+        History		:
 
 -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
 
-#include        <utallhdr.h"
-#include        <opHeston.h"
-#include        "opfnctns.h"
-#include		<math.h"
+#include "opfnctns.h"
+#include <math.h"
+#include <opHeston.h"
+#include <utallhdr.h"
 
-
-
-/* 1) If the argument "greek" is set to "PREMIUM", 
-   this function returns a pointer *result that contains the values 
+/* 1) If the argument "greek" is set to "PREMIUM"  ,
+   this function returns a pointer *result that contains the values
    of the shifted-Heston european options
-   in correspondence to a string of increasing strikes to be input in *Strikes. 
-
-   2) If the argument "greek" is set to "DENSITY", 
-   this function returns a pointer *result that contains the values of the probability density 
-   associated to the input parameters 
    in correspondence to a string of increasing strikes to be input in *Strikes.
 
-   3)If the argument "greek" is set to "CUMDENSITY", 
-   this function returns a pointer *result that contains the values of the probability cumulative density 
-   associated to the input parameters 
-   in correspondence to a string of increasing strikes to be input in *Strikes.
+   2) If the argument "greek" is set to "DENSITY"  ,
+   this function returns a pointer *result that contains the values of the
+   probability density associated to the input parameters in correspondence to a
+   string of increasing strikes to be input in *Strikes.
+
+   3)If the argument "greek" is set to "CUMDENSITY"  ,
+   this function returns a pointer *result that contains the values of the
+   probability cumulative density associated to the input parameters in
+   correspondence to a string of increasing strikes to be input in *Strikes.
 
   */
 
-Err ConvertSABRParamInHestonParam(
-					double	Forward,
-					double	Maturity,
-					double	SABRBetaVol,
-					double	SABRAlpha,
-					double	SABRMeanReversion,
-					double  SABRBeta,
-					double  SABRRho,
-					double	*HESTONVol,
-					double	*HESTONAlpha,
-					double	*HESTONMeanReversion,
-					double  *HESTONBeta,
-					double  *HESTONRho)
-{
-	Err err = NULL;
-	double shift;
+Err ConvertSABRParamInHestonParam(double Forward, double Maturity,
+                                  double SABRBetaVol, double SABRAlpha,
+                                  double SABRMeanReversion, double SABRBeta,
+                                  double SABRRho, double *HESTONVol,
+                                  double *HESTONAlpha,
+                                  double *HESTONMeanReversion,
+                                  double *HESTONBeta, double *HESTONRho) {
+  Err err = NULL;
+  double shift;
 
-	shift = Forward * (1. - SABRBeta) / (1e-20 + SABRBeta);
-	*HESTONVol = pow(Forward,SABRBeta) * SABRBetaVol / (shift + Forward);
-	*HESTONAlpha = SABRAlpha * 2.0 * (*HESTONVol);
-//	*HESTONAlpha = SABRAlpha * 2.0 * (SABRBetaVol);
-	*HESTONMeanReversion = SABRMeanReversion * 2.0;
-	*HESTONBeta = SABRBeta;	
-	*HESTONRho = SABRRho;
+  shift = Forward * (1. - SABRBeta) / (1e-20 + SABRBeta);
+  *HESTONVol = pow(Forward, SABRBeta) * SABRBetaVol / (shift + Forward);
+  *HESTONAlpha = SABRAlpha * 2.0 * (*HESTONVol);
+  //	*HESTONAlpha = SABRAlpha * 2.0 * (SABRBetaVol);
+  *HESTONMeanReversion = SABRMeanReversion * 2.0;
+  *HESTONBeta = SABRBeta;
+  *HESTONRho = SABRRho;
 
-	return err;
+  return err;
 }
 
+Err ConvertHESTONParamInSABRParam(double Forward, double Maturity,
+                                  double HESTONVol, double HESTONAlpha,
+                                  double HESTONMeanReversion, double HESTONBeta,
+                                  double HESTONRho, double *SABRBetaVol,
+                                  double *SABRAlpha, double *SABRMeanReversion,
+                                  double *SABRBeta, double *SABRRho) {
+  Err err = NULL;
+  double shift;
 
-Err ConvertHESTONParamInSABRParam(
-					double	Forward,
-					double	Maturity,
-					double	HESTONVol,
-					double	HESTONAlpha,
-					double	HESTONMeanReversion,
-					double  HESTONBeta,
-					double  HESTONRho,
-					double	*SABRBetaVol,
-					double	*SABRAlpha,
-					double	*SABRMeanReversion,
-					double  *SABRBeta,
-					double  *SABRRho)
-{
-	Err err = NULL;
-	double shift;
+  shift = Forward * (1. - HESTONBeta) / (1e-20 + HESTONBeta);
+  *SABRBetaVol = HESTONVol * (shift + Forward) / pow(Forward, HESTONBeta);
+  *SABRAlpha = HESTONAlpha / (2.0 * HESTONVol);
+  *SABRMeanReversion = HESTONMeanReversion * 0.5;
+  *SABRBeta = HESTONBeta;
+  *SABRRho = HESTONRho;
 
-	shift = Forward * (1. - HESTONBeta) / (1e-20 + HESTONBeta);
-	*SABRBetaVol = HESTONVol * (shift + Forward) / pow(Forward, HESTONBeta);
-	*SABRAlpha =  HESTONAlpha / (2.0 * HESTONVol);
-	*SABRMeanReversion = HESTONMeanReversion * 0.5;
-	*SABRBeta = HESTONBeta;
-	*SABRRho = HESTONRho;
-
-	return err;
+  return err;
 }
 
-Err HestonPrice(	
-					double	Forward,
-					double* Strike,
-					int		nStrikes,
-					double	Maturity,
-					double	Sigma,
-					double	Alpha,
-					double  SigmaIfty, 
-					double	b,
-					double  Beta,
-					double	Rho,
-					double	Disc,
-					double  UpperBound,
-					SrtCallPutType 	call_put, 
-					SrtGreekType greek,
-					SRT_Boolean isVolInfFix,
-					int IntegrType,
-					int nSteps,
-					double 	*result
-					)
-{
-
-
-	double a,CosT1,SinT1,CosT2,SinT2;
-	double *x,*w,*x1,*w1,G11,*G12,G21,*G22,*GKK,n1,n2,n3,RePsi1,ImPsi1,RePsi2,ImPsi2;
-	double DRePsi1,DRePsi2,DImPsi1,DImPsi2,DDRePsi1,DDRePsi2,DDImPsi1,DDImPsi2,*premium;
-	double esp,esp2,ImAppr1,ImAppr2,dStdDev,dApproxBSVol,nStdDev=10.0;//,*Strike_used;
-	int i,j,k,nStp=5,iter,iThresh,nOptSteps1,nOptSteps2,nSteps_opt;
-	double Int,Int1,NodeLeft,NodeRight,NodeLeft1,NodeRight1,dScaling=1.,dGear,Gamma,UpperBound_opt;
-	Err err = NULL;
-	double HSigma, HAlpha, Hb, HBeta, HSigmaIfty, HRho;
+Err HestonPrice(double Forward, double *Strike, int nStrikes, double Maturity,
+                double Sigma, double Alpha, double SigmaIfty, double b,
+                double Beta, double Rho, double Disc, double UpperBound,
+                SrtCallPutType call_put, SrtGreekType greek,
+                SRT_Boolean isVolInfFix, int IntegrType, int nSteps,
+                double *result) {
 
-	err = ConvertSABRParamInHestonParam(
-							Forward,
-							Maturity,
-							Sigma,
-							Alpha,
-							b,
-							Beta,
-							Rho,
-							&HSigma,
-							&HAlpha,
-							&Hb,
-							&HBeta,
-							&HRho);
+  double a, CosT1, SinT1, CosT2, SinT2;
+  double *x, *w, *x1, *w1, G11, *G12, G21, *G22, *GKK, n1, n2, n3, RePsi1,
+      ImPsi1, RePsi2, ImPsi2;
+  double DRePsi1, DRePsi2, DImPsi1, DImPsi2, DDRePsi1, DDRePsi2, DDImPsi1,
+      DDImPsi2, *premium;
+  double esp, esp2, ImAppr1, ImAppr2, dStdDev, dApproxBSVol,
+      nStdDev = 10.0; //  ,*Strike_used;
+  int i, j, k, nStp = 5, iter, iThresh, nOptSteps1, nOptSteps2, nSteps_opt;
+  double Int, Int1, NodeLeft, NodeRight, NodeLeft1, NodeRight1,
+      dScaling = 1., dGear, Gamma, UpperBound_opt;
+  Err err = NULL;
+  double HSigma, HAlpha, Hb, HBeta, HSigmaIfty, HRho;
 
-	HSigmaIfty = HSigma;
-	isVolInfFix = 1;
+  err =
+      ConvertSABRParamInHestonParam(Forward, Maturity, Sigma, Alpha, b, Beta,
+                                    Rho, &HSigma, &HAlpha, &Hb, &HBeta, &HRho);
 
-//	IntegrType=3;
+  HSigmaIfty = HSigma;
+  isVolInfFix = 1;
 
-	G12=dvector(1,nStrikes);
-	G22=dvector(1,nStrikes);
-	GKK=dvector(1,nStrikes);
-	premium=dvector(1,nStrikes); 
+  //	IntegrType=3;
 
-	// Transforms the input Beta parameter into a Lognormal shift
+  G12 = dvector(1, nStrikes);
+  G22 = dvector(1, nStrikes);
+  GKK = dvector(1, nStrikes);
+  premium = dvector(1, nStrikes);
 
-//	Gamma = HESTON_CONST*(1.-Beta)/Beta;
-	Gamma = Forward*(1.-HBeta)/HBeta;
+  // Transforms the input Beta parameter into a Lognormal shift
 
+  //	Gamma = HESTON_CONST*(1.-Beta)/Beta;
+  Gamma = Forward * (1. - HBeta) / HBeta;
 
-	// here I define the max n. of Std. Dev. 
+  // here I define the max n. of Std. Dev.
 
-	dApproxBSVol= (Forward+Gamma)/Forward*HSigma;
-	dStdDev = Forward*sqrt(exp(dApproxBSVol*dApproxBSVol*Maturity)-1.);
+  dApproxBSVol = (Forward + Gamma) / Forward * HSigma;
+  dStdDev = Forward * sqrt(exp(dApproxBSVol * dApproxBSVol * Maturity) - 1.);
 
-	// if Infinity Vol is fixed, then a is set to the initial vol 
-	if (isVolInfFix) HSigmaIfty=HSigma;
-	a=HSigmaIfty*HSigmaIfty*Hb;
+  // if Infinity Vol is fixed  , then a is set to the initial vol
+  if (isVolInfFix)
+    HSigmaIfty = HSigma;
+  a = HSigmaIfty * HSigmaIfty * Hb;
 
-	esp=exp(-Hb*Maturity);
-	esp2=exp(-Maturity*(Hb-HAlpha*HRho));
+  esp = exp(-Hb * Maturity);
+  esp2 = exp(-Maturity * (Hb - HAlpha * HRho));
 
+  /* Here I redefinee Strikes and Forward (to improve the convergence) by a
+   * scaling factor */
 
-	/* Here I redefinee Strikes and Forward (to improve the convergence) by a scaling factor */
+  //	Forward+=Gamma;
+  Forward = (Forward + Gamma) * dScaling;
 
-//	Forward+=Gamma;
-	Forward=(Forward+Gamma)*dScaling;
+  for (j = 1; j <= nStrikes; j++) {
+    Strike[j] = (Strike[j] + Gamma) * dScaling;
 
-	for (j=1; j<=nStrikes;j++)
-	{
-		Strike[j] = (Strike[j]+Gamma)*dScaling;
+    //		Strike[j] += Gamma;
+  }
 
-//		Strike[j] += Gamma;
-	}
+  switch (greek) {
 
-	switch (greek) {
+  case PREMIUM:
 
-	case PREMIUM:
+    switch (IntegrType) {
 
-		switch (IntegrType){
+    case 1:
 
-		case 1:
+      x = dvector(1, nStp);
+      w = dvector(1, nStp);
+      x1 = dvector(1, nStp);
+      w1 = dvector(1, nStp);
 
-		x=dvector(1,nStp);
-		w=dvector(1,nStp);
-		x1=dvector(1,nStp);
-		w1=dvector(1,nStp);
+      for (j = 1; j <= nStrikes; j++) {
+        G12[j] = 0.0;
+        G22[j] = 0.0;
+      }
 
-		for (j=1;j<=nStrikes;j++) {
-			G12[j]=0.0;
-			G22[j]=0.0;
-		}
+      ImAppr2 =
+          -(log(Forward) +
+            (esp2 - 1) * HSigma * HSigma / 2. / (Hb - HAlpha * HRho) +
+            Maturity * a / 2. / (Hb - HAlpha * HRho) +
+            a * (esp2 - 1.) / 2 / (Hb - HAlpha * HRho) / (Hb - HAlpha * HRho));
+      ImAppr1 = -(log(Forward) + HSigma * HSigma / Hb * (1. - esp) -
+                  Maturity * a / 2. / Hb + a / 2. / Hb / Hb * (1. - esp));
 
-			ImAppr2=-(log(Forward)+(esp2-1)*HSigma*HSigma/2./(Hb-HAlpha*HRho)+Maturity*a/2./(Hb-HAlpha*HRho)
-				                +a*(esp2-1.)/2/(Hb-HAlpha*HRho)/(Hb-HAlpha*HRho));
-			ImAppr1=-(log(Forward)+HSigma*HSigma/Hb*(1.-esp)-Maturity*a/2./Hb+a/2./Hb/Hb*(1.-esp));
+      for (j = 1; j <= nStrikes; j++) {
 
+        iter = 0;
+        NodeLeft = 0.0;
+        NodeLeft1 = 0.0;
+        do {
 
-		for (j=1;j<=nStrikes;j++) {
+          /* find the next node on the axis */
 
-			iter=0;
-			NodeLeft=0.0;
-			NodeLeft1=0.0;
-			do  {
+          NodeRight = HestonFindRightNode(ImAppr1, Strike[j], NodeLeft,
+                                          isVolInfFix, Maturity, a, Hb, HAlpha,
+                                          HRho, Forward, HSigma, 1.0, greek);
+          GaussLeg(NodeLeft, NodeRight, x, w, nStp);
 
-			/* find the next node on the axis */
+          NodeRight1 = HestonFindRightNode(ImAppr2, Strike[j], NodeLeft,
+                                           isVolInfFix, Maturity, a, Hb, HAlpha,
+                                           HRho, Forward, HSigma, 0.0, greek);
+          GaussLeg(NodeLeft1, NodeRight1, x1, w1, nStp);
 
-			NodeRight = HestonFindRightNode(ImAppr1,Strike[j],NodeLeft,isVolInfFix,Maturity,
-											a,Hb,HAlpha,HRho,Forward,HSigma,1.0,greek);
-			GaussLeg(NodeLeft, NodeRight, x, w, nStp);
+          Int = 0.0;
+          Int1 = 0.0;
+          for (k = 1; k <= nStp; k++) {
 
-			NodeRight1 = HestonFindRightNode(ImAppr2,Strike[j],NodeLeft,isVolInfFix,Maturity,
-											a,Hb,HAlpha,HRho,Forward,HSigma,0.0,greek);
-			GaussLeg(NodeLeft1, NodeRight1, x1, w1, nStp);
+            err =
+                PsiFunction(isVolInfFix, Maturity, 1., -x[k], a, Hb, HAlpha,
+                            HRho, log(Forward), HSigma * HSigma, greek, &RePsi1,
+                            &ImPsi1, &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
 
-				Int=0.0;
-				Int1=0.0;
-				for (k=1;k<=nStp;k++) {
+            G12[j] +=
+                w[k] / x[k] * exp(RePsi1) * sin(ImPsi1 + x[k] * log(Strike[j]));
 
-					err=PsiFunction (isVolInfFix,Maturity,1.,-x[k],a,Hb,HAlpha,HRho,log(Forward),
-						             HSigma*HSigma,greek,&RePsi1,&ImPsi1,
-									 &DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
+            err =
+                PsiFunction(isVolInfFix, Maturity, 0., -x1[k], a, Hb, HAlpha,
+                            HRho, log(Forward), HSigma * HSigma, greek, &RePsi2,
+                            &ImPsi2, &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
 
-					G12[j]+=w[k]/x[k]*exp(RePsi1)*sin(ImPsi1+x[k]*log(Strike[j])); 
+            G22[j] += w1[k] / x1[k] * exp(RePsi2) *
+                      sin(ImPsi2 + x1[k] * log(Strike[j]));
+          }
 
-					err=PsiFunction (isVolInfFix,Maturity,0.,-x1[k],a,Hb,HAlpha,HRho,log(Forward),
-									 HSigma*HSigma,greek,&RePsi2,&ImPsi2,
-									 &DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
+          NodeLeft = NodeRight;
+          NodeLeft1 = NodeRight1;
 
-					G22[j]+=w1[k]/x1[k]*exp(RePsi2)*sin(ImPsi2+x1[k]*log(Strike[j]));	
-			
-				}
+          iter++;
 
-			NodeLeft=NodeRight;
-			NodeLeft1=NodeRight1;
+        } while ((NodeLeft <= UpperBound) && (iter <= 1000));
+      }
 
-			iter++;
+      /* computes the remaining two terms that need no integration */
 
-			} while ((NodeLeft <= UpperBound) && (iter <= 1000));
-		}
+      err = PsiFunction(isVolInfFix, Maturity, 1., 0., a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi1, &ImPsi1,
+                        &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+      G11 = exp(RePsi1);
 
-			/* computes the remaining two terms that need no integration */
+      err = PsiFunction(isVolInfFix, Maturity, 0., 0., a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi2, &ImPsi2,
+                        &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
+      G21 = exp(RePsi2);
 
-			err = PsiFunction (isVolInfFix,Maturity,1.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			G11=exp(RePsi1);
+      /* finally puts all together and evaluates the option */
 
-			err=PsiFunction (isVolInfFix,Maturity,0.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
-			G21=exp(RePsi2);
+      for (j = 1; j <= nStrikes; j++) {
 
-			/* finally puts all together and evaluates the option */
+        n1 = G11 / 2. - 1. / SRT_PI * G12[j];
+        n2 = G21 / 2. - 1. / SRT_PI * G22[j];
 
-			for (j=1;j<=nStrikes;j++) {
-				
-				n1=G11/2.-1./SRT_PI*G12[j];
-				n2=G21/2.-1./SRT_PI*G22[j];
+        switch (call_put) {
 
-				switch (call_put){
+        case SRT_CALL:
+          result[j] = DMAX(1.e-13, (n1 - Strike[j] * n2) * Disc);
 
-					case SRT_CALL:
-					result[j]=DMAX(1.e-13,(n1-Strike[j]*n2)*Disc);
+          if (result[j] < (Forward - Strike[j]) * Disc)
+            result[j] = (Forward - Strike[j]) * Disc + 1.e-8;
 
-					if (result[j]< (Forward-Strike[j])*Disc) result[j]=(Forward-Strike[j])*Disc+1.e-8;
+          break;
 
-				break;
+        default:
+          result[j] = DMAX(1.e-13, (n1 - Strike[j] * n2) * Disc -
+                                       (Forward - Strike[j]) * Disc);
 
-				default:
-					result[j]= DMAX(1.e-13,(n1-Strike[j]*n2)*Disc - (Forward-Strike[j])*Disc);
+          if (result[j] < (-Forward + Strike[j]) * Disc)
+            result[j] = (-Forward + Strike[j]) * Disc + 1.e-8;
+          break;
+        }
+      }
 
-					if (result[j]< (-Forward+Strike[j])*Disc) result[j]=(-Forward+Strike[j])*Disc+1.e-8;	
-				break;
+      free_dvector(x, 1, nStp);
+      free_dvector(w, 1, nStp);
+      free_dvector(x1, 1, nStp);
+      free_dvector(w1, 1, nStp);
 
-				}
-			}
+      break;
 
-			free_dvector(x,1,nStp);
-			free_dvector(w,1,nStp);
-			free_dvector(x1,1,nStp);
-			free_dvector(w1,1,nStp);
+    case 0:
 
-		break;
+      x = dvector(1, nSteps);
+      w = dvector(1, nSteps);
+      GaussLeg(0., UpperBound, x, w, nSteps);
 
+      for (j = 1; j <= nStrikes; j++) {
+        G12[j] = 0.0;
+        G22[j] = 0.0;
+      }
 
-		case 0:
+      /*
+                              // computes the approximated Re(Psi)/v
 
-		x=dvector(1,nSteps);
-		w=dvector(1,nSteps);
-		GaussLeg(0., UpperBound, x, w, nSteps);
+                              PsiFunction (isVolInfFix  ,Maturity  ,1.
+         ,-UpperBound  ,a  ,b  ,Alpha  ,Rho  ,log(Forward)  ,Sigma*Sigma  ,greek
+         ,&ReUpBound  ,&ImUpBound  ,&DRePsi1  ,&DImPsi1  ,&DDRePsi1 ,&DDImPsi1);
+                              PsiFunction (isVolInfFix  ,Maturity  ,1.  ,0.0  ,a
+         ,b  ,Alpha  ,Rho  ,log(Forward)  ,Sigma*Sigma  ,greek  ,&ReLowBound
+         ,&ImLowBound  ,&DRePsi1  ,&DImPsi1  ,&DDRePsi1  ,&DDImPsi1);
 
-		for (j=1;j<=nStrikes;j++) {
-			G12[j]=0.0;
-			G22[j]=0.0;
-		}
+                              ReAppr1=(ReUpBound-ReLowBound)/(UpperBound-x[2]);
+                              ReAppr1c=ReLowBound;
 
-/*
-			// computes the approximated Re(Psi)/v
-			
-			PsiFunction (isVolInfFix,Maturity,1.,-UpperBound,a,b,Alpha,Rho,log(Forward),Sigma*Sigma,greek,&ReUpBound,&ImUpBound,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			PsiFunction (isVolInfFix,Maturity,1.,0.0,a,b,Alpha,Rho,log(Forward),Sigma*Sigma,greek,&ReLowBound,&ImLowBound,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
+                              PsiFunction (isVolInfFix  ,Maturity  ,0.
+         ,-UpperBound  ,a  ,b  ,Alpha  ,Rho  ,log(Forward)  ,Sigma*Sigma  ,greek
+         ,&ReUpBound  ,&ImUpBound  ,&DRePsi1  ,&DImPsi1  ,&DDRePsi1 ,&DDImPsi1);
+                              PsiFunction (isVolInfFix  ,Maturity  ,0.  ,0.0  ,a
+         ,b  ,Alpha  ,Rho  ,log(Forward)  ,Sigma*Sigma  ,greek  ,&ReLowBound
+         ,&ImLowBound  ,&DRePsi1  ,&DImPsi1  ,&DDRePsi1  ,&DDImPsi1);
 
-			ReAppr1=(ReUpBound-ReLowBound)/(UpperBound-x[2]);
-			ReAppr1c=ReLowBound;
+                              ReAppr2=(ReUpBound-ReLowBound)/(UpperBound-x[2]);
+                              ReAppr2c=ReLowBound;
 
-			PsiFunction (isVolInfFix,Maturity,0.,-UpperBound,a,b,Alpha,Rho,log(Forward),Sigma*Sigma,greek,&ReUpBound,&ImUpBound,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			PsiFunction (isVolInfFix,Maturity,0.,0.0,a,b,Alpha,Rho,log(Forward),Sigma*Sigma,greek,&ReLowBound,&ImLowBound,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
+                              // computes the approximated Im(Psi)/v
 
-			ReAppr2=(ReUpBound-ReLowBound)/(UpperBound-x[2]);
-			ReAppr2c=ReLowBound;
+                              ImAppr2=-(log(Forward)+(esp2-1)*Sigma*Sigma/2./(b-Alpha*Rho)+Maturity*a/2./(b-Alpha*Rho)
+                                                      +a*(esp2-1.)/2/(b-Alpha*Rho)/(b-Alpha*Rho));
+                              ImAppr1=-(log(Forward)+Sigma*Sigma/b*(1.-esp)-Maturity*a/2./b+a/2./b/b*(1.-esp));
 
-			// computes the approximated Im(Psi)/v 
+      */
+      for (i = 1; i <= nSteps; i++) {
 
-			ImAppr2=-(log(Forward)+(esp2-1)*Sigma*Sigma/2./(b-Alpha*Rho)+Maturity*a/2./(b-Alpha*Rho)
-				                +a*(esp2-1.)/2/(b-Alpha*Rho)/(b-Alpha*Rho));
-			ImAppr1=-(log(Forward)+Sigma*Sigma/b*(1.-esp)-Maturity*a/2./b+a/2./b/b*(1.-esp));
+        err = PsiFunction(isVolInfFix, Maturity, 1., -x[i], a, Hb, HAlpha, HRho,
+                          log(Forward), HSigma * HSigma, greek, &RePsi1,
+                          &ImPsi1, &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+        err = PsiFunction(isVolInfFix, Maturity, 0., -x[i], a, Hb, HAlpha, HRho,
+                          log(Forward), HSigma * HSigma, greek, &RePsi2,
+                          &ImPsi2, &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
 
-*/
-		for (i=1;i<=nSteps;i++) {
+        // runs over the strikes
 
-			err=PsiFunction (isVolInfFix,Maturity,1.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			err=PsiFunction (isVolInfFix,Maturity,0.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
+        for (j = 1; j <= nStrikes; j++) {
 
-			// runs over the strikes 
+          G12[j] +=
+              w[i] / x[i] * exp(RePsi1) * sin(ImPsi1 + x[i] * log(Strike[j]));
+          G22[j] +=
+              w[i] / x[i] * exp(RePsi2) * sin(ImPsi2 + x[i] * log(Strike[j]));
 
-			for (j=1;j<=nStrikes;j++) {
+          /*
+                                          G12[j]+=w[i]/x[i]*exp(RePsi1)*sin(ImPsi1+x[i]*log(Strike[j]))
+             - w[i]/x[i]*exp(ReAppr1c+ReAppr1*x[i]) *
+             sin(x[i]*log(Strike[j])+x[i]*ImAppr1);
 
+                                          G22[j]+=w[i]/x[i]*exp(RePsi2)*sin(ImPsi2+x[i]*log(Strike[j]))-
+                                              w[i]/x[i]*exp(ReAppr2c+ReAppr2*x[i])
+             * sin(x[i]*log(Strike[j])+x[i]*ImAppr2);
+          */
+        }
+      }
 
-				G12[j]+=w[i]/x[i]*exp(RePsi1)*sin(ImPsi1+x[i]*log(Strike[j]));
-				G22[j]+=w[i]/x[i]*exp(RePsi2)*sin(ImPsi2+x[i]*log(Strike[j]));
+      err = PsiFunction(isVolInfFix, Maturity, 1., 0., a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi1, &ImPsi1,
+                        &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+      G11 = exp(RePsi1);
 
-/*
-				G12[j]+=w[i]/x[i]*exp(RePsi1)*sin(ImPsi1+x[i]*log(Strike[j])) -
-					    w[i]/x[i]*exp(ReAppr1c+ReAppr1*x[i]) * sin(x[i]*log(Strike[j])+x[i]*ImAppr1);
+      err = PsiFunction(isVolInfFix, Maturity, 0., 0., a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi2, &ImPsi2,
+                        &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
+      G21 = exp(RePsi2);
 
-				G22[j]+=w[i]/x[i]*exp(RePsi2)*sin(ImPsi2+x[i]*log(Strike[j]))-
-	 		            w[i]/x[i]*exp(ReAppr2c+ReAppr2*x[i]) * sin(x[i]*log(Strike[j])+x[i]*ImAppr2);
-*/
+      for (j = 1; j <= nStrikes; j++) {
 
-			}
-		}
+        /*
+                                        ContrVar =
+           exp(ReAppr1c)*atan(-(log(Strike[j])+ImAppr1)/ReAppr1);
+                                        n1=G11/2.-1./SRT_PI*(G12[j]+ContrVar);
 
-			err = PsiFunction (isVolInfFix,Maturity,1.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			G11=exp(RePsi1);
+                                        ContrVar =
+           exp(ReAppr2c)*atan(-(log(Strike[j])+ImAppr2)/ReAppr2);
+                                        n2=G21/2.-1./SRT_PI*(G22[j]+ContrVar);
+        */
+        n1 = G11 / 2. - 1. / SRT_PI * G12[j];
+        n2 = G21 / 2. - 1. / SRT_PI * G22[j];
 
-			err=PsiFunction (isVolInfFix,Maturity,0.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
-			G21=exp(RePsi2);
+        switch (call_put) {
 
-			for (j=1;j<=nStrikes;j++) {
+        case SRT_CALL:
+          result[j] = DMAX(1.e-13, (n1 - Strike[j] * n2) * Disc) / dScaling;
 
-/*
-				ContrVar = exp(ReAppr1c)*atan(-(log(Strike[j])+ImAppr1)/ReAppr1);
-				n1=G11/2.-1./SRT_PI*(G12[j]+ContrVar);
+          if (result[j] < (Forward - Strike[j]) * Disc)
+            result[j] = (Forward - Strike[j]) * Disc / dScaling + 1.e-8;
 
-				ContrVar = exp(ReAppr2c)*atan(-(log(Strike[j])+ImAppr2)/ReAppr2);
-				n2=G21/2.-1./SRT_PI*(G22[j]+ContrVar);
-*/				
-				n1=G11/2.-1./SRT_PI*G12[j];
-				n2=G21/2.-1./SRT_PI*G22[j];
+          break;
 
-				switch (call_put){
+        default:
+          result[j] = DMAX(1.e-13, (n1 - Strike[j] * n2) * Disc / dScaling -
+                                       (Forward - Strike[j]) * Disc) /
+                      dScaling;
 
-					case SRT_CALL:
-					result[j]=DMAX(1.e-13,(n1-Strike[j]*n2)*Disc)/dScaling;
+          if (result[j] < (-Forward + Strike[j]) * Disc)
+            result[j] = (-Forward + Strike[j]) * Disc + 1.e-8;
+          break;
+        }
+      }
 
-					if (result[j]< (Forward-Strike[j])*Disc) result[j]=(Forward-Strike[j])*Disc/dScaling+1.e-8;
+      free_dvector(x, 1, nSteps);
+      free_dvector(w, 1, nSteps);
 
-				break;
+      break;
 
-				default:
-					result[j]= DMAX(1.e-13,(n1-Strike[j]*n2)*Disc/dScaling - (Forward-Strike[j])*Disc)/dScaling;
+    case 3:
 
-					if (result[j]< (-Forward+Strike[j])*Disc) result[j]=(-Forward+Strike[j])*Disc+1.e-8;	
-				break;
+      //		Strike_used=dvector(1  ,nStrikes);
 
-				}
-			}
+      for (j = 1; j <= nStrikes; j++) {
+        G12[j] = 0.0;
+        G22[j] = 0.0;
+      }
 
-			free_dvector(x,1,nSteps);
-			free_dvector(w,1,nSteps);
+      ImAppr2 =
+          -(log(Forward) +
+            (esp2 - 1) * HSigma * HSigma / 2. / (Hb - HAlpha * HRho) +
+            Maturity * a / 2. / (Hb - HAlpha * HRho) +
+            a * (esp2 - 1.) / 2 / (Hb - HAlpha * HRho) / (Hb - HAlpha * HRho));
+      ImAppr1 = -(log(Forward) + HSigma * HSigma / Hb * (1. - esp) -
+                  Maturity * a / 2. / Hb + a / 2. / Hb / Hb * (1. - esp));
 
-			break;
+      UpperBound_opt = 60. + 20 * pow(DMAX(0.0, 5. - Maturity), 1.4);
 
-		case 3:
+      for (j = 1; j <= nStrikes; j++) {
 
-//		Strike_used=dvector(1,nStrikes);
+        // computes the approximated n. of oscillations in a unit interval
+        // and then the required n. integration steps. For very short maturities
+        // , the precision is forced to increse  , as there is little time value
 
-		for (j=1;j<=nStrikes;j++) {
-			G12[j]=0.0;
-			G22[j]=0.0;
-		}
+        // Here it branches following the rule: if Strike is larger than nStdDev
+        // from the forward or smaller than -nStdDev  , then it simply evaluates
+        // the price at +- nStdDev
 
+        dGear = 2 + 3. / (Maturity * Maturity * Maturity);
+        nOptSteps1 = IMAX(IMIN((int)(dGear * UpperBound *
+                                     (fabs(ImAppr1 + log(Strike[j]))) / SRT_PI),
+                               nSteps),
+                          22);
+        nOptSteps2 = IMAX(IMIN((int)(dGear * UpperBound *
+                                     (fabs(ImAppr2 + log(Strike[j]))) / SRT_PI),
+                               nSteps),
+                          22);
 
-			ImAppr2=-(log(Forward)+(esp2-1)*HSigma*HSigma/2./(Hb-HAlpha*HRho)+Maturity*a/2./(Hb-HAlpha*HRho)
-				                +a*(esp2-1.)/2/(Hb-HAlpha*HRho)/(Hb-HAlpha*HRho));
-			ImAppr1=-(log(Forward)+HSigma*HSigma/Hb*(1.-esp)-Maturity*a/2./Hb+a/2./Hb/Hb*(1.-esp));
+        nSteps_opt = IMAX(nOptSteps1, nOptSteps2);
+        x = dvector(1, nSteps_opt);
+        w = dvector(1, nSteps_opt);
 
+        GaussLeg(0., UpperBound_opt, x, w, nSteps_opt);
 
-	UpperBound_opt=60.+ 20*pow(DMAX(0.0,5.-Maturity),1.4);
+        //		Strike_used[j] = DMIN(Strike[j]  ,Forward +
+        //nStdDev*dStdDev); 		Strike_used[j] = DMAX(Strike_used[j]  , DMAX(0.0015
+        //,Forward - nStdDev*dStdDev));
 
+        Strike[j] = DMIN(Strike[j], Forward + nStdDev * dStdDev);
+        Strike[j] = DMAX(Strike[j], DMAX(0.00001, Forward - nStdDev * dStdDev));
 
-	for (j=1;j<=nStrikes;j++) {	
+        for (i = 1; i <= nSteps_opt; i++) {
 
-			// computes the approximated n. of oscillations in a unit interval 
-	        // and then the required n. integration steps. For very short maturities, 
-		    // the precision is forced to increse, as there is little time value
+          err = PsiFunction(isVolInfFix, Maturity, 1., -x[i], a, Hb, HAlpha,
+                            HRho, log(Forward), HSigma * HSigma, greek, &RePsi1,
+                            &ImPsi1, &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+          err = PsiFunction(isVolInfFix, Maturity, 0., -x[i], a, Hb, HAlpha,
+                            HRho, log(Forward), HSigma * HSigma, greek, &RePsi2,
+                            &ImPsi2, &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
 
+          //				G12[j]+=w[i]/x[i]*exp(RePsi1)*sin(ImPsi1+x[i]*log(Strike_used[j]));
+          //				G22[j]+=w[i]/x[i]*exp(RePsi2)*sin(ImPsi2+x[i]*log(Strike_used[j]));
 
-		// Here it branches following the rule: if Strike is larger than nStdDev from the forward 
-		// or smaller than -nStdDev, then it simply evaluates the price at +- nStdDev
-		
+          G12[j] +=
+              w[i] / x[i] * exp(RePsi1) * sin(ImPsi1 + x[i] * log(Strike[j]));
+          G22[j] +=
+              w[i] / x[i] * exp(RePsi2) * sin(ImPsi2 + x[i] * log(Strike[j]));
+        }
 
-		dGear = 2 + 3./(Maturity*Maturity*Maturity);
-		nOptSteps1 = IMAX(IMIN((int)( dGear*UpperBound*(fabs(ImAppr1+log(Strike[j])))/SRT_PI),nSteps),22);
-		nOptSteps2 = IMAX(IMIN((int)( dGear*UpperBound*(fabs(ImAppr2+log(Strike[j])))/SRT_PI),nSteps),22);
+        err = PsiFunction(isVolInfFix, Maturity, 1., 0., a, Hb, HAlpha, HRho,
+                          log(Forward), HSigma * HSigma, greek, &RePsi1,
+                          &ImPsi1, &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+        G11 = exp(RePsi1);
 
-		nSteps_opt=IMAX(nOptSteps1,nOptSteps2);
-		x=dvector(1,nSteps_opt);
-		w=dvector(1,nSteps_opt);
+        err = PsiFunction(isVolInfFix, Maturity, 0., 0., a, Hb, HAlpha, HRho,
+                          log(Forward), HSigma * HSigma, greek, &RePsi2,
+                          &ImPsi2, &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
+        G21 = exp(RePsi2);
 
-		GaussLeg(0., UpperBound_opt, x, w, nSteps_opt);
+        n1 = G11 / 2. - 1. / SRT_PI * G12[j];
+        n2 = G21 / 2. - 1. / SRT_PI * G22[j];
 
-//		Strike_used[j] = DMIN(Strike[j],Forward + nStdDev*dStdDev);
-//		Strike_used[j] = DMAX(Strike_used[j], DMAX(0.0015,Forward - nStdDev*dStdDev));
+        switch (call_put) {
 
-		Strike[j] = DMIN(Strike[j],Forward + nStdDev*dStdDev);
-		Strike[j] = DMAX(Strike[j], DMAX(0.00001,Forward - nStdDev*dStdDev));
+        case SRT_CALL:
+          result[j] = DMAX(1.e-13, (n1 - Strike[j] * n2) * Disc) / dScaling;
+          //					result[j]=DMAX(1.e-13
+          //,(n1-Strike_used[j]*n2)*Disc)/dScaling;
 
-		for (i=1;i<=nSteps_opt;i++) {
+          if (result[j] < (Forward - Strike[j]) * Disc)
+            result[j] = (Forward - Strike[j]) * Disc / dScaling + 1.e-8;
+          //					if (result[j]< (Forward-Strike_used[j])*Disc)
+          //result[j]=(Forward-Strike_used[j])*Disc/dScaling+1.e-8;
 
-			err=PsiFunction (isVolInfFix,Maturity,1.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			err=PsiFunction (isVolInfFix,Maturity,0.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
+          break;
 
-//				G12[j]+=w[i]/x[i]*exp(RePsi1)*sin(ImPsi1+x[i]*log(Strike_used[j]));
-//				G22[j]+=w[i]/x[i]*exp(RePsi2)*sin(ImPsi2+x[i]*log(Strike_used[j]));
+        default:
+          result[j] = DMAX(1.e-13, (n1 - Strike[j] * n2) * Disc / dScaling -
+                                       (Forward - Strike[j]) * Disc) /
+                      dScaling;
+          //					result[j]= DMAX(1.e-13
+          //,(n1-Strike_used[j]*n2)*Disc/dScaling -
+          //(Forward-Strike_used[j])*Disc)/dScaling;
 
-				G12[j]+=w[i]/x[i]*exp(RePsi1)*sin(ImPsi1+x[i]*log(Strike[j]));
-				G22[j]+=w[i]/x[i]*exp(RePsi2)*sin(ImPsi2+x[i]*log(Strike[j]));
-			
-		}
+          if (result[j] < (-Forward + Strike[j]) * Disc)
+            result[j] = (-Forward + Strike[j]) * Disc + 1.e-8;
+          //					if (result[j]< (-Forward+Strike_used[j])*Disc)
+          //result[j]=(-Forward+Strike_used[j])*Disc+1.e-8;
+          break;
+        }
 
-			err = PsiFunction (isVolInfFix,Maturity,1.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			G11=exp(RePsi1);
+        free_dvector(x, 1, nSteps_opt);
+        free_dvector(w, 1, nSteps_opt);
+      }
 
-			err=PsiFunction (isVolInfFix,Maturity,0.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
-			G21=exp(RePsi2);
+      //			free_dvector(Strike_used  ,1  ,nStrikes);
 
-				
-				n1=G11/2.-1./SRT_PI*G12[j];
-				n2=G21/2.-1./SRT_PI*G22[j];
+      break;
 
-				switch (call_put){
+    default:
 
-					case SRT_CALL:
-					result[j]=DMAX(1.e-13,(n1-Strike[j]*n2)*Disc)/dScaling;
-//					result[j]=DMAX(1.e-13,(n1-Strike_used[j]*n2)*Disc)/dScaling;
+      /* runs over strikes to set the breakpoint between the two methods */
 
-					if (result[j]< (Forward-Strike[j])*Disc) result[j]=(Forward-Strike[j])*Disc/dScaling+1.e-8;
-//					if (result[j]< (Forward-Strike_used[j])*Disc) result[j]=(Forward-Strike_used[j])*Disc/dScaling+1.e-8;
+      iThresh = nStrikes;
+      for (j = 0; j < nStrikes; j++) {
+        if (Strike[j + 1] > Forward * 0.1 * dScaling) {
+          iThresh = j;
+          break;
+        }
+      }
 
-				break;
+      /* now I integrate with the optimised algorithm for strikes < breakpoint
+         and with the parallel algorithm for strikes  > breakpoint */
 
-				default:
-					result[j]= DMAX(1.e-13,(n1-Strike[j]*n2)*Disc/dScaling - (Forward-Strike[j])*Disc)/dScaling;
-//					result[j]= DMAX(1.e-13,(n1-Strike_used[j]*n2)*Disc/dScaling - (Forward-Strike_used[j])*Disc)/dScaling;
+      x = dvector(1, nStp);
+      w = dvector(1, nStp);
+      x1 = dvector(1, nStp);
+      w1 = dvector(1, nStp);
 
-					if (result[j]< (-Forward+Strike[j])*Disc) result[j]=(-Forward+Strike[j])*Disc+1.e-8;	
-//					if (result[j]< (-Forward+Strike_used[j])*Disc) result[j]=(-Forward+Strike_used[j])*Disc+1.e-8;	
-				break;
+      for (j = 1; j <= iThresh; j++) {
+        G12[j] = 0.0;
+        G22[j] = 0.0;
+      }
 
-				}
+      ImAppr2 =
+          -(log(Forward) +
+            (esp2 - 1) * HSigma * HSigma / 2. / (Hb - HAlpha * HRho) +
+            Maturity * a / 2. / (Hb - HAlpha * HRho) +
+            a * (esp2 - 1.) / 2 / (Hb - HAlpha * HRho) / (Hb - HAlpha * HRho));
+      ImAppr1 = -(log(Forward) + HSigma * HSigma / Hb * (1. - esp) -
+                  Maturity * a / 2. / Hb + a / 2. / Hb / Hb * (1. - esp));
 
-			free_dvector(x,1,nSteps_opt);
-			free_dvector(w,1,nSteps_opt);
-	}		
+      for (j = 1; j <= iThresh; j++) {
 
-//			free_dvector(Strike_used,1,nStrikes);
+        iter = 0;
+        NodeLeft = 0.0;
+        NodeLeft1 = 0.0;
+        do {
 
-			break;
+          /* find the next node on the axis */
 
+          NodeRight = HestonFindRightNode(ImAppr1, Strike[j], NodeLeft,
+                                          isVolInfFix, Maturity, a, Hb, HAlpha,
+                                          HRho, Forward, HSigma, 1.0, greek);
+          GaussLeg(NodeLeft, NodeRight, x, w, nStp);
 
-		default:
+          NodeRight1 = HestonFindRightNode(ImAppr2, Strike[j], NodeLeft,
+                                           isVolInfFix, Maturity, a, Hb, HAlpha,
+                                           HRho, Forward, HSigma, 0.0, greek);
+          GaussLeg(NodeLeft1, NodeRight1, x1, w1, nStp);
 
-		/* runs over strikes to set the breakpoint between the two methods */
+          Int = 0.0;
+          Int1 = 0.0;
+          for (k = 1; k <= nStp; k++) {
 
-		iThresh=nStrikes;
-		for (j=0;j<nStrikes;j++) {
-			if (Strike[j+1] > Forward*0.1*dScaling)  {
-				iThresh = j;
-				break;
-			}
-		}
+            err =
+                PsiFunction(isVolInfFix, Maturity, 1., -x[k], a, Hb, HAlpha,
+                            HRho, log(Forward), HSigma * HSigma, greek, &RePsi1,
+                            &ImPsi1, &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
 
-		/* now I integrate with the optimised algorithm for strikes < breakpoint and with the parallel
-		   algorithm for strikes  > breakpoint */
+            G12[j] +=
+                w[k] / x[k] * exp(RePsi1) * sin(ImPsi1 + x[k] * log(Strike[j]));
 
-		x=dvector(1,nStp);
-		w=dvector(1,nStp);
-		x1=dvector(1,nStp);
-		w1=dvector(1,nStp);
+            err =
+                PsiFunction(isVolInfFix, Maturity, 0., -x1[k], a, Hb, HAlpha,
+                            HRho, log(Forward), HSigma * HSigma, greek, &RePsi2,
+                            &ImPsi2, &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
 
-		for (j=1;j<=iThresh;j++) {
-			G12[j]=0.0;
-			G22[j]=0.0;
-		}
+            G22[j] += w1[k] / x1[k] * exp(RePsi2) *
+                      sin(ImPsi2 + x1[k] * log(Strike[j]));
+          }
 
-			ImAppr2=-(log(Forward)+(esp2-1)*HSigma*HSigma/2./(Hb-HAlpha*HRho)+Maturity*a/2./(Hb-HAlpha*HRho)
-				                +a*(esp2-1.)/2/(Hb-HAlpha*HRho)/(Hb-HAlpha*HRho));
-			ImAppr1=-(log(Forward)+HSigma*HSigma/Hb*(1.-esp)-Maturity*a/2./Hb+a/2./Hb/Hb*(1.-esp));
+          NodeLeft = NodeRight;
+          NodeLeft1 = NodeRight1;
 
+          iter++;
 
-		for (j=1;j<=iThresh;j++) {
+        } while ((NodeLeft <= UpperBound) && (iter <= 1000));
+      }
 
-			iter=0;
-			NodeLeft=0.0;
-			NodeLeft1=0.0;
-			do  {
+      free_dvector(x, 1, nStp);
+      free_dvector(w, 1, nStp);
+      free_dvector(x1, 1, nStp);
+      free_dvector(w1, 1, nStp);
 
-			/* find the next node on the axis */
+      /* second part  , now I use the parallel integrator for strikes > 30 bps
+       */
 
-			NodeRight = HestonFindRightNode(ImAppr1,Strike[j],NodeLeft,isVolInfFix,Maturity,
-											a,Hb,HAlpha,HRho,Forward,HSigma,1.0,greek);
-			GaussLeg(NodeLeft, NodeRight, x, w, nStp);
+      x = dvector(1, nSteps);
+      w = dvector(1, nSteps);
+      GaussLeg(0., UpperBound, x, w, nSteps);
 
-			NodeRight1 = HestonFindRightNode(ImAppr2,Strike[j],NodeLeft,isVolInfFix,Maturity,
-											a,Hb,HAlpha,HRho,Forward,HSigma,0.0,greek);
-			GaussLeg(NodeLeft1, NodeRight1, x1, w1, nStp);
+      for (j = iThresh + 1; j <= nStrikes; j++) {
+        G12[j] = 0.0;
+        G22[j] = 0.0;
+      }
 
-				Int=0.0;
-				Int1=0.0;
-				for (k=1;k<=nStp;k++) {
+      for (i = 1; i <= nSteps; i++) {
 
-					err=PsiFunction (isVolInfFix,Maturity,1.,-x[k],a,Hb,HAlpha,HRho,log(Forward),
-						             HSigma*HSigma,greek,&RePsi1,&ImPsi1,
-									 &DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
+        err = PsiFunction(isVolInfFix, Maturity, 1., -x[i], a, Hb, HAlpha, HRho,
+                          log(Forward), HSigma * HSigma, greek, &RePsi1,
+                          &ImPsi1, &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+        err = PsiFunction(isVolInfFix, Maturity, 0., -x[i], a, Hb, HAlpha, HRho,
+                          log(Forward), HSigma * HSigma, greek, &RePsi2,
+                          &ImPsi2, &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
 
-					G12[j]+=w[k]/x[k]*exp(RePsi1)*sin(ImPsi1+x[k]*log(Strike[j])); 
+        // runs over the strikes
 
-					err=PsiFunction (isVolInfFix,Maturity,0.,-x1[k],a,Hb,HAlpha,HRho,log(Forward),
-									 HSigma*HSigma,greek,&RePsi2,&ImPsi2,
-									 &DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
+        for (j = iThresh + 1; j <= nStrikes; j++) {
 
-					G22[j]+=w1[k]/x1[k]*exp(RePsi2)*sin(ImPsi2+x1[k]*log(Strike[j]));	
-			
-				}
+          G12[j] +=
+              w[i] / x[i] * exp(RePsi1) * sin(ImPsi1 + x[i] * log(Strike[j]));
+          G22[j] +=
+              w[i] / x[i] * exp(RePsi2) * sin(ImPsi2 + x[i] * log(Strike[j]));
+        }
+      }
 
-			NodeLeft=NodeRight;
-			NodeLeft1=NodeRight1;
+      err = PsiFunction(isVolInfFix, Maturity, 1., 0., a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi1, &ImPsi1,
+                        &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+      G11 = exp(RePsi1);
 
-			iter++;
+      err = PsiFunction(isVolInfFix, Maturity, 0., 0., a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi2, &ImPsi2,
+                        &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
+      G21 = exp(RePsi2);
 
-			} while ((NodeLeft <= UpperBound) && (iter <= 1000));
-		}
+      /* Now sums up all together */
 
-			free_dvector(x,1,nStp);
-			free_dvector(w,1,nStp);
-			free_dvector(x1,1,nStp);
-			free_dvector(w1,1,nStp);
+      for (j = 1; j <= nStrikes; j++) {
 
-			/* second part, now I use the parallel integrator for strikes > 30 bps */
+        n1 = G11 / 2. - 1. / SRT_PI * G12[j];
+        n2 = G21 / 2. - 1. / SRT_PI * G22[j];
 
-			x=dvector(1,nSteps);
-			w=dvector(1,nSteps);
-			GaussLeg(0., UpperBound, x, w, nSteps);
+        switch (call_put) {
 
-		for (j=iThresh+1;j<=nStrikes ;j++) {
-			G12[j]=0.0;
-			G22[j]=0.0;
-		}
+        case SRT_CALL:
+          result[j] = DMAX(1.e-13, (n1 - Strike[j] * n2) * Disc) / dScaling;
 
+          if (result[j] < (Forward - Strike[j]) * Disc)
+            result[j] = (Forward - Strike[j]) * Disc / dScaling + 1.e-8;
 
-		for (i=1;i<=nSteps;i++) {
+          break;
 
-			err=PsiFunction (isVolInfFix,Maturity,1.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			err=PsiFunction (isVolInfFix,Maturity,0.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
+        default:
+          result[j] = DMAX(1.e-13, (n1 - Strike[j] * n2) * Disc / dScaling -
+                                       (Forward - Strike[j]) * Disc) /
+                      dScaling;
 
-			// runs over the strikes 
+          if (result[j] < (-Forward + Strike[j]) * Disc)
+            result[j] = (-Forward + Strike[j]) * Disc + 1.e-8;
+          break;
+        }
+      }
 
-			for (j=iThresh+1;j<=nStrikes ;j++) {
+      free_dvector(x, 1, nSteps);
+      free_dvector(w, 1, nSteps);
 
+      break;
+    }
 
-				G12[j]+=w[i]/x[i]*exp(RePsi1)*sin(ImPsi1+x[i]*log(Strike[j]));
-				G22[j]+=w[i]/x[i]*exp(RePsi2)*sin(ImPsi2+x[i]*log(Strike[j]));
+    break;
 
-			}
-		}
+  case DELTA:
 
-			err = PsiFunction (isVolInfFix,Maturity,1.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			G11=exp(RePsi1);
+    x = dvector(1, nSteps);
+    w = dvector(1, nSteps);
+    GaussLeg(0., UpperBound, x, w, nSteps);
 
-			err=PsiFunction (isVolInfFix,Maturity,0.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
-			G21=exp(RePsi2);
+    for (j = 1; j <= nStrikes; j++) {
+      G12[j] = 0.0;
+      G22[j] = 0.0;
+    }
 
-			/* Now sums up all together */
+    for (i = 1; i <= nSteps; i++) {
 
-			for (j=1;j<=nStrikes;j++) {
-				
-				n1=G11/2.-1./SRT_PI*G12[j];
-				n2=G21/2.-1./SRT_PI*G22[j];
+      err = PsiFunction(isVolInfFix, Maturity, 1., -x[i], a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi1, &ImPsi1,
+                        &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+      err = PsiFunction(isVolInfFix, Maturity, 0., -x[i], a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi2, &ImPsi2,
+                        &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
 
-				switch (call_put){
+      // runs over the strikes
 
-					case SRT_CALL:
-					result[j]=DMAX(1.e-13,(n1-Strike[j]*n2)*Disc)/dScaling;
+      for (j = 1; j <= nStrikes; j++) {
 
-					if (result[j]< (Forward-Strike[j])*Disc) result[j]=(Forward-Strike[j])*Disc/dScaling+1.e-8;
+        SinT1 = sin(ImPsi1 + x[i] * log(Strike[j]));
+        CosT1 = cos(ImPsi1 + x[i] * log(Strike[j]));
 
-				break;
+        SinT2 = sin(ImPsi2 + x[i] * log(Strike[j]));
+        CosT2 = cos(ImPsi2 + x[i] * log(Strike[j]));
 
-				default:
-					result[j]= DMAX(1.e-13,(n1-Strike[j]*n2)*Disc/dScaling - (Forward-Strike[j])*Disc)/dScaling;
+        G12[j] +=
+            w[i] / x[i] * exp(RePsi1) * (SinT1 * DRePsi1 + CosT1 * DImPsi1);
+        G22[j] +=
+            w[i] / x[i] * exp(RePsi2) * (SinT2 * DRePsi2 + CosT2 * DImPsi2);
+      }
+    }
 
-					if (result[j]< (-Forward+Strike[j])*Disc) result[j]=(-Forward+Strike[j])*Disc+1.e-8;	
-				break;
+    err = PsiFunction(isVolInfFix, Maturity, 1., 0., a, Hb, HAlpha, HRho,
+                      log(Forward), HSigma * HSigma, greek, &RePsi1, &ImPsi1,
+                      &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+    G11 = exp(RePsi1) * DRePsi1;
 
-				}
-			}
+    err = PsiFunction(isVolInfFix, Maturity, 0., 0., a, Hb, HAlpha, HRho,
+                      log(Forward), HSigma * HSigma, greek, &RePsi2, &ImPsi2,
+                      &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
+    G21 = exp(RePsi2) * DRePsi2;
 
-			free_dvector(x,1,nSteps);
-			free_dvector(w,1,nSteps);
+    for (j = 1; j <= nStrikes; j++) {
 
-			break;
+      n1 = G11 / 2. - 1. / SRT_PI * G12[j];
+      n2 = G21 / 2. - 1. / SRT_PI * G22[j];
 
-		}
+      switch (call_put) {
 
-	break;
+      case SRT_CALL:
+        result[j] = DMAX(1.e-13, (n1 - Strike[j] * n2) * Disc);
 
-	case DELTA:
+        break;
 
-		x=dvector(1,nSteps);
-		w=dvector(1,nSteps);
-		GaussLeg(0., UpperBound, x, w, nSteps);
+      default:
+        result[j] = DMAX(1.e-13, (n1 - Strike[j] * n2) * Disc) - Disc;
 
-		for (j=1;j<=nStrikes;j++) {
-			G12[j]=0.0;
-			G22[j]=0.0;
-		}
+        break;
+      }
+    }
 
-		for (i=1;i<=nSteps;i++) {
+    free_dvector(x, 1, nSteps);
+    free_dvector(w, 1, nSteps);
 
-			err=PsiFunction (isVolInfFix,Maturity,1.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			err=PsiFunction (isVolInfFix,Maturity,0.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
+    break;
 
-			// runs over the strikes 
+  case GAMMA:
 
-			for (j=1;j<=nStrikes;j++) {
+    x = dvector(1, nSteps);
+    w = dvector(1, nSteps);
+    GaussLeg(0., UpperBound, x, w, nSteps);
 
-				SinT1=sin(ImPsi1+x[i]*log(Strike[j]));
-				CosT1=cos(ImPsi1+x[i]*log(Strike[j]));
+    for (j = 1; j <= nStrikes; j++) {
+      G12[j] = 0.0;
+      G22[j] = 0.0;
+    }
 
-				SinT2=sin(ImPsi2+x[i]*log(Strike[j]));
-				CosT2=cos(ImPsi2+x[i]*log(Strike[j]));
+    for (i = 1; i <= nSteps; i++) {
 
-				G12[j]+=w[i]/x[i]*exp(RePsi1)*(SinT1*DRePsi1+CosT1*DImPsi1);
-				G22[j]+=w[i]/x[i]*exp(RePsi2)*(SinT2*DRePsi2+CosT2*DImPsi2);
+      err = PsiFunction(isVolInfFix, Maturity, 1., -x[i], a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi1, &ImPsi1,
+                        &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+      err = PsiFunction(isVolInfFix, Maturity, 0., -x[i], a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi2, &ImPsi2,
+                        &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
 
-			}
-		}
+      // runs over the strikes
 
-			err=PsiFunction (isVolInfFix,Maturity,1.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			G11=exp(RePsi1)*DRePsi1;
+      for (j = 1; j <= nStrikes; j++) {
 
-			err=PsiFunction (isVolInfFix,Maturity,0.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
-			G21=exp(RePsi2)*DRePsi2;
+        SinT1 = sin(ImPsi1 + x[i] * log(Strike[j]));
+        CosT1 = cos(ImPsi1 + x[i] * log(Strike[j]));
 
-			for (j=1;j<=nStrikes;j++) {
+        SinT2 = sin(ImPsi2 + x[i] * log(Strike[j]));
+        CosT2 = cos(ImPsi2 + x[i] * log(Strike[j]));
 
-				n1=G11/2.-1./SRT_PI*G12[j];
-				n2=G21/2.-1./SRT_PI*G22[j];
-		
-				switch (call_put){
+        G12[j] += w[i] / x[i] * exp(RePsi1) *
+                  (SinT1 * DRePsi1 * DRePsi1 + CosT1 * DImPsi1 * DRePsi1 +
+                   DDRePsi1 * SinT1 + DRePsi1 * DImPsi1 * CosT1 -
+                   DImPsi1 * DImPsi1 * SinT1 + DDImPsi1 * CosT1);
+        G22[j] += w[i] / x[i] * exp(RePsi2) *
+                  (SinT2 * DRePsi2 * DRePsi2 + CosT2 * DImPsi2 * DRePsi2 +
+                   DDRePsi2 * SinT2 + DRePsi2 * DImPsi2 * CosT2 -
+                   DImPsi2 * DImPsi2 * SinT2 + DDImPsi2 * CosT2);
+      }
+    }
 
-				case SRT_CALL:
-					result[j]=DMAX(1.e-13,(n1-Strike[j]*n2)*Disc);
+    err = PsiFunction(isVolInfFix, Maturity, 1., 0., a, Hb, HAlpha, HRho,
+                      log(Forward), HSigma * HSigma, greek, &RePsi1, &ImPsi1,
+                      &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+    G11 = exp(RePsi1) * (DRePsi1 * DRePsi1 + DDRePsi1);
 
-				break;
+    err = PsiFunction(isVolInfFix, Maturity, 0., 0., a, Hb, HAlpha, HRho,
+                      log(Forward), HSigma * HSigma, greek, &RePsi2, &ImPsi2,
+                      &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
+    G21 = exp(RePsi2) * (DRePsi2 * DRePsi2 + DDRePsi2);
 
- 				default:
-					result[j]= DMAX(1.e-13,(n1-Strike[j]*n2)*Disc) - Disc;
-	
-				break;
+    for (j = 1; j <= nStrikes; j++) {
 
-				}
-			}
+      n1 = G11 / 2. - 1. / SRT_PI * G12[j];
+      n2 = G21 / 2. - 1. / SRT_PI * G22[j];
 
-		free_dvector(x,1,nSteps);
-		free_dvector(w,1,nSteps);
+      result[j] = DMAX(1.e-13, (n1 - Strike[j] * n2) * Disc);
+    }
 
-		break;
+    free_dvector(x, 1, nSteps);
+    free_dvector(w, 1, nSteps);
+    break;
 
-	case GAMMA:
+  case VEGA:
 
-		x=dvector(1,nSteps);
-		w=dvector(1,nSteps);
-		GaussLeg(0., UpperBound, x, w, nSteps);
+    x = dvector(1, nSteps);
+    w = dvector(1, nSteps);
+    GaussLeg(0., UpperBound, x, w, nSteps);
 
-		for (j=1;j<=nStrikes;j++) {
-			G12[j]=0.0;
-			G22[j]=0.0;
-		}
+    for (j = 1; j <= nStrikes; j++) {
+      G12[j] = 0.0;
+      G22[j] = 0.0;
+    }
 
-		for (i=1;i<=nSteps;i++) {
+    for (i = 1; i <= nSteps; i++) {
 
-			err=PsiFunction (isVolInfFix,Maturity,1.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			err=PsiFunction (isVolInfFix,Maturity,0.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
+      err = PsiFunction(isVolInfFix, Maturity, 1., -x[i], a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi1, &ImPsi1,
+                        &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+      err = PsiFunction(isVolInfFix, Maturity, 0., -x[i], a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi2, &ImPsi2,
+                        &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
 
-			// runs over the strikes 
+      // runs over the strikes
 
-			for (j=1;j<=nStrikes;j++) {
+      for (j = 1; j <= nStrikes; j++) {
 
-				SinT1=sin(ImPsi1+x[i]*log(Strike[j]));
-				CosT1=cos(ImPsi1+x[i]*log(Strike[j]));
- 
-				SinT2=sin(ImPsi2+x[i]*log(Strike[j]));
-				CosT2=cos(ImPsi2+x[i]*log(Strike[j]));
+        SinT1 = sin(ImPsi1 + x[i] * log(Strike[j]));
+        CosT1 = cos(ImPsi1 + x[i] * log(Strike[j]));
 
-				G12[j]+=w[i]/x[i]*exp(RePsi1)*(SinT1*DRePsi1*DRePsi1+CosT1*DImPsi1*DRePsi1+DDRePsi1*SinT1+
-					                           DRePsi1*DImPsi1*CosT1-DImPsi1*DImPsi1*SinT1+DDImPsi1*CosT1);
-				G22[j]+=w[i]/x[i]*exp(RePsi2)*(SinT2*DRePsi2*DRePsi2+CosT2*DImPsi2*DRePsi2+DDRePsi2*SinT2+
-					                           DRePsi2*DImPsi2*CosT2-DImPsi2*DImPsi2*SinT2+DDImPsi2*CosT2);
+        SinT2 = sin(ImPsi2 + x[i] * log(Strike[j]));
+        CosT2 = cos(ImPsi2 + x[i] * log(Strike[j]));
 
-			}
-		}
+        G12[j] +=
+            w[i] / x[i] * exp(RePsi1) * (SinT1 * DRePsi1 + CosT1 * DImPsi1);
+        G22[j] +=
+            w[i] / x[i] * exp(RePsi2) * (SinT2 * DRePsi2 + CosT2 * DImPsi2);
+      }
+    }
 
-			err=PsiFunction (isVolInfFix,Maturity,1.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			G11=exp(RePsi1)*(DRePsi1*DRePsi1+DDRePsi1);
+    err = PsiFunction(isVolInfFix, Maturity, 1., 0., a, Hb, HAlpha, HRho,
+                      log(Forward), HSigma * HSigma, greek, &RePsi1, &ImPsi1,
+                      &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+    G11 = exp(RePsi1) * DRePsi1;
 
-			err=PsiFunction (isVolInfFix,Maturity,0.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
-			G21=exp(RePsi2)*(DRePsi2*DRePsi2+DDRePsi2);
+    err = PsiFunction(isVolInfFix, Maturity, 0., 0., a, Hb, HAlpha, HRho,
+                      log(Forward), HSigma * HSigma, greek, &RePsi2, &ImPsi2,
+                      &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
+    G21 = exp(RePsi2) * DRePsi2;
 
+    for (j = 1; j <= nStrikes; j++) {
 
-			for (j=1;j<=nStrikes;j++) {
+      n1 = G11 / 2. - 1. / SRT_PI * G12[j];
+      n2 = G21 / 2. - 1. / SRT_PI * G22[j];
 
-				n1=G11/2.-1./SRT_PI*G12[j];
-				n2=G21/2.-1./SRT_PI*G22[j];
-		
-				result[j]=DMAX(1.e-13,(n1-Strike[j]*n2)*Disc);	
+      result[j] = (n1 - Strike[j] * n2) * Disc;
+    }
 
-			}
+    free_dvector(x, 1, nSteps);
+    free_dvector(w, 1, nSteps);
+    break;
 
-		free_dvector(x,1,nSteps);
-		free_dvector(w,1,nSteps);
-		break;
+  case VOLGA:
 
-	case VEGA:
+    x = dvector(1, nSteps);
+    w = dvector(1, nSteps);
+    GaussLeg(0., UpperBound, x, w, nSteps);
 
-		x=dvector(1,nSteps);
-		w=dvector(1,nSteps);
-		GaussLeg(0., UpperBound, x, w, nSteps);
+    for (j = 1; j <= nStrikes; j++) {
+      G12[j] = 0.0;
+      G22[j] = 0.0;
+    }
 
-		for (j=1;j<=nStrikes;j++) {
-			G12[j]=0.0;
-			G22[j]=0.0;
-		}
+    for (i = 1; i <= nSteps; i++) {
 
-		for (i=1;i<=nSteps;i++) {
+      err = PsiFunction(isVolInfFix, Maturity, 1., -x[i], a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi1, &ImPsi1,
+                        &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+      err = PsiFunction(isVolInfFix, Maturity, 0., -x[i], a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi2, &ImPsi2,
+                        &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
 
-			err=PsiFunction (isVolInfFix,Maturity,1.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			err=PsiFunction (isVolInfFix,Maturity,0.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
+      // runs over the strikes
 
-			// runs over the strikes 
+      for (j = 1; j <= nStrikes; j++) {
 
-			for (j=1;j<=nStrikes;j++) {
+        SinT1 = sin(ImPsi1 + x[i] * log(Strike[j]));
+        CosT1 = cos(ImPsi1 + x[i] * log(Strike[j]));
 
-				SinT1=sin(ImPsi1+x[i]*log(Strike[j]));
-				CosT1=cos(ImPsi1+x[i]*log(Strike[j]));
+        SinT2 = sin(ImPsi2 + x[i] * log(Strike[j]));
+        CosT2 = cos(ImPsi2 + x[i] * log(Strike[j]));
 
-				SinT2=sin(ImPsi2+x[i]*log(Strike[j]));
-				CosT2=cos(ImPsi2+x[i]*log(Strike[j]));
+        G12[j] += w[i] / x[i] * exp(RePsi1) *
+                  (SinT1 * DRePsi1 * DRePsi1 + CosT1 * DImPsi1 * DRePsi1 +
+                   DDRePsi1 * SinT1 + DRePsi1 * DImPsi1 * CosT1 -
+                   DImPsi1 * DImPsi1 * SinT1 + DDImPsi1 * CosT1);
+        G22[j] += w[i] / x[i] * exp(RePsi2) *
+                  (SinT2 * DRePsi2 * DRePsi2 + CosT2 * DImPsi2 * DRePsi2 +
+                   DDRePsi2 * SinT2 + DRePsi2 * DImPsi2 * CosT2 -
+                   DImPsi2 * DImPsi2 * SinT2 + DDImPsi2 * CosT2);
+      }
+    }
 
-				G12[j]+=w[i]/x[i]*exp(RePsi1)*(SinT1*DRePsi1+CosT1*DImPsi1);
-				G22[j]+=w[i]/x[i]*exp(RePsi2)*(SinT2*DRePsi2+CosT2*DImPsi2);
+    err = PsiFunction(isVolInfFix, Maturity, 1., 0., a, Hb, HAlpha, HRho,
+                      log(Forward), HSigma * HSigma, greek, &RePsi1, &ImPsi1,
+                      &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+    G11 = exp(RePsi1) * (DRePsi1 * DRePsi1 + DDRePsi1);
 
-			}
-		}
+    err = PsiFunction(isVolInfFix, Maturity, 0., 0., a, Hb, HAlpha, HRho,
+                      log(Forward), HSigma * HSigma, greek, &RePsi2, &ImPsi2,
+                      &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
+    G21 = exp(RePsi2) * (DRePsi2 * DRePsi2 + DDRePsi2);
 
+    for (j = 1; j <= nStrikes; j++) {
 
-			err=PsiFunction (isVolInfFix,Maturity,1.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			G11=exp(RePsi1)*DRePsi1;
+      n1 = G11 / 2. - 1. / SRT_PI * G12[j];
+      n2 = G21 / 2. - 1. / SRT_PI * G22[j];
 
-			err=PsiFunction (isVolInfFix,Maturity,0.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
-			G21=exp(RePsi2)*DRePsi2;
+      result[j] = (n1 - Strike[j] * n2) * Disc;
+    }
 
+    free_dvector(x, 1, nSteps);
+    free_dvector(w, 1, nSteps);
+    break;
 
-			for (j=1;j<=nStrikes;j++) {
+  case VANNA:
 
-				n1=G11/2.-1./SRT_PI*G12[j];
-				n2=G21/2.-1./SRT_PI*G22[j];
-		
+    x = dvector(1, nSteps);
+    w = dvector(1, nSteps);
+    GaussLeg(0., UpperBound, x, w, nSteps);
 
-					result[j]=(n1-Strike[j]*n2)*Disc;
+    for (j = 1; j <= nStrikes; j++) {
+      G12[j] = 0.0;
+      G22[j] = 0.0;
+    }
 
-			}
+    for (i = 1; i <= nSteps; i++) {
 
-	free_dvector(x,1,nSteps);
-	free_dvector(w,1,nSteps);
-	break;
+      err = PsiFunction(isVolInfFix, Maturity, 1., -x[i], a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi1, &ImPsi1,
+                        &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+      err = PsiFunction(isVolInfFix, Maturity, 0., -x[i], a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi2, &ImPsi2,
+                        &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
 
-	case VOLGA:
+      // runs over the strikes
 
-		x=dvector(1,nSteps);
-		w=dvector(1,nSteps);
-		GaussLeg(0., UpperBound, x, w, nSteps);
+      for (j = 1; j <= nStrikes; j++) {
 
-		for (j=1;j<=nStrikes;j++) {
-			G12[j]=0.0;
-			G22[j]=0.0;
-		}
+        SinT1 = sin(ImPsi1 + x[i] * log(Strike[j]));
+        CosT1 = cos(ImPsi1 + x[i] * log(Strike[j]));
 
-		for (i=1;i<=nSteps;i++) {
+        SinT2 = sin(ImPsi2 + x[i] * log(Strike[j]));
+        CosT2 = cos(ImPsi2 + x[i] * log(Strike[j]));
 
-			err=PsiFunction (isVolInfFix,Maturity,1.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			err=PsiFunction (isVolInfFix,Maturity,0.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
+        G12[j] += w[i] / x[i] * exp(RePsi1) *
+                  (SinT1 * DDRePsi1 * DRePsi1 + CosT1 * DRePsi1 * DDImPsi1 +
+                   DImPsi1 * DDRePsi1 * CosT1 - DDImPsi1 * DImPsi1 * SinT1);
+        G22[j] += w[i] / x[i] * exp(RePsi2) *
+                  (SinT2 * DDRePsi2 * DRePsi2 + CosT2 * DRePsi2 * DDImPsi2 +
+                   DImPsi2 * DDRePsi2 * CosT2 - DDImPsi2 * DImPsi2 * SinT2);
+      }
+    }
 
-			// runs over the strikes 
+    err = PsiFunction(isVolInfFix, Maturity, 1., 0., a, Hb, HAlpha, HRho,
+                      log(Forward), HSigma * HSigma, greek, &RePsi1, &ImPsi1,
+                      &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+    G11 = exp(RePsi1) * (DRePsi1 * DDRePsi1);
 
-			for (j=1;j<=nStrikes;j++) {
+    err = PsiFunction(isVolInfFix, Maturity, 0., 0., a, Hb, HAlpha, HRho,
+                      log(Forward), HSigma * HSigma, greek, &RePsi2, &ImPsi2,
+                      &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
+    G21 = exp(RePsi2) * (DRePsi2 * DDRePsi2);
 
-				SinT1=sin(ImPsi1+x[i]*log(Strike[j]));
-				CosT1=cos(ImPsi1+x[i]*log(Strike[j]));
+    for (j = 1; j <= nStrikes; j++) {
 
-				SinT2=sin(ImPsi2+x[i]*log(Strike[j]));
-				CosT2=cos(ImPsi2+x[i]*log(Strike[j]));
+      n1 = G11 / 2. - 1. / SRT_PI * G12[j];
+      n2 = G21 / 2. - 1. / SRT_PI * G22[j];
 
-				G12[j]+=w[i]/x[i]*exp(RePsi1)*(SinT1*DRePsi1*DRePsi1+CosT1*DImPsi1*DRePsi1+DDRePsi1*SinT1+
-					                           DRePsi1*DImPsi1*CosT1-DImPsi1*DImPsi1*SinT1+DDImPsi1*CosT1);
-				G22[j]+=w[i]/x[i]*exp(RePsi2)*(SinT2*DRePsi2*DRePsi2+CosT2*DImPsi2*DRePsi2+DDRePsi2*SinT2+
-					                           DRePsi2*DImPsi2*CosT2-DImPsi2*DImPsi2*SinT2+DDImPsi2*CosT2);
+      result[j] = (n1 - Strike[j] * n2) * Disc;
+    }
 
-			}
-		}
+    free_dvector(x, 1, nSteps);
+    free_dvector(w, 1, nSteps);
+    break;
 
-			err=PsiFunction (isVolInfFix,Maturity,1.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			G11=exp(RePsi1)*(DRePsi1*DRePsi1+DDRePsi1);
+  case THETA:
 
-			err=PsiFunction (isVolInfFix,Maturity,0.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
-			G21=exp(RePsi2)*(DRePsi2*DRePsi2+DDRePsi2);
+    x = dvector(1, nSteps);
+    w = dvector(1, nSteps);
+    GaussLeg(0., UpperBound, x, w, nSteps);
 
+    /* I first compute the derivative of the term containing the DF */
 
-			for (j=1;j<=nStrikes;j++) {
+    greek = PREMIUM;
+    for (j = 1; j <= nStrikes; j++) {
+      G12[j] = 0.0;
+      G22[j] = 0.0;
+    }
 
-				n1=G11/2.-1./SRT_PI*G12[j];
-				n2=G21/2.-1./SRT_PI*G22[j];
-		
-				result[j]=(n1-Strike[j]*n2)*Disc;	
+    for (i = 1; i <= nSteps; i++) {
 
-			}
+      err = PsiFunction(isVolInfFix, Maturity, 1., -x[i], a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi1, &ImPsi1,
+                        &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+      err = PsiFunction(isVolInfFix, Maturity, 0., -x[i], a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi2, &ImPsi2,
+                        &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
 
-		free_dvector(x,1,nSteps);
-		free_dvector(w,1,nSteps);
-		break;
+      // runs over the strikes
 
-	case VANNA:
+      for (j = 1; j <= nStrikes; j++) {
 
-		x=dvector(1,nSteps);
-		w=dvector(1,nSteps);
-		GaussLeg(0., UpperBound, x, w, nSteps);
+        G12[j] +=
+            w[i] / x[i] * exp(RePsi1) * sin(ImPsi1 + x[i] * log(Strike[j]));
+        G22[j] +=
+            w[i] / x[i] * exp(RePsi2) * sin(ImPsi2 + x[i] * log(Strike[j]));
+      }
+    }
 
-		for (j=1;j<=nStrikes;j++) {
-			G12[j]=0.0;
-			G22[j]=0.0;
-		}
+    err = PsiFunction(isVolInfFix, Maturity, 1., 0., a, Hb, HAlpha, HRho,
+                      log(Forward), HSigma * HSigma, greek, &RePsi1, &ImPsi1,
+                      &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+    G11 = exp(RePsi1);
 
-		for (i=1;i<=nSteps;i++) {
+    err = PsiFunction(isVolInfFix, Maturity, 0., 0., a, Hb, HAlpha, HRho,
+                      log(Forward), HSigma * HSigma, greek, &RePsi2, &ImPsi2,
+                      &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
+    G21 = exp(RePsi2);
 
-			err=PsiFunction (isVolInfFix,Maturity,1.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			err=PsiFunction (isVolInfFix,Maturity,0.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
+    for (j = 1; j <= nStrikes; j++) {
 
-			// runs over the strikes 
+      n1 = G11 / 2. - 1. / SRT_PI * G12[j];
+      n2 = G21 / 2. - 1. / SRT_PI * G22[j];
 
-			for (j=1;j<=nStrikes;j++) {
+      switch (call_put) {
 
-				SinT1=sin(ImPsi1+x[i]*log(Strike[j]));
-				CosT1=cos(ImPsi1+x[i]*log(Strike[j]));
+      case SRT_CALL:
+        result[j] = -(n1 - Strike[j] * n2) * Disc * log(Disc) / Maturity;
 
-				SinT2=sin(ImPsi2+x[i]*log(Strike[j]));
-				CosT2=cos(ImPsi2+x[i]*log(Strike[j]));
+        break;
 
-				G12[j]+=w[i]/x[i]*exp(RePsi1)*(SinT1*DDRePsi1*DRePsi1+CosT1*DRePsi1*DDImPsi1+
-					                           DImPsi1*DDRePsi1*CosT1-DDImPsi1*DImPsi1*SinT1);
-				G22[j]+=w[i]/x[i]*exp(RePsi2)*(SinT2*DDRePsi2*DRePsi2+CosT2*DRePsi2*DDImPsi2+
-					                           DImPsi2*DDRePsi2*CosT2-DDImPsi2*DImPsi2*SinT2);
+      default:
+        result[j] = -(n1 - Strike[j] * n2) * Disc * log(Disc) / Maturity +
+                    (Forward - Strike[j]) * Disc * log(Disc) / Maturity;
 
-			}
-		}
+        break;
+      }
+    }
 
-			err=PsiFunction (isVolInfFix,Maturity,1.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			G11=exp(RePsi1)*(DRePsi1*DDRePsi1);
+    /* I now compute the derivative of the term equivalent to [Fwd*N(d1)-KN(d2)]
+     */
 
-			err=PsiFunction (isVolInfFix,Maturity,0.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
-			G21=exp(RePsi2)*(DRePsi2*DDRePsi2);
+    greek = THETA;
+    for (j = 1; j <= nStrikes; j++) {
+      G12[j] = 0.0;
+      G22[j] = 0.0;
+    }
 
+    for (i = 1; i <= nSteps; i++) {
 
-			for (j=1;j<=nStrikes;j++) {
+      err = PsiFunction(isVolInfFix, Maturity, 1., -x[i], a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi1, &ImPsi1,
+                        &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+      err = PsiFunction(isVolInfFix, Maturity, 0., -x[i], a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi2, &ImPsi2,
+                        &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
 
-				n1=G11/2.-1./SRT_PI*G12[j];
-				n2=G21/2.-1./SRT_PI*G22[j];
-		
-				result[j]=(n1-Strike[j]*n2)*Disc;	
+      // runs over the strikes
 
-			}
+      for (j = 1; j <= nStrikes; j++) {
 
-		free_dvector(x,1,nSteps);
-		free_dvector(w,1,nSteps);
-		break;
+        SinT1 = sin(ImPsi1 + x[i] * log(Strike[j]));
+        CosT1 = cos(ImPsi1 + x[i] * log(Strike[j]));
 
-	case THETA:
+        SinT2 = sin(ImPsi2 + x[i] * log(Strike[j]));
+        CosT2 = cos(ImPsi2 + x[i] * log(Strike[j]));
 
-		x=dvector(1,nSteps);
-		w=dvector(1,nSteps);
-		GaussLeg(0., UpperBound, x, w, nSteps);
+        G12[j] +=
+            w[i] / x[i] * exp(RePsi1) * (SinT1 * DRePsi1 + CosT1 * DImPsi1);
+        G22[j] +=
+            w[i] / x[i] * exp(RePsi2) * (SinT2 * DRePsi2 + CosT2 * DImPsi2);
+      }
+    }
 
-		/* I first compute the derivative of the term containing the DF */
+    err = PsiFunction(isVolInfFix, Maturity, 1., 0., a, Hb, HAlpha, HRho,
+                      log(Forward), HSigma * HSigma, greek, &RePsi1, &ImPsi1,
+                      &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+    G11 = exp(RePsi1) * DRePsi1;
 
-		greek = PREMIUM;
-		for (j=1;j<=nStrikes;j++) {
-			G12[j]=0.0;
-			G22[j]=0.0;
-		}
+    err = PsiFunction(isVolInfFix, Maturity, 0., 0., a, Hb, HAlpha, HRho,
+                      log(Forward), HSigma * HSigma, greek, &RePsi2, &ImPsi2,
+                      &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
+    G21 = exp(RePsi2) * DRePsi2;
 
-		for (i=1;i<=nSteps;i++) {
+    for (j = 1; j <= nStrikes; j++) {
 
-			err=PsiFunction (isVolInfFix,Maturity,1.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			err=PsiFunction (isVolInfFix,Maturity,0.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
+      n1 = G11 / 2. - 1. / SRT_PI * G12[j];
+      n2 = G21 / 2. - 1. / SRT_PI * G22[j];
 
-			// runs over the strikes 
+      result[j] += -(n1 - Strike[j] * n2) * Disc;
+    }
 
-			for (j=1;j<=nStrikes;j++) {
+    free_dvector(x, 1, nSteps);
+    free_dvector(w, 1, nSteps);
+    break;
 
-				G12[j]+=w[i]/x[i]*exp(RePsi1)*sin(ImPsi1+x[i]*log(Strike[j]));
-				G22[j]+=w[i]/x[i]*exp(RePsi2)*sin(ImPsi2+x[i]*log(Strike[j]));
+  case DENSITY:
 
-			}
-		}
+    x = dvector(1, nSteps);
+    w = dvector(1, nSteps);
+    GaussLeg(0., UpperBound, x, w, nSteps);
 
-			err=PsiFunction (isVolInfFix,Maturity,1.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			G11=exp(RePsi1);
+    /* now I split the integration in two parts */
 
-			err=PsiFunction (isVolInfFix,Maturity,0.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
-			G21=exp(RePsi2);
+    for (i = 1; i <= nSteps; i++) {
 
+      err = PsiFunction(isVolInfFix, Maturity, 1., -x[i], a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi1, &ImPsi1,
+                        &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+      err = PsiFunction(isVolInfFix, Maturity, 0., -x[i], a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi2, &ImPsi2,
+                        &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
 
-			for (j=1;j<=nStrikes;j++) {
+      // runs over the strikes
 
-				n1=G11/2.-1./SRT_PI*G12[j];
-				n2=G21/2.-1./SRT_PI*G22[j];
-		
-				switch (call_put){
+      for (j = 1; j <= nStrikes; j++) {
 
-					case SRT_CALL:
-					result[j]=-(n1-Strike[j]*n2)*Disc*log(Disc)/Maturity;
+        G12[j] += w[i] * exp(RePsi1) *
+                  (-cos(ImPsi1 + x[i] * log(Strike[j])) -
+                   x[i] * sin(ImPsi1 + x[i] * log(Strike[j]))) /
+                  Strike[j] / Strike[j];
+        G22[j] += w[i] * exp(RePsi2) *
+                  (-cos(ImPsi2 + x[i] * log(Strike[j])) -
+                   x[i] * sin(ImPsi2 + x[i] * log(Strike[j]))) /
+                  Strike[j] / Strike[j];
+        GKK[j] += w[i] * exp(RePsi2) * cos(ImPsi2 + x[i] * log(Strike[j])) /
+                  Strike[j];
+      }
+    }
 
-				break;
+    for (j = nStrikes; j >= 1; j--) {
 
-				default:
-					result[j]= -(n1-Strike[j]*n2)*Disc*log(Disc)/Maturity
-						+ (Forward-Strike[j])*Disc*log(Disc)/Maturity;
+      n1 = -1. / SRT_PI * G12[j];
+      n2 = -1. / SRT_PI * G22[j];
+      n3 = -1. / SRT_PI * GKK[j];
 
-				break;
+      result[j] = DMAX(0.0, n1 - 2. * n3 - Strike[j] * n2);
+    }
 
-				}
-			}
+    free_dvector(x, 1, nSteps);
+    free_dvector(w, 1, nSteps);
+    break;
 
-		/* I now compute the derivative of the term equivalent to [Fwd*N(d1)-KN(d2)] */
+  case CUMDENSITY:
 
-		greek = THETA;
-		for (j=1;j<=nStrikes;j++) {
-			G12[j]=0.0;
-			G22[j]=0.0;
-		}
+    switch (IntegrType) {
 
-		for (i=1;i<=nSteps;i++) {
+    case 1:
 
-			err=PsiFunction (isVolInfFix,Maturity,1.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			err=PsiFunction (isVolInfFix,Maturity,0.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
+      x = dvector(1, nStp);
+      w = dvector(1, nStp);
+      x1 = dvector(1, nStp);
+      w1 = dvector(1, nStp);
 
-			// runs over the strikes 
+      for (j = 1; j <= nStrikes; j++) {
 
-			for (j=1;j<=nStrikes;j++) {
+        G12[j] = 0.0;
+        G22[j] = 0.0;
+        GKK[j] = 0.0;
+      }
 
-				SinT1=sin(ImPsi1+x[i]*log(Strike[j]));
-				CosT1=cos(ImPsi1+x[i]*log(Strike[j]));
+      ImAppr2 =
+          -(log(Forward) +
+            (esp2 - 1) * HSigma * HSigma / 2. / (Hb - HAlpha * HRho) +
+            Maturity * a / 2. / (Hb - HAlpha * HRho) +
+            a * (esp2 - 1.) / 2 / (Hb - HAlpha * HRho) / (Hb - HAlpha * HRho));
+      ImAppr1 = -(log(Forward) + HSigma * HSigma / Hb * (1. - esp) -
+                  Maturity * a / 2. / Hb + a / 2. / Hb / Hb * (1. - esp));
 
-				SinT2=sin(ImPsi2+x[i]*log(Strike[j]));
-				CosT2=cos(ImPsi2+x[i]*log(Strike[j]));
+      for (j = 1; j <= nStrikes; j++) {
 
-				G12[j]+=w[i]/x[i]*exp(RePsi1)*(SinT1*DRePsi1+CosT1*DImPsi1);
-				G22[j]+=w[i]/x[i]*exp(RePsi2)*(SinT2*DRePsi2+CosT2*DImPsi2);
+        iter = 0;
+        NodeLeft = 0.0;
+        NodeLeft1 = 0.0;
+        do {
 
-			}
-		}
+          /* find the next node on the axis */
 
-			err=PsiFunction (isVolInfFix,Maturity,1.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			G11=exp(RePsi1)*DRePsi1;
+          NodeRight = HestonFindRightNode(ImAppr1, Strike[j], NodeLeft,
+                                          isVolInfFix, Maturity, a, Hb, HAlpha,
+                                          HRho, Forward, HSigma, 1.0, greek);
+          GaussLeg(NodeLeft, NodeRight, x, w, nStp);
 
-			err=PsiFunction (isVolInfFix,Maturity,0.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
-			G21=exp(RePsi2)*DRePsi2;
+          NodeRight1 = HestonFindRightNode(ImAppr2, Strike[j], NodeLeft,
+                                           isVolInfFix, Maturity, a, Hb, HAlpha,
+                                           HRho, Forward, HSigma, 0.0, greek);
+          GaussLeg(NodeLeft1, NodeRight1, x1, w1, nStp);
 
+          Int = 0.0;
+          Int1 = 0.0;
+          for (k = 1; k <= nStp; k++) {
 
-			for (j=1;j<=nStrikes;j++) {
+            err =
+                PsiFunction(isVolInfFix, Maturity, 1., -x[k], a, Hb, HAlpha,
+                            HRho, log(Forward), HSigma * HSigma, greek, &RePsi1,
+                            &ImPsi1, &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
 
-				n1=G11/2.-1./SRT_PI*G12[j];
-				n2=G21/2.-1./SRT_PI*G22[j];
-	
-				result[j]+=-(n1-Strike[j]*n2)*Disc;
+            G12[j] += w[k] * exp(RePsi1) * cos(ImPsi1 + x[k] * log(Strike[j])) /
+                      Strike[j];
 
-			}
+            err =
+                PsiFunction(isVolInfFix, Maturity, 0., -x1[k], a, Hb, HAlpha,
+                            HRho, log(Forward), HSigma * HSigma, greek, &RePsi2,
+                            &ImPsi2, &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
 
-		free_dvector(x,1,nSteps);
-		free_dvector(w,1,nSteps);
-		break;
+            G22[j] += w1[k] * exp(RePsi2) *
+                      cos(ImPsi2 + x1[k] * log(Strike[j])) / Strike[j];
+            GKK[j] += w1[k] / x1[k] * exp(RePsi2) *
+                      sin(ImPsi2 + x1[k] * log(Strike[j]));
+          }
 
-	case DENSITY: 
+          NodeLeft = NodeRight;
+          NodeLeft1 = NodeRight1;
 
-		x=dvector(1,nSteps);
-		w=dvector(1,nSteps);
-		GaussLeg(0., UpperBound, x, w, nSteps);
+          iter++;
 
-		/* now I split the integration in two parts */
+        } while ((NodeLeft <= UpperBound) && (iter <= 1000));
+      }
 
-		for (i=1;i<=nSteps;i++) {
+      /* computes the remaining two terms that need no integration */
 
-			err=PsiFunction (isVolInfFix,Maturity,1.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			err=PsiFunction (isVolInfFix,Maturity,0.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
+      err = PsiFunction(isVolInfFix, Maturity, 1., 0., a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi1, &ImPsi1,
+                        &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+      G11 = exp(RePsi1);
 
-			// runs over the strikes 
+      err = PsiFunction(isVolInfFix, Maturity, 0., 0., a, Hb, HAlpha, HRho,
+                        log(Forward), HSigma * HSigma, greek, &RePsi2, &ImPsi2,
+                        &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
+      G21 = exp(RePsi2);
 
-			for (j=1;j<=nStrikes;j++) {
+      /* finally puts all together and evaluates the option */
 
-				G12[j]+=w[i]*exp(RePsi1)*(-cos(ImPsi1+x[i]*log(Strike[j]))-x[i]*sin(ImPsi1+x[i]*log(Strike[j])))/Strike[j]/Strike[j];
-				G22[j]+=w[i]*exp(RePsi2)*(-cos(ImPsi2+x[i]*log(Strike[j]))-x[i]*sin(ImPsi2+x[i]*log(Strike[j])))/Strike[j]/Strike[j];
-				GKK[j]+=w[i]*exp(RePsi2)*cos(ImPsi2+x[i]*log(Strike[j]))/Strike[j];
-				
-			}
-		}
+      for (j = 1; j <= nStrikes; j++) {
 
-			for (j=nStrikes;j>=1;j--) {
+        n1 = -1. / SRT_PI * G12[j];
+        n2 = -1. / SRT_PI * G22[j];
+        n3 = -1. / SRT_PI * GKK[j];
 
-				n1=-1./SRT_PI*G12[j];
-				n2=-1./SRT_PI*G22[j];
-				n3=-1./SRT_PI*GKK[j];
+        result[j] = DMAX(DMIN(1.0, 0.5 + (n1 - n3 - Strike[j] * n2)), 0.0);
+      }
 
-					result[j]=DMAX(0.0,n1-2.*n3-Strike[j]*n2);
+      free_dvector(x, 1, nStp);
+      free_dvector(w, 1, nStp);
+      free_dvector(x1, 1, nStp);
+      free_dvector(w1, 1, nStp);
 
-			}
+      break;
 
+    default:
 
-		free_dvector(x,1,nSteps);
-		free_dvector(w,1,nSteps);
-		break;
+      x = dvector(1, nSteps);
+      w = dvector(1, nSteps);
+      GaussLeg(0., UpperBound, x, w, nSteps);
 
-	case CUMDENSITY: 
+      for (j = 1; j <= nStrikes; j++) {
 
-		switch (IntegrType){
+        G12[j] = 0.0;
+        G22[j] = 0.0;
+        GKK[j] = 0.0;
+      }
 
-		case 1:
+      for (i = 1; i <= nSteps; i++) {
 
-		x=dvector(1,nStp);
-		w=dvector(1,nStp);
-		x1=dvector(1,nStp);
-		w1=dvector(1,nStp);
+        err = PsiFunction(isVolInfFix, Maturity, 1., -x[i], a, Hb, HAlpha, HRho,
+                          log(Forward), HSigma * HSigma, greek, &RePsi1,
+                          &ImPsi1, &DRePsi1, &DImPsi1, &DDRePsi1, &DDImPsi1);
+        err = PsiFunction(isVolInfFix, Maturity, 0., -x[i], a, Hb, HAlpha, HRho,
+                          log(Forward), HSigma * HSigma, greek, &RePsi2,
+                          &ImPsi2, &DRePsi2, &DImPsi2, &DDRePsi2, &DDImPsi2);
 
-		for (j=1;j<=nStrikes;j++) {
+        // runs over the strikes
 
-			G12[j]=0.0;
-			G22[j]=0.0;
-			GKK[j]=0.0;
-		}
+        for (j = 1; j <= nStrikes; j++) {
 
-			ImAppr2=-(log(Forward)+(esp2-1)*HSigma*HSigma/2./(Hb-HAlpha*HRho)+Maturity*a/2./(Hb-HAlpha*HRho)
-				                +a*(esp2-1.)/2/(Hb-HAlpha*HRho)/(Hb-HAlpha*HRho));
-			ImAppr1=-(log(Forward)+HSigma*HSigma/Hb*(1.-esp)-Maturity*a/2./Hb+a/2./Hb/Hb*(1.-esp));
+          G12[j] += w[i] * exp(RePsi1) * cos(ImPsi1 + x[i] * log(Strike[j])) /
+                    Strike[j];
+          G22[j] += w[i] * exp(RePsi2) * cos(ImPsi2 + x[i] * log(Strike[j])) /
+                    Strike[j];
+          GKK[j] +=
+              w[i] / x[i] * exp(RePsi2) * sin(ImPsi2 + x[i] * log(Strike[j]));
+        }
+      }
 
+      for (j = 1; j <= nStrikes; j++) {
 
-		for (j=1;j<=nStrikes;j++) {
+        n1 = -1. / SRT_PI * G12[j];
+        n2 = -1. / SRT_PI * G22[j];
+        n3 = -1. / SRT_PI * GKK[j];
 
-			iter=0;
-			NodeLeft=0.0;
-			NodeLeft1=0.0;
-			do  {
+        result[j] = DMAX(DMIN(1.0, 0.5 + (n1 - n3 - Strike[j] * n2)), 0.0);
+      }
 
-			/* find the next node on the axis */
+      free_dvector(x, 1, nSteps);
+      free_dvector(w, 1, nSteps);
+    }
 
-			NodeRight = HestonFindRightNode(ImAppr1,Strike[j],NodeLeft,isVolInfFix,Maturity,
-											a,Hb,HAlpha,HRho,Forward,HSigma,1.0,greek);
-			GaussLeg(NodeLeft, NodeRight, x, w, nStp);
+    break;
+  }
 
-			NodeRight1 = HestonFindRightNode(ImAppr2,Strike[j],NodeLeft,isVolInfFix,Maturity,
-											a,Hb,HAlpha,HRho,Forward,HSigma,0.0,greek);
-			GaussLeg(NodeLeft1, NodeRight1, x1, w1, nStp);
+  Forward -= Gamma;
 
-				Int=0.0;
-				Int1=0.0;
-				for (k=1;k<=nStp;k++) {
+  for (j = 1; j <= nStrikes; j++) {
+    Strike[j] -= Gamma;
+  }
 
+  free_dvector(G12, 1, nStrikes);
+  free_dvector(G22, 1, nStrikes);
+  free_dvector(GKK, 1, nStrikes);
+  free_dvector(premium, 1, nStrikes);
 
-					err=PsiFunction (isVolInfFix,Maturity,1.,-x[k],a,Hb,HAlpha,HRho,log(Forward),
-						             HSigma*HSigma,greek,&RePsi1,&ImPsi1,
-									 &DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-
-					G12[j]+=w[k]*exp(RePsi1)*cos(ImPsi1+x[k]*log(Strike[j]))/Strike[j];
- 
-
-					err=PsiFunction (isVolInfFix,Maturity,0.,-x1[k],a,Hb,HAlpha,HRho,log(Forward),
-									 HSigma*HSigma,greek,&RePsi2,&ImPsi2,
-									 &DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
-	
-				    G22[j]+=w1[k]*exp(RePsi2)*cos(ImPsi2+x1[k]*log(Strike[j]))/Strike[j];
-					GKK[j]+=w1[k]/x1[k]*exp(RePsi2)*sin(ImPsi2+x1[k]*log(Strike[j]));
-			
-				}
-
-			NodeLeft=NodeRight;
-			NodeLeft1=NodeRight1;
-
-			iter++;
-
-			} while ((NodeLeft <= UpperBound) && (iter <= 1000));
-		}
-
-			/* computes the remaining two terms that need no integration */
-
-			err = PsiFunction (isVolInfFix,Maturity,1.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			G11=exp(RePsi1);
-
-			err=PsiFunction (isVolInfFix,Maturity,0.,0.,a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
-			G21=exp(RePsi2);
-
-			/* finally puts all together and evaluates the option */
-
-			for (j=1;j<=nStrikes;j++) {
-				
-				n1=-1./SRT_PI*G12[j];
-				n2=-1./SRT_PI*G22[j];
-				n3=-1./SRT_PI*GKK[j];
-
-				result[j]=DMAX(DMIN(1.0,0.5+(n1-n3-Strike[j]*n2)),0.0);
-
-				
-			}
-
-			free_dvector(x,1,nStp);
-			free_dvector(w,1,nStp);
-			free_dvector(x1,1,nStp);
-			free_dvector(w1,1,nStp);
-
-		break;
-
-		default:
-
-		x=dvector(1,nSteps);
-		w=dvector(1,nSteps);
-		GaussLeg(0., UpperBound, x, w, nSteps);
-
-		for (j=1;j<=nStrikes;j++) {
-
-			G12[j]=0.0;
-			G22[j]=0.0;
-			GKK[j]=0.0;
-		}
-
-		for (i=1;i<=nSteps;i++) {
-
-			err=PsiFunction (isVolInfFix,Maturity,1.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi1,&ImPsi1,&DRePsi1,&DImPsi1,&DDRePsi1,&DDImPsi1);
-			err=PsiFunction (isVolInfFix,Maturity,0.,-x[i],a,Hb,HAlpha,HRho,log(Forward),HSigma*HSigma,greek,&RePsi2,&ImPsi2,&DRePsi2,&DImPsi2,&DDRePsi2,&DDImPsi2);
-
-			// runs over the strikes 
-
-			for (j=1;j<=nStrikes;j++) {
-
-
-				G12[j]+=w[i]*exp(RePsi1)*cos(ImPsi1+x[i]*log(Strike[j]))/Strike[j];
-				G22[j]+=w[i]*exp(RePsi2)*cos(ImPsi2+x[i]*log(Strike[j]))/Strike[j];
-				GKK[j]+=w[i]/x[i]*exp(RePsi2)*sin(ImPsi2+x[i]*log(Strike[j]));
-				
-			}
-		}
-
-			for (j=1;j<=nStrikes;j++) {
-
-				n1=-1./SRT_PI*G12[j];
-				n2=-1./SRT_PI*G22[j];
-				n3=-1./SRT_PI*GKK[j];
-
-				result[j]=DMAX(DMIN(1.0,0.5+(n1-n3-Strike[j]*n2)),0.0);
-
-			}
-
-		free_dvector(x,1,nSteps);
-		free_dvector(w,1,nSteps);
-
-		}
-
-		break;
-	}
-
-	Forward-=Gamma;
-
-	for (j=1; j<=nStrikes;j++)
-	{
-		Strike[j] -= Gamma;
-	}
-
-	free_dvector(G12,1,nStrikes);
-	free_dvector(G22,1,nStrikes);
-	free_dvector(GKK,1,nStrikes);
-	free_dvector(premium,1,nStrikes);
-
-	return NULL;
+  return NULL;
 }
-
-
-

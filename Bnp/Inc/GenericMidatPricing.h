@@ -1,200 +1,185 @@
 #ifndef GENERICMIDATPRICING
-#define	GENERICMIDATPRICING
+#define GENERICMIDATPRICING
 
-#include "srt_h_all.h"
 #include "GenericMidatUtil.h"
 #include "MCEBOptimisation.h"
+#include "srt_h_all.h"
 
-typedef struct
-{
-	int		iPricingMethod;
+typedef struct {
+  int iPricingMethod;
 
-	/* PDE */
-	int		iDiscType;
-	long	lNbTime;
-	long	lNbX;
+  /* PDE */
+  int iDiscType;
+  long lNbTime;
+  long lNbX;
 
-	double	dNbStd;
-	double	dTheta;
+  double dNbStd;
+  double dTheta;
 
-	int		iJumpQuadra;
+  int iJumpQuadra;
 
-	int		iDiffMethod;
-	int		iAdaptGrid;
+  int iDiffMethod;
+  int iAdaptGrid;
 
-	/* MC */
-	long	lNbPaths;
+  /* MC */
+  long lNbPaths;
 
 } genmidat_pdeparams, *GENMIDAT_PDEPAMS;
 
 void genmidat_set_pdeparams_default(GENMIDAT_PDEPAMS sParams);
 
-typedef struct
-{
-	int		iDiffMethod;
+typedef struct {
+  int iDiffMethod;
 
-	double	dCoefX1;
-	double	dCoefX2;
-	double	dCoefY1;
-	double	dCoefY2;
+  double dCoefX1;
+  double dCoefX2;
+  double dCoefY1;
+  double dCoefY2;
 
-	double	dLastCoefX1;
-	double	dLastCoefX2;
-	double	dLastCoefY1;
-	double	dLastCoefY2;
+  double dLastCoefX1;
+  double dLastCoefX2;
+  double dLastCoefY1;
+  double dLastCoefY2;
 
 } genmidat_recons, *GENMIDAT_RECONS;
 
-Err	GenericMidat_OneFactor_PDE(	/* Time Discretisation */
-								long				lNbTime,
-								double				*dTimes,
+Err GenericMidat_OneFactor_PDE(/* Time Discretisation */
+                               long lNbTime, double *dTimes,
 
-								/* Model */
-								GENMIDAT_MODEL		sModel,
+                               /* Model */
+                               GENMIDAT_MODEL sModel,
 
-								/*	Product data */
-								void				**sFuncParmTab, 
-								int					*iEvalEvt,
+                               /*	Product data */
+                               void **sFuncParmTab, int *iEvalEvt,
 
-								/*	Payoff Function */
-								Err (*payoff_func)(/* Event */
-													double	dTime,
+                               /*	Payoff Function */
+                               Err (*payoff_func)(/* Event */
+                                                  double dTime,
 
-													/* Parameters */
-													void	*sFuncParm,																										
-													
-													/* Gride data	*/
-													long			lStartIndex,
-													long			lEndIndex,											
-													double			*dXt,
-													GENMIDAT_RECONS	sReconsParams,
-																			
-													/* Vector of results to be updated */
-													int		iNbProd,
-													double	**dProdVal),
+                                                  /* Parameters */
+                                                  void *sFuncParm,
 
-								/* PDE Parameters */
-								GENMIDAT_PDEPAMS	sParams,
+                                                  /* Gride data	*/
+                                                  long lStartIndex,
+                                                  long lEndIndex, double *dXt,
+                                                  GENMIDAT_RECONS sReconsParams,
 
-								/* Result */
-								int					iNbProd,
-								double				*dProdVal);
+                                                  /* Vector of results to be
+                                                     updated */
+                                                  int iNbProd,
+                                                  double **dProdVal),
 
-Err	GenericMidat_TwoFactor_PDE(	/* Time Discretisation */
-								long				lNbTime,
-								double				*dTimes,
+                               /* PDE Parameters */
+                               GENMIDAT_PDEPAMS sParams,
 
-								/* Model */
-								GENMIDAT_MODEL		sModel,
+                               /* Result */
+                               int iNbProd, double *dProdVal);
 
-								/*	Product data */
-								void				**sFuncParmTab, 
-								int					*iEvalEvt,
+Err GenericMidat_TwoFactor_PDE(/* Time Discretisation */
+                               long lNbTime, double *dTimes,
 
-								/*	Payoff Function */
-								Err (*payoff_func)(/* Event */
-													double	dTime,
+                               /* Model */
+                               GENMIDAT_MODEL sModel,
 
-													/* Parameters */
-													void	*sFuncParm,																										
-													
-													/* Gride data	*/
-													long	lStartIndex1,
-													long	lEndIndex1,
-													long	lStartIndex2,
-													long	lEndIndex2,
+                               /*	Product data */
+                               void **sFuncParmTab, int *iEvalEvt,
 
-													double	*dXt,
-													double	*dZt,
-													GENMIDAT_RECONS	sReconsParams,
-																			
-													/* Vector of results to be updated */
-													int		iNbProd,
-													double	***dProdVal),
+                               /*	Payoff Function */
+                               Err (*payoff_func)(/* Event */
+                                                  double dTime,
 
-								/* PDE Parameters */
-								GENMIDAT_PDEPAMS	sParams,
+                                                  /* Parameters */
+                                                  void *sFuncParm,
 
-								/* Result */
-								int					iNbProd,
-								double				*dProdVal);
+                                                  /* Gride data	*/
+                                                  long lStartIndex1,
+                                                  long lEndIndex1,
+                                                  long lStartIndex2,
+                                                  long lEndIndex2,
 
+                                                  double *dXt, double *dZt,
+                                                  GENMIDAT_RECONS sReconsParams,
 
-Err	GenericMidat_OneFactor_MC(	/* Time Discretisation */
-								int					iNbEvent,
-								double				*dTimes,
+                                                  /* Vector of results to be
+                                                     updated */
+                                                  int iNbProd,
+                                                  double ***dProdVal),
 
-								/* Model */
-								GENMIDAT_MODEL		sModel,
+                               /* PDE Parameters */
+                               GENMIDAT_PDEPAMS sParams,
 
-								/*	Product data */
-								void				**sFuncParmTab, 
+                               /* Result */
+                               int iNbProd, double *dProdVal);
 
-								/*	Payoff Function */
-								Err (*payoff_func)(/* Event */
-													double			dTime,
+Err GenericMidat_OneFactor_MC(/* Time Discretisation */
+                              int iNbEvent, double *dTimes,
 
-													/* Parameters */
-													void			*sFuncParm,																								
-													
-													/* Gride data	*/
-													long			lNumPaths,
-													double			*dXt,
-													GENMIDAT_RECONS	sReconsParams,
-																			
-													/* Vector of results to be updated */
-													int				iNbProd,
-													double			**dProdVal),
+                              /* Model */
+                              GENMIDAT_MODEL sModel,
 
-								/* MC Parameters */
-								GENMIDAT_PDEPAMS	sParams,
+                              /*	Product data */
+                              void **sFuncParmTab,
 
-								/* for Optimisation of exercise boundary */
-								int					iDoOptim,
-								int					*iOptimise,
-								MCEBPARAMS			sMCEBParams,
+                              /*	Payoff Function */
+                              Err (*payoff_func)(/* Event */
+                                                 double dTime,
 
-								/* Result */
-								int					iNbProd,
-								double				**dProdVal);
+                                                 /* Parameters */
+                                                 void *sFuncParm,
 
-Err	GenericMidat_TwoFactor_MC(	/* Time Discretisation */
-								int					iNbEvent,
-								double				*dTimes,
+                                                 /* Gride data	*/
+                                                 long lNumPaths, double *dXt,
+                                                 GENMIDAT_RECONS sReconsParams,
 
-								/* Model */
-								GENMIDAT_MODEL		sModel,
+                                                 /* Vector of results to be
+                                                    updated */
+                                                 int iNbProd,
+                                                 double **dProdVal),
 
-								/*	Product data */
-								void				**sFuncParmTab, 
+                              /* MC Parameters */
+                              GENMIDAT_PDEPAMS sParams,
 
-								/*	Payoff Function */
-								Err (*payoff_func)(/* Event */
-													double	dTime,
+                              /* for Optimisation of exercise boundary */
+                              int iDoOptim, int *iOptimise,
+                              MCEBPARAMS sMCEBParams,
 
-													/* Parameters */
-													void			*sFuncParm,																								
-													
-													/* Gride data	*/
-													long			lNumPaths,
-													double			*dXt,
-													double			*dYt,
-													GENMIDAT_RECONS	sReconsParams,
-																			
-													/* Vector of results to be updated */
-													int				iNbProd,
-													double			**dProdVal),
+                              /* Result */
+                              int iNbProd, double **dProdVal);
 
-								/* MC Parameters */
-								GENMIDAT_PDEPAMS	sParams,
+Err GenericMidat_TwoFactor_MC(/* Time Discretisation */
+                              int iNbEvent, double *dTimes,
 
-								/* for Optimisation of exercise boundary */
-								int					iDoOptim,
-								int					*iOptimise,
-								MCEBPARAMS			sMCEBParams,
+                              /* Model */
+                              GENMIDAT_MODEL sModel,
 
-								/* Result */
-								int					iNbProd,
-								double				**dProdVal);
+                              /*	Product data */
+                              void **sFuncParmTab,
+
+                              /*	Payoff Function */
+                              Err (*payoff_func)(/* Event */
+                                                 double dTime,
+
+                                                 /* Parameters */
+                                                 void *sFuncParm,
+
+                                                 /* Gride data	*/
+                                                 long lNumPaths, double *dXt,
+                                                 double *dYt,
+                                                 GENMIDAT_RECONS sReconsParams,
+
+                                                 /* Vector of results to be
+                                                    updated */
+                                                 int iNbProd,
+                                                 double **dProdVal),
+
+                              /* MC Parameters */
+                              GENMIDAT_PDEPAMS sParams,
+
+                              /* for Optimisation of exercise boundary */
+                              int iDoOptim, int *iOptimise,
+                              MCEBPARAMS sMCEBParams,
+
+                              /* Result */
+                              int iNbProd, double **dProdVal);
 
 #endif

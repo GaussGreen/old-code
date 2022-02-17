@@ -1,231 +1,150 @@
 
 #ifndef FxSabrSLAdiH
-#define	FxSabrSLAdiH
+#define FxSabrSLAdiH
 
 #include "srt_h_all.h"
 
 double solve_var_diff(double a, double tgt);
 
 Err FxSabrSLPrecalculations(
-							/*	Time data		*/
-							int			nstp,
-							double		*time,
-							
-							/*	Model data		*/
-							double		sig0,
-							double		*drift,
-							double		alpha,
-							double		a,
-							double		b,
-							double		rho,
-							double		lambda,
+    /*	Time data		*/
+    int nstp, double *time,
 
-							/*	Market data */
-							double		spot_fx,
+    /*	Model data		*/
+    double sig0, double *drift, double alpha, double a, double b, double rho,
+    double lambda,
 
-							/*	Output			*/							
-							double		*expect_z,
-							double		*drift_z,
-							double		*std1);
+    /*	Market data */
+    double spot_fx,
 
-Err	 FxSabrSL_adi(	
-					/*	Time data		*/
-					int			nstp,					
-					double		*time,
-					double		*date,
+    /*	Output			*/
+    double *expect_z, double *drift_z, double *std1);
 
-					/*	Discretisation	*/
-					int			nstepfx,
-					int			nstepvol,
-										
-					/*	Model data		*/
-					double		sig0,
-					double		*drift,
-					double		alpha,
-					double		beta,
-					double		rho,
-					double		lambda,
+Err FxSabrSL_adi(
+    /*	Time data		*/
+    int nstp, double *time, double *date,
 
-					double		floormu,
+    /*	Discretisation	*/
+    int nstepfx, int nstepvol,
 
-					/*	Product data */
-					void		**func_parm_tab, 
-					int			*eval_evt,
-					double		*bar_lvl,
-					int			*bar_col,
-					int			*is_bar,
-					
-					/*	Market data */
-					double		spot_fx,	/*	The cash one */
-					char		*dom_yc,
-					char		*for_yc,
-					
-					/*	Payoff function */
-					Err (*payoff_func)(/* Event */
-										double	evt_date,
-										double	evt_time,
-										void	*func_parm, 
-										
-										/* Market data	*/										
-										long	today,
-										double	spot_fx,	/*	The cash one */
-										void	*dom_yc,
-										void	*for_yc,
-																				
-										/* Grid data	*/
-										int		l1,
-										int		u1,
-										int		l2,
-										int		u2,
-										double	*x,
-																
-										/* Vector of results to be updated */
-										int		nprod,
-										double	***prod_val
-										),
-					/*	Result */
-					int			nprod, 
-					double		*res,
-				
-				/* Additional informations */
-				int			calc_greeks,
-				double		**greeks,		/* array 6 * nprod containing delta, gamma, theta, vega, volga and vanna */
-				
-				/* For calibration purpose */
-				int			calc_at_point,
-				int			column,
-				double		target,
-				double		*vol,
-				double		*res_at_point);
+    /*	Model data		*/
+    double sig0, double *drift, double alpha, double beta, double rho,
+    double lambda,
 
+    double floormu,
 
-Err	FxSabrSLCalibration(
-						/*	Underlying	*/
-						char	*dom_yc,
-						char	*for_yc,
-						long	today,
-						double	spot_fx,
+    /*	Product data */
+    void **func_parm_tab, int *eval_evt, double *bar_lvl, int *bar_col,
+    int *is_bar,
 
-						/*	Model Parameters			*/						
-						double	alpha,
-						double	beta,
-						double	rho,
-						double	lambda,
+    /*	Market data */
+    double spot_fx, /*	The cash one */
+    char *dom_yc, char *for_yc,
 
-						double	floormu,
+    /*	Payoff function */
+    Err (*payoff_func)(/* Event */
+                       double evt_date, double evt_time, void *func_parm,
 
-						/*	Options Parameters			*/
-						double	*exercise,
-						double	*maturity,
-						double	*volatility,
-						int		nbOpt,
-						int		start_opt,
-						int		is_straddle,
+                       /* Market data	*/
+                       long today, double spot_fx, /*	The cash one */
+                       void *dom_yc, void *for_yc,
 
-						/*	Discretisation Parameters	*/
-						long	nstpt,
-						int		nstpfx,
-						int		nstpvol,
-						int		nbIter,	
-						double	precision,
+                       /* Grid data	*/
+                       int l1, int u1, int l2, int u2, double *x,
 
-						/*	Guess						*/
-						double	*guess,
+                       /* Vector of results to be updated */
+                       int nprod, double ***prod_val),
+    /*	Result */
+    int nprod, double *res,
 
-						/*	Result						*/
-						double	*sigma						
-						);
+    /* Additional informations */
+    int calc_greeks,
+    double **greeks, /* array 6 * nprod containing delta  , gamma  , theta  ,
+                        vega  , volga and vanna */
 
-Err	FxSabrSLCalibSmile(
-						/*	Underlying						*/
-						char	*dom_yc,
-						char	*for_yc,
-						long	today,
-						double	spot_fx,
+    /* For calibration purpose */
+    int calc_at_point, int column, double target, double *vol,
+    double *res_at_point);
 
-						/*	Model Parameters				*/						
-						double	*alpha_out,						
-						double	beta,						
-						double	*rho_out,
-						double	lambda,
-						double	floormu,
+Err FxSabrSLCalibration(
+    /*	Underlying	*/
+    char *dom_yc, char *for_yc, long today, double spot_fx,
 
-						/*	User input of starting points	*/
-						int		calib_smile,
-						int		use_input,
-						int		use_total_ts,
+    /*	Model Parameters			*/
+    double alpha, double beta, double rho, double lambda,
 
-						/*	Options Parameters				*/
-						double	*exercise,
-						double	*maturity,
-						double	*volatility,
-						int		nbOpt,
-						int		is_straddle,
+    double floormu,
 
-						long	mat_date,
-						double	risk_reversal,
-						double	butterfly,						
+    /*	Options Parameters			*/
+    double *exercise, double *maturity, double *volatility, int nbOpt,
+    int start_opt, int is_straddle,
 
-						/*	Discretisation Parameters		*/
-						long	nstpt_tgt,
-						int		nstpfx,
-						int		nstpvol,
-						int		nbIterATM,
-						double	precisionATM,
-						int		nbIterSmile,
-						double	precisionSmile,
+    /*	Discretisation Parameters	*/
+    long nstpt, int nstpfx, int nstpvol, int nbIter, double precision,
 
-						/*	Result							*/
-						double	*strike1_out,
-						double	*vol1_out,
-						double	*strike2_out,
-						double	*vol2_out,
-						
-						double	*sigma		
-						);
+    /*	Guess						*/
+    double *guess,
 
-Err	 FxSabrSL_KOOption(	
-					/*	Time data		*/
-					int			nstp,					
-					double		*time,
-					double		*date,
+    /*	Result						*/
+    double *sigma);
 
-					/*	Discretisation	*/
-					int			nstepfx,
-					int			nstepvol,
-										
-					/*	Model data		*/
-					double		sig0,
-					double		*drift,
-					double		alpha,
-					double		beta,
-					double		rho,
-					double		lambda,
+Err FxSabrSLCalibSmile(
+    /*	Underlying						*/
+    char *dom_yc, char *for_yc, long today, double spot_fx,
 
-					double		floorstd,
+    /*	Model Parameters				*/
+    double *alpha_out, double beta, double *rho_out, double lambda,
+    double floormu,
 
-					/*	Product data */
-					double		strike,
-					int			is_call,	/* 1 Call, 0: Put */
-					int			is_american,
-					int			is_cvx,		/* 1 use 1/Fx, 0: use Fx */
-					int			is_digital,	/* 1: digital payoff, 0, regular option payoff */
-					double		*bar_lvl_up,
-					double		*bar_lvl_down,
-					double		rebate_up,
-					double		rebate_down,
-					
-					/*	Market data */
-					double		spot_fx,	/*	The cash one */
-					char		*dom_yc,
-					char		*for_yc,
-					
-					/*	Result */					
-					double		*res,
-					
-					/* Additional informations */
-					int			calc_greeks,
-					double		*greeks);		/* array 6 * nprod containing delta, gamma, theta, vega, volga and vanna */
+    /*	User input of starting points	*/
+    int calib_smile, int use_input, int use_total_ts,
 
+    /*	Options Parameters				*/
+    double *exercise, double *maturity, double *volatility, int nbOpt,
+    int is_straddle,
+
+    long mat_date, double risk_reversal, double butterfly,
+
+    /*	Discretisation Parameters		*/
+    long nstpt_tgt, int nstpfx, int nstpvol, int nbIterATM, double precisionATM,
+    int nbIterSmile, double precisionSmile,
+
+    /*	Result							*/
+    double *strike1_out, double *vol1_out, double *strike2_out,
+    double *vol2_out,
+
+    double *sigma);
+
+Err FxSabrSL_KOOption(
+    /*	Time data		*/
+    int nstp, double *time, double *date,
+
+    /*	Discretisation	*/
+    int nstepfx, int nstepvol,
+
+    /*	Model data		*/
+    double sig0, double *drift, double alpha, double beta, double rho,
+    double lambda,
+
+    double floorstd,
+
+    /*	Product data */
+    double strike, int is_call,  /* 1 Call  , 0: Put */
+    int is_american, int is_cvx, /* 1 use 1/Fx  , 0: use Fx */
+    int is_digital, /* 1: digital payoff  , 0  , regular option payoff */
+    double *bar_lvl_up, double *bar_lvl_down, double rebate_up,
+    double rebate_down,
+
+    /*	Market data */
+    double spot_fx, /*	The cash one */
+    char *dom_yc, char *for_yc,
+
+    /*	Result */
+    double *res,
+
+    /* Additional informations */
+    int calc_greeks,
+    double *greeks); /* array 6 * nprod containing delta  , gamma  , theta  ,
+                        vega  , volga and vanna */
 
 #endif

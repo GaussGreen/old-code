@@ -1,4 +1,4 @@
-			    /* SRT_H_IOBACK2SS.h */
+/* SRT_H_IOBACK2SS.h */
 
 #include "srt_h_all.h"
 
@@ -7,11 +7,10 @@
 
 /* ------------------------------------------------------------ */
 
-Err srt_f_IOback2ss( SrtIOStruct* iolist, SRT_Boolean dev );
+Err srt_f_IOback2ss(SrtIOStruct *iolist, SRT_Boolean dev);
 
 /* -> create a file to export results into a 2020 spreadsheet */
 
 /* ------------------------------------------------------------ */
 
 #endif
-

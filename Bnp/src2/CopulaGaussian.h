@@ -1,143 +1,111 @@
 #ifndef __COPULAGAUSSIAN_H
 #define __COPULAGAUSSIAN_H
 
-typedef struct
-{
-	long				lNumPaths;		
-	long				lNbPoints;
-	SrtMCSamType		eMCType;
+typedef struct {
+  long lNumPaths;
+  long lNbPoints;
+  SrtMCSamType eMCType;
 
-	int					iInterpMethod;
-	int					iAdaptGrid;
-	long				lAdaptNbPoints;
-	int					iUseOldGridMethod;
-	double				dNbStd;
-	double				dMaxError;
+  int iInterpMethod;
+  int iAdaptGrid;
+  long lAdaptNbPoints;
+  int iUseOldGridMethod;
+  double dNbStd;
+  double dMaxError;
 
-	/* All the numerical params */
-	int					iHasSavedGaussian;
-	int					iFreeSavedGaussian;
-	int					iNbFwd;
-	double				**dSavedGaussian;
-	
-	int					iForceLogBeta;
-	int					iUseSABR;	
-	double				dPi;
-	double				dCalibBetaStd;	
+  /* All the numerical params */
+  int iHasSavedGaussian;
+  int iFreeSavedGaussian;
+  int iNbFwd;
+  double **dSavedGaussian;
 
-	int					iIntegSkipFirst;
+  int iForceLogBeta;
+  int iUseSABR;
+  double dPi;
+  double dCalibBetaStd;
 
-	char				cFileName[140];
+  int iIntegSkipFirst;
+
+  char cFileName[140];
 
 } COPULAGAUSSIAN_Params, *COPULAGAUSSIAN_PARAMS;
 
 void copula_gaussian_set_default_num_params(COPULAGAUSSIAN_PARAMS sParams);
 
-Err	copula_gaussian_init_gaussian(int					iNbFwd,
-								  COPULAGAUSSIAN_PARAMS sParams);
+Err copula_gaussian_init_gaussian(int iNbFwd, COPULAGAUSSIAN_PARAMS sParams);
 
 void copula_gaussian_free_gaussian(COPULAGAUSSIAN_PARAMS sParams);
 
 /* Compute the Cumulative of a SABR distribution !!! */
-Err	copula_gaussian_get_SABR_cumulative(double	dMaturity,
-										double	dForward,
-										double	dSigmaBeta,
-										double	dAlpha,
-										double	dBeta,
-										double	dRho,
+Err copula_gaussian_get_SABR_cumulative(double dMaturity, double dForward,
+                                        double dSigmaBeta, double dAlpha,
+                                        double dBeta, double dRho,
 
-										int		iAdaptGrid,
-										long	lAdaptPoints,
-										int		iUsePoints,
+                                        int iAdaptGrid, long lAdaptPoints,
+                                        int iUsePoints,
 
-										long	lNumPoints,
-										double	*dPoints,
-										double	*dCumulative);
+                                        long lNumPoints, double *dPoints,
+                                        double *dCumulative);
 
 /* Compute the Cumulative of a SABR distribution !!!	*/
 /* Recurcive version with control of interpolation		*/
-Err	copula_gaussian_get_BMM_linterp_cumulative(	double	dMaturity,
-												double	dForward,
-												double	dForward1,
-												double	dSigmaBeta1,
-												double	dForward2,
-												double	dSigmaBeta2,
-												double	dBeta,
-												double	dPi,
+Err copula_gaussian_get_BMM_linterp_cumulative(
+    double dMaturity, double dForward, double dForward1, double dSigmaBeta1,
+    double dForward2, double dSigmaBeta2, double dBeta, double dPi,
 
-												double	dMaxError,
-												double	dNbStdLeft,
-												double	dNbStdRight,
+    double dMaxError, double dNbStdLeft, double dNbStdRight,
 
-												long	*lNumPoints,
-												double	**dPoints,
-												double	**dCumulative);
+    long *lNumPoints, double **dPoints, double **dCumulative);
 
-/* Pricing of max(dWeights[0->n-1] * dFwds[0->n-1] - K, 0) */
+/* Pricing of max(dWeights[0->n-1] * dFwds[0->n-1] - K  , 0) */
 /* ******************************************************* */
 
-Err copula_gaussian_basket_SABR (	/* Marginales Distributions */
-									double					dMaturity,
-									int						iNbFwd,
-									double					*dFwds,
-									double					*dVols,
-									double					*dAlpha,
-									double					*dBeta,
-									double					*dRho,
-									SrtDiffusionType		eTypeInput,
+Err copula_gaussian_basket_SABR(/* Marginales Distributions */
+                                double dMaturity, int iNbFwd, double *dFwds,
+                                double *dVols, double *dAlpha, double *dBeta,
+                                double *dRho, SrtDiffusionType eTypeInput,
 
-									/* Payoff Definition */
-									double					*dWeights,
-									int						iNbStrikes,
-									double					*dStrike,
-									SrtCallPutType			eCallPut,
-									
-									/* Model Parameters */
-									double					**dCorrelation,
-									COPULAGAUSSIAN_PARAMS	sParams,
+                                /* Payoff Definition */
+                                double *dWeights, int iNbStrikes,
+                                double *dStrike, SrtCallPutType eCallPut,
 
-									/* Results */
-									double					*dPremium);
+                                /* Model Parameters */
+                                double **dCorrelation,
+                                COPULAGAUSSIAN_PARAMS sParams,
 
-Err	copula_gaussian_numer (	/* Marginales Distributions */
-							int						iNbFwd,							
-							double					**dX,
-							double					**dCumulative,
-							long					*lNbPoints,
+                                /* Results */
+                                double *dPremium);
 
-							/* Copula Parameters */	
-							int						iIsChoMatrix,
-							double					**dCorrMatrix,
+Err copula_gaussian_numer(/* Marginales Distributions */
+                          int iNbFwd, double **dX, double **dCumulative,
+                          long *lNbPoints,
 
-							/* Numerical Parameters */
-							COPULAGAUSSIAN_PARAMS	sParams,
-							
-							/* Result */
-							double					**dResult);
+                          /* Copula Parameters */
+                          int iIsChoMatrix, double **dCorrMatrix,
 
-Err copula_gaussian_GearedOption_SABR (	/* Marginales Distributions */
-									double					dFloatMaturity,
-									double					dCMSMaturity,
-									int						iNbFwd,
-									double					*dFwds,
-									double					*dVols,
-									double					*dAlpha,
-									double					*dBeta,
-									double					*dRho,
-									SrtDiffusionType		eTypeInput,
+                          /* Numerical Parameters */
+                          COPULAGAUSSIAN_PARAMS sParams,
 
-									/* Payoff Definition */
-									double					*dWeights,
-									double					dMargin,
-									int						iNbStrike,
-									double					*dStrike,
-									SrtCallPutType			eCallPut,
-									
-									/* Model Parameters */
-									double					**dCorrMatrix,
-									COPULAGAUSSIAN_PARAMS	sParams,
+                          /* Result */
+                          double **dResult);
 
-									/* Results */
-									double					*dPremium);
+Err copula_gaussian_GearedOption_SABR(/* Marginales Distributions */
+                                      double dFloatMaturity,
+                                      double dCMSMaturity, int iNbFwd,
+                                      double *dFwds, double *dVols,
+                                      double *dAlpha, double *dBeta,
+                                      double *dRho, SrtDiffusionType eTypeInput,
+
+                                      /* Payoff Definition */
+                                      double *dWeights, double dMargin,
+                                      int iNbStrike, double *dStrike,
+                                      SrtCallPutType eCallPut,
+
+                                      /* Model Parameters */
+                                      double **dCorrMatrix,
+                                      COPULAGAUSSIAN_PARAMS sParams,
+
+                                      /* Results */
+                                      double *dPremium);
 
 #endif

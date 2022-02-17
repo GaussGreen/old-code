@@ -1,13 +1,13 @@
 #ifndef GRF_H_FLTFLDEFS
 #define GRF_H_FLTFLDEFS
 
-/*** default strings, etc. for grfn interaction with flat files ***/
+/*** default strings  , etc. for grfn interaction with flat files ***/
 
 #define GRFCOMCHAR '!'
-#define GRFCOMSTR  "!\\"
+#define GRFCOMSTR "!\\"
 #define GRF2020LINE "\\="
 #define GRFSEPCHAR '#'
-#define GRFSEPSTR  "#"
+#define GRFSEPSTR "#"
 #define GRFBLNCHAR '0'
 #define GRFBEGEV "BEGIN_GRFNEVENTS"
 #define GRFENDEV "END_GRFNEVENTS"
@@ -19,6 +19,5 @@
 #define GRFENDGRN "END_GRFNRNG"
 #define GRFMAXROW 300
 #define GRFMAXCOL 100
-
 
 #endif

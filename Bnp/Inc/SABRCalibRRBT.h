@@ -1,90 +1,66 @@
 #ifndef SABRCALIBRRBT
-#define	SABRCALIBRRBT
+#define SABRCALIBRRBT
 
-#include "srt_h_all.h"
 #include "DiagcalibGen.h"
+#include "srt_h_all.h"
 
-Err calib_sabr_rr_bt_given_beta(double				fwd,
-								double				mat,
-								double				vol_atm,
-								double				strike_down,
-								double				vol_down,
-								double				strike_up,
-								double				vol_up,
-								double				*sigma_beta,
-								double				*alpha,
-								double				fixed_beta,
-								double				*rho,
-								SrtDiffusionType	vol_type,
-								int					solve_on_vol,
-								double				precision,
-								int					nb_iter_max,
-								double				*calib_err);
+Err calib_sabr_rr_bt_given_beta(
+    double fwd, double mat, double vol_atm, double strike_down, double vol_down,
+    double strike_up, double vol_up, double *sigma_beta, double *alpha,
+    double fixed_beta, double *rho, SrtDiffusionType vol_type, int solve_on_vol,
+    double precision, int nb_iter_max, double *calib_err);
 
 /* All the structures needed */
-typedef struct
-{
-	double				vol_atm;
-	double				price_atm;
+typedef struct {
+  double vol_atm;
+  double price_atm;
 
-	double				strike_up;
-	double				target_vol_up;
-	double				target_price_up;
-	double				vol_up;
-	double				price_up;
-						
-	double				strike_down;
-	double				target_vol_down;
-	double				target_price_down;
-	double				vol_down;
-	double				price_down;
+  double strike_up;
+  double target_vol_up;
+  double target_price_up;
+  double vol_up;
+  double price_up;
 
-	SrtDiffusionType	vol_type;
+  double strike_down;
+  double target_vol_down;
+  double target_price_down;
+  double vol_down;
+  double price_down;
 
-}	sabr_rrbt_inst, *SABR_RRBT_INST;
+  SrtDiffusionType vol_type;
 
-typedef struct
-{
-	double				fwd;
-	double				mat;
-	double				vol_atm;
-	double				sigma_beta;
-	double				alpha;
-	double				beta;
-	double				rho;
+} sabr_rrbt_inst, *SABR_RRBT_INST;
 
-	double				rhoalpha;
+typedef struct {
+  double fwd;
+  double mat;
+  double vol_atm;
+  double sigma_beta;
+  double alpha;
+  double beta;
+  double rho;
 
-	SrtDiffusionType	vol_type;
+  double rhoalpha;
 
-}	sabr_rrbt_model, *SABR_RRBT_MODEL;
+  SrtDiffusionType vol_type;
 
-typedef struct
-{
-	int					solve_on_vol;
-	int					solve_on_rhoalpha;
-	CALIBFUNCTIONS		AllFunctions_ForAlpha;	
-	CALIBGEN_PARAMS		CalibParams_ForAlpha;
-	CALIBFUNCTIONS		AllFunctions_ForRho;
-	CALIBGEN_PARAMS		CalibParams_ForRho;
+} sabr_rrbt_model, *SABR_RRBT_MODEL;
 
-}	sabr_rrbt_params, *SABR_RRBT_PARAMS;
+typedef struct {
+  int solve_on_vol;
+  int solve_on_rhoalpha;
+  CALIBFUNCTIONS AllFunctions_ForAlpha;
+  CALIBGEN_PARAMS CalibParams_ForAlpha;
+  CALIBFUNCTIONS AllFunctions_ForRho;
+  CALIBGEN_PARAMS CalibParams_ForRho;
 
-Err transform_sabr_beta(double				mat,
-						double				fwd,
-						double				init_sigma,	
-						double				init_alpha,
-						double				init_beta,
-						double				init_rho,
-						SrtDiffusionType	vol_type,
-						double				*new_sigmabeta,
-						double				*new_alpha,
-						double				new_beta,
-						double				*new_rho,
-						double				nb_std,
-						int					solve_on_vol,
-						double				precision,
-						int					nb_iter_max,
-						double				*calib_err);
+} sabr_rrbt_params, *SABR_RRBT_PARAMS;
+
+Err transform_sabr_beta(double mat, double fwd, double init_sigma,
+                        double init_alpha, double init_beta, double init_rho,
+                        SrtDiffusionType vol_type, double *new_sigmabeta,
+                        double *new_alpha, double new_beta, double *new_rho,
+                        double nb_std, int solve_on_vol, double precision,
+                        int nb_iter_max, double *calib_err);
 
 #endif

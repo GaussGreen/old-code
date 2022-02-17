@@ -1,139 +1,108 @@
 #ifndef GENERICMIDATAPPLICATIONS
-#define	GENERICMIDATAPPLICATIONS
+#define GENERICMIDATAPPLICATIONS
 
-#include "srt_h_all.h"
-#include "GenericMidatUtil.h"
 #include "GenericMidatCalib.h"
 #include "GenericMidatPricing.h"
+#include "GenericMidatUtil.h"
+#include "srt_h_all.h"
 
-typedef struct
-{
-	int		iCalibATM;
-	int		iCalibFwdVol;
-	char	cCorrelName[100];
+typedef struct {
+  int iCalibATM;
+  int iCalibFwdVol;
+  char cCorrelName[100];
 
-	int		iNbShortVolShift;
-	double	*dShortVolShiftTime;
-	double	*dShortVolShift;
+  int iNbShortVolShift;
+  double *dShortVolShiftTime;
+  double *dShortVolShift;
 
-	double	dVolShift;
-	int		iVolShiftType;	
+  double dVolShift;
+  int iVolShiftType;
 
-	int		iNewAlgo;
+  int iNewAlgo;
 
 } GMA_MidatParams, *GMA_MIDATPARAMS;
 
-Err	GMA_Midat_allocate_params(	int				iNbShortVolShift,
-								double			*dShortVolShiftTime,
-								double			*dShortVolShift,
-								GMA_MIDATPARAMS	sParams);
+Err GMA_Midat_allocate_params(int iNbShortVolShift, double *dShortVolShiftTime,
+                              double *dShortVolShift, GMA_MIDATPARAMS sParams);
 
-void GMA_MIDAT_set_default_params(GMA_MIDATPARAMS	sParams);
+void GMA_MIDAT_set_default_params(GMA_MIDATPARAMS sParams);
 
-void GMA_MIDAT_free_params(GMA_MIDATPARAMS	sParams);
+void GMA_MIDAT_free_params(GMA_MIDATPARAMS sParams);
 
-Err GMA_MidatAutocal(		/* Cash Flows description */
-						long	lToday,
-						char	*cYieldCurve,
-						char	*cVolCurve,
+Err GMA_MidatAutocal(/* Cash Flows description */
+                     long lToday, char *cYieldCurve, char *cVolCurve,
 
-						/*		Generic Info */
-						long	lStartDate,
-						long	lTheoEndDate,
+                     /*		Generic Info */
+                     long lStartDate, long lTheoEndDate,
 
-						/* Fixed Leg */
-						int		iNbFixedCoupon,
-						double	*dCoupon,
-						long	*lCouponStartDate,
-						long	*lCouponEndDate,
-						long	*lCouponPayDate,
-						char	*cCouponBasis,
+                     /* Fixed Leg */
+                     int iNbFixedCoupon, double *dCoupon,
+                     long *lCouponStartDate, long *lCouponEndDate,
+                     long *lCouponPayDate, char *cCouponBasis,
 
-						/* Floating Leg */
-						int		iNbFixedFunding,
-						char	*cRefRate,
-						double	*dFundingMargin,
-						long	*lFundingStartDate,
-						long	*lFundingEndDate,
-						long	*lFundingPayDate,
-						char	*cFundingBasis,
+                     /* Floating Leg */
+                     int iNbFixedFunding, char *cRefRate,
+                     double *dFundingMargin, long *lFundingStartDate,
+                     long *lFundingEndDate, long *lFundingPayDate,
+                     char *cFundingBasis,
 
-						/* Exercise Dates */
-						int		iNbExercise,
-						long	*lExerciseDate,
-						long	*lSettlementDate,
-						double	*lExerciseFee,
+                     /* Exercise Dates */
+                     int iNbExercise, long *lExerciseDate,
+                     long *lSettlementDate, double *lExerciseFee,
 
-						int		iPayRec,
+                     int iPayRec,
 
-						/* Model parameters */						
-						GENMIDAT_MODEL			sModel,
+                     /* Model parameters */
+                     GENMIDAT_MODEL sModel,
 
-						/* Parameters */
-						GENMIDAT_AUTOCALPARAMS	sAutocalParams,
-						GENMIDAT_CALIBPARAMS	sCalibParams,
-						GENMIDAT_PDEPAMS		sPDEParams,
+                     /* Parameters */
+                     GENMIDAT_AUTOCALPARAMS sAutocalParams,
+                     GENMIDAT_CALIBPARAMS sCalibParams,
+                     GENMIDAT_PDEPAMS sPDEParams,
 
-						/* Extra Parameters */
-						GMA_MIDATPARAMS			sMidatParams,
-				
-						/* Outputs */
-						double	*dIV,
-						double	*dCall,
-						GENMIDAT_AUTOCALINFO	sInfos);
+                     /* Extra Parameters */
+                     GMA_MIDATPARAMS sMidatParams,
 
-Err GMA_MidatAutocalNew(		/* Cash Flows description */
-						long	lToday,
-						char	*cYieldCurve,
-						char	*cVolCurve,
-						int		iEODFixFlag,
-						int		iEODPayFlag,
-						int		iEODExeFlag,
+                     /* Outputs */
+                     double *dIV, double *dCall, GENMIDAT_AUTOCALINFO sInfos);
 
-						/*		Generic Info */
-						long	lStartDate,
-						long	lTheoEndDate,
-						
-						/* Floating Leg */
-						int		iNbFunding,
-						char	*cRefRate,
-						long	*lFundingFixDate,
-						long	*lFundingStartDate,
-						long	*lFundingPayDate,						
-						double	*dFundingCoverage,						
-						double	*dFundingMargin,
-						double	*dPastFixings,
+Err GMA_MidatAutocalNew(/* Cash Flows description */
+                        long lToday, char *cYieldCurve, char *cVolCurve,
+                        int iEODFixFlag, int iEODPayFlag, int iEODExeFlag,
 
-						/* Fixed Leg */
-						int		iNbCoupon,						
-						long	*lCouponStartDate,
-						long	*lCouponPayDate,
-						double	*dCouponCoverage,
-						double	*dCoupon,
+                        /*		Generic Info */
+                        long lStartDate, long lTheoEndDate,
 
-						/* Exercise Dates */
-						int		iNbExercise,
-						long	*lExerciseDate,
-						long	*lSettlementDate,
-						double	*lExerciseFee,
+                        /* Floating Leg */
+                        int iNbFunding, char *cRefRate, long *lFundingFixDate,
+                        long *lFundingStartDate, long *lFundingPayDate,
+                        double *dFundingCoverage, double *dFundingMargin,
+                        double *dPastFixings,
 
-						double	dPayRec,
+                        /* Fixed Leg */
+                        int iNbCoupon, long *lCouponStartDate,
+                        long *lCouponPayDate, double *dCouponCoverage,
+                        double *dCoupon,
 
-						/* Model parameters */						
-						GENMIDAT_MODEL			sModel,
+                        /* Exercise Dates */
+                        int iNbExercise, long *lExerciseDate,
+                        long *lSettlementDate, double *lExerciseFee,
 
-						/* Parameters */
-						GENMIDAT_AUTOCALPARAMS	sAutocalParams,
-						GENMIDAT_CALIBPARAMS	sCalibParams,
-						GENMIDAT_PDEPAMS		sPDEParams,
+                        double dPayRec,
 
-						/* Extra Parameters */
-						GMA_MIDATPARAMS			sMidatParams,
-				
-						/* Outputs */						
-						double	*dIV,
-						double	*dCall,
-						GENMIDAT_AUTOCALINFO	sInfos);
+                        /* Model parameters */
+                        GENMIDAT_MODEL sModel,
 
+                        /* Parameters */
+                        GENMIDAT_AUTOCALPARAMS sAutocalParams,
+                        GENMIDAT_CALIBPARAMS sCalibParams,
+                        GENMIDAT_PDEPAMS sPDEParams,
+
+                        /* Extra Parameters */
+                        GMA_MIDATPARAMS sMidatParams,
+
+                        /* Outputs */
+                        double *dIV, double *dCall,
+                        GENMIDAT_AUTOCALINFO sInfos);
 
 #endif

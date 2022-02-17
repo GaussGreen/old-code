@@ -1,8 +1,8 @@
 /*--------------------------------------------------------------
-	FILE: CheyBetaMC.h
-	PURPOSE: Cheyette beta Monte-Carlo
-	AUTHOR: Dimitri Mayevski
-	DATE: 26/02/2003
+        FILE: CheyBetaMC.h
+        PURPOSE: Cheyette beta Monte-Carlo
+        AUTHOR: Dimitri Mayevski
+        DATE: 26/02/2003
   --------------------------------------------------------------*/
 
 #ifndef __CHEYBETAMC_H__
@@ -12,7 +12,6 @@
 #include "srt_h_cheybeta_new.h"
 
 Err CheyBetaMC_Price(SProductDesc *g, int nt, long npaths, double cutcoef,
-					 SCheyBeta *pmdl, int rgmode, double *pv, double *stddev);
+                     SCheyBeta *pmdl, int rgmode, double *pv, double *stddev);
 
-
-#endif  /* #ifndef __CHEYBETAMC_H__ */
+#endif /* #ifndef __CHEYBETAMC_H__ */
