@@ -4,7 +4,7 @@
 ////////////////////
 //	warnings
 #pragma warning(disable : 4786) //"identifier was truncated to '255' characters
-                                //in the debug information"
+                                // in the debug information"
 
 // NB: force warnings for unused arguments and local parameters
 #pragma warning(1 : 4100 4101)
@@ -27,7 +27,7 @@ Err am_caller_AmortMidatAutocal(
     long today,
 
     /*	The underlying */
-    int use_calib, /*	0: use lgm2fund  , 1: calibrate */
+    int use_calib, /*	0: use lgm2fund      , 1: calibrate */
 
     /*		if calib */
     char *yc,         /*	yc */
@@ -54,26 +54,25 @@ Err am_caller_AmortMidatAutocal(
     long theoEndDate, /* End Date of the structure */
 
     /*		funding */
-    char *fund_ref, int fund_ccy, /*	0: domestic  , 1: other */
+    char *fund_ref, int fund_ccy, /*	0: domestic      , 1: other */
     double
         *fund_not, /*	If different from domestic or foreign (fund_ccy = 1) */
     char *
         fund_ccy_yc, /*	If different from domestic or foreign (fund_ccy = 1) */
     double fx_fund_dom, /*	If different from domestic or foreign (fund_ccy
-                           = 1) 2 bd fwd */
+                       = 1) 2 bd fwd */
     long fx_fund_dom_spot_date, int fund_ncpn, long *fund_fix, long *fund_start,
     long *fund_end, long *fund_pay, char **fund_basis, double *fund_spr,
-    double *fund_mrg,
-    double *
-        fund_fix_cpn, /*	Past coupon fixing if relevant  ,
-                              includes spr  , but not mrg  , cvg and notional */
+    double *fund_mrg, double *fund_fix_cpn, /*	Past coupon fixing if relevant ,
+                                                includes spr      , but not mrg
+                                               , cvg and notional */
     /*		fix */
     double *fix_not, int fix_ncpn, long *fix_start, long *fix_end,
     long *fix_pay, char **fix_basis, double *fix_rate,
     double *fix_fee, /*	Exercise Fee */
 
     /*		calls */
-    int ncall, int pay_rec, /*	0: rec pd  , 1: pay pd */
+    int ncall, int pay_rec, /*	0: rec pd      , 1: pay pd */
     long *ex_date, long *set_date, double *fee,
 
     /*	Numerical params */
@@ -88,20 +87,21 @@ Err am_caller_AmortMidatAutocal(
                       double end_date, double strike, double *vol),
     char *CorrelName,
 
-    double max_std_short, int fix_lambda, /*	0: calib lambda to cap  , 1: fix
-                                             lambda calib to diagonal */
+    double max_std_short, int fix_lambda, /*	0: calib lambda to cap      , 1:
+                                     fix lambda calib to diagonal */
     int one_f_equi,                       /*	1F equivalent flag:
-                                                                          if set to 1  , then 2F
-                                             lambda will calibrate                       to the cap priced within calibrated
-                                             1F                       with the given lambda */
-    int skip_last, /*	If 1  , the last option is disregarded
-                                                   and the forward volatility is
-                      flat from option n-1 */
+                                                                      if set to 1      , then 2F
+                                         lambda will calibrate                       to the cap priced
+                                         within calibrated                       1F                       with the given
+                                         lambda */
+    int skip_last, /*	If 1      , the last option is disregarded
+                                               and the forward volatility is
+                  flat from option n-1 */
 
     /*	EOD Flags */
-    int eod_fix_flag, /*	0: I  , 1: E */
-    int eod_pay_flag, /*	0: I  , 1: E */
-    int eod_ex_flag,  /*	0: I  , 1: E */
+    int eod_fix_flag, /*	0: I      , 1: E */
+    int eod_pay_flag, /*	0: I      , 1: E */
+    int eod_ex_flag,  /*	0: I      , 1: E */
 
     /*	Exercised flag */
     int exercised,    /*	Flag */
@@ -117,7 +117,7 @@ Err am_caller_AmortMidatAutocal(
     double *call_val,   /*	Value of the callable feature */
     double **ppdExProb, // exercise probabilities
     double **ppdAvgSwapRate, int *pnEx,
-    int export_ts, /*	1: Export TS  , 0: don't */
+    int export_ts, /*	1: Export TS      , 0: don't */
     AM_UND und_exp);
 
 Err am_caller_AmortMidatAutocal_reduc(
@@ -125,7 +125,7 @@ Err am_caller_AmortMidatAutocal_reduc(
     long today,
 
     /*	The underlying */
-    int use_calib, /*	0: use lgm2fund  , 1: calibrate */
+    int use_calib, /*	0: use lgm2fund      , 1: calibrate */
 
     /*		if calib */
     char *yc,         /*	yc */
@@ -152,26 +152,25 @@ Err am_caller_AmortMidatAutocal_reduc(
     long theoEndDate, /* End Date of the structure */
 
     /*		funding */
-    char *fund_ref, int fund_ccy, /*	0: domestic  , 1: other */
+    char *fund_ref, int fund_ccy, /*	0: domestic      , 1: other */
     double
         *fund_not, /*	If different from domestic or foreign (fund_ccy = 1) */
     char *
         fund_ccy_yc, /*	If different from domestic or foreign (fund_ccy = 1) */
     double fx_fund_dom, /*	If different from domestic or foreign (fund_ccy
-                           = 1) 2 bd fwd */
+                       = 1) 2 bd fwd */
     long fx_fund_dom_spot_date, int fund_ncpn, long *fund_fix, long *fund_start,
     long *fund_end, long *fund_pay, char **fund_basis, double *fund_spr,
-    double *fund_mrg,
-    double *
-        fund_fix_cpn, /*	Past coupon fixing if relevant  ,
-                              includes spr  , but not mrg  , cvg and notional */
+    double *fund_mrg, double *fund_fix_cpn, /*	Past coupon fixing if relevant ,
+                                                includes spr      , but not mrg
+                                               , cvg and notional */
     /*		fix */
     double *fix_not, int fix_ncpn, long *fix_start, long *fix_end,
     long *fix_pay, char **fix_basis, double *fix_rate,
     double *fix_fee, /*	Exercise Fee */
 
     /*		calls */
-    int ncall, int pay_rec, /*	0: rec pd  , 1: pay pd */
+    int ncall, int pay_rec, /*	0: rec pd      , 1: pay pd */
     long *ex_date, long *set_date, double *fee,
 
     /*	Numerical params */
@@ -186,20 +185,21 @@ Err am_caller_AmortMidatAutocal_reduc(
                       double end_date, double strike, double *vol),
     char *CorrelName,
 
-    double max_std_short, int fix_lambda, /*	0: calib lambda to cap  , 1: fix
-                                             lambda calib to diagonal */
+    double max_std_short, int fix_lambda, /*	0: calib lambda to cap      , 1:
+                                     fix lambda calib to diagonal */
     int one_f_equi,                       /*	1F equivalent flag:
-                                                                          if set to 1  , then 2F
-                                             lambda will calibrate                       to the cap priced within calibrated
-                                             1F                       with the given lambda */
-    int skip_last, /*	If 1  , the last option is disregarded
-                                                   and the forward volatility is
-                      flat from option n-1 */
+                                                                      if set to 1      , then 2F
+                                         lambda will calibrate                       to the cap priced
+                                         within calibrated                       1F                       with the given
+                                         lambda */
+    int skip_last, /*	If 1      , the last option is disregarded
+                                               and the forward volatility is
+                  flat from option n-1 */
 
     /*	EOD Flags */
-    int eod_fix_flag, /*	0: I  , 1: E */
-    int eod_pay_flag, /*	0: I  , 1: E */
-    int eod_ex_flag,  /*	0: I  , 1: E */
+    int eod_fix_flag, /*	0: I      , 1: E */
+    int eod_pay_flag, /*	0: I      , 1: E */
+    int eod_ex_flag,  /*	0: I      , 1: E */
 
     /*	Exercised flag */
     int exercised,    /*	Flag */
@@ -215,7 +215,7 @@ Err am_caller_AmortMidatAutocal_reduc(
     double *call_val,   /*	Value of the callable feature */
     double **ppdExProb, // exercise probabilities
     double **ppdAvgSwapRate, int *pnEx,
-    int export_ts, /*	1: Export TS  , 0: don't */
+    int export_ts, /*	1: Export TS      , 0: don't */
     AM_UND und_exp);
 
 Err am_caller_ts_AmortMidatAutocal(
@@ -223,7 +223,7 @@ Err am_caller_ts_AmortMidatAutocal(
     long today,
 
     /*	The underlying */
-    int use_calib, /*	0: use lgm2fund  , 1: calibrate */
+    int use_calib, /*	0: use lgm2fund      , 1: calibrate */
 
     /*		if calib */
     char *yc,              /*	yc */
@@ -250,29 +250,29 @@ Err am_caller_ts_AmortMidatAutocal(
     long theoEndDate, /* End Date of the structure */
 
     /*		funding */
-    char *fund_ref, int fund_ccy, /*	0: domestic  , 1: other */
+    char *fund_ref, int fund_ccy, /*	0: domestic      , 1: other */
     double
         *fund_not, /*	If different from domestic or foreign (fund_ccy = 1) */
     char *
         fund_ccy_yc, /*	If different from domestic or foreign (fund_ccy = 1) */
     double fx_fund_dom, /*	If different from domestic or foreign (fund_ccy
-                           = 1) 2 bd fwd */
+                       = 1) 2 bd fwd */
     long fx_fund_dom_spot_date, int fund_ncpn, long *fund_fix, long *fund_start,
     long *fund_end, long *fund_pay, char **fund_basis, double *fund_spr,
-    double *fund_mrg,
-    double *
-        fund_fix_cpn, /*	Past coupon fixing if relevant  ,
-                              includes spr  , but not mrg  , cvg and notional */
+    double *fund_mrg, double *fund_fix_cpn, /*	Past coupon fixing if relevant ,
+                                                includes spr      , but not mrg
+                                               , cvg and notional */
     /*		fix */
     double *fix_not, int fix_ncpn,
-    //			long		*fix_fix  ,
+    //			long		*fix_fix      ,
     long *fix_start, long *fix_end, long *fix_pay, char **fix_basis,
     double *fix_rate, double *fix_fee, /*	Exercise Fee */
-    //			double		*fix_fix_cpn  ,			/*	Past coupon fixing if relevant
+    //			double		*fix_fix_cpn      ,			/*	Past coupon fixing if
+    //relevant
     //*/
 
     /*		calls */
-    int ncall, int pay_rec, /*	0: rec pd  , 1: pay pd */
+    int ncall, int pay_rec, /*	0: rec pd      , 1: pay pd */
     long *ex_date, long *set_date, double *fee,
 
     /*	Numerical params */
@@ -287,23 +287,24 @@ Err am_caller_ts_AmortMidatAutocal(
                       double end_date, double strike, double *vol),
     char *CorrelName,
     /*
-                            Err (*GetVolForBadr)( Date  , Date  , double  ,
-       SRT_Boolean  , double *)  , char *cVolType  ,
+                            Err (*GetVolForBadr)( Date      , Date      , double
+       , SRT_Boolean      , double *)      , char *cVolType      ,
     */
-    double max_std_short, int fix_lambda, /*	0: calib lambda to cap  , 1: fix
-                                             lambda calib to diagonal */
+    double max_std_short, int fix_lambda, /*	0: calib lambda to cap      , 1:
+                                     fix lambda calib to diagonal */
     int one_f_equi,                       /*	1F equivalent flag:
-                                                                          if set to 1  , then 2F
-                                             lambda will calibrate                       to the cap priced within calibrated
-                                             1F                       with the given lambda */
-    int skip_last, /*	If 1  , the last option is disregarded
-                                                   and the forward volatility is
-                      flat from option n-1 */
+                                                                      if set to 1      , then 2F
+                                         lambda will calibrate                       to the cap priced
+                                         within calibrated                       1F                       with the given
+                                         lambda */
+    int skip_last, /*	If 1      , the last option is disregarded
+                                               and the forward volatility is
+                  flat from option n-1 */
 
     /*	EOD Flags */
-    int eod_fix_flag, /*	0: I  , 1: E */
-    int eod_pay_flag, /*	0: I  , 1: E */
-    int eod_ex_flag,  /*	0: I  , 1: E */
+    int eod_fix_flag, /*	0: I      , 1: E */
+    int eod_pay_flag, /*	0: I      , 1: E */
+    int eod_ex_flag,  /*	0: I      , 1: E */
 
     /*	Exercised flag */
     int exercised,    /*	Flag */
@@ -319,7 +320,7 @@ Err am_caller_ts_AmortMidatAutocal(
     double *call_val,   /*	Value of the callable feature */
     double **ppdExProb, // exercise probabilies
     double **ppdAvgSwapRate, int *pnEx,
-    int export_ts, /*	1: Export TS  , 0: don't */
+    int export_ts, /*	1: Export TS      , 0: don't */
     AM_UND und_exp);
 
 Err am_caller_ts_AmortMidatAutocal_reduc(
@@ -327,7 +328,7 @@ Err am_caller_ts_AmortMidatAutocal_reduc(
     long today,
 
     /*	The underlying */
-    int use_calib, /*	0: use lgm2fund  , 1: calibrate */
+    int use_calib, /*	0: use lgm2fund      , 1: calibrate */
 
     /*		if calib */
     char *yc,              /*	yc */
@@ -354,29 +355,29 @@ Err am_caller_ts_AmortMidatAutocal_reduc(
     long theoEndDate, /* End Date of the structure */
 
     /*		funding */
-    char *fund_ref, int fund_ccy, /*	0: domestic  , 1: other */
+    char *fund_ref, int fund_ccy, /*	0: domestic      , 1: other */
     double
         *fund_not, /*	If different from domestic or foreign (fund_ccy = 1) */
     char *
         fund_ccy_yc, /*	If different from domestic or foreign (fund_ccy = 1) */
     double fx_fund_dom, /*	If different from domestic or foreign (fund_ccy
-                           = 1) 2 bd fwd */
+                       = 1) 2 bd fwd */
     long fx_fund_dom_spot_date, int fund_ncpn, long *fund_fix, long *fund_start,
     long *fund_end, long *fund_pay, char **fund_basis, double *fund_spr,
-    double *fund_mrg,
-    double *
-        fund_fix_cpn, /*	Past coupon fixing if relevant  ,
-                              includes spr  , but not mrg  , cvg and notional */
+    double *fund_mrg, double *fund_fix_cpn, /*	Past coupon fixing if relevant ,
+                                                includes spr      , but not mrg
+                                               , cvg and notional */
     /*		fix */
     double *fix_not, int fix_ncpn,
-    //			long		*fix_fix  ,
+    //			long		*fix_fix      ,
     long *fix_start, long *fix_end, long *fix_pay, char **fix_basis,
     double *fix_rate, double *fix_fee, /*	Exercise Fee */
-    //			double		*fix_fix_cpn  ,			/*	Past coupon fixing if relevant
+    //			double		*fix_fix_cpn      ,			/*	Past coupon fixing if
+    //relevant
     //*/
 
     /*		calls */
-    int ncall, int pay_rec, /*	0: rec pd  , 1: pay pd */
+    int ncall, int pay_rec, /*	0: rec pd      , 1: pay pd */
     long *ex_date, long *set_date, double *fee,
 
     /*	Numerical params */
@@ -391,23 +392,24 @@ Err am_caller_ts_AmortMidatAutocal_reduc(
                       double end_date, double strike, double *vol),
     char *CorrelName,
     /*
-                            Err (*GetVolForBadr)( Date  , Date  , double  ,
-       SRT_Boolean  , double *)  , char *cVolType  ,
+                            Err (*GetVolForBadr)( Date      , Date      , double
+       , SRT_Boolean      , double *)      , char *cVolType      ,
     */
-    double max_std_short, int fix_lambda, /*	0: calib lambda to cap  , 1: fix
-                                             lambda calib to diagonal */
+    double max_std_short, int fix_lambda, /*	0: calib lambda to cap      , 1:
+                                     fix lambda calib to diagonal */
     int one_f_equi,                       /*	1F equivalent flag:
-                                                                          if set to 1  , then 2F
-                                             lambda will calibrate                       to the cap priced within calibrated
-                                             1F                       with the given lambda */
-    int skip_last, /*	If 1  , the last option is disregarded
-                                                   and the forward volatility is
-                      flat from option n-1 */
+                                                                      if set to 1      , then 2F
+                                         lambda will calibrate                       to the cap priced
+                                         within calibrated                       1F                       with the given
+                                         lambda */
+    int skip_last, /*	If 1      , the last option is disregarded
+                                               and the forward volatility is
+                  flat from option n-1 */
 
     /*	EOD Flags */
-    int eod_fix_flag, /*	0: I  , 1: E */
-    int eod_pay_flag, /*	0: I  , 1: E */
-    int eod_ex_flag,  /*	0: I  , 1: E */
+    int eod_fix_flag, /*	0: I      , 1: E */
+    int eod_pay_flag, /*	0: I      , 1: E */
+    int eod_ex_flag,  /*	0: I      , 1: E */
 
     /*	Exercised flag */
     int exercised,    /*	Flag */
@@ -423,5 +425,5 @@ Err am_caller_ts_AmortMidatAutocal_reduc(
     double *call_val,   /*	Value of the callable feature */
     double **ppdExProb, // exercise probabilies
     double **ppdAvgSwapRate, int *pnEx,
-    int export_ts, /*	1: Export TS  , 0: don't */
+    int export_ts, /*	1: Export TS      , 0: don't */
     AM_UND und_exp);

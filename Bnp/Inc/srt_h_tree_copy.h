@@ -1,6 +1,6 @@
 /******************************************************************************/
 /*                                                                            */
-/*      SYSTEM:         SRT     SORT  , Fixed Income 2020 Addins */
+/*      SYSTEM:         SRT     SORT      , Fixed Income 2020 Addins */
 /*      SUB_SYSTEM:     SWT     Swap Tools                                    */
 /*                                                                            */
 /*      MODULE NAME:    SRT_H_TREE_COPY.H                                     */

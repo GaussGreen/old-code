@@ -15,7 +15,7 @@
 #include "string.h"
 #include "time.h"
 
-/* Some utilities: memory allocation  , errors  ,.. */
+/* Some utilities: memory allocation      , errors      ,.. */
 #include "utallhdr.h"
 
 /* For external functions */

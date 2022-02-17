@@ -50,28 +50,29 @@ typedef struct {
   int MMB,                     /* Money market basis (360 or 365) */
       IndexMat,                /* Index maturity in years */
       SwaptionExp[NBSWAPTION], /* Expiration (in years) of the benchmark
-                                  swaptions */
-      TStree,                  /* 0 for treasury tree  , 1 for swap tree */
-      TSdiscount;    /* 0 for treasury discount  , 1 for swap discount */
+                              swaptions */
+      TStree,                  /* 0 for treasury tree      , 1 for swap tree */
+      TSdiscount;    /* 0 for treasury discount      , 1 for swap discount */
   char AoS,          /* Yield curve type (annual or semi-annual) */
       YearBase[4],   /* Year basis convention for the swap curve */
       IndexFreq;     /* Index frequency */
-  double MMYield[6], /* Money market rates (O/N  ,1m  ,2m  ,3m  ,6m  ,1yr) for
-                        tree building */
-      MSYield[6],    /* Libor rates if above is treasury  , vice versa  , for
-                        discounting. */
-      SwapYield[8],  /* Swap rates (2  ,3  ,4  ,5  ,7  ,10  ,20  ,30yr) */
-      YieldS[8],     /* Yield rates for discount */
-      Beta,          /* Mean reversion coefficient */
+  double MMYield[6], /* Money market rates (O/N      ,1m      ,2m      ,3m ,6m
+                    ,1yr) for tree building */
+      MSYield[6],   /* Libor rates if above is treasury      , vice versa      ,
+                   for   discounting. */
+      SwapYield[8], /* Swap rates (2      ,3      ,4      ,5      ,7      ,10
+                       ,20      ,30yr) */
+      YieldS[8],    /* Yield rates for discount */
+      Beta,         /* Mean reversion coefficient */
       SwaptionVol[NBSWAPTION]; /* Volatility of the benchmark swaptions */
   long ValueDate,              /* Output: value date */
       Period[2 * MAXMAT + 4], /* Output: length of money market periods followed
-                                 by 6m increments */
+                             by 6m increments */
       Holidays[MAXHOLIDAYS];
   int numHolidays;
   double OAS,               /* Option adjusted spread (cf Lattice() in dev2.c */
       Zero[2 * MAXMAT + 4], /* Output: Zeros at money market points followed by
-                               6m interval points */
+                           6m interval points */
       ZeroS[2 * MAXMAT + 4]; /* Output: Zeros at mm points followed by 6m
                                 interval points for YieldS*/
 
@@ -86,7 +87,7 @@ typedef struct {
       *FwdVol,    /* Instantaneous volatility of forward rate */
       *Drift,     /* Drift of the short term rate at each node */
       *Delta,     /* convexity adjustment for discounting rates when tree rates
-                     differ */
+                 differ */
       *FwdPrepay, /* Forward prepayment at each node in the tree */
       *PrepayVol, /* Instantaneous volatility of forward prepayment */
       *Length,    /* Length of time steps */
@@ -101,7 +102,7 @@ typedef struct {
       NodeMax2,   /* Maximum node reached in the prepayment tree */
       ExerPosition[NBEXER], /* Position (node number) of exercise dates */
       FwdPosition[NBFWD],   /* Position (node number) of forward prepayments */
-      *ExerFlag;            /* 1 if node is an exercise date  , 0 otherwise */
+      *ExerFlag; /* 1 if node is an exercise date      , 0 otherwise */
 } TREE_DATA;
 
 typedef struct {
@@ -169,12 +170,12 @@ typedef struct {
                 [NBPOINTS], /* Corresponding annual CPR level or Avg Life*/
       AmortLevel1[MAXNUMP][NBPOINTS],
       Amort[MAXSFSNB], /* Additional amortization once the trigger is reached
-                          for each SFS */
+                      for each SFS */
       Speedup,         /* Speed up the PPF */
       rational,        /* rationality speed up */
       TriggerRate[MAXSFSNB],    /* Trigger rate for each SFS */
       SeasoningLevel[NUMRAMPS], /* 3 Levels of Refi/Coupon that define seasoning
-                                   (cf SeasoningMat) */
+                               (cf SeasoningMat) */
       SeasoningMat[NUMRAMPS],   /* 3 Maturities that define seasoning */
       Seasonality[12],          /* Seasonality level for each month */
       InitialSMM[MAXFIXEDPREPAY],
@@ -185,10 +186,10 @@ typedef struct {
   char Scenario;  /* 'Y' means to do parallel shift of YC */
   double Shift;   /* shift amount */
   char Schedule;  /* 'N' means no scheduled amortization */
-  char AlorCPR;   /* 'A' means average life  , 'C' means CPR */
+  char AlorCPR;   /* 'A' means average life      , 'C' means CPR */
   char Balloon;   /* 'Y' means ballon */
   int BalloonSch; /* original amortization schedule of    balloon  */
-  char Always;    /* if yes  , always build tree 10 yr beyond */
+  char Always;    /* if yes      , always build tree 10 yr beyond */
   double Inpio;   /* input io */
   double Inppo;   /* input po */
   double stripratio;
@@ -196,7 +197,7 @@ typedef struct {
   int casenumber;  /* I built in the program of 10 cases */
   double implvol;  /* implied volatility multiplier  */
   int pay_delay;   /* payment delay */
-  char Swaption;   /* swaption: No  , Call  , Put */
+  char Swaption;   /* swaption: No      , Call      , Put */
   int ExerT;       /* exercise time: periods from now */
   char invfloater; /* inverse floater or not */
   double output[10];

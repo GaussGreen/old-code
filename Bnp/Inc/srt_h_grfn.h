@@ -70,10 +70,11 @@ Err srt_f_grfn_ex_frontier(
     SrtUndPtr und, SrtGrfnParam *grfnparam, long numeventdates,
     Date **eventdates, long *nrows, long *ncols, GrfnCell ***sprdsht,
     long numgrng, GrfnRng *grng, long auxwidth, long *auxlen, double **aux,
-    void *answer,           /* This is actually a pointer to the IoList */
-    double **cellcontents,  /* The results of the last path when using MC */
-    double **knownpayments, /* A report of known CF [2]  , paid on pay dates [0]
-                               , according to event dates [1] ([0..*nrows-1])*/
+    void *answer,          /* This is actually a pointer to the IoList */
+    double **cellcontents, /* The results of the last path when using MC */
+    double *
+        *knownpayments, /* A report of known CF [2]      , paid on pay dates [0]
+                           , according to event dates [1] ([0..*nrows-1])*/
     double *exfrontier);
 
 #endif

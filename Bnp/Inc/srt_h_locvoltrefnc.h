@@ -32,8 +32,8 @@ typedef struct {
 
 Err srt_f_locvol_init_tminf(
     SrtStpPtr stp,  /*	Step pointer:
-                                            the step list is supposed to have
-                       been init */
+                                        the step list is supposed to have
+                   been init */
     SrtUndPtr und); /*	Underlying pointer:
                                             contains the relevant info */
 
@@ -49,12 +49,12 @@ Err srt_f_locvol_init_trinf(
                                 greates max_r_index (for allocation) */
 
 /*	Function:		srt_f_locvol_make_r_grid
-        Object:			make r grid  , once for all */
+        Object:			make r grid      , once for all */
 
 Err srt_f_locvol_make_r_grid(SrtLocTreInf maxtrinf, double *r_grid);
 
 /*	Function:		srt_f_locvol_make_phi_grid
-        Object:			make phi grid  , for a given time step */
+        Object:			make phi grid      , for a given time step */
 
 Err srt_f_locvol_make_phi_grid(SrtLocTreInf *trinf, double *cur_phi_grid);
 

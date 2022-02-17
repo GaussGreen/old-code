@@ -44,18 +44,18 @@ Err cpd_calibSV_approx(
                         char *ref_rate_name, double *vol, double *power),
     char *instr_freq, /*	Frequency and basis of instruments */
     char *instr_basis,
-    /*	If ex_date is NULL  ,
+    /*	If ex_date is NULL      ,
     exercise dates will be generated 2bd before start */
     /*	Structure */
-    int num_ex_dates, /*	Exercise dates  ,
-                                                      all supposed to be on or
-                         after today */
+    int num_ex_dates, /*	Exercise dates      ,
+                                                  all supposed to be on or
+                     after today */
     long *ex_date,    /*	Supposed to be sorted */
     char **end_tenor, /*	Tenors of the underlying instruments
-                                                              or "DIAG" */
+                                                          or "DIAG" */
     long end_date,    /*	End date for diagonal */
     double *strike,   /*	Strikes
-                                              0: ATM */
+                                          0: ATM */
     /*	Model Parameters */
     double dLambdaX, int iNbPWTime, /* Piece Wise Term Structures  */
     double *dPWTime, double *dAlphaTS, double *dLambdaEpsTS, double *dRhoTS,
@@ -96,12 +96,13 @@ Err cpd_calib_diagonal_LGMSV_dlm(
 
     int num_ex_datesl, /*	Long Exercise dates */
     long *ex_datel_,   /*	Supposed to be sorted */
-    int *cal_datel,    /*	1: use ex_date as calibration date  , 0: don't */
+    int *cal_datel,    /*	1: use ex_date as calibration date      , 0: don't */
     char **end_tenorl, /*	Tenors of the underlying instruments */
     long end_datel,    /*	End date for diagonal */
     double *strikel_,  /*	Strikes */
-    // double			*strikeS1l_  ,						/*	First strike for smile calibration
-    // */ double			*strikeS2l_  ,
+    // double			*strikeS1l_      ,						/*	First strike for smile
+    // calibration
+    // */ double			*strikeS2l_      ,
     // /*	Second strike for smile calibration */
 
     CPD_DIAG_CALIB_PARAM paraml,
@@ -113,7 +114,7 @@ Err cpd_calib_diagonal_LGMSV_dlm(
 
     int num_ex_datess, /*	Short Exercise dates */
     long *ex_dates_,   /*	Supposed to be sorted */
-    int *cal_dates,    /*	1: use ex_date as calibration date  , 0: don't */
+    int *cal_dates,    /*	1: use ex_date as calibration date      , 0: don't */
     char **end_tenors, /*	Tenors of the underlying instruments */
     long end_dates,    /*	End date for diagonal */
     double *strikes_,  /*	Strikes */
@@ -122,7 +123,8 @@ Err cpd_calib_diagonal_LGMSV_dlm(
 
     /*	Model */
     int fix_lambda,
-    // int				calib_smile  ,						/* 0: no calib  , 1: total calib
+    // int				calib_smile      ,						/* 0: no calib      , 1: total
+    // calib
     // */
     int one2F, double *dLambdaX,
     int iNbPWTime, /* Piece Wise Term Structures  */
@@ -318,7 +320,7 @@ Err cpd_calib_diagonal_LGMSV_new_dlm(
 
     int num_ex_datesl, /*	Long Exercise dates */
     long *ex_datel_,   /*	Supposed to be sorted */
-    int *cal_datel,    /*	1: use ex_date as calibration date  , 0: don't */
+    int *cal_datel,    /*	1: use ex_date as calibration date      , 0: don't */
     char **end_tenorl, /*	Tenors of the underlying instruments */
     long end_datel,    /*	End date for diagonal */
     double *strikel_,  /*	Strikes */
@@ -333,7 +335,7 @@ Err cpd_calib_diagonal_LGMSV_new_dlm(
 
     int num_ex_datess,  /*	Short Exercise dates */
     long *ex_dates_,    /*	Supposed to be sorted */
-    int *cal_dates,     /*	1: use ex_date as calibration date  , 0: don't */
+    int *cal_dates,     /*	1: use ex_date as calibration date      , 0: don't */
     char **end_tenors,  /*	Tenors of the underlying instruments */
     long end_dates,     /*	End date for diagonal */
     double *strikes_,   /*	Strikes */

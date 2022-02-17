@@ -10,18 +10,18 @@ free_TARN_Struct(TARN_Struct *tarn);
 /*
 init_TARN_All_Struct(
                                                 TARN_Market_Struct*
-tarn_market_struct  , TARN_Deal_Struct* tarn_deal_struct  , TARN_Model_Struct*
-tarn_model_struct  , TARN_Calibration_Struct* tarn_calibration_struct  ,
-                                                TARN_Pricing_Struct*
-tarn_pricing_struct  , TARN_Output_Struct* tarn_output_struct
+tarn_market_struct      , TARN_Deal_Struct* tarn_deal_struct      ,
+TARN_Model_Struct* tarn_model_struct      , TARN_Calibration_Struct*
+tarn_calibration_struct      , TARN_Pricing_Struct* tarn_pricing_struct      ,
+TARN_Output_Struct* tarn_output_struct
                                         );
 
 free_TARN_All_Struct(
                                                 TARN_Market_Struct*
-tarn_market_struct  , TARN_Deal_Struct* tarn_deal_struct  , TARN_Model_Struct*
-tarn_model_struct  , TARN_Calibration_Struct* tarn_calibration_struct  ,
-                                                TARN_Pricing_Struct*
-tarn_pricing_struct  , TARN_Output_Struct* tarn_output_struct
+tarn_market_struct      , TARN_Deal_Struct* tarn_deal_struct      ,
+TARN_Model_Struct* tarn_model_struct      , TARN_Calibration_Struct*
+tarn_calibration_struct      , TARN_Pricing_Struct* tarn_pricing_struct      ,
+TARN_Output_Struct* tarn_output_struct
                                         );
 */
 

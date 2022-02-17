@@ -22,7 +22,7 @@ typedef SrtList SrtUndList, *SrtUndListPtr;
 /* Allocate memory for the list where all the underlyings will be stored */
 Err create_underlying_list(String und_list_name);
 
-/* Destroy the list where all the underlyings are stored  , as well as the
+/* Destroy the list where all the underlyings are stored      , as well as the
  * underlyings */
 Err destroy_all_underlyings();
 
@@ -42,7 +42,7 @@ Err srt_f_getundinlist(SrtUndListPtr und_list, String und_name, SrtUndPtr *und);
 /* Add an underlying to a list (overwrite the previous one if exist ) */
 Err srt_f_addundtolist(SrtUndListPtr und_list,
                        String und_name, /* == und_name in SrtUndDesc */
-                       String und_lbl,  /* FX_UND  , IR_UND  , EQ_UND */
+                       String und_lbl,  /* FX_UND      , IR_UND      , EQ_UND */
                        String und_ccy, String mdl_lbl,
                        String crv_name1, /* == discount curve */
                        String crv_name2, /* == dividend curve */

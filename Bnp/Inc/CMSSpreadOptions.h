@@ -21,8 +21,8 @@ typedef struct {
 
   long lNumStrikesInVol; /*	Array of strikes in vol matrix */
   double *dStrikesInVol;
-  SrtDiffusionType
-      eVolType; /*	Type of vol in matrix  , SRT_NORMAL or SRT_LOGNORMAL */
+  SrtDiffusionType eVolType; /*	Type of vol in matrix      , SRT_NORMAL or
+                                SRT_LOGNORMAL */
   int iCashVol; /*	1: matrix is a cash vol 0: matrix is a swap vol */
   int iIsSABR;
   int iIsSABRAF;
@@ -241,8 +241,8 @@ Err cms_spread_option_digital(
 
     /* Option part */
     double dGear1, double dGear2, int iNbStrike, double *dStrike,
-    int iCallPut,   /* 0: Call  , 1: Put */
-    double dPayRec, /* Pay: -1.0  , Rec: +1.0 */
+    int iCallPut,   /* 0: Call      , 1: Put */
+    double dPayRec, /* Pay: -1.0      , Rec: +1.0 */
 
     /* Model Description */
     CMS_SPREAD_MODEL_PARAMS sModelParams,
@@ -259,8 +259,8 @@ Err cms_spread_option_struct(
 
     /* Payoff Description */
     double dGear1, double dGear2, int iNbStrike, double *dStrike,
-    int iCallPut,   /* 0: Call  , 1: Put */
-    double dPayRec, /* Pay: -1.0  , Rec: +1.0 */
+    int iCallPut,   /* 0: Call      , 1: Put */
+    double dPayRec, /* Pay: -1.0      , Rec: +1.0 */
 
     /* Model Description */
     CMS_SPREAD_MODEL_PARAMS sModelParams,
@@ -274,8 +274,8 @@ Err cms_spread_digital_struct(
 
     /* Payoff Description */
     double dGear1, double dGear2, int iNbStrike, double *dStrike,
-    int iCallPut,   /* 0: Call  , 1: Put */
-    double dPayRec, /* Pay: -1.0  , Rec: +1.0 */
+    int iCallPut,   /* 0: Call      , 1: Put */
+    double dPayRec, /* Pay: -1.0      , Rec: +1.0 */
 
     /* Model Description */
     CMS_SPREAD_MODEL_PARAMS sModelParams,
@@ -304,8 +304,8 @@ Err cms_geared_spread_option_struct(
 
     /* Payoff Description */
     double dFloatGear, double dMargin, double dGear1, double dGear2,
-    int iNbStrike, double *dStrike, int iCallPut, /* 0: Call  , 1: Put */
-    double dPayRec,                               /* Pay: -1.0  , Rec: +1.0 */
+    int iNbStrike, double *dStrike, int iCallPut, /* 0: Call      , 1: Put */
+    double dPayRec, /* Pay: -1.0      , Rec: +1.0 */
 
     /* Model Description */
     CMS_SPREAD_MODEL_PARAMS sModelParams,
@@ -319,8 +319,8 @@ Err cms_geared_spread_digital_struct(
 
     /* Payoff Description */
     double dFloatGear, double dMargin, double dGear1, double dGear2,
-    int iNbStrike, double *dStrike, int iCallPut, /* 0: Call  , 1: Put */
-    double dPayRec,                               /* Pay: -1.0  , Rec: +1.0 */
+    int iNbStrike, double *dStrike, int iCallPut, /* 0: Call      , 1: Put */
+    double dPayRec, /* Pay: -1.0      , Rec: +1.0 */
 
     /* Model Description */
     CMS_SPREAD_MODEL_PARAMS sModelParams,

@@ -1,6 +1,7 @@
 /* f2c.h  --  Standard Fortran to C header file */
 
-/**  barf  [ba:rf]  2.  "He suggested using FORTRAN  , and everybody barfed."
+/**  barf  [ba:rf]  2.  "He suggested using FORTRAN      , and everybody
+   barfed."
 
         - From The Shogakukan DICTIONARY OF NEW ENGLISH (Second edition) */
 
@@ -51,7 +52,7 @@ typedef long int ftnlen;
 typedef long int ftnint;
 #endif
 
-/*external read  , write*/
+/*external read      , write*/
 typedef struct {
   flag cierr;
   ftnint ciunit;
@@ -60,7 +61,7 @@ typedef struct {
   ftnint cirec;
 } cilist;
 
-/*internal read  , write*/
+/*internal read      , write*/
 typedef struct {
   flag icierr;
   char *iciunit;
@@ -90,7 +91,7 @@ typedef struct {
   char *csta;
 } cllist;
 
-/*rewind  , backspace  , endfile*/
+/*rewind      , backspace      , endfile*/
 typedef struct {
   flag aerr;
   ftnint aunit;
@@ -204,7 +205,7 @@ typedef VOID H_f;       /* character function */
 typedef VOID Z_f;       /* double complex function */
 typedef doublereal E_f; /* real function with -R not specified */
 
-/* undef any lower-case symbols that your C compiler predefines  , e.g.: */
+/* undef any lower-case symbols that your C compiler predefines      , e.g.: */
 
 #ifndef Skip_f2c_Undefs
 #undef cray

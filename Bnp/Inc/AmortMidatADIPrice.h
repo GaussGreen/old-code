@@ -4,7 +4,7 @@
 //////////////////////
 //	warnings
 #pragma warning(disable : 4786) //"identifier was truncated to '255' characters
-                                //in the debug information"
+                                // in the debug information"
 // NB: force warnings for unused arguments and local parameters
 #pragma warning(1 : 4100 4101)
 #include "AmortMidatADI.h"
@@ -97,7 +97,7 @@ const char *Price_GenMidAt(
     const double *pdGamma, const double *pdRho,
     // grid
     int nNumPointT, int nNumPointX,
-    /// results  ,
+    /// results      ,
     double *pdOptionPV, double *pdFixLegPV, double *pdFltLegPV,
     double *pdExProb, double *pdExBoundary, int nUse_Backward);
 

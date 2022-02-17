@@ -108,9 +108,11 @@ typedef struct ExpoVolStr_ {
 
   double beta; /* The Power of r */
 
-  double F;     /* exp -[ int(u=0  ,u=s) lam(u) du  */
-  double Psi;   /* int(s=0  ,s=t) [ exp -[ int(u=0  ,u=s) lam(u) du ] ds ]*/
-  double Kappa; /* int(s=0  ,s=t) [ exp [ int(u=0  ,u=s) lam(u) du ] ds ] */
+  double F; /* exp -[ int(u=0      ,u=s) lam(u) du  */
+  double
+      Psi; /* int(s=0      ,s=t) [ exp -[ int(u=0      ,u=s) lam(u) du ] ds ]*/
+  double Kappa; /* int(s=0      ,s=t) [ exp [ int(u=0      ,u=s) lam(u) du ] ds
+                   ] */
 
   double J; /* for quanto only*/
   double M; /* for quanto only*/

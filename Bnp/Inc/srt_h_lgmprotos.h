@@ -8,71 +8,75 @@
 /* LGMCaller.c routines */
 /******************************************************************/
 /******************************************************************/
-/* These programs have the identical calls as the old LGMautocal  , except
+/* These programs have the identical calls as the old LGMautocal      , except
 that input parameters to choose the calibration method have been added.
-In addition  , in the american call  , rflt_current is a new input parameter
-which is ignored if it is zero or negative.
-It uses its inputs to create the call to the LGMnewautocal program. */
-/* NOTE: this program is a temporizing step  , which does not use the
-flexibility of the new program  , and it should be replaced with programs which
-call the new LGMautocal directly from MAD and Westminster  , which can expose
-the new functionality  , ASAP */
+In addition      , in the american call      , rflt_current is a new input
+parameter which is ignored if it is zero or negative. It uses its inputs to
+create the call to the LGMnewautocal program. */
+/* NOTE: this program is a temporizing step      , which does not use the
+flexibility of the new program      , and it should be replaced with programs
+which call the new LGMautocal directly from MAD and Westminster      , which can
+expose the new functionality      , ASAP */
 
 /* calibrate and evaluate an American swaption */
 LGMErr TestLGMAmerCaller(
     /* definition of American deal */
-    long nfix, /* number of fixed periods */
-    Date
-        tfixStart[], /* [0  ,1  ,...  ,nfix-1]  start dates for fixed coupons */
-    Date tfixEnd[],  /* [0  ,1  ,...  ,nfix-1]  end dates for fixed coupons */
-    Date tfixPay[],  /* [0  ,1  ,...  ,nfix-1]  pay dates for fixed coupons */
-    double fixFullPayment[], /* [0  ,1  ,...  ,nfix-1]  fixed coupons (with
-                                notional at end) */
-    double Strike[],  /* [0  ,1  ,...  ,nfix-1]  premium for exer. at j (with
-                         notional) */
-    char *fixBasis,   /* basis for fixed coupons */
+    long nfix,        /* number of fixed periods */
+    Date tfixStart[], /* [0      ,1      ,...      ,nfix-1]  start dates for
+                         fixed coupons */
+    Date tfixEnd[],   /* [0      ,1      ,...      ,nfix-1]  end dates for fixed
+                         coupons */
+    Date tfixPay[],   /* [0      ,1      ,...      ,nfix-1]  pay dates for fixed
+                         coupons */
+    double fixFullPayment[], /* [0      ,1      ,...      ,nfix-1]  fixed
+                            coupons (with notional at end) */
+    double Strike[], /* [0      ,1      ,...      ,nfix-1]  premium for exer. at
+                    j (with notional) */
+    char *fixBasis,  /* basis for fixed coupons */
     int fixEarlyFlag, /* 0=subtract accrual from frst pymnt; 1=add accrual to
-                         fee */
+                     fee */
     long nfltdates,   /* number of floating dates */
-    Date tflt[], /* [0  ,1  ,...  ,nfltdates-1] all flting dates (first start
-                    date & all pay dates) */
+    Date tflt[], /* [0      ,1      ,...      ,nfltdates-1] all flting dates
+                (first start date & all pay dates) */
     double rflt_current, /* current floating rate (if fixed); ignored if
-                            non-positive */
+                        non-positive */
     char *fltBasis,      /* basis for floating coupons */
     int fltEarlyFlag, /* 0 = subtrct accrual from frst pymnt; 1 = add accrual to
-                         prem */
+                     prem */
     Date tFirstExer,  /* first exercise date */
     int lagExerStart, /* days between exercise and start */
-    int cal_or_bus,   /* 0 = cal. days  , 1 = bus. days for lag_exer_start */
+    int cal_or_bus, /* 0 = cal. days      , 1 = bus. days for lag_exer_start */
     BusDayConv convStart, /* business day convention for start (typically none
-                             or suceeding) */
+                         or suceeding) */
     char *PayRecStr,      /* RECEIVER or PAYER */
                           /* info about today's marketplace */
     String ycName,        /* Yield curve name */
-    int endofdayflag, /* 1=too late to exercise deals today  , 0=not too late */
+    int endofdayflag,     /* 1=too late to exercise deals today      , 0=not too
+                             late */
     LGMErr (*GetVol)(long, long, double, SRT_Boolean,
                      double *), /* volatility function for reference swptns */
     char *char_vol_type,        /* normal or log normal swaption vols */
                                 /* calibration method to use */
     int LGMOneTwoFactor, int usefixtau, /* 1=calibrate with fixed tau */
-    int usecaps, /* 1=use caplets for calibration  , 0=use only swaptions */
-    double tau,  /* if fixed tau  , use this value for tau (in years) */
+    int usecaps, /* 1=use caplets for calibration      , 0=use only swaptions */
+    double tau,  /* if fixed tau      , use this value for tau (in years) */
     double alpha, double gamma, double rho,
-    int calibrationmeth, /* 1 = fixexp  , 2=backboot  , 3=fixed sigma */
-    int strikechoice,    /* 1 = IRR  , 2 = dIRR */
+    int calibrationmeth, /* 1 = fixexp      , 2=backboot      , 3=fixed sigma */
+    int strikechoice,    /* 1 = IRR      , 2 = dIRR */
                          /* task list */
-    int skipEval,        /* 1=calibrate only  , 0=calibrate & evaluate deal */
-    int convertTS, /* 1=cmpute new sigmas  , taus & store in ts; 0=don't bother
-                    */
+    int skipEval,      /* 1=calibrate only      , 0=calibrate & evaluate deal */
+    int convertTS,     /* 1=cmpute new sigmas      , taus & store in ts; 0=don't
+                        * bother
+                        */
     int findExerBdry,  /* 1=find swap rates at exercise boundary; 0=don't bother
                         */
                        /* outputs */
     String outfile,    /* output log file (unused) */
     double *LGMValPtr, /* answer */
     SrtLgmExerBdryData *lgmExerBdryData, /* ptr to exercise boundary data
-                                            structure (NULL => not req'd) */
+                                        structure (NULL => not req'd) */
     SrtLgmRefSwptnData *lgmRefSwptnData, /* ptr to reference swaption data
-                                            structure (NULL => not req'd) */
+                                        structure (NULL => not req'd) */
                                          /* calibrated term structure */
     SrtLgmTSData *lgmTSData,  /* ptr to tau/sigma data (NULL => not req'd) */
                               /* miscellaneous */
@@ -81,58 +85,62 @@ LGMErr TestLGMAmerCaller(
 
 LGMErr TestLGMAmerCallerRR(
     /* definition of American deal */
-    long nfix, /* number of fixed periods */
-    Date
-        tfixStart[], /* [0  ,1  ,...  ,nfix-1]  start dates for fixed coupons */
-    Date tfixEnd[],  /* [0  ,1  ,...  ,nfix-1]  end dates for fixed coupons */
-    Date tfixPay[],  /* [0  ,1  ,...  ,nfix-1]  pay dates for fixed coupons */
-    double fixFullPayment[], /* [0  ,1  ,...  ,nfix-1]  fixed coupons (with
-                                notional at end) */
-    double Strike[],  /* [0  ,1  ,...  ,nfix-1]  premium for exer. at j (with
-                         notional) */
-    char *fixBasis,   /* basis for fixed coupons */
+    long nfix,        /* number of fixed periods */
+    Date tfixStart[], /* [0      ,1      ,...      ,nfix-1]  start dates for
+                         fixed coupons */
+    Date tfixEnd[],   /* [0      ,1      ,...      ,nfix-1]  end dates for fixed
+                         coupons */
+    Date tfixPay[],   /* [0      ,1      ,...      ,nfix-1]  pay dates for fixed
+                         coupons */
+    double fixFullPayment[], /* [0      ,1      ,...      ,nfix-1]  fixed
+                            coupons (with notional at end) */
+    double Strike[], /* [0      ,1      ,...      ,nfix-1]  premium for exer. at
+                    j (with notional) */
+    char *fixBasis,  /* basis for fixed coupons */
     int fixEarlyFlag, /* 0=subtract accrual from frst pymnt; 1=add accrual to
-                         fee */
+                     fee */
     long nfltdates,   /* number of floating dates */
-    Date tflt[], /* [0  ,1  ,...  ,nfltdates-1] all flting dates (first start
-                    date & all pay dates) */
+    Date tflt[], /* [0      ,1      ,...      ,nfltdates-1] all flting dates
+                (first start date & all pay dates) */
     double rflt_current, /* current floating rate (if fixed); ignored if
-                            non-positive */
+                        non-positive */
     char *fltBasis,      /* basis for floating coupons */
     int fltEarlyFlag, /* 0 = subtrct accrual from frst pymnt; 1 = add accrual to
-                         prem */
+                     prem */
     Date tFirstExer,  /* first exercise date */
     int lagExerStart, /* days between exercise and start */
-    int cal_or_bus,   /* 0 = cal. days  , 1 = bus. days for lag_exer_start */
+    int cal_or_bus, /* 0 = cal. days      , 1 = bus. days for lag_exer_start */
     BusDayConv convStart, /* business day convention for start (typically none
-                             or suceeding) */
+                         or suceeding) */
     char *PayRecStr,      /* RECEIVER or PAYER */
                           /* info about today's marketplace */
     String ycName,        /* Yield curve name */
-    int endofdayflag, /* 1=too late to exercise deals today  , 0=not too late */
+    int endofdayflag,     /* 1=too late to exercise deals today      , 0=not too
+                             late */
     LGMErr (*GetVol)(long, long, double, SRT_Boolean,
                      double *), /* volatility function for reference swptns */
     char *char_vol_type,        /* normal or log normal swaption vols */
                                 /* calibration method to use */
     int LGMOneTwoFactor, int usefixtau, /* 1=calibrate with fixed tau */
-    int usecaps, /* 1=use caplets for calibration  , 0=use only swaptions */
-    double tau,  /* if fixed tau  , use this value for tau (in years) */
+    int usecaps, /* 1=use caplets for calibration      , 0=use only swaptions */
+    double tau,  /* if fixed tau      , use this value for tau (in years) */
     double alpha, double gamma, double rho,
-    int calibrationmeth, /* 1 = fixexp  , 2=backboot  , 3=fixed sigma */
-    int strikechoice,    /* 1 = IRR  , 2 = dIRR */
+    int calibrationmeth, /* 1 = fixexp      , 2=backboot      , 3=fixed sigma */
+    int strikechoice,    /* 1 = IRR      , 2 = dIRR */
                          /* task list */
-    int skipEval,        /* 1=calibrate only  , 0=calibrate & evaluate deal */
-    int convertTS, /* 1=cmpute new sigmas  , taus & store in ts; 0=don't bother
-                    */
+    int skipEval,      /* 1=calibrate only      , 0=calibrate & evaluate deal */
+    int convertTS,     /* 1=cmpute new sigmas      , taus & store in ts; 0=don't
+                        * bother
+                        */
     int findExerBdry,  /* 1=find swap rates at exercise boundary; 0=don't bother
                         */
                        /* outputs */
     String outfile,    /* output log file (unused) */
     double *LGMValPtr, /* answer */
     SrtLgmExerBdryData *lgmExerBdryData, /* ptr to exercise boundary data
-                                            structure (NULL => not req'd) */
+                                        structure (NULL => not req'd) */
     SrtLgmRefSwptnData *lgmRefSwptnData, /* ptr to reference swaption data
-                                            structure (NULL => not req'd) */
+                                        structure (NULL => not req'd) */
                                          /* calibrated term structure */
     SrtLgmTSData *lgmTSData, /* ptr to tau/sigma data (NULL => not req'd) */
                              /* miscellaneous */
@@ -142,35 +150,39 @@ LGMErr TestLGMAmerCallerRR(
 
 LGMErr TestLGMautocalCaller(
     long nEx,       /* nEx is number of exercises */
-    Date *tEx,      /* notification (exercise) dates  , [0  ,1  ,...  ,nEx-1] */
-    Date *tStart,   /* start dates for each exercise  , [0  ,1  ,...  ,nEx-1] */
-    double *Strike, /* total value paid at tStart[j] for fixed leg  , [0  ,1
-                       ,...  ,nEx-1] */
+    Date *tEx,      /* notification (exercise) dates      , [0      ,1      ,...
+                       ,nEx-1] */
+    Date *tStart,   /* start dates for each exercise      , [0      ,1      ,...
+                       ,nEx-1] */
+    double *Strike, /* total value paid at tStart[j] for fixed leg      , [0 ,1
+                       ,...      ,nEx-1] */
     long nPay,      /* nPay is number of fixed leg coupons */
-    Date *tPay,     /* pay dates for period i  , [0  ,1  , ...  ,nPay-1] */
-    double *Payment, /* total fixed leg payment(last includes notional)  , [0
-                        ,...  ,nPay-1] */
-    double *RedFirstPay, /* reduction in 1rst payment after exercise  , [0  ,...
-                            ,nEx-1] */
+    Date *tPay,     /* pay dates for period i      , [0      ,1      , ...
+                       ,nPay-1] */
+    double
+        *Payment, /* total fixed leg payment(last includes notional)      , [0
+                     ,...      ,nPay-1] */
+    double *RedFirstPay, /* reduction in 1rst payment after exercise      , [0
+                            ,... ,nEx-1] */
     char *PayRecStr,     /* RECEIVER or PAYER */
                          /* information about today */
     String ycName,       /* pointer to market structures */
-    int endofday, /* 1=too late to exercise deals today  , 0=not too late */
+    int endofday, /* 1=too late to exercise deals today      , 0=not too late */
                   /* today's volatilities */
     LGMErr (*GetVol)(Date, Date, double, SRT_Boolean,
                      double *), /* function to get swaption vols */
     char *char_vol_type, /* determines whether vol is normal or log normal */
                          /* calibration method to use */
     int LGMOneTwoFactor, int usefixtau, /* 1=calibrate with fixed tau */
-    int usecaps, /* 1=use caplets for calibration  , 0=use only swaptions */
-    double tau,  /* if fixed tau  , use this value for tau (in years) */
+    int usecaps, /* 1=use caplets for calibration      , 0=use only swaptions */
+    double tau,  /* if fixed tau      , use this value for tau (in years) */
     double alpha, double gamma, double rho,
-    int calibrationmeth, /* 1 = fixexp  , 2=backboot  , 3=fixed sigma */
-    int strikechoice,    /* 1 = IRR  , 2 = dIRR */
+    int calibrationmeth, /* 1 = fixexp      , 2=backboot      , 3=fixed sigma */
+    int strikechoice,    /* 1 = IRR      , 2 = dIRR */
     double maxstd,       /* Maximum number of std between forward and strike */
                          /* requested operation */
-    int skipEval,        /* 1=calibrate only  , 0=calibrate & evaluate deal */
-    int convertTS,       /* 1=compute new sigs and taus; 0=don't bother */
+    int skipEval,     /* 1=calibrate only      , 0=calibrate & evaluate deal */
+    int convertTS,    /* 1=compute new sigs and taus; 0=don't bother */
     int findExerBdry, /* 1=find swap rates at exercise boundary; 0=don't bother
                        */
     long *Zeta1Dates, double *StartZeta1s, long *TauDates, double *StartTaus,
@@ -180,9 +192,9 @@ LGMErr TestLGMautocalCaller(
     String outfile,    /* output file name for log file (unused) */
     double *LGMvalPtr, /* LGM value of mid-atlantic */
     SrtLgmExerBdryData *lgmExerBdryData, /* ptr to exercise boundary data
-                                            structure (NULL => not req'd) */
+                                        structure (NULL => not req'd) */
     SrtLgmRefSwptnData *lgmRefSwptnData, /* ptr to reference swaption data
-                                            structure (NULL => not req'd) */
+                                        structure (NULL => not req'd) */
                                          /* calibrated term structure */
     SrtLgmTSData *lgmTSData,  /* ptr to tau/sigma data (NULL => not req'd) */
     LGM_TSPtr *atcTSData,     /* ptr to zeta/G data (NULL => not req'd) */
@@ -191,35 +203,39 @@ LGMErr TestLGMautocalCaller(
 
 LGMErr TestLGMautocalCallerRR(
     long nEx,       /* nEx is number of exercises */
-    Date *tEx,      /* notification (exercise) dates  , [0  ,1  ,...  ,nEx-1] */
-    Date *tStart,   /* start dates for each exercise  , [0  ,1  ,...  ,nEx-1] */
-    double *Strike, /* total value paid at tStart[j] for fixed leg  , [0  ,1
-                       ,...  ,nEx-1] */
+    Date *tEx,      /* notification (exercise) dates      , [0      ,1      ,...
+                       ,nEx-1] */
+    Date *tStart,   /* start dates for each exercise      , [0      ,1      ,...
+                       ,nEx-1] */
+    double *Strike, /* total value paid at tStart[j] for fixed leg      , [0 ,1
+                       ,...      ,nEx-1] */
     long nPay,      /* nPay is number of fixed leg coupons */
-    Date *tPay,     /* pay dates for period i  , [0  ,1  , ...  ,nPay-1] */
-    double *Payment, /* total fixed leg payment(last includes notional)  , [0
-                        ,...  ,nPay-1] */
-    double *RedFirstPay, /* reduction in 1rst payment after exercise  , [0  ,...
-                            ,nEx-1] */
+    Date *tPay,     /* pay dates for period i      , [0      ,1      , ...
+                       ,nPay-1] */
+    double
+        *Payment, /* total fixed leg payment(last includes notional)      , [0
+                     ,...      ,nPay-1] */
+    double *RedFirstPay, /* reduction in 1rst payment after exercise      , [0
+                            ,... ,nEx-1] */
     char *PayRecStr,     /* RECEIVER or PAYER */
                          /* information about today */
     String ycName,       /* pointer to market structures */
-    int endofday, /* 1=too late to exercise deals today  , 0=not too late */
+    int endofday, /* 1=too late to exercise deals today      , 0=not too late */
                   /* today's volatilities */
     LGMErr (*GetVol)(Date, Date, double, SRT_Boolean,
                      double *), /* function to get swaption vols */
     char *char_vol_type, /* determines whether vol is normal or log normal */
                          /* calibration method to use */
     int LGMOneTwoFactor, int usefixtau, /* 1=calibrate with fixed tau */
-    int usecaps, /* 1=use caplets for calibration  , 0=use only swaptions */
-    double tau,  /* if fixed tau  , use this value for tau (in years) */
+    int usecaps, /* 1=use caplets for calibration      , 0=use only swaptions */
+    double tau,  /* if fixed tau      , use this value for tau (in years) */
     double alpha, double gamma, double rho,
-    int calibrationmeth, /* 1 = fixexp  , 2=backboot  , 3=fixed sigma */
-    int strikechoice,    /* 1 = IRR  , 2 = dIRR */
+    int calibrationmeth, /* 1 = fixexp      , 2=backboot      , 3=fixed sigma */
+    int strikechoice,    /* 1 = IRR      , 2 = dIRR */
     double maxstd,       /* Maximum number of std between forward and strike */
                          /* requested operation */
-    int skipEval,        /* 1=calibrate only  , 0=calibrate & evaluate deal */
-    int convertTS,       /* 1=compute new sigs and taus; 0=don't bother */
+    int skipEval,     /* 1=calibrate only      , 0=calibrate & evaluate deal */
+    int convertTS,    /* 1=compute new sigs and taus; 0=don't bother */
     int findExerBdry, /* 1=find swap rates at exercise boundary; 0=don't bother
                        */
     long *Zeta1Dates, double *StartZeta1s, long *TauDates, double *StartTaus,
@@ -229,9 +245,9 @@ LGMErr TestLGMautocalCallerRR(
     String outfile,    /* output file name for log file (unused) */
     double *LGMvalPtr, /* LGM value of mid-atlantic */
     SrtLgmExerBdryData *lgmExerBdryData, /* ptr to exercise boundary data
-                                            structure (NULL => not req'd) */
+                                        structure (NULL => not req'd) */
     SrtLgmRefSwptnData *lgmRefSwptnData, /* ptr to reference swaption data
-                                            structure (NULL => not req'd) */
+                                        structure (NULL => not req'd) */
                                          /* calibrated term structure */
     SrtLgmTSData *lgmTSData, /* ptr to tau/sigma data (NULL => not req'd) */
     LGM_TSPtr *atcTSData,    /* ptr to zeta/G data (NULL => not req'd) */
@@ -244,44 +260,43 @@ LGMErr LGMCallInvFloaterCaller(
     /*	Exercise	*/
 
     long nEx,     /* number of exercise dates		*/
-    Date *tEx,    /* [0  ,1  ,...  ,nEx-1] notification dates:
-                                  first coupon to be called is the first coupon
-                     with a start date    on or after the notification date */
-    Date *tStart, /* [0  ,1  ,...  ,nEx-1] settlement dates for each exercise
-                                          i.e. dates on which the fee is paid */
-    double
-        *exerFee, /* [0  ,1  ,...  ,nEx-1] fee paid by option holder to exercise
-                                          most frequently  , the bond is called
-                     at par  , i.e. exerFee = 1.0 */
+    Date *tEx,    /* [0      ,1      ,...      ,nEx-1] notification dates:
+                              first coupon to be called is the first coupon
+                 with a start date    on or after the notification date */
+    Date *tStart, /* [0      ,1      ,...      ,nEx-1] settlement dates for each
+                     exercise i.e. dates on which the fee is paid */
+    double *exerFee, /* [0      ,1      ,...      ,nEx-1] fee paid by option
+                    holder to exercise most frequently      , the bond is called
+                    at par      , i.e. exerFee = 1.0 */
     char
         *PayRecStr, /* RECEIVER (call on the bond) or PAYER (put on the bond) */
 
     /*	Coupons: the structure must be decomposed into a swap that delivers:
 
-- on the funding side  , Libor CASH FLAT
+- on the funding side      , Libor CASH FLAT
 
-- on the exotic side  , a - gear * Libor CASH * libor_cvg
+- on the exotic side      , a - gear * Libor CASH * libor_cvg
 
-- the exotic side also includes a cap paying gear * max (0  , Libor CASH -
+- the exotic side also includes a cap paying gear * max (0      , Libor CASH -
 cap_str) * libor_cvg */
 
     long nCpn,       /* number of coupon periods */
-    Date *tCpnStart, /* [0  ,1  ,...  ,nCpn-1] coupon start date */
-    Date *tCpnPay,   /* [0  ,1  ,...  ,nCpn-1] coupon pay date */
+    Date *tCpnStart, /* [0      ,1      ,...      ,nCpn-1] coupon start date */
+    Date *tCpnPay,   /* [0      ,1      ,...      ,nCpn-1] coupon pay date */
 
-    double *a,         /* [0  ,1  ,...  ,nCpn-1] */
-    double *gear,      /* [0  ,1  ,...  ,nCpn-1] */
-    double *cvg,       /* [0  ,1  ,...  ,nCpn-1] */
-    double *libor_cvg, /* [0  ,1  ,...  ,nCpn-1] */
+    double *a,         /* [0      ,1      ,...      ,nCpn-1] */
+    double *gear,      /* [0      ,1      ,...      ,nCpn-1] */
+    double *cvg,       /* [0      ,1      ,...      ,nCpn-1] */
+    double *libor_cvg, /* [0      ,1      ,...      ,nCpn-1] */
 
     /*	Cap on cash libor	*/
 
-    double *cap_str, /* [0  ,1  ,...  ,nCpn-1] */
+    double *cap_str, /* [0      ,1      ,...      ,nCpn-1] */
 
     /*	Market & context	*/
 
     String ycName, /* yield curve name */
-    int endofday,  /* 1 = too late to notify today  , 0 = not too late */
+    int endofday,  /* 1 = too late to notify today      , 0 = not too late */
     LGMErr (*GetVol)(long, long, double, SRT_Boolean, double *),
     /* Autocal volatility function to get market cash vol */
     char *char_vol_type, /* normal or log normal swaption vols */
@@ -289,30 +304,31 @@ cap_str) * libor_cvg */
     /*	Calibration	*/
 
     int LGMOneTwoFactor, int usefixtau, /* 1 = calibrate with fixed tau */
-    int usecaps,  /* 1 = use caplets for calibration  , 0=use only swaptions */
-    double tau,   /* if fixed tau  , use this value for tau (in years) */
-    double alpha, /* For the future 2F implementation  , usused so far */
-    double gamma, /* For the future 2F implementation  , usused so far */
-    double rho,   /* For the future 2F implementation  , usused so far */
+    int usecaps,  /* 1 = use caplets for calibration      , 0=use only swaptions
+                   */
+    double tau,   /* if fixed tau      , use this value for tau (in years) */
+    double alpha, /* For the future 2F implementation      , usused so far */
+    double gamma, /* For the future 2F implementation      , usused so far */
+    double rho,   /* For the future 2F implementation      , usused so far */
     int calibrationmeth, /* Always choose 2 */
-    int capletvolmethod, /* 1 = Model  , 2 = Sliding  , 3 = Converging  , 4 =
-                            Calibrated */
-    int strikechoice,    /* 1 = Not used  , 2 = MidatStrike/MidatStrike  ,
-                                            3 = MidatStrike/std  , 4=
-                            MidatStrike/ATM */
-    double maxstd,       /* Maximum number of std between forward and strike */
+    int capletvolmethod, /* 1 = Model      , 2 = Sliding      , 3 = Converging
+                        , 4 = Calibrated */
+    int strikechoice, /* 1 = Not used      , 2 = MidatStrike/MidatStrike      ,
+                                     3 = MidatStrike/std      , 4=
+                     MidatStrike/ATM */
+    double maxstd,    /* Maximum number of std between forward and strike */
 
     /*	Results	*/
 
-    int convertTS,     /* 1 = cmpute new sigmas  , taus & store in ts; 0 = don't
-                          bother */
+    int convertTS, /* 1 = cmpute new sigmas      , taus & store in ts; 0 = don't
+                  bother */
     int findExerBdry,  /* 1 = find swap rates at exercise boundary; 0 = don't
-                          bother */
+                      bother */
     double *LGMValPtr, /* answer...value of the option */
     SrtLgmExerBdryData *lgmExerBdryData, /* ptr to exercise boundary data
-                                            structure (NULL => not req'd) */
+                                        structure (NULL => not req'd) */
     SrtLgmRefSwptnData *lgmRefSwptnData, /* ptr to reference swaption data
-                                            structure (NULL => not req'd) */
+                                        structure (NULL => not req'd) */
     SrtLgmTSData *lgmTSData, /* ptr to tau/sigma data (NULL => not req'd) */
     LGM_TSPtr *atcTSData,    /* ptr to zeta/G data (NULL => not req'd) */
     FWD_VOL_STR *fwdVolStr); /* ptr to fwd vol data (NULL => not req'd) */
@@ -322,62 +338,63 @@ cap_str) * libor_cvg */
 LGMErr LGMCallCapFloaterCaller(
     /* definition of coupon leg */
     long nCpn,    /* number of coupon periods */
-    Date *tCpn,   /* t[0  ,1  ,...  ,nCpn]...cpn for t[i-1] to t[i] paid at t[i]
-                     , i=1  ,...  ,nCpn	*/
+    Date *tCpn,   /* t[0      ,1      ,...      ,nCpn]...cpn for t[i-1] to t[i]
+                     paid at t[i]   , i=1      ,...      ,nCpn	*/
     double *amax, /* cpn[i] is
                    */
-    double *amin, /*	cvg(t[i-1]  ,t[i]) * (margin[i] +
+    double *amin, /*	cvg(t[i-1]      ,t[i]) * (margin[i] +
                    */
-    double *margin, /*		lvg*max{rate[i]-amin[i]  ,0} - lvg*max{rate[i]-amax[i]
-                       ,0})		*/
-    double lvg,     /*			 paid at t[i] for i=1  ,2  , ...  , n
-                     */
+    double *margin,         /*		lvg*max{rate[i]-amin[i]      ,0} -
+                               lvg*max{rate[i]-amax[i]         ,0})		*/
+    double lvg,             /*			 paid at t[i] for i=1      ,2      , ...
+                             * , n
+                             */
     char *cpnRateBasisName, /* day count basis for rate[i] */
     char *cpnBasisName,     /* day count basis for coupon leg */
                             /* definition of floating leg */
     long nflt,              /* number of funding periods */
-    Date *tflt, /* tau[0  ,1  ,...  ,nflt]...float periofs are tau[j-1] to
-                   tau[j]  , j=1  ,...  ,nflt */
+    Date *tflt, /* tau[0      ,1      ,...      ,nflt]...float periofs are
+               tau[j-1] to tau[j]      , j=1      ,...      ,nflt */
     char *fltBasisName, /* day count basis for the floating leg */
                         /* exercise information */
     long nEx,           /* number of exercise dates */
-    Date *tEx, /* [0  ,1  ,...  ,nEx-1] notification dates; deal starts on next
-                  coupon date */
-    double *exerFee,  /* [0  ,1  ,...  ,nEx-1] fee paid by option holder to
-                         exercise */
-    char *PayRecStr,  /* RECEIVER or PAYER */
-    int earlyFlag,    /* if 1  , deal is a cancelation of an existing inverse
-                         floater */
-    int resetFlt,     /* float for stub period is reset upon exercise */
-                      /* information about today and today's market place*/
-    String ycName,    /* yield curve name */
+    Date *tEx, /* [0      ,1      ,...      ,nEx-1] notification dates; deal
+              starts on next coupon date */
+    double *exerFee, /* [0      ,1      ,...      ,nEx-1] fee paid by option
+                    holder to exercise */
+    char *PayRecStr, /* RECEIVER or PAYER */
+    int earlyFlag,   /* if 1      , deal is a cancelation of an existing inverse
+                    floater */
+    int resetFlt,    /* float for stub period is reset upon exercise */
+                     /* information about today and today's market place*/
+    String ycName,   /* yield curve name */
     double rfund_cur, /* current (true) funding rate (if fixed); ignored if
-                         non-positive */
-    int endofday,     /* 1=too late to notify today  , 0=not too late */
+                     non-positive */
+    int endofday,     /* 1=too late to notify today      , 0=not too late */
     LGMErr (*GetVol)(long, long, double, SRT_Boolean,
                      double *), /* volatility function for reference swptns */
     char *char_vol_type,        /* normal or log normal swaption vols */
                                 /* calibration method to use */
     int LGMOneTwoFactor, int usefixtau, /* 1=calibrate with fixed tau */
-    int usecaps, /* 1=use caplets for calibration  , 0=use only swaptions */
-    double tau,  /* if fixed tau  , use this value for tau (in years) */
+    int usecaps, /* 1=use caplets for calibration      , 0=use only swaptions */
+    double tau,  /* if fixed tau      , use this value for tau (in years) */
     double alpha, double gamma, double rho,
-    int calibrationmeth, /* 1 = fixexp  , 2=backboot  , 3=fixed sigma */
-    int strikechoice,    /* 1 = IRR  , 2 = dIRR */
+    int calibrationmeth, /* 1 = fixexp      , 2=backboot      , 3=fixed sigma */
+    int strikechoice,    /* 1 = IRR      , 2 = dIRR */
                          /* task list */
-    int skipEval,        /* 1=calibrate only  , 0=calibrate & evaluate deal */
-    int convertTS,       /* 1=compute new sigs and taus; 0=don't bother */
+    int skipEval,      /* 1=calibrate only      , 0=calibrate & evaluate deal */
+    int convertTS,     /* 1=compute new sigs and taus; 0=don't bother */
     int findExerBdry,  /* 1=find swap rates at exercise boundary; 0=don't bother
                         */
                        /* outputs */
     String outfile,    /* output log file (unused) */
     double *LGMValPtr, /* answer...value of the option */
     double *intrinValPtr, /* value if exercise date tNot[j] had to be chosen
-                             today */
+                         today */
     SrtLgmExerBdryData *lgmExerBdryData, /* ptr to exercise boundary data
-                                            structure (NULL => not req'd) */
+                                        structure (NULL => not req'd) */
     SrtLgmRefSwptnData *lgmRefSwptnData, /* ptr to reference swaption data
-                                            structure (NULL => not req'd) */
+                                        structure (NULL => not req'd) */
                                          /* calibrated term structure */
     SrtLgmTSData *lgmTSData); /* ptr to tau/sigma data (NULL => not req'd) */
 
@@ -393,7 +410,7 @@ LGMErr LGMFillSimMidAt(Date tfirst, SrtSimMidAt **MidAtPtrPtr, long nPay,
                        Date *tStart, double *Strike, double *RedFirstPay,
                        SrtReceiverType payrec);
 
-/* Create a simple American deal structure  , and copy input data into it */
+/* Create a simple American deal structure      , and copy input data into it */
 LGMErr LGMFillSimAmer(Date tfirst, int standardLag, SrtSimAmer **AmerPtrPtr,
                       long nfix, Date *tfixStart, Date *tfixEnd, Date *tfixPay,
                       double *fixFullPayment, SrtBasisCode fixBasisCode,
@@ -402,7 +419,8 @@ LGMErr LGMFillSimAmer(Date tfirst, int standardLag, SrtSimAmer **AmerPtrPtr,
                       Date tFirstExer, int lagExerStart, int calbus,
                       BusDayConv convStart, SrtReceiverType payrec);
 
-/* Create a Bermudan inverse floater structure  , and copy input data into it */
+/* Create a Bermudan inverse floater structure      , and copy input data into
+ * it */
 LGMErr
 LGMFillCallInvFloater(SrtCallInvFlt **dealPtrPtr, /* output: the deal */
                       long *nExleftPtr, /* output: effective number of exer */
@@ -414,7 +432,7 @@ LGMFillCallInvFloater(SrtCallInvFlt **dealPtrPtr, /* output: the deal */
                       double *exFee,           /* exercise info */
                       SrtReceiverType payrec); /* PAYER or RECEIVER */
 
-/* Create a Bermudan cap floater structure  , and copy input data into it */
+/* Create a Bermudan cap floater structure      , and copy input data into it */
 LGMErr LGMFillCallCapFloater(
     long *nExleftPtr,                            /* effective number of exer */
     Date tfirst, char *ycName, double rfund_cur, /* info about today */
@@ -465,16 +483,16 @@ ConvParamsPtr LGMSetDefaultEvalParms(void);
 /* MAIN PROGRAM to calibrate zeta(t) & G(t) and evaluate an American */
 LGMErr LGMNewAmerican(
     /* task list */
-    int skipEval,     /* 0=calibrate & value deal  , 1=calibrate only */
-    int skipCalib,    /* 0=calibrate & value deal  , 1=value deal only */
+    int skipEval,     /* 0=calibrate & value deal      , 1=calibrate only */
+    int skipCalib,    /* 0=calibrate & value deal      , 1=value deal only */
     int convertTS,    /* 1=compute & output sig-kappa ts equivalent to LGM ts */
     int findExerBdry, /* 1=find swap rates at exer boundary  */
                       /* information about today & today's yield curve */
     Date tNow,        /* eval as if today is tNow */
-    int eod,          /* 0=can exercise on tNow  , 1=cannot exercise on tNow */
-    String ycName,    /* market pointer for discount factors */
+    int eod,       /* 0=can exercise on tNow      , 1=cannot exercise on tNow */
+    String ycName, /* market pointer for discount factors */
     double rflt_current, /* current floating rate (if fixed); ignored if
-                            non-positive */
+                        non-positive */
                          /* information about today's option prices */
     LGMErr (*GetVol)(Date, Date, double, SRT_Boolean,
                      double *), /* function to provide swaption/cap vols */
@@ -499,7 +517,7 @@ LGMErr LGMNewAmerican(
     LGMSwptns **
         ExerBdryPtrPtr, /* European swaptions struck at the exercise boundary */
     SrtLgmRefSwptnData *lgmRefSwptnData, /* ptr to reference swaption data
-                                            structure (NULL => not req'd) */
+                                        structure (NULL => not req'd) */
     LGM_TS **LGMtsPtrPtr,                /* calibrated zeta-G term structure */
     SigKapTS **SigKaptsPtrPtr, /* an equivalent sigma-kappa term structure */
     String outfile);           /* output file name for log file (unused) */
@@ -508,15 +526,16 @@ LGMErr LGMNewAmerican(
 mid_atlantic */
 LGMErr LGMnewautocal(
     /* operations to be done */
-    int skip_deal_eval,   /* 0=value deal  , 1=calibrate only */
-    int skip_calibration, /* 0=calibrate & value deal  , 1=value deal only */
+    int skip_deal_eval,   /* 0=value deal      , 1=calibrate only */
+    int skip_calibration, /* 0=calibrate & value deal      , 1=value deal only
+                           */
     int convert_ts_flag,  /* 1=compute new sigs and taus & store; 0=don't bother
                            */
     int find_exer_bdry, /* 1=find swap rates at exer boundary; 0=don't bother */
 
     /* information about today & today's market prices */
     Date tNow,     /* eval as if today is tNow */
-    int eod,       /* 0=can exercise on tNow  , 1=cannot exercise on tNow */
+    int eod,       /* 0=can exercise on tNow      , 1=cannot exercise on tNow */
     String ycname, /* yield curve name for discount factors */
     LGMErr (*GetVol)(Date, Date, double, SRT_Boolean,
                      double *), /* function to provide swaption/cap vols */
@@ -545,7 +564,7 @@ LGMErr LGMnewautocal(
     LGMSwptns **
         ExerBdryPtrPtr, /* European swaptions struck at the exercise boundary */
     SrtLgmRefSwptnData *lgmRefSwptnData, /* ptr to reference swaption data
-                                            structure (NULL => not req'd) */
+                                        structure (NULL => not req'd) */
     LGM_TS **LGMtsPtrPtr,                /* calibrated zeta-G term structure */
     SigKapTS **SigKaptsPtr, /* an equivalent sigma-kappa term structure */
 
@@ -560,14 +579,14 @@ SrtSimMidAtPtr LGMCreateMidAtFromAmer(Date tfirst, double rfltCur,
 
 /******************************************************************/
 /* Get info for calibration:
-The effective number of exercise dates and the exercise dates - nEx  , TauArr[]
-The PV of fixed leg/PV of strike at each exercise date - FVArr[]
-The last pay date of the deal - tlast
+The effective number of exercise dates and the exercise dates - nEx      ,
+TauArr[] The PV of fixed leg/PV of strike at each exercise date - FVArr[] The
+last pay date of the deal - tlast
 
-Compute the intrinsic value of the deal  , and store the underlying
-exercise dates  , enddates  , and the fixed rate Rfix of the vanilla swaption
-that comes closest to describing the underlying in UnderSwptns structure  ,
-and return these to the calling routine as "ExerInto"
+Compute the intrinsic value of the deal      , and store the underlying
+exercise dates      , enddates      , and the fixed rate Rfix of the vanilla
+swaption that comes closest to describing the underlying in UnderSwptns
+structure      , and return these to the calling routine as "ExerInto"
 */
 
 LGMErr LGMExtractInfoFromDeal(
@@ -627,12 +646,13 @@ LGMErr LGMCalibration(
 /* Main routine to construct the reference instruments */
 LGMErr LGMMakeRefDeals(
     LGMDealType DealType, void *dealptr, Date tNow, /* EVALUTAION DATE */
-    Date tLast,   /* LAST PAY DATE OF THE REFERENCE INSTRUMENTS */
-    long nArr,    /* NUMBER OF EXERCISE DATES IN DEAL*/
-    Date *TauArr, /* [*  ,1  ,2  ,...  ,nEx] ARRAY OF EXERCISE DATES AFTER TODAY
-                   */
-    double *RatArr, /* [*  ,1  ,2  ,...  ,nEx] RATIO OF PV OF FIXED LEG TO PV OF
-                       STRIKE */
+    Date tLast,     /* LAST PAY DATE OF THE REFERENCE INSTRUMENTS */
+    long nArr,      /* NUMBER OF EXERCISE DATES IN DEAL*/
+    Date *TauArr,   /* [*      ,1      ,2      ,...      ,nEx] ARRAY OF EXERCISE
+                     * DATES AFTER TODAY
+                     */
+    double *RatArr, /* [*      ,1      ,2      ,...      ,nEx] RATIO OF PV OF
+                   FIXED LEG TO PV OF STRIKE */
     String ycname,  /* DISCOUNT CURVE */
     LGMMarkConv *conv,  /* MARKET PLACE CONVENTIONS */
     LGMCalParm *CalReq, /* METHODS AND DATA FOR CHOOSING STRIKES */
@@ -668,9 +688,9 @@ double LGMCEVSwaptionPrice(
     double stubcvg, /* cvg for initial stub period (if any) */
     double Dstub,   /* dis factor to the stub's pay date */
     long n,         /* number of other fixed leg pay dates */
-    double *cvg,    /* [0  ,...  ,n-1] coverages of rest of periods */
-    double *Dpay,   /* [0  ,...  ,n-1] dis factor to rest of pay dates */
-    double CEVvol,  /* CEV vol */
+    double *cvg,    /* [0      ,...      ,n-1] coverages of rest of periods */
+    double *Dpay,  /* [0      ,...      ,n-1] dis factor to rest of pay dates */
+    double CEVvol, /* CEV vol */
     double beta);
 
 /******************************************************************/
@@ -687,7 +707,7 @@ double LGMCEVCapletPrice(
     double beta);  /* CEV exponent */
 
 /******************************************************************/
-/* Creates a term structure using a constant kappa  , and calibrate it to
+/* Creates a term structure using a constant kappa      , and calibrate it to
 the set of caplets (if usecaps=1) or long swaptions (if usecaps!=1) */
 LGMErr
 LGMCalFixKap(LGM_TS **LGMtsPtrPtr, /* Return: Calibrated term structure */
@@ -699,7 +719,7 @@ LGMCalFixKap(LGM_TS **LGMtsPtrPtr, /* Return: Calibrated term structure */
              LGMCalSet *CSPtr);    /* Reference caplets */
 
 /******************************************************************/
-/* Creates a term structure using a given G(t) data  , and calibrate zeta
+/* Creates a term structure using a given G(t) data      , and calibrate zeta
 to the set of caplets (if usecaps=1) or long swaptions (if usecaps!=1) */
 LGMErr
 LGMCalGivenG(LGM_TS **LGMtsPtrPtr, /* Return: Calibrated term structure */
@@ -710,7 +730,7 @@ LGMCalGivenG(LGM_TS **LGMtsPtrPtr, /* Return: Calibrated term structure */
              LGMCalSet *CSPtr);
 
 /******************************************************************/
-/* Creates a term structure using a constant sigma  , and calibrates G(t)
+/* Creates a term structure using a constant sigma      , and calibrates G(t)
 to the set of caplets if (usecaps=1) or long swaptions (if usecaps!=1) */
 LGMErr LGMCalFixSig(
     LGM_TS **LGMtsPtrPtr, /* Return: Calibrated term structure */
@@ -718,7 +738,7 @@ LGMErr LGMCalFixSig(
     LGMCalSet *CSPtr); /* Reference instruments */
 
 /******************************************************************/
-/* Creates a term structure using a given zeta(t)  , and calibrates G(t)
+/* Creates a term structure using a given zeta(t)      , and calibrates G(t)
 to the set of caplets (if usecaps=1) or long swaptions (if usecaps!=1) */
 LGMErr LGMCalGivenZeta(
     LGM_TS **LGMtsPtrPtr, /* Return: Calibrated term structure */
@@ -729,8 +749,8 @@ LGMErr LGMCalGivenZeta(
     LGMCalSet *CSPtr); /* Reference caplets */
 
 /******************************************************************/
-/* Creates a term structure  , and finds G(t) by calibrating on the 1 into k
-swaptions  , and finds zeta(t) by calibrating to the caplets (if usecaps=1)
+/* Creates a term structure      , and finds G(t) by calibrating on the 1 into k
+swaptions      , and finds zeta(t) by calibrating to the caplets (if usecaps=1)
 or long swaptions (if usecaps!=1) */
 LGMErr LGMCalFixExp(
     LGM_TS **LGMtsPtrPtr, /* Return: Calibrated term structure */
@@ -739,7 +759,7 @@ LGMErr LGMCalFixExp(
     LGMCalSet *CSPtr); /* Reference caplets */
 
 /******************************************************************/
-/* Creates a term structure  , and finds zeta(t) and G(t) by simultaneously
+/* Creates a term structure      , and finds zeta(t) and G(t) by simultaneously
 calibrating on the long (k into n-k) swaptions and either the caplets (if
 usecaps==1) or the short (k into 1) swaptions (if usecaps!=1) */
 LGMErr LGMCalTenorDiag(
@@ -759,8 +779,8 @@ LGMErr NewMidAtEval(
     ConvParams *parms, /* convolution numerical constants */
                        /* info about today */
     Date tNow,         /* calculation date */
-    int endofday,      /* 1 = cannot exercise today  , 0 = can exercise today */
-    String ycname,     /* yield curve name for discount factors */
+    int endofday,  /* 1 = cannot exercise today      , 0 = can exercise today */
+    String ycname, /* yield curve name for discount factors */
     LGMCalParm *CalReq, LGM_TS *tsPtr, /* calibrated term structure */
     LGMErr (*GetVol)(Date, Date, double, SRT_Boolean,
                      double *),              /* swaption/cap vols */
@@ -785,8 +805,8 @@ LGMErr fra_in_LGMAutocal(String ycName, LGM_TS *tsPtr, long value_date,
 LGMErr Convolver(
     /* info about convolutions */
     long nEx,     /* number of exercises */
-    double *zeta, /* [0  , 1  , ...  , nEx-1]  , values of zeta at the exercise
-                     dates */
+    double *zeta, /* [0      , 1      , ...      , nEx-1]      , values of zeta
+                 at the exercise dates */
     ConvParams *parms, /* convolution numerical constants */
 
     /* info about today's discount curve */
@@ -812,7 +832,7 @@ LGMErr Convolver(
 /******************************************************************/
 /******* Utilities for Deal structures ****************************/
 
-/* Create an array of (exer date  , end date  , fixed rate) for
+/* Create an array of (exer date      , end date      , fixed rate) for
 conveniently passing exer boundary info */
 LGMSwptnsPtr LGMCreateSwptns(long nopt);
 
@@ -940,7 +960,7 @@ LGMErr LGMCcyDefaults(SrtCurvePtr yldcrv, LGMMarkConv *conventions);
 LGMErr LGMMuniDefaults(char *szRefRate, LGMMarkConv *conventions);
 
 /* Construct the pay dates for a standard fixed leg with exercise
-date tEx and last pay date tEnd  , using standard market conventions */
+date tEx and last pay date tEnd      , using standard market conventions */
 Date *LGMFixLegSched(Date tEx, Date tEnd, long extraperiods, LGMMarkConv *conv,
                      long *nPayPtr);
 
@@ -970,15 +990,17 @@ LGMErr LGMGetFloatRateFromX(Date tStart, Date tPay, double x, String ycName,
 double LGMRecVal(double *ystar, long n, double *a, double DStart, double sqzeta,
                  double *Gpay, double Gst);
 
-/* finds ystar  , the state variable at which a swaption is ATM */
+/* finds ystar      , the state variable at which a swaption is ATM */
 double LGMFindystar(long n, double *a, double DStart, double zeta, double *Gpay,
                     double Gst);
 
 /******* Math Utilities ******************************************/
-/* calculates Gaussian probability density  , protected against underflows */
+/* calculates Gaussian probability density      , protected against underflows
+ */
 double LGMsafeGauss(double z);
 
-/* calculates cumulative normal distribution  , protected against underflows */
+/* calculates cumulative normal distribution      , protected against underflows
+ */
 double LGMsafeNorm(double z);
 
 /* Gets the equivalent normal vol from CEV vol */

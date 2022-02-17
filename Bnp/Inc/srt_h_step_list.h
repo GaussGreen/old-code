@@ -2,7 +2,7 @@
 #define SRT_H_STEP_LIST_H
 
 /* -----------------------------------------------------------------------
-  TYPE            :SrtStp  ,SrtStpPtr
+  TYPE            :SrtStp      ,SrtStpPtr
   AUTHOR          :E.Auld
   DESCRIPTION     :A step contains the information for events at that time and
 for the time slice that follows.  It is used for discretizing a stochastic
@@ -18,7 +18,7 @@ typedef struct SrtStp {
   struct SrtStp *prev;
   struct SrtStp *next;
 
-  /* Time step information : index and date  , time  ,... */
+  /* Time step information : index and date      , time      ,... */
   long index;          /* INDEX OF NODE */
   long date;           /* INTEGER DATE AT START NODE */
   double time;         /* TIME IN YEARS FROM TODAY TO NODE */
@@ -54,7 +54,7 @@ SrtStpPtr free_node(SrtStpPtr a);
 /* ------------------------------------------------------------------------------
  */
 SrtStpPtr rem_node(SrtStpPtr a);
-/* frees a  , and updates a->next and a->prev to take this into account */
+/* frees a      , and updates a->next and a->prev to take this into account */
 /* does not redo indexing of list */
 /* returns a pointer to the next node.  If it returns NULL then the list */
 /* is gone */
@@ -62,8 +62,8 @@ SrtStpPtr rem_node(SrtStpPtr a);
 /* ------------------------------------------------------------------------------
  */
 SrtStpPtr rem_eventless_nodes(SrtStpPtr a, Date today);
-/* removes all nodes from list that have NULL event field  , except today  */
-/* returns NULL if this is all the nodes  , else top of what remains */
+/* removes all nodes from list that have NULL event field      , except today */
+/* returns NULL if this is all the nodes      , else top of what remains */
 /* does not redo indexing of list */
 
 /* ------------------------------------------------------------------------------

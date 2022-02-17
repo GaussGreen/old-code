@@ -31,7 +31,7 @@ void find_closest(double key, double *val_array, long min_index, long max_index,
 void find_closest_strictly_below(double target, double *val_array,
                                  long min_index, long max_index, long *guess);
 
-/** assume that we are probably increasing  , so we take as initial guess
+/** assume that we are probably increasing      , so we take as initial guess
     the value in node->mid_son_index.
     want index of element of prev_x closest to (drift_sam...STATEVAR);
     values in prev_x are increasing **/
@@ -80,13 +80,11 @@ void srt_f_trintredeltax(SrtStpPtr top, double *delta_x, int und_index);
 /*<%%STA-----------------------------------------------------------------
   FUNCNAME        :srt_f_trintreprob
   AUTHOR          :O. Van Eyseren (from E. Auld code)
-  DESCRIPTION     :calculate probabilities  , assuming that node->drift_sam and
-    node->var_at_sam are correctly set  , as well as node->mid_son_index
-    If the mid_son_index hits the top (bottom)  , it is decremented
-    (incremented).  Probabilities are bounded to be between PROBUPB and
-    PROBLUB. They are printed if PRINFO is true.
-  MODIFIES	  :node->p
-  CALL            :
+  DESCRIPTION     :calculate probabilities      , assuming that node->drift_sam
+and node->var_at_sam are correctly set      , as well as node->mid_son_index If
+the mid_son_index hits the top (bottom)      , it is decremented (incremented).
+Probabilities are bounded to be between PROBUPB and PROBLUB. They are printed if
+PRINFO is true. MODIFIES	  :node->p CALL            :
 
 <%%END---------------------------------------------------------------------*/
 void srt_f_trintreprob(double *prev_x, SrtTrinTreNdInf *node,
@@ -95,9 +93,9 @@ void srt_f_trintreprob(double *prev_x, SrtTrinTreNdInf *node,
 /*-------------------------------------------------------------------------
   FUNCNAME        :srt_f_nonotreprob
   AUTHOR          :O. Van Eyseren (from E. Auld code)
-  DESCRIPTION     :calculates probabilities for a nononomial tree  ,
+  DESCRIPTION     :calculates probabilities for a nononomial tree      ,
                                    assuming that node -> moments are correctly
-set  , as well as node -> mid_son_index MODIFIES		  :node ->
+set      , as well as node -> mid_son_index MODIFIES		  :node ->
 p[0..2][0..2]
 ---------------------------------------------------------------------------*/
 void srt_f_nonotreprob(SrtTwoFacTreInf *trinf, SrtNonoTreeNodeInfo *node,

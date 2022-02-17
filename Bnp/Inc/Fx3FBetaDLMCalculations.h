@@ -161,7 +161,7 @@ Fx3DBetaDLM_ExpectAndVarGrfn(long nstp, double *time, FxBetaDLM_model *model,
                              double *for_beta, double *fx_fwd,
                              double *fx_var_std, double *ffx_var,
 
-                             int mc_tree, /*0: MC  , 1: Tree */
+                             int mc_tree, /*0: MC      , 1: Tree */
                              double *dom_for_cov_corr, double *dom_fx_cov_corr,
                              double *for_fx_cov_corr,
 

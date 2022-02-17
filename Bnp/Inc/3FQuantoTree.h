@@ -4,7 +4,8 @@
 Err tree_main_3fquanto(
     /*	Time data */
     long nstp, double *time, double *date,
-    int *vol_change, /*	1 if one of the volatilities has changed  , 0 otherwise
+    int *vol_change, /*	1 if one of the volatilities has changed      , 0
+                      * otherwise
                       */
 
     /*	Term structures & Distributions */
@@ -39,7 +40,8 @@ Err tree_main_3fquanto(
         double r3_lambda, double r3_phi, int lgm2F_is_dom_for,
         /* Nodes data */
         long n1, long n2, long n3,
-        /* i: d1  , j: d2  , k: d3  , l = {0: r1  , 1: r2  , 2: r3} */
+        /* i: d1      , j: d2      , k: d3      , l = {0: r1      , 1: r2      ,
+           2: r3} */
         double ****sv,
         /* Vector of results to be updated */
         long nprod, double ****prod_val),

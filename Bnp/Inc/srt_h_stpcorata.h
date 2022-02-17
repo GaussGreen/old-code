@@ -4,7 +4,7 @@
         DATE		: Feb 23 1995
         FILE NAME	: srt_h_stpcorata.h
         PURPOSE		: function to attache the right correlation/coefficients
-                                  matrix to the stps used (coeff for MC  ,
+                                  matrix to the stps used (coeff for MC      ,
    correl for the tree)
    ------------------------------------------------------------------------- */
 #ifndef STPCORATA_H

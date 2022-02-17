@@ -4,7 +4,7 @@
 **
 ********************************************************************************
 **
-**      SYSTEM:         SRT     SORT  , Fixed Income 2020 Addins
+**      SYSTEM:         SRT     SORT      , Fixed Income 2020 Addins
 **      SUB_SYSTEM:     OPT     Option Tools
 **
 **      MODULE NAME:    OPTION_TOOLS
@@ -16,7 +16,7 @@
 **			proba_tools
 **			capfloor_compute
 **
-**      AUTHORS:        Guillaume AMBLARD  ,
+**      AUTHORS:        Guillaume AMBLARD      ,
 **                      Remy KLAMMERS
 **                      Eric AULD
 **                      Alexandra POITE
@@ -25,7 +25,7 @@
 **			Olivier VAN EYSEREN	JUN 95
 **			Jasbir MALHI		JUL 95
 **
-**      DATE:           1st October  , 1992
+**      DATE:           1st October      , 1992
 **
 **      DESCRIPTION:    Header for the library of general related option
 **			functions used in the SORT program applications
@@ -42,7 +42,7 @@
 /* ========================================================================== */
 
 /*******************************************************************************
-**                      Macros  , Typedefs and Constants
+**                      Macros      , Typedefs and Constants
 *******************************************************************************/
 
 #define VOL_SHIFT (double)0.001
@@ -603,8 +603,8 @@ Err srt_f_EuroBasketSmile(int nFwds, double *Fwds, int nWeights,
                           double **ppdSpreadVol);
 
 /* =============================================================================
-  FUNCTION PAYOFF 	: MAX(0  ,w1*S1 + w2*S2 + ... + wN*SN )  with Student
- copulas
+  FUNCTION PAYOFF 	: MAX(0      ,w1*S1 + w2*S2 + ... + wN*SN )  with
+ Student copulas
  ============================================================================ */
 
 Err srt_f_EuroBasketSmileCpl(
@@ -635,10 +635,10 @@ Err srt_f_Basket_MixedSL_Copula(
     SrtMCSamType MCType, int iNConv, double *dPremium);
 
 /* =====================================================================================================
-  FUNCTION PAYOFF	:  MAX(w1+S1  , w2+S2  , ...  , wN+SN) + MarginFix if
- MAX(w1+S1  , w2+S2  , ...  , wN+SN) > strike
-                                               CouponFix						 if  MAX(w1+S1  ,
- w2+S2  , ...  , wN+SN) < strike with Student copulas
+  FUNCTION PAYOFF	:  MAX(w1+S1      , w2+S2      , ...      , wN+SN) +
+ MarginFix if MAX(w1+S1      , w2+S2      , ...      , wN+SN) > strike CouponFix
+ if  MAX(w1+S1      , w2+S2      , ...      , wN+SN) < strike with Student
+ copulas
  ======================================================================================================
  */
 
@@ -654,8 +654,8 @@ Err srt_f_BestOfDigitalSmileCpl(
     SrtMCSamType MCType);
 
 /* =====================================================================================================
-  FUNCTION PAYOFF	:  MAX (0  ,MAX(w1+S1  , w2+S2  , ...  , wN+SN)-strike)
-                                                  with Student copulas
+  FUNCTION PAYOFF	:  MAX (0      ,MAX(w1+S1      , w2+S2      , ...      ,
+ wN+SN)-strike) with Student copulas
  ======================================================================================================
  */
 
@@ -670,9 +670,9 @@ Err srt_f_BestOfSmileCpl(
     SrtDiffusionType TypeInput, SrtMCSamType MCType);
 
 /* =====================================================================================================
-  FUNCTION PAYOFF	:	S1^w1*S2^w2* ...*Sn^wn + MarginFix		if
- S1^w1*S2^w2* ...*Sn^wn > strike CouponFix
- if  S1^w1*S2^w2* ...*Sn^wn < strike with Student copulas
+  FUNCTION PAYOFF	:	S1^w1*S2^w2* ...*Sn^wn + MarginFix
+ if S1^w1*S2^w2* ...*Sn^wn > strike CouponFix if  S1^w1*S2^w2* ...*Sn^wn <
+ strike with Student copulas
  ======================================================================================================
  */
 
@@ -1091,7 +1091,7 @@ double trivar(double a1, double a2, double a3, double r12, double r23,
               double r13);
 
 /* ============================================================================
-   Asian Price for IRD  , Moment Matching (order 2 and 3)
+   Asian Price for IRD      , Moment Matching (order 2 and 3)
    ==========================================================================*/
 
 Err srt_f_AsianCapPrice(double *dStartDates, double *dCmsForwards,

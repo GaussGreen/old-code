@@ -7,8 +7,8 @@
 /*	Calibrate zeta to diagonal and lambda to cap: both 1F and 2F */
 Err LGMSVcalibration_dlm(
 
-    int fix_lambda, /*	0: calib lambda to cap  , 1: fix lambda calib
-                                            to diagonal */
+    int fix_lambda, /*	0: calib lambda to cap      , 1: fix lambda calib
+                                        to diagonal */
     int nlam,       /*	Lambda TS: may NOT be changed in the process */
     double lam_time[], double lam[],
 

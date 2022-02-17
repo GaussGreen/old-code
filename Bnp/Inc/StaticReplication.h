@@ -19,9 +19,10 @@ Err Convex_replication( // Market
     long *fx_mkt_vol_date, double *fx_mkt_smile_alpha,
     double *fx_mkt_smile_beta, double *fx_mkt_smile_rho,
     double *fx_mkt_smile_pi, int num_fx_mkt_vol,
-    int smile_spec_type, //	0: lognormal vol + SABR params  , 1: sigma-beta
-                         //+ SABR params  , 2: lognormal vol + BMM  , 3:
-                         //lognormal vol + BMM
+    int smile_spec_type, //	0: lognormal vol + SABR params      , 1:
+                         //sigma-beta
+                         //+ SABR params      , 2: lognormal vol + BMM      , 3:
+                         // lognormal vol + BMM
     char *for_yc, char *dom_yc, int is_reversed_fx,
     // Convex Data
     double Notional, long Fix_date, long Settle_date, double Kmin, double Kmax,
@@ -34,9 +35,10 @@ Err Convex_replication( // Market
 Err Convex_replication_simple( // Market
     long Today, double Forward, double fx_mkt_vol, double fx_mkt_smile_alpha,
     double fx_mkt_smile_beta, double fx_mkt_smile_rho, double fx_mkt_smile_pi,
-    int smile_spec_type, //	0: lognormal vol + SABR params  , 1: sigma-beta
-                         //+ SABR params  , 2: lognormal vol + BMM  , 3:
-                         //lognormal vol + BMM
+    int smile_spec_type, //	0: lognormal vol + SABR params      , 1:
+                         //sigma-beta
+                         //+ SABR params      , 2: lognormal vol + BMM      , 3:
+                         // lognormal vol + BMM
     int is_reversed_fx,
     // Convex Data
     double Notional, long Fix_date, long Settle_date, double Kmin, double Kmax,

@@ -87,9 +87,9 @@ typedef enum PayOffCallPutDigType_ {
 /* PayOff_ProductofCalls
         p underlying of value X[j] (j=0 to p-1)
         n number of product
-        Payoff = product (i=0 to n-1) of Max(0 ; Sum (j=1->p) a[i  ,j] X[j]) -
-   Strike[i]) if  iCallPut[i] = Call Max(0 ; Strike[i] - Sum (j=1->p) a[i  ,j]
-   X[j]) ) if iCallPut[i] = Put */
+        Payoff = product (i=0 to n-1) of Max(0 ; Sum (j=1->p) a[i        ,j]
+   X[j]) - Strike[i]) if  iCallPut[i] = Call Max(0 ; Strike[i] - Sum (j=1->p)
+   a[i        ,j] X[j]) ) if iCallPut[i] = Put */
 typedef struct {
   int iNbProduct;    /* Nb of product of max */
   int iNbUnderlying; /* Nb of undrlying */
@@ -105,7 +105,7 @@ typedef struct {
 
 /* PayOff_X_div_Y
 
-  max(max(X - Kx  , 0) / Y - Kxdivy  ,0)
+  max(max(X - Kx        , 0) / Y - Kxdivy        ,0)
   1/Y can be replicate by put as sum Ni*(Ki-Y)+
 
  */
@@ -174,9 +174,9 @@ Err interp_call_put_dig(const char *constStr, PayOffCallPutDigType *val);
 
         p underlying of value X[j] (j=0 to p-1)
         n number of product
-        Payoff = product (i=0 to n-1) of Max(0 ; Sum (j=1->p) a[i  ,j] X[j]) -
-  Strike[i]) if  iCallPut[i] = Call Max(0 ; Strike[i] - Sum (j=1->p) a[i  ,j]
-  X[j]) ) if iCallPut[i] = Put
+        Payoff = product (i=0 to n-1) of Max(0 ; Sum (j=1->p) a[i        ,j]
+  X[j]) - Strike[i]) if  iCallPut[i] = Call Max(0 ; Strike[i] - Sum (j=1->p) a[i
+  ,j] X[j]) ) if iCallPut[i] = Put
 
   ----------------------------------------------------------------------------
 */
@@ -229,10 +229,11 @@ Err GaussianCopulaGetSamples(/* Copula Parameter */
 
                              /* Marginales Distributions */
                              long *lNbPoints, /* Array of Nb points in the
-                                                 cumulative */
+                                           cumulative */
                              double **dX, /* dX[iNumUnderlying][iNumPoints]  */
-                             double **dCumulative, /* dCumulative[iNumUnderlying][iNumPoints]
-                                                    */
+                             double **
+                                 dCumulative, /* dCumulative[iNumUnderlying][iNumPoints]
+                                               */
 
                              /* Ouput */
                              double *
@@ -245,8 +246,9 @@ Err SVCopulaGetSamples(/* Copula Parameter */
                        long *
                            lNbPoints, /* Array of Nb points in the cumulative */
                        double **dX,   /* dX[iNumUnderlying][iNumPoints]  */
-                       double **dCumulative, /* dCumulative[iNumUnderlying][iNumPoints]
-                                              */
+                       double **
+                           dCumulative, /* dCumulative[iNumUnderlying][iNumPoints]
+                                         */
 
                        /* Ouput */
                        double **dSamples /* dSamples[iNumPath][iNumUnd]  */);
@@ -265,41 +267,41 @@ Err SVCopulaGetSamples(/* Copula Parameter */
   ----------------------------------------------------------------------------
 */
 Err Copula_GenericPayOff_Price (	/* Copula Parameter */
-									Generic_Copula			*CopulaParam  ,
+									Generic_Copula			*CopulaParam        ,
 									
 									/* PayOff parameters */
-									int						iNbProduct  ,
-									void					*PayOffParam  ,
+									int						iNbProduct        ,
+									void					*PayOffParam        ,
 						  								  
 									/* For generating Marginales Distributions */
-									double					dMaturity  ,
-									double					*dForward  ,
-									Generic_Model			*UnderlyingModelParam  ,
+									double					dMaturity        ,
+									double					*dForward        ,
+									Generic_Model			*UnderlyingModelParam        ,
 
 									/* Copula function */
 									Err	(*CopulaGetSamples) (/* Copula Parameter */
-															Generic_Copula	*CopulaParam  ,
+															Generic_Copula	*CopulaParam        ,
 
 															/* Marginales Distributions */
-															long		*lNbPoints  ,		/* Array of Nb points in the cumulative */
-															double	**dX  ,			/* dX[iNumUnderlying][iNumPoints]  */
-															double	**dCumulative  ,	/* dCumulative[iNumUnderlying][iNumPoints]  */
+															long		*lNbPoints        ,		/* Array of Nb points in the cumulative */
+															double	**dX        ,			/* dX[iNumUnderlying][iNumPoints]  */
+															double	**dCumulative        ,	/* dCumulative[iNumUnderlying][iNumPoints]  */
 
 															/* Ouput */
-															double	**dSamples		/* dSamples[iNumPath][iNumUnd]  */)  ,
+															double	**dSamples		/* dSamples[iNumPath][iNumUnd]  */)        ,
 
 														  
 									/* Payoff Function */
 									Err (*PayOff) (/* Underlying value */
-												   int		iNbUnderlying  ,
-												   double	*UnderlyingValue  ,
+												   int		iNbUnderlying        ,
+												   double	*UnderlyingValue        ,
 
 												   /* For Payoff description */
-												   int		iNbProduct  ,
-												   void		*PayOffParam  ,
+												   int		iNbProduct        ,
+												   void		*PayOffParam        ,
 												   
 												   /* OutPuts */
-												   double	*dPV)  ,
+												   double	*dPV)        ,
 
 									/* Results */
 									double					*dPremium);
@@ -334,19 +336,21 @@ Err Copula_SABRCalib_GenericPayOff_Price(
     SrtDiffusionType eTypeInput,
 
     /* Copula function */
-    Err (*CopulaGetSamples)(/* Copula Parameter */
-                            Generic_Copula *CopulaParam,
+    Err (
+        *CopulaGetSamples)(/* Copula Parameter */
+                           Generic_Copula *CopulaParam,
 
-                            /* Marginales Distributions */
-                            long *lNbPoints, /* Array of Nb points in the
-                                                cumulative */
-                            double **dX, /* dX[iNumUnderlying][iNumPoints]  */
-                            double **dCumulative, /* dCumulative[iNumUnderlying][iNumPoints]
-                                                   */
+                           /* Marginales Distributions */
+                           long *lNbPoints, /* Array of Nb points in the
+                                         cumulative */
+                           double **dX, /* dX[iNumUnderlying][iNumPoints]  */
+                           double **
+                               dCumulative, /* dCumulative[iNumUnderlying][iNumPoints]
+                                             */
 
-                            /* Ouput */
-                            double *
-                                *dSamples /* dSamples[iNumPath][iNumUnd]  */),
+                           /* Ouput */
+                           double *
+                               *dSamples /* dSamples[iNumPath][iNumUnd]  */),
 
     /* Payoff Function */
     Err (*PayOff)(/* Underlying value */

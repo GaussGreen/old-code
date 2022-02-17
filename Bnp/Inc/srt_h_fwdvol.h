@@ -1,8 +1,8 @@
 /*
         FILE NAME				SRT_F_FWDVOL.C
         AUTHOR					NONO SAVINE
-        PURPOSE					COMPUTE FORWARD VOLATILITY  ,
-   EITHER THROUGH AUTOCALIBRATION  , OR PARABOLAS
+        PURPOSE					COMPUTE FORWARD VOLATILITY ,
+   EITHER THROUGH AUTOCALIBRATION      , OR PARABOLAS
 */
 
 #ifndef _SRT_H_FWDVOL_H
@@ -10,7 +10,7 @@
 
 /*	Main function for autocal option */
 Err srt_f_fwdvol_autocal(
-    String model,   /* Model (LGM  , CHEY  , CHEY_BETA  , 1F or 2F) */
+    String model, /* Model (LGM      , CHEY      , CHEY_BETA      , 1F or 2F) */
     long *tau_date, /* Tau Term Struct */
     double *tau_value, long num_tau, int fix_tau_flag,
 

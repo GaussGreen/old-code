@@ -52,8 +52,8 @@ void triangulate_srt(char *, SrtTriangulationIO *);
 
 /* Labels that signify the result of TriPoint location.  The result of a */
 /*   search indicates that the TriPoint falls in the interior of a TriTriangle
- * , on */
-/*   an edge  , on a vertex  , or outside the mesh. */
+ *     , on */
+/*   an edge      , on a vertex      , or outside the mesh. */
 
 typedef enum { INTRIANGLE, ONEDGE, ONVERTEX, OUTSIDE } TriLocateResultType;
 
@@ -61,82 +61,104 @@ typedef enum { INTRIANGLE, ONEDGE, ONVERTEX, OUTSIDE } TriLocateResultType;
 /*                                                                           */
 /*  The basic mesh data structures                                           */
 /*                                                                           */
-/*  There are three:  points  , triangles  , and shell edges (abbreviated */
-/*  `TriShell').  These three data structures  , linked by pointers  , comprise
+/*  There are three:  points      , triangles      , and shell edges
+ * (abbreviated */
+/*  `TriShell').  These three data structures      , linked by pointers      ,
+ * comprise
  */
 /*  the mesh.  A TriPoint simply represents a TriPoint in space and its
  * properties.*/
 /*  A TriTriangle is a TriTriangle.  A shell edge is a special data structure
  * used */
 /*  to represent impenetrable segments in the mesh (including the outer      */
-/*  boundary  , boundaries of holes  , and internal boundaries separating two */
+/*  boundary      , boundaries of holes      , and internal boundaries
+ * separating two */
 /*  triangulated regions).  Shell edges represent boundaries defined by the  */
 /*  user that triangles may not lie across.                                  */
 /*                                                                           */
-/*  A TriTriangle consists of a list of three vertices  , a list of three */
-/*  adjoining triangles  , a list of three adjoining shell edges (when shell */
-/*  edges are used)  , an arbitrary number of optional user-defined floating- */
-/*  TriPoint attributes  , and an optional area constraint.  The latter is an */
-/*  upper bound on the permissible area of each TriTriangle in a region  , used
+/*  A TriTriangle consists of a list of three vertices      , a list of three */
+/*  adjoining triangles      , a list of three adjoining shell edges (when shell
+ */
+/*  edges are used)      , an arbitrary number of optional user-defined
+ * floating- */
+/*  TriPoint attributes      , and an optional area constraint.  The latter is
+ * an */
+/*  upper bound on the permissible area of each TriTriangle in a region      ,
+ * used
  */
 /*  for mesh refinement.                                                     */
 /*                                                                           */
-/*  For a TriTriangle on a boundary of the mesh  , some or all of the
+/*  For a TriTriangle on a boundary of the mesh      , some or all of the
  * neighboring */
 /*  triangles may not be present.  For a TriTriangle in the interior of the */
-/*  mesh  , often no neighboring shell edges are present.  Such absent */
+/*  mesh      , often no neighboring shell edges are present.  Such absent */
 /*  triangles and shell edges are never represented by NULL pointers; they   */
-/*  are represented by two special records:  `dummytri'  , the TriTriangle that
+/*  are represented by two special records:  `dummytri'      , the TriTriangle
+ * that
  */
-/*  fills "outer space"  , and `dummysh'  , the omnipresent shell edge. */
-/*  `dummytri' and `dummysh' are used for several reasons; for instance  , */
+/*  fills "outer space"      , and `dummysh'      , the omnipresent shell edge.
+ */
+/*  `dummytri' and `dummysh' are used for several reasons; for instance      ,
+ */
 /*  they can be dereferenced and their contents examined without causing the */
 /*  memory protection exception that would occur if NULL were dereferenced.  */
 /*                                                                           */
-/*  However  , it is important to understand that a TriTriangle includes other
+/*  However      , it is important to understand that a TriTriangle includes
+ * other
  */
-/*  information as well.  The pointers to adjoining vertices  , triangles  , and
+/*  information as well.  The pointers to adjoining vertices      , triangles ,
+ * and
  */
 /*  shell edges are ordered in a way that indicates their geometric relation */
-/*  to each other.  Furthermore  , each of these pointers contains orientation
+/*  to each other.  Furthermore      , each of these pointers contains
+ * orientation
  */
 /*  information.  Each pointer to an adjoining TriTriangle indicates which face
  */
-/*  of that TriTriangle is contacted.  Similarly  , each pointer to an adjoining
+/*  of that TriTriangle is contacted.  Similarly      , each pointer to an
+ * adjoining
  */
-/*  shell edge indicates which side of that shell edge is contacted  , and how
+/*  shell edge indicates which side of that shell edge is contacted      , and
+ * how
  */
 /*  the shell edge is oriented relative to the TriTriangle. */
 /*                                                                           */
 /*  Shell edges are found abutting edges of triangles; either sandwiched     */
-/*  between two triangles  , or resting against one TriTriangle on an exterior
+/*  between two triangles      , or resting against one TriTriangle on an
+ * exterior
  */
 /*  boundary or hole boundary.                                               */
 /*                                                                           */
-/*  A shell edge consists of a list of two vertices  , a list of two */
-/*  adjoining shell edges  , and a list of two adjoining triangles.  One of */
+/*  A shell edge consists of a list of two vertices      , a list of two */
+/*  adjoining shell edges      , and a list of two adjoining triangles.  One of
+ */
 /*  the two adjoining triangles may not be present (though there should      */
-/*  always be one)  , and neighboring shell edges might not be present. */
+/*  always be one)      , and neighboring shell edges might not be present. */
 /*  Shell edges also store a user-defined integer "boundary marker".         */
-/*  Typically  , this integer is used to indicate what sort of boundary */
+/*  Typically      , this integer is used to indicate what sort of boundary */
 /*  conditions are to be applied at that location in a finite element        */
 /*  simulation.                                                              */
 /*                                                                           */
-/*  Like triangles  , shell edges maintain information about the relative */
+/*  Like triangles      , shell edges maintain information about the relative */
 /*  orientation of neighboring objects.                                      */
 /*                                                                           */
 /*  Points are relatively simple.  A TriPoint is a list of floating TriPoint */
-/*  numbers  , starting with the x  , and y coordinates  , followed by an */
-/*  arbitrary number of optional user-defined floating-TriPoint attributes  , */
+/*  numbers      , starting with the x      , and y coordinates      , followed
+ * by an */
+/*  arbitrary number of optional user-defined floating-TriPoint attributes ,
+ */
 /*  followed by an integer boundary marker.  During the segment insertion    */
-/*  phase  , there is also a pointer from each TriPoint to a TriTriangle that
- * may    */
-/*  contain it.  Each pointer is not always correct  , but when one is  , it */
+/*  phase      , there is also a pointer from each TriPoint to a TriTriangle
+ * that may    */
+/*  contain it.  Each pointer is not always correct      , but when one is ,
+ * it */
 /*  speeds up segment insertion.  These pointers are assigned values once    */
-/*  at the beginning of the segment insertion phase  , and are not used or */
+/*  at the beginning of the segment insertion phase      , and are not used or
+ */
 /*  updated at any other time.  Edge swapping during segment insertion will  */
-/*  render some of them incorrect.  Hence  , don't rely upon them for */
-/*  anything.  For the most part  , points do not have any information about */
+/*  render some of them incorrect.  Hence      , don't rely upon them for */
+/*  anything.  For the most part      , points do not have any information about
+ */
 /*  what triangles or shell edges they are linked to.                        */
 /*                                                                           */
 /*****************************************************************************/
@@ -148,16 +170,18 @@ typedef enum { INTRIANGLE, ONEDGE, ONVERTEX, OUTSIDE } TriLocateResultType;
 /*  The oriented TriTriangle (`TriOrientedTriangle') and oriented shell edge
  * (`edge') data  */
 /*  structures defined below do not themselves store any part of the mesh.   */
-/*  The mesh itself is made of `TriTriangle's  , `TriShell's  , and `TriPoint's.
+/*  The mesh itself is made of `TriTriangle's      , `TriShell's      , and
+ * `TriPoint's.
  */
 /*                                                                           */
 /*  Oriented triangles and oriented shell edges will usually be referred to  */
 /*  as "handles".  A handle is essentially a pointer into the mesh; it       */
 /*  allows you to "hold" one particular part of the mesh.  Handles are used  */
 /*  to specify the regions in which one is traversing and modifying the mesh.*/
-/*  A single `TriTriangle' may be held by many handles  , or none at all.  (The
+/*  A single `TriTriangle' may be held by many handles      , or none at all.
+ * (The
  */
-/*  latter case is not a memory leak  , because the TriTriangle is still */
+/*  latter case is not a memory leak      , because the TriTriangle is still */
 /*  connected to other triangles in the mesh.)                               */
 /*                                                                           */
 /*  A `TriOrientedTriangle' is a handle that holds a TriTriangle.  It holds a
@@ -166,30 +190,36 @@ typedef enum { INTRIANGLE, ONEDGE, ONVERTEX, OUTSIDE } TriLocateResultType;
 /*  holds either the left or right side of the edge.                         */
 /*                                                                           */
 /*  Navigation about the mesh is accomplished through a set of mesh          */
-/*  manipulation primitives  , further below.  Many of these primitives take */
+/*  manipulation primitives      , further below.  Many of these primitives take
+ */
 /*  a handle and produce a new handle that holds the mesh near the first     */
 /*  handle.  Other primitives take two handles and glue the corresponding    */
 /*  parts of the mesh together.  The exact position of the handles is        */
-/*  important.  For instance  , when two triangles are glued together by the */
-/*  bond() primitive  , they are glued by the sides on which the handles lie. */
+/*  important.  For instance      , when two triangles are glued together by the
+ */
+/*  bond() primitive      , they are glued by the sides on which the handles
+ * lie. */
 /*                                                                           */
 /*  Because points have no information about which triangles they are        */
-/*  attached to  , I commonly represent a TriPoint by use of a handle whose */
+/*  attached to      , I commonly represent a TriPoint by use of a handle whose
+ */
 /*  origin is the TriPoint.  A single handle can simultaneously represent a */
-/*  TriTriangle  , an edge  , and a TriPoint. */
+/*  TriTriangle      , an edge      , and a TriPoint. */
 /*                                                                           */
 /*****************************************************************************/
 
 /* The TriTriangle data structure.  Each TriTriangle contains three pointers to
  */
-/*   adjoining triangles  , plus three pointers to vertex points  , plus three
+/*   adjoining triangles      , plus three pointers to vertex points      , plus
+ * three
  */
 /*   pointers to shell edges (defined below; these pointers are usually      */
 /*   `dummysh').  It may or may not also contain user-defined attributes     */
 /*   and/or a floating-TriPoint "area constraint".  It may also contain extra */
-/*   pointers for nodes  , when the user asks for high-order elements. */
+/*   pointers for nodes      , when the user asks for high-order elements. */
 /*   Because the size and structure of a `TriTriangle' is not decided until */
-/*   runtime  , I haven't simply defined the type `TriTriangle' to be a struct.
+/*   runtime      , I haven't simply defined the type `TriTriangle' to be a
+ * struct.
  */
 
 typedef double *
@@ -197,8 +227,9 @@ typedef double *
 
 /* An oriented TriTriangle:  includes a pointer to a TriTriangle and
  * orientation.  */
-/*   The orientation denotes an edge of the TriTriangle.  Hence  , there are */
-/*   three possible orientations.  By convention  , each edge is always */
+/*   The orientation denotes an edge of the TriTriangle.  Hence      , there are
+ */
+/*   three possible orientations.  By convention      , each edge is always */
 /*   directed to TriPoint counterclockwise about the corresponding TriTriangle.
  */
 
@@ -208,15 +239,17 @@ typedef struct {
 } TriOrientedTriangle;
 
 /* The shell data structure.  Each shell edge contains two pointers to       */
-/*   adjoining shell edges  , plus two pointers to vertex points  , plus two */
-/*   pointers to adjoining triangles  , plus one shell marker. */
+/*   adjoining shell edges      , plus two pointers to vertex points      , plus
+ * two */
+/*   pointers to adjoining triangles      , plus one shell marker. */
 
 typedef double **TriShell; /* doublely:  typedef TriShell *TriShell   */
 
 /* An oriented shell edge:  includes a pointer to a shell edge and an        */
-/*   orientation.  The orientation denotes a side of the edge.  Hence  , there
+/*   orientation.  The orientation denotes a side of the edge.  Hence      ,
+ * there
  */
-/*   are two possible orientations.  By convention  , the edge is always */
+/*   are two possible orientations.  By convention      , the edge is always */
 /*   directed so that the "side" denoted is the right side of the edge.      */
 
 typedef struct {
@@ -227,7 +260,8 @@ typedef struct {
 /* The TriPoint data structure.  Each TriPoint is actually an array of doubles.
  */
 /*   The number of doubles is unknown until runtime.  An integer boundary */
-/*   marker  , and sometimes a pointer to a TriTriangle  , is appended after the
+/*   marker      , and sometimes a pointer to a TriTriangle      , is appended
+ * after the
  */
 /*   doubles. */
 
@@ -237,14 +271,18 @@ typedef double *TriPoint;
 /*                                                                           */
 /*  Mesh manipulation primitives.  Each TriTriangle contains three pointers to
  */
-/*  other triangles  , with orientations.  Each pointer points not to the */
-/*  first byte of a TriTriangle  , but to one of the first three bytes of a */
+/*  other triangles      , with orientations.  Each pointer points not to the */
+/*  first byte of a TriTriangle      , but to one of the first three bytes of a
+ */
 /*  TriTriangle.  It is necessary to extract both the TriTriangle itself and the
  */
-/*  orientation.  To save memory  , I keep both pieces of information in one */
-/*  pointer.  To make this possible  , I assume that all triangles are aligned
+/*  orientation.  To save memory      , I keep both pieces of information in one
  */
-/*  to four-byte boundaries.  The `decode' routine below decodes a pointer  , */
+/*  pointer.  To make this possible      , I assume that all triangles are
+ * aligned
+ */
+/*  to four-byte boundaries.  The `decode' routine below decodes a pointer ,
+ */
 /*  extracting an orientation (in the range 0 to 2) and a pointer to the     */
 /*  beginning of a TriTriangle.  The `encode' routine compresses a pointer to a
  */
@@ -256,7 +294,7 @@ typedef double *TriPoint;
 /*  Shell edges are manipulated similarly.  A pointer to a shell edge        */
 /*  carries both an address and an orientation in the range 0 to 1.          */
 /*                                                                           */
-/*  The other primitives take an oriented TriTriangle or oriented shell edge  ,
+/*  The other primitives take an oriented TriTriangle or oriented shell edge ,
  */
 /*  and return an oriented TriTriangle or oriented shell edge or TriPoint; or
  * they */
@@ -284,15 +322,17 @@ typedef double *TriPoint;
 
 /* encode() compresses an oriented TriTriangle into a single pointer.  It */
 /*   relies on the assumption that all triangles are aligned to four-byte    */
-/*   boundaries  , so the two least significant bits of
+/*   boundaries      , so the two least significant bits of
  * (TriOrientedTriangle).tri are zero.*/
 
 #define encode(TriOrientedTriangle)                                            \
   (TriTriangle)((unsigned long)(TriOrientedTriangle).tri |                     \
                 (unsigned long)(TriOrientedTriangle).orient)
 
-/* sym() finds the abutting TriTriangle  , on the same edge.  Note that the */
-/*   edge direction is necessarily reversed  , because TriTriangle/edge handles
+/* sym() finds the abutting TriTriangle      , on the same edge.  Note that the
+ */
+/*   edge direction is necessarily reversed      , because TriTriangle/edge
+ * handles
  */
 /*   are always directed counterclockwise around the TriTriangle. */
 
@@ -304,7 +344,8 @@ typedef double *TriPoint;
   ptr = (TriOrientedTriangle).tri[(TriOrientedTriangle).orient];               \
   decode(ptr, TriOrientedTriangle);
 
-/* These primitives determine or set the origin  , destination  , or apex of a
+/* These primitives determine or set the origin      , destination      , or
+ * apex of a
  */
 /* TriTriangle. */
 

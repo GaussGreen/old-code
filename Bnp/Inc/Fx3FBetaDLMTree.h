@@ -54,8 +54,8 @@ Err tree_main_3dBetaDLM_QTStar(
     /*	Time data */
     long nstp, double *time, double *date,
     /*	Model data */
-    int *vol_change, /*	1 if one of the volatlities has changed  ,
-                                             0 otherwise */
+    int *vol_change, /*	1 if one of the volatlities has changed      ,
+                                         0 otherwise */
     double *sig_dom, /*	Term structures */
     double *mu_quanto_const, double *mu_quanto_lin, double *sig_for,
     double *sig_fx, double *dom_fwd, double *dom_var, double *for_fwd,

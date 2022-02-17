@@ -16,7 +16,7 @@ typedef struct {
   int len;           /** length of *date 	***/
   SwapDateDir dir;   /** FWD or BKWD 	**/
   DateListType type; /** BROKEN or NOTBROKEN **/
-  Date prev;         /** date before 2nd date  , if BROKEN **/
+  Date prev;         /** date before 2nd date      , if BROKEN **/
 } DateList, SrtDateList;
 
 SrtDateList new_DateList(int len);

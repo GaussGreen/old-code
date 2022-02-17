@@ -44,7 +44,7 @@ Err srt_f_CheyBetaTree_init_trinf(
 /* ---------------------------------------------------------------------------
  */
 /*	Function:		srt_f_locvol_make_r_grid
-        Object:			make r grid  , once for all */
+        Object:			make r grid      , once for all */
 
 Err srt_f_CheyBetaTree_make_state_var_grid(SrtLocTreInf maxtrinf,
                                            double *r_grid);
@@ -52,7 +52,7 @@ Err srt_f_CheyBetaTree_make_state_var_grid(SrtLocTreInf maxtrinf,
 /* ---------------------------------------------------------------------------
  */
 /*	Function:		srt_f_locvol_make_phi_grid
-        Object:			make phi grid  , for a given time step */
+        Object:			make phi grid      , for a given time step */
 
 Err srt_f_CheyBetaTree_make_phi_grid(SrtLocTreInf *trinf, double *cur_phi_grid);
 

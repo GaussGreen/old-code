@@ -16,7 +16,8 @@
 
 /*	Call */
 typedef struct {
-  int pay_rec; /*	0: rec pd upon exercise  , 1: pay pd upon exercise */
+  int pay_rec; /*	0: rec pd upon exercise      , 1: pay pd upon exercise
+                */
   /*	Specs */
   long ex_date;     /*	Exercise date */
   double ex_time;   /*	Exercise time */
@@ -43,8 +44,8 @@ Err ctsqto_fill_calls(
     /*	Exercises before today are disregarded */
     long today,
     /*	EOD Flag */
-    int eod_flag,           /*	0: I  , 1: E */
-    int ncall, int pay_rec, /*	0: rec pd  , 1: pay pd */
+    int eod_flag,           /*	0: I      , 1: E */
+    int ncall, int pay_rec, /*	0: rec pd      , 1: pay pd */
     long *ex_date, long *set_date, double *fee, CTSQTO_STR ctsqto);
 
 /*	Check dates consistency */
@@ -71,7 +72,7 @@ Err ctsqto_fill_check_all_struct(
     /*	Today's date */
     long today,
     /*	The underlying */
-    int use_calib, /*	0: use fx3dund  , 1: calibrate */
+    int use_calib, /*	0: use fx3dund      , 1: calibrate */
     /*		if calib */
     char *dom_yc,         /*	yc */
     char *dom_vc,         /*	vc (only if calib) */
@@ -87,7 +88,7 @@ Err ctsqto_fill_check_all_struct(
     char *for_swap_basis, /*	swap basis */
     double for_lambda,    /*	lambda if unique */
 
-    int forcalib, /*	0 : RA Und  , 1 : Diag */
+    int forcalib, /*	0 : RA Und      , 1 : Diag */
 
     /*	End of calib params */
     Err (*get_cash_vol)(/*	function to get IR cash vol from the markets */
@@ -123,7 +124,7 @@ Err ctsqto_fill_check_all_struct(
     double correl_start, double correl_end, int float_adj_strike,
 
     /*		calls */
-    int ncall, int pay_rec, /*	0: rec pd  , 1: pay pd */
+    int ncall, int pay_rec, /*	0: rec pd      , 1: pay pd */
     long *ex_date, long *set_date, double *fee,
     /*	Numerical params */
     int req_stp, int req_stpx,
@@ -131,22 +132,22 @@ Err ctsqto_fill_check_all_struct(
     int dom_force_atm, /*	force atm calib domestic und */
     int for_force_atm, /*	force atm calib foreign und */
     double max_std_long, double max_std_short,
-    int fix_lambda, /*	0: calib lambda to cap  , 1: fix lambda calib
-                                                    to diagonal */
+    int fix_lambda, /*	0: calib lambda to cap      , 1: fix lambda calib
+                                                to diagonal */
     int one_f_equi, /*	1F equivalent flag:
-                                                    if set to 1  , then 2F
-                       lambda will calibrate to the cap priced within calibrated
-                       1F with the given lambda */
-    int skip_last,  /*	If 1  , the last option is disregarded
-                                                    and the forward volatility is
-                       flat from option  n-1 */
+                                                if set to 1      , then 2F
+                   lambda will calibrate to the cap priced within calibrated
+                   1F with the given lambda */
+    int skip_last,  /*	If 1      , the last option is disregarded
+                                                and the forward volatility is
+                   flat from option  n-1 */
     long *fx_mkt_vol_date, double *fx_mkt_vol, int num_fx_mkt_vol,
 
     double *corr_times, double *correl_dom_for, double *correl_dom_fx,
     double *correl_for_fx, int corr_n_times,
     /*	EOD Flags */
-    int eod_fix_flag, /*	0: I  , 1: E */
-    int eod_ex_flag,  /*	0: I  , 1: E */
+    int eod_fix_flag, /*	0: I      , 1: E */
+    int eod_ex_flag,  /*	0: I      , 1: E */
 
     //------Spot Lag-------------
     int fund_spot_lag, int ra_spot_lag,
@@ -154,7 +155,7 @@ Err ctsqto_fill_check_all_struct(
     /*	Results */
     CTSQTO_STR ctsqto, LGMQTO_UND und,
     int *call_feat, /*	0: No callable feature to be valued
-                            1: Callable feature to be valued through adi */
+                        1: Callable feature to be valued through adi */
     LGMQTO_ADI_ARG adi_arg);
 
 #endif

@@ -33,8 +33,8 @@ typedef struct {
   double *TimePoints; // DayPoints /YearBase
   double *Rates;      // 0.01 for 1%
   long Ref_Date;
-} Zero_Data; // Zero_Data enables us to construct a func df: Days --> R  , df(t)
-             // = df spanning from Ref_Date to (Ref_Date + t)
+} Zero_Data; // Zero_Data enables us to construct a func df: Days --> R      ,
+             // df(t) = df spanning from Ref_Date to (Ref_Date + t)
 
 char *Zero_Data_Construct(Zero_Data *zero_data, int frequency, YBASIS YearBase,
                           int NbTimePoints, long *dates, double *DayPoints,
@@ -163,11 +163,11 @@ struct tagBKTreeCachStruct {
   int NbFwdZerosWithOAS; // = max number of (fwd) zeros with OAS to be cached <=
                          // NbTNodes
   double **zeros_OAS;
-  // zeros[i  ,j]  , for i=0  , .. min( (NbTNodes - currIndex_zeros + 1)  ,
-  // NbZerosCached ) - 1  ,
-  // j in the suitable continguous subinterval of [0  , NbXNodes-1]  ,
-  // gives the value at currIdx_zeros-th time slice j-th space node  ,
-  // of a zero coupon bond maturing at (currIdx_zeros + i)-th time slice
+  // zeros[i      ,j]      , for i=0      , .. min( (NbTNodes - currIndex_zeros
+  // + 1)      , NbZerosCached ) - 1      , j in the suitable continguous
+  // subinterval of [0      , NbXNodes-1]      , gives the value at
+  // currIdx_zeros-th time slice j-th space node      , of a zero coupon bond
+  // maturing at (currIdx_zeros + i)-th time slice
   //
   // 1Prd DF's with and without OAS
   int currIdx_DF;
@@ -191,9 +191,9 @@ void BKTreeCachStruct_Destruct(BKTreeCachStruct *cach);
 
 struct tagMBS_BKTree {
   long RefDate;
-  int PPY; // parts per year  , 12 for roughly month spacing; for cashflow times
-           // interval dT  , N = number of time slice intervals = round(PPY*dT);
-           // ASSUME dT is close to integer multiple of 1/PPY
+  int PPY; // parts per year      , 12 for roughly month spacing; for cashflow
+           // times interval dT      , N = number of time slice intervals =
+           // round(PPY*dT); ASSUME dT is close to integer multiple of 1/PPY
   double DX_COEFF;
   double beta;
   double OAS;          // 25 for 25bp
@@ -207,19 +207,20 @@ struct tagMBS_BKTree {
   ///////////
   int NodeMax; // we have only initial;it will be updated iteratively in drift
                // calculatin
-  double DX; // size of jump in log space
+  double DX;   // size of jump in log space
   int NbTimeSlices;
   int NbSpaceNodes;
-  int EndTimeSlices;  // = NbTimeSlices - 1  , we start backward induction for
-                      // zeros at tree_times[EndTimeSlices-1]
+  int EndTimeSlices; // = NbTimeSlices - 1      , we start backward induction
+                     // for zeros at tree_times[EndTimeSlices-1]
   double *tree_times; // always starts from 0.0 <-> RefDate
   double *DFS;        // DFS[i] = values at tree_times[0] of $1 payoff at
-               // tree_times[i]; i.e.  , DFS[0] = 1.0
+                      // tree_times[i]; i.e.      , DFS[0] = 1.0
   double *
       sigmas; // sigmas[i] = constant sigma value prevailing over [tree_times[i]
-              // , tree_times[i+1]); if i = NbTimeSlices  , treat tree_Times[i+1]
-              // = infinity  , this last one is most likely not used
-  int isZV; // zero-vol
+              //     , tree_times[i+1]); if i = NbTimeSlices      , treat
+              //     tree_Times[i+1]
+              // = infinity      , this last one is most likely not used
+  int isZV;   // zero-vol
   int *Bottom;
   int *Top;
   double *Drift;
@@ -234,7 +235,7 @@ char *MBS_BKTree_ConstructHelper(MBS_BKTree *tree, long RefDate, int PPY,
 void MBS_BKTree_Destruct(MBS_BKTree *tree);
 
 char *MBS_BKTree_Construct_FromFile(MBS_BKTree *tree, char *data_dir,
-                                    // Zero_Data * zero_data  ,
+                                    // Zero_Data * zero_data      ,
                                     MBSDF_Data *df_data, int NbSwaptions,
                                     double Swaptions_Mat, double *SwaptionsExp,
                                     double *vols, double beta, double OAS,
@@ -243,7 +244,7 @@ char *MBS_BKTree_Construct_FromFile(MBS_BKTree *tree, char *data_dir,
 
 char *MBS_BKTree_Construct(MBS_BKTree *tree,
                            // dfs
-                           // Zero_Data * zero_data  ,
+                           // Zero_Data * zero_data      ,
                            MBSDF_Data *df_data,
                            // vol_info
                            int NbSwaptions, double *expiries,
@@ -259,10 +260,12 @@ char *MBS_BKTree_FitCrv(MBS_BKTree *tree);
 char *MBS_BKTree_FitVol(MBS_BKTree *tree);
 
 //**********MBS_BKTree_CalcBranching***************
-// given time slice NbPer  , and space node i (the lowest one is 0)  , and the
-// tree  , clac the brahcing adjustment needed: middle branch is always from (i
-// , NbPer) --> (i+1+k  , NbPer + 1)  , normal branching means k = 0 int
-// MBS_BKTree_CalcBranching( int i  , int NbPer  , MBS_BKTree * tree );
+// given time slice NbPer      , and space node i (the lowest one is 0)      ,
+// and the tree      , clac the brahcing adjustment needed: middle branch is
+// always from (i
+//     , NbPer) --> (i+1+k      , NbPer + 1)      , normal branching means k = 0
+//     int
+// MBS_BKTree_CalcBranching( int i      , int NbPer      , MBS_BKTree * tree );
 #define MBS_BKTree_CalcBranching(i, NbPer, tree)                               \
   ((NbPer) + 1 <= (tree)->NodeMax)                                             \
       ? 0                                                                      \

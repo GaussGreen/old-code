@@ -8,8 +8,8 @@ void static_lgmsetupG_tauts(int nlam, double lam_time[], double lam[],
                             int ncpn,          /*	Number of cash-flows */
                             double cpn_time[], /*	Cash-Flow times */
                             double cpn_G[],    /*	Output: G at cash-flow dates
-                                                                               G(T)
-                                                  = (1.0 - exp (- lambda * T )) */
+                                                                           G(T)
+                                              = (1.0 - exp (- lambda * T )) */
                             int nex,           /*	Number of exercise dates */
                             double ex_time[],  /*	Exercise times */
                             double ex_G[]);
@@ -39,8 +39,8 @@ Err lgmcalibzeta1F_tauts2(
     double mkt_price[],                  /*	Market prices */
     double mkt_vega[], double ex_zeta[], /*	Output: zetas */
     int nlam, double lam_time[], double lam[],
-    int skip_last, /*	If 1  , the last option is disregarded and the forward
-                      volatility is flat from option n-1 */
+    int skip_last, /*	If 1      , the last option is disregarded and the
+                  forward volatility is flat from option n-1 */
     double prec, int vega_prec,
     double min_fact, /*	Maximum down jump on variance */
     double max_fact, /*	Maximum up jump on variance */
@@ -64,11 +64,11 @@ Err lgmcalibzeta2F_tauts2(
     double strike[],                     /*	Strikes */
     double mkt_price[],                  /*	Market prices */
     double mkt_vega[], double ex_zeta[], /*	Output: zetas (1) */
-    /*	Lambda  , Alpha  , gamma  , rho */
+    /*	Lambda      , Alpha      , gamma      , rho */
     int nlam, double lam_time[], double lam[], double alpha, double gamma,
     double rho,
-    int skip_last, /*	If 1  , the last option is disregarded and the forward
-                      volatility is flat from option n-1 */
+    int skip_last, /*	If 1      , the last option is disregarded and the
+                  forward volatility is flat from option n-1 */
     double prec, int vega_prec,
     double min_fact, /*	Maximum down jump on variance */
     double max_fact, /*	Maximum up jump on variance */
@@ -77,14 +77,15 @@ Err lgmcalibzeta2F_tauts2(
 double static_lgmcalcexpfact_tauts(double T1, double T2, int nlam,
                                    double lam_time[], double lam[]);
 
-void static_lgmcalczeta2zeta12_tauts(int n,          /*	Number of dates */
-                                     double t[],     /*	Times */
-                                     double zeta1[], /*	Zeta1 */
-                                     /*	Lambda  , Alpha  , Beta  , Rho */
-                                     int nlam, double lam_time[], double lam[],
-                                     double alpha, double gamma, double rho,
-                                     /*	Output */
-                                     double zeta2[], double zeta12[]);
+void static_lgmcalczeta2zeta12_tauts(
+    int n,          /*	Number of dates */
+    double t[],     /*	Times */
+    double zeta1[], /*	Zeta1 */
+    /*	Lambda      , Alpha      , Beta      , Rho */
+    int nlam, double lam_time[], double lam[], double alpha, double gamma,
+    double rho,
+    /*	Output */
+    double zeta2[], double zeta12[]);
 
 /*	Setup G2 function (2F) */
 /*	Tau-TS enabled version */
@@ -92,8 +93,8 @@ void static_lgmsetupG2_tauts(int nlam, double lam_time[], double lam[],
                              double gamma, int ncpn, /*	Number of cash-flows */
                              double cpn_time[],      /*	Cash-Flow times */
                              double cpn_G2[],        /*	Output: G2 at cash-flow
-                                                        dates        G2(T) = (1.0 - exp (-
-                                                        lambda2 * T )) */
+                                                    dates        G2(T) = (1.0 - exp (-
+                                                    lambda2 * T )) */
                              int nex,          /*	Number of exercise dates */
                              double ex_time[], /*	Exercise times */
                              double ex_G2[]);
@@ -103,8 +104,8 @@ double static_lgmystar_stochvol(
     int ncpn,     /*	Num coupons */
     double cpn[], /*	Discounted coupons */
     double beta[], double psi,
-    int *dir); /*	Output  , whether iv is increasing in y
-                                       1: decreasing  , -1: increasing */
+    int *dir); /*	Output      , whether iv is increasing in y
+                                       1: decreasing      , -1: increasing */
 
 /*	Just a safer Gaussian */
 double static_lgmsafenorm(double z);
@@ -121,9 +122,9 @@ double lgmopval1F(int ncpn,       /*	Number of cash-flows */
 double
 lgmopval_stochvol(int ncpn,      /*	Number of cash-flows */
                   double cpn[],  /*	Discounted Cash-Flows */
-                  double beta[], /*	beta(T*  , T) at cash-flow dates */
+                  double beta[], /*	beta(T*      , T) at cash-flow dates */
                   double psi,    /*	Psi at exercise date */
-                  double driftf, /*  Std of f(t  ,T*) */
+                  double driftf, /*  Std of f(t      ,T*) */
                   double rho2,   /*	1 - rho * rho */
                   double sqrho2);
 
@@ -139,8 +140,8 @@ double lgmopval2F(int ncpn,         /*	Number of cash-flows */
                   double ex_G2);    /*	G2 at exercise date */
 
 /*	Value of European Swap option within LGM 1F */
-double lgmsopval1F(int ncpn,       /*	Number of cash-flow dates  , including
-                                                           start and end date */
+double lgmsopval1F(int ncpn,       /*	Number of cash-flow dates      , including
+                                                       start and end date */
                    double df[],    /*	Df to cash flow dates */
                    double cvg[],   /*	cvg from i-1 to i */
                    double cpn_G[], /*	G at cash-flow dates */
@@ -149,10 +150,10 @@ double lgmsopval1F(int ncpn,       /*	Number of cash-flow dates  , including
                    double strike); /*	Strike */
 
 /*	Value of European Swap option within LGM 2F */
-double lgmsopval2F(int ncpn,         /*	Number of cash-flow dates  , including
-                                                             start and end date */
-                   double df[],      /*	Df to cash flow dates */
-                   double cvg[],     /*	cvg from i-1 to i */
+double lgmsopval2F(int ncpn,     /*	Number of cash-flow dates      , including
+                                                     start and end date */
+                   double df[],  /*	Df to cash flow dates */
+                   double cvg[], /*	cvg from i-1 to i */
                    double cpn_G1[],  /*	G1 at cash-flow dates */
                    double cpn_G2[],  /*	G2 at cash-flow dates */
                    double ex_zeta1,  /*	Z1 at exercise date */
@@ -163,33 +164,33 @@ double lgmsopval2F(int ncpn,         /*	Number of cash-flow dates  , including
                    double strike);   /*	Strike */
 
 /*	Value of European Cap within LGM 1F */
-double lgmcapval1F(int ncpn,       /*	Number of cash-flow dates  , including
-                                                           start and end date */
+double lgmcapval1F(int ncpn,       /*	Number of cash-flow dates      , including
+                                                       start and end date */
                    double df[],    /*	Df to cash flow dates */
                    double cvg[],   /*	cvg from i-1 to i */
                    double cpn_G[], /*	G at cash-flow dates */
                    int nex,        /*	Number of exercise dates */
-                   int ex_cpn[],   /*	For each exercise date  , first coupon
-                                                           to be exercised */
-                   int ex_ncpn[],  /*	For each exercise date  , number of
-                                      coupons  to be exercised */
+                   int ex_cpn[],   /*	For each exercise date      , first
+                                      coupon   to be exercised */
+                   int ex_ncpn[],  /*	For each exercise date      , number of
+                                  coupons  to be exercised */
                    double ex_weight[],
                    double ex_zeta[], /*	Z at exercise date */
                    double ex_G[],    /*	G at exercise date */
                    double strike[]); /*	Strikes */
 
 /*	Value of European Cap within LGM 2F */
-double lgmcapval2F(int ncpn,           /*	Number of cash-flow dates  , including
-                                                               start and end date */
-                   double df[],        /*	Df to cash flow dates */
-                   double cvg[],       /*	cvg from i-1 to i */
-                   double cpn_G1[],    /*	G1 at cash-flow dates */
-                   double cpn_G2[],    /*	G2 at cash-flow dates */
-                   int nex,            /*	Number of exercise dates */
-                   int ex_cpn[],       /*	For each exercise date  , first coupon
-                                                               to be exercised */
-                   int ex_ncpn[],      /*	For each exercise date  , number of
-                                          coupons      to be exercised */
+double lgmcapval2F(int ncpn,     /*	Number of cash-flow dates      , including
+                                                     start and end date */
+                   double df[],  /*	Df to cash flow dates */
+                   double cvg[], /*	cvg from i-1 to i */
+                   double cpn_G1[], /*	G1 at cash-flow dates */
+                   double cpn_G2[], /*	G2 at cash-flow dates */
+                   int nex,         /*	Number of exercise dates */
+                   int ex_cpn[],    /*	For each exercise date      , first
+                                       coupon    to be exercised */
+                   int ex_ncpn[],   /*	For each exercise date      , number of
+                                   coupons      to be exercised */
                    double ex_weight[], /*	Weights on each caplet */
                    double ex_zeta1[],  /*	Z1 at exercise date */
                    double ex_zeta2[],  /*	Z2 at exercise date */
@@ -213,8 +214,8 @@ Err lgmcalibzeta1F(
     double mkt_price[], /*	Market prices */
     double ex_zeta[],   /*	Output: zetas */
     double lambda,
-    int skip_last,   /*	If 1  , the last option is disregarded and the forward
-                        volatility is flat from option n-1 */
+    int skip_last,   /*	If 1      , the last option is disregarded and the
+                    forward   volatility is flat from option n-1 */
     double prec,     /*	Precision on primary instruments */
     double min_fact, /*	Maximum down jump on variance */
     double max_fact, /*	Maximum up jump on variance */
@@ -234,8 +235,8 @@ Err lgmcalibzeta1F_tauts(
     double mkt_price[], /*	Market prices */
     double ex_zeta[],   /*	Output: zetas */
     int nlam, double lam_time[], double lam[],
-    int skip_last,   /*	If 1  , the last option is disregarded and the forward
-                        volatility is flat from option n-1 */
+    int skip_last,   /*	If 1      , the last option is disregarded and the
+                    forward   volatility is flat from option n-1 */
     double min_fact, /*	Maximum down jump on variance */
     double max_fact, /*	Maximum up jump on variance */
     int use_jumps);  /*	Allow vol term structure to jump */
@@ -258,9 +259,9 @@ Err lgmcalibzeta1F_2(
     double strike[],               /*	Strikes */
     double mkt_price[],            /*	Market prices */
     double ex_zeta[],              /*	Output: zetas */
-    double lambda, int skip_last); /*	If 1  , the last option is disregarded
-                                                           and the forward
-                                      volatility is flat from option n-1 */
+    double lambda, int skip_last); /*	If 1      , the last option is
+                                  disregarded and the forward
+                                  volatility is flat from option n-1 */
 
 /*	Calibrate zeta to diagonal given G: 2F case */
 Err lgmcalibzeta2F(
@@ -278,10 +279,10 @@ Err lgmcalibzeta2F(
     double strike[],    /*	Strikes */
     double mkt_price[], /*	Market prices */
     double ex_zeta[],   /*	Output: zetas (1) */
-    /*	Lambda  , Alpha  , gamma  , rho */
+    /*	Lambda      , Alpha      , gamma      , rho */
     double lambda, double alpha, double gamma, double rho,
-    int skip_last,   /*	If 1  , the last option is disregarded and the forward
-                        volatility is flat from option n-1 */
+    int skip_last,   /*	If 1      , the last option is disregarded and the
+                    forward   volatility is flat from option n-1 */
     double prec,     /*	Precision on primary instruments */
     double min_fact, /*	Maximum down jump on variance */
     double max_fact, /*	Maximum up jump on variance */
@@ -302,11 +303,11 @@ Err lgmcalibzeta2F_tauts(
     double strike[],    /*	Strikes */
     double mkt_price[], /*	Market prices */
     double ex_zeta[],   /*	Output: zetas (1) */
-    /*	Lambda  , Alpha  , gamma  , rho */
+    /*	Lambda      , Alpha      , gamma      , rho */
     int nlam, double lam_time[], double lam[], double alpha, double gamma,
     double rho,
-    int skip_last,   /*	If 1  , the last option is disregarded and the forward
-                        volatility is flat from option n-1 */
+    int skip_last,   /*	If 1      , the last option is disregarded and the
+                    forward   volatility is flat from option n-1 */
     double min_fact, /*	Maximum down jump on variance */
     double max_fact, /*	Maximum up jump on variance */
     int use_jumps);  /*	Allow vol term structure to jump */
@@ -331,9 +332,9 @@ Err lgmcalibzeta2F_2(
     double strike[],    /*	Strikes */
     double mkt_price[], /*	Market prices */
     double ex_zeta[],   /*	Output: zetas (1) */
-    /*	Lambda  , Alpha  , gamma  , rho */
+    /*	Lambda      , Alpha      , gamma      , rho */
     double lambda, double alpha, double gamma, double rho,
-    int skip_last); /*	If 1  , the last option is disregarded
+    int skip_last); /*	If 1      , the last option is disregarded
                                             and the forward volatility is flat
                        from option n-1 */
 
@@ -354,15 +355,15 @@ Err lgmprcapgivenlambda(
     double ex_zeta[],    /*	Output: zetas */
     double lambda,       /*	Lambda */
     int one2F,           /*	Number of factors */
-    /*	Alpha  , Gamma  , Rho (2F only) */
+    /*	Alpha      , Gamma      , Rho (2F only) */
     double alpha, double gamma, double rho,
-    int skip_last,   /*	If 1  , the last option is disregarded and the forward
-                        volatility is flat from option n-1 */
-    double prec,     /*	Precision on primary instruments */
-    double min_fact, /*	Maximum down jump on variance */
-    double max_fact, /*	Maximum up jump on variance */
-    int use_jumps,   /*	Allow vol term structure to jump */
-    int price_cap,   /*	0: just calibrate */
+    int skip_last,      /*	If 1      , the last option is disregarded and the
+                       forward      volatility is flat from option n-1 */
+    double prec,        /*	Precision on primary instruments */
+    double min_fact,    /*	Maximum down jump on variance */
+    double max_fact,    /*	Maximum up jump on variance */
+    int use_jumps,      /*	Allow vol term structure to jump */
+    int price_cap,      /*	0: just calibrate */
     double *ex_sprice); /*	Cap price as output */
 
 /*	Calibrate zeta to diagonal and lambda to cap: both 1F and 2F */
@@ -380,11 +381,11 @@ Err lgmprcapgivenlambda_tauts(
     double ex_lprice[],  /*	Market prices */
     double ex_zeta[],    /*	Output: zetas */
     int one2F,           /*	Number of factors */
-    /*	Alpha  , Gamma  , Rho (2F only) */
+    /*	Alpha      , Gamma      , Rho (2F only) */
     int nlam, /*	Lambda TS: may NOT be changed in the process */
     double lam_time[], double lam[], double alpha, double gamma, double rho,
-    int skip_last,   /*	If 1  , the last option is disregarded and the forward
-                        volatility is flat from option n-1 */
+    int skip_last,   /*	If 1      , the last option is disregarded and the
+                    forward   volatility is flat from option n-1 */
     double min_fact, /*	Maximum down jump on variance */
     double max_fact, /*	Maximum up jump on variance */
     int use_jumps);  /*	Allow vol term structure to jump */
@@ -405,11 +406,11 @@ Err lgmprcapgivenlambda_tauts2(
     int ex_sendcpn[], double ex_sstrike[], /*	Strikes */
     double ex_zeta[],                      /*	Output: zetas */
     int one2F,                             /*	Number of factors */
-    /*	Alpha  , Gamma  , Rho (2F only) */
+    /*	Alpha      , Gamma      , Rho (2F only) */
     int nlam, /*	Lambda TS: may NOT be changed in the process */
     double lam_time[], double lam[], double alpha, double gamma, double rho,
-    int skip_last, /*	If 1  , the last option is disregarded and the forward
-                      volatility is flat from option n-1 */
+    int skip_last, /*	If 1      , the last option is disregarded and the
+                  forward volatility is flat from option n-1 */
     double prec, int vega_prec,
     double min_fact,        /*	Maximum down jump on variance */
     double max_fact,        /*	Maximum up jump on variance */
@@ -434,9 +435,9 @@ Err lgmprcapgivenlambda_2(
     double ex_zeta[],    /*	Output: zetas */
     double lambda,       /*	Lambda: may NOT be changed in the process */
     int one2F,           /*	Number of factors */
-    /*	Alpha  , Gamma  , Rho (2F only) */
+    /*	Alpha      , Gamma      , Rho (2F only) */
     double alpha, double gamma, double rho,
-    int skip_last); /*	If 1  , the last option is disregarded
+    int skip_last); /*	If 1      , the last option is disregarded
                                             and the forward volatility is flat
                        from option n-1 */
 
@@ -456,14 +457,14 @@ Err lgmcalibzetalambda(
     double ex_sweight[], /*	Weights on each caplet */
     double ex_sprice,    /*	Market price for cap */
     double ex_zeta[],    /*	Output: zetas */
-    int fix_lambda,      /*	0: calib lambda to cap  , 1: fix lambda calib
-                                                 to diagonal */
+    int fix_lambda,      /*	0: calib lambda to cap      , 1: fix lambda calib
+                                             to diagonal */
     double *lambda,      /*	Lambda: may be changed in the process */
     int one2F,           /*	Number of factors */
-    /*	Alpha  , Gamma  , Rho (2F only) */
+    /*	Alpha      , Gamma      , Rho (2F only) */
     double alpha, double gamma, double rho,
-    int skip_last,     /*	If 1  , the last option is disregarded and the forward
-                          volatility is flat from option n-1 */
+    int skip_last,     /*	If 1      , the last option is disregarded and the
+                      forward     volatility is flat from option n-1 */
     double long_prec,  /*	Precision on primary instruments */
     double short_prec, /*	Precision on secondary instruments */
     double min_fact,   /*	Maximum down jump on variance */
@@ -505,16 +506,15 @@ Err lgmcalibzetalambda_tauts(
     double ex_sprice[],  /*	Market price for cap */
     double ex_svega[],   /*	Market vega for cap */
     double ex_zeta[],    /*	Output: zetas */
-    int fix_lambda,      /*	0: calib lambda to cap  , 1: fix lambda calib
-                                                 to diagonal */
+    int fix_lambda,      /*	0: calib lambda to cap      , 1: fix lambda calib
+                                             to diagonal */
     int nlam,            /*	Lambda TS: may NOT be changed in the process */
     double lam_time[], double lam[], int one2F, /*	Number of factors */
-    /*	Alpha  , Gamma  , Rho (2F only) */
+    /*	Alpha      , Gamma      , Rho (2F only) */
     double alpha, double gamma, double rho, int skip_last,
-    DIAG_CALIB_LM_PARAMS
-        lm_params); /*	If 1  , the last option is disregarded
-                                                    and the forward volatility
-                       is flat from option n-1 */
+    DIAG_CALIB_LM_PARAMS lm_params); /*	If 1      , the last option is
+                                        disregarded and the forward volatility
+                                        is flat from option n-1 */
 
 /*	Structures that hold calibration instrument data */
 typedef struct {
@@ -558,37 +558,36 @@ Err cpd_calib_diagonal(
                         char *vol_curve_name, double start_date,
                         double end_date, double cash_strike, int zero,
                         char *ref_rate_name, double *vol, double *power),
-    double vol_shift,
-    int shift_type,       /*	0:	Additive
-                                          1:	Multiplicative */
-                          /*	If ex_date is NULL  ,
-                          exercise dates will be generated 2bd before start */
-    int num_ex_dates,     /*	Exercise dates  ,
-                                                          all supposed to be on or
-                             after today */
-    long *ex_date,        /*	Supposed to be sorted
-                                                          NULL = 2bd before each coupon
-                           */
-    long end_date,        /*	End date for diagonal */
-    double *long_strike,  /*	Diagonal swaption strikes
+    double vol_shift, int shift_type, /*	0:	Additive
+                                                  1:	Multiplicative */
+                                      /*	If ex_date is NULL      ,
+                                      exercise dates will be generated 2bd before start */
+    int num_ex_dates,                 /*	Exercise dates      ,
+                                                                  all supposed to be on or
+                                     after today */
+    long *ex_date,                    /*	Supposed to be sorted
+                                                                  NULL = 2bd before each coupon
+                                   */
+    long end_date,                    /*	End date for diagonal */
+    double *long_strike,              /*	Diagonal swaption strikes
+                                                                          NULL = ATM */
+    double *short_strike,             /*	Short swaption strikes
                                                                   NULL = ATM */
-    double *short_strike, /*	Short swaption strikes
-                                                          NULL = ATM */
-    int strike_type,      /*	0: ATM
-                                                  1: CASH
-                                                  2: SWAP
-                                                  3: STD */
+    int strike_type,                  /*	0: ATM
+                                                          1: CASH
+                                                          2: SWAP
+                                                          3: STD */
     double max_std_long, double max_std_short,
     char *swaption_freq, /*	Frequency and basis of underlying swaptions */
-    char *swaption_basis, int fix_lambda, /*	0: calib lambda to cap  , 1: fix
-                                             lambda calib to diagonal */
+    char *swaption_basis, int fix_lambda, /*	0: calib lambda to cap      , 1:
+                                     fix lambda calib to diagonal */
     int one_f_equi,                       /*	1F equivalent flag:
-                                                                  if set to 1  , then 2F lambda will
-                                             calibrate                       to the cap priced within calibrated 1F
-                                                                  with the given lambda */
-    int skip_last,     /*	If 1  , the last option is disregarded
-                                               and the forward volatility is flat
-                          from option     n-1 */
+                                                              if set to 1      , then 2F lambda will
+                                         calibrate                       to the cap priced within
+                                         calibrated 1F                       with the given lambda */
+    int skip_last,     /*	If 1      , the last option is disregarded
+                                           and the forward volatility is flat
+                      from option     n-1 */
     double long_prec,  /*	Precision on primary instruments */
     double short_prec, /*	Precision on secondary instruments */
     double min_fact,   /*	Maximum down jump on variance */
@@ -599,7 +598,7 @@ Err cpd_calib_diagonal(
 
     double *lambda, /*	Lambda: may be changed in the process */
     int one2F,      /*	Number of factors */
-    /*	Alpha  , Gamma  , Rho (2F only) */
+    /*	Alpha      , Gamma      , Rho (2F only) */
     double alpha, double gamma, double rho, int *num_sig, /*	Answer */
     double **sig_time, double **sig,
     /*	Calibration instrument data */
@@ -617,36 +616,35 @@ Err cpd_calib_diagonal_tauts(
                         char *vol_curve_name, double start_date,
                         double end_date, double cash_strike, int zero,
                         char *ref_rate_name, double *vol, double *power),
-    double vol_shift,
-    int shift_type,      /*	0:	Additive
-                                         1:	Multiplicative */
-                         /*	If ex_date is NULL  ,
-                         exercise dates will be generated 2bd before start */
-    int num_ex_dates,    /*	Exercise dates  ,
-                                                         all supposed to be on or
-                            after today */
-    long *ex_date,       /*	Supposed to be sorted
-                                                         NULL = 2bd before each coupon
-                          */
-    long end_date,       /*	End date for diagonal */
-    double *long_strike, /*	Diagonal swaption strikes
-                                                                 NULL = ATM */
-    int strike_type,     /*	0: ATM
-                                                 1: CASH
-                                                 2: SWAP
-                                                 3: STD */
+    double vol_shift, int shift_type, /*	0:	Additive
+                                                  1:	Multiplicative */
+                                      /*	If ex_date is NULL      ,
+                                      exercise dates will be generated 2bd before start */
+    int num_ex_dates,                 /*	Exercise dates      ,
+                                                                  all supposed to be on or
+                                     after today */
+    long *ex_date,                    /*	Supposed to be sorted
+                                                                  NULL = 2bd before each coupon
+                                   */
+    long end_date,                    /*	End date for diagonal */
+    double *long_strike,              /*	Diagonal swaption strikes
+                                                                          NULL = ATM */
+    int strike_type,                  /*	0: ATM
+                                                          1: CASH
+                                                          2: SWAP
+                                                          3: STD */
     double max_std_long,
     char *swaption_freq, /*	Frequency and basis of underlying swaptions */
     char *swaption_basis,
-    int skip_last,   /*	If 1  , the last option is disregarded and the forward
-                        volatility is flat from option n-1 */
+    int skip_last,   /*	If 1      , the last option is disregarded and the
+                    forward   volatility is flat from option n-1 */
     double min_fact, /*	Maximum down jump on variance */
     double max_fact, /*	Maximum up jump on variance */
     int use_jumps,   /*	Allow vol term structure to jump */
 
     int nlam, /*	Lambda TS: may NOT be changed in the process */
     double lam_time[], double lam[], int one2F, /*	Number of factors */
-    /*	Alpha  , Gamma  , Rho (2F only) */
+    /*	Alpha      , Gamma      , Rho (2F only) */
     double alpha, double gamma, double rho, int *num_sig, /*	Answer */
     double **sig_time, double **sig,
     /*	Calibration instrument data */
@@ -675,10 +673,10 @@ Err diagcalib_interp_shifttype(const char *constStr,
 typedef struct {
   /*	Shifts */
   double vol_shift;
-  DIAGCALIB_VOLTYPE vol_type; /*	0: normal  , 1: lognormal */
+  DIAGCALIB_VOLTYPE vol_type; /*	0: normal      , 1: lognormal */
   DIAGCALIB_SHIFTTYPE
-      shift_type; /*	0:	Additive
-                                          1:	Multiplicative */
+  shift_type; /*	0:	Additive
+                                      1:	Multiplicative */
   double lambda_shift;
   double lambda_min;
   double lambda_max;
@@ -695,14 +693,14 @@ typedef struct {
   /*	Exclusions */
   double max_std;
   double min_time; /*	Minimum time between 2 instruments */
-  int skip_last;   /*	If 1  , the last option is disregarded and the forward
-                      volatility is flat from option n-1 */
+  int skip_last;   /*	If 1      , the last option is disregarded and the
+                      forward   volatility is flat from option n-1 */
   int keep_first;  /*	Min time is not applied on "keep_first" first options */
   double min_calib_time; /*	Minimum time from today for an option to be
                             calibrated */
   double min_fact;       /*	Maximum down jump on variance */
   double max_fact;       /*	Maximum up jump on variance */
-  int use_jumps;         /*	1: we allow jumps on vol  , 0: we don't */
+  int use_jumps;         /*	1: we allow jumps on vol      , 0: we don't */
 
   /* For Newton */
   double precision;
@@ -742,22 +740,22 @@ Err cpd_calib_diagonal_2(
     char *instr_freq, /*	Frequency and basis of instruments */
     char *instr_basis,
     /*	Structure */
-    /*	If ex_date is NULL  ,
+    /*	If ex_date is NULL      ,
     exercise dates will be generated 2bd before start */
-    int num_ex_dates,  /*	Exercise dates  ,
-                                                       all supposed to be on or
-                          after today */
+    int num_ex_dates,  /*	Exercise dates      ,
+                                                   all supposed to be on or
+                      after today */
     long *ex_date_,    /*	Supposed to be sorted */
-    int *cal_date,     /*	1: use ex_date as calibration date  , 0: don't */
+    int *cal_date,     /*	1: use ex_date as calibration date      , 0: don't */
     char **end_tenor_, /*	Tenors of the underlying instruments
-                                                               or "DIAG" */
+                                                           or "DIAG" */
     long end_date,     /*	End date for diagonal */
     double *strike_,   /*	Strikes
-                                               0: ATM */
+                                           0: ATM */
     /*	Model */
     double lambda, /*	Lambda: may NOT be changed in the process */
     int one2F,     /*	Number of factors */
-    double alpha,  /*	Alpha  , Gamma  , Rho (2F only) */
+    double alpha,  /*	Alpha      , Gamma      , Rho (2F only) */
     double gamma, double rho,
     /*	Output */
     int *num_sig, /*	Answer */
@@ -811,13 +809,13 @@ Err cpd_calib_all(
     double *corr_times, double *correl_dom_for, double *correl_dom_fx,
     double *correl_for_fx, long corr_n_times,
     /*	Structure */
-    /*	If ex_date is NULL  ,
+    /*	If ex_date is NULL      ,
     exercise dates will be generated 2bd before start */
-    int num_ex_dates,     /*	Exercise dates  ,
-                                                          all supposed to be on or
-                             after today */
-    long *ex_date,        /*	Supposed to be sorted */
-    int *cal_date,        /*	1: use ex_date as calibration date  , 0: don't */
+    int num_ex_dates, /*	Exercise dates      ,
+                                                  all supposed to be on or
+                     after today */
+    long *ex_date,    /*	Supposed to be sorted */
+    int *cal_date,    /*	1: use ex_date as calibration date      , 0: don't */
     char **dom_end_tenor, /*	Tenors of the underlying instruments or "DIAG"
                            */
     char **for_end_tenor, long end_date, /*	End date for diagonal */
@@ -862,28 +860,28 @@ Err cpd_calib_diagonal_3(
                         char *ref_rate_name, double *vol, double *power),
     char *instr_freq, /*	Frequency and basis of instruments */
     char *instr_basis,
-    /*	If ex_date is NULL  ,
+    /*	If ex_date is NULL      ,
     exercise dates will be generated 2bd before start */
     /*	Structure */
-    int num_ex_dates,   /*	Exercise dates  ,
-                                                        all supposed to be on or
-                           after today */
+    int num_ex_dates,   /*	Exercise dates      ,
+                                                    all supposed to be on or
+                       after today */
     long *ex_date_,     /*	Supposed to be sorted */
-    int *cal_date,      /*	1: use ex_date as calibration date  , 0: don't */
+    int *cal_date,      /*	1: use ex_date as calibration date      , 0: don't */
     char **end_tenorl_, /*	Tenors of the underlying instruments
-                                                        or "DIAG" */
+                                                    or "DIAG" */
     char **end_tenors_, /*	Tenors of the underlying instruments
-                                                        or "DIAG" */
+                                                    or "DIAG" */
     long end_date,      /*	End date for diagonal */
     double *strikel_,   /*	Strikes
-                                                0: ATM */
+                                            0: ATM */
     double *strikes_,   /*	Strikes
-                                                0: ATM */
+                                            0: ATM */
     /*	Model */
     int fix_lambda,
     int nlam, /*	Lambda TS: may NOT be changed in the process */
     double lam_time[], double lam[], int one2F, /*	Number of factors */
-    double alpha, /*	Alpha  , Gamma  , Rho (2F only) */
+    double alpha, /*	Alpha      , Gamma      , Rho (2F only) */
     double gamma, double rho,
     /*	Output */
     int *num_sig, /*	Answer */
@@ -898,41 +896,41 @@ double export_lgmcalcexpfact_tauts(double T1, double T2, int nlam,
                                    double lam_time[], double lam[],
                                    double gamma);
 
-void export_lgmcalczeta1_tauts(int nsig,          /*	Number of Sigmas */
-                               double sig_time[], /*	Sigma Times */
-                               double sig[],      /*	Sigmas */
-                               /*	Lambda  , Alpha  , Beta  , Rho */
-                               int nlam, double lam_time[],
-                               double lam[], /*	Lambdas */
-                               double alpha, double gamma, double rho,
-                               /*	Output */
-                               int nzeta, double zeta_t[], /*	Zeta times */
-                               double zeta[]);             /*	Output */
+void export_lgmcalczeta1_tauts(
+    int nsig,          /*	Number of Sigmas */
+    double sig_time[], /*	Sigma Times */
+    double sig[],      /*	Sigmas */
+    /*	Lambda      , Alpha      , Beta      , Rho */
+    int nlam, double lam_time[], double lam[], /*	Lambdas */
+    double alpha, double gamma, double rho,
+    /*	Output */
+    int nzeta, double zeta_t[], /*	Zeta times */
+    double zeta[]);             /*	Output */
 
-void export_lgmcalczeta2zeta12(int n,          /*	Number of dates */
-                               double t[],     /*	Times */
-                               double zeta1[], /*	Zeta1 */
-                               /*	Lambda  , Alpha  , Beta  , Rho */
-                               double lambda, double alpha, double gamma,
-                               double rho,
-                               /*	Output */
-                               double zeta2[], double zeta12[]);
+void export_lgmcalczeta2zeta12(
+    int n,          /*	Number of dates */
+    double t[],     /*	Times */
+    double zeta1[], /*	Zeta1 */
+    /*	Lambda      , Alpha      , Beta      , Rho */
+    double lambda, double alpha, double gamma, double rho,
+    /*	Output */
+    double zeta2[], double zeta12[]);
 
-void export_lgmcalczeta2zeta12_ts(int n,          /*	Number of dates */
-                                  double t[],     /*	Times */
-                                  double zeta1[], /*	Zeta1 */
-                                  /*	Lambda  , Alpha  , Beta  , Rho */
-                                  int nlambda, double lambda_time[],
-                                  double lambda[], double alpha, double gamma,
-                                  double rho,
-                                  /*	Output */
-                                  double zeta2[], double zeta12[]);
+void export_lgmcalczeta2zeta12_ts(
+    int n,          /*	Number of dates */
+    double t[],     /*	Times */
+    double zeta1[], /*	Zeta1 */
+    /*	Lambda      , Alpha      , Beta      , Rho */
+    int nlambda, double lambda_time[], double lambda[], double alpha,
+    double gamma, double rho,
+    /*	Output */
+    double zeta2[], double zeta12[]);
 
 void export_lgmsetupG(double lambda, int ncpn, /*	Number of cash-flows */
                       double cpn_time[],       /*	Cash-Flow times */
                       double cpn_G[],          /*	Output: G at cash-flow dates
-                                                                               G(T) =
-                                                  (1.0 - exp (- lambda * T )) */
+                                                                           G(T) =
+                                              (1.0 - exp (- lambda * T )) */
                       int nex,                 /*	Number of exercise dates */
                       double ex_time[],        /*	Exercise times */
                       double ex_G[]);          /*	Output: G at exercise dates */
@@ -943,8 +941,8 @@ void export_lgmsetupG_ts(int nlambda, double lambda_time[], double lambda[],
                          int ncpn,          /*	Number of cash-flows */
                          double cpn_time[], /*	Cash-Flow times */
                          double cpn_G[],    /*	Output: G at cash-flow dates
-                                                                            G(T) =
-                                               (1.0 - exp (- lambda * T )) */
+                                                                        G(T) =
+                                           (1.0 - exp (- lambda * T )) */
                          int nex,           /*	Number of exercise dates */
                          double ex_time[],  /*	Exercise times */
                          double ex_G[]);    /*	Output: G at exercise dates */
@@ -953,8 +951,8 @@ void export_lgmsetupG2(double lambda, double gamma,
                        int ncpn,          /*	Number of cash-flows */
                        double cpn_time[], /*	Cash-Flow times */
                        double cpn_G2[],   /*	Output: G2 at cash-flow dates
-                                                                          G2(T) =
-                                             (1.0 - exp (- lambda2 * T )) */
+                                                                      G2(T) =
+                                         (1.0 - exp (- lambda2 * T )) */
                        int nex,           /*	Number of exercise dates */
                        double ex_time[],  /*	Exercise times */
                        double ex_G2[]);   /*	Output: G2 at exercise dates */
@@ -964,8 +962,8 @@ void export_lgmsetupG2_ts(int nlambda, double lambda_time[], double lambda[],
                           double gamma, int ncpn, /*	Number of cash-flows */
                           double cpn_time[],      /*	Cash-Flow times */
                           double cpn_G2[],  /*	Output: G2 at cash-flow dates
-                                                                            G2(T)
-                                               = (1.0 - exp (- lambda2 * T )) */
+                                                                        G2(T)
+                                           = (1.0 - exp (- lambda2 * T )) */
                           int nex,          /*	Number of exercise dates */
                           double ex_time[], /*	Exercise times */
                           double ex_G2[]);  /*	Output: G2 at exercise dates */

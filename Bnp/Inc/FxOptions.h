@@ -84,25 +84,28 @@ Err BarrierOption_autocal(
     /*	Product parameters */
     double notional, long exercise_date, long settlmt_date, double strike,
     double barrier_up, double barrier_down, double rebate_up,
-    double rebate_down, int is_call, /* 1: Call  , 0: Put */
-    int is_ko,                       /* 1: KO  , 0: KI */
-    int is_cvx,                      /* 1: use 1/Fx  , 0: use Fx */
-    int is_digital,  /* 1: digital payoff  , 0  , regular option payoff */
-    int is_american, /* 1: American  , 0: European */
+    double rebate_down, int is_call, /* 1: Call      , 0: Put */
+    int is_ko,                       /* 1: KO      , 0: KI */
+    int is_cvx,                      /* 1: use 1/Fx      , 0: use Fx */
+    int is_digital,  /* 1: digital payoff      , 0      , regular option payoff
+                      */
+    int is_american, /* 1: American      , 0: European */
 
     /*	Model parameters */
     double mdl_alpha, double mdl_beta, double mdl_rho, double mdl_lambda,
     double mdl_gamma, double mdl_floor,
 
     /*	Calib parameters */
-    long *opt_matdates,  /* mkt options maturity */
-    double *opt_atmvols, /* mkt options ATM vols */
-    int nb_opt,
-    int calib_all_ts, /* 1: calib all the TS  , 0: calib only the relevant */
+    long *opt_matdates,           /* mkt options maturity */
+    double *opt_atmvols,          /* mkt options ATM vols */
+    int nb_opt, int calib_all_ts, /* 1: calib all the TS      , 0: calib only
+                                     the relevant */
 
-    int do_smile_calib, /* 1: calibrates alpha and rho  , 0: uses model input */
-    int cal_stochvol,   /* 1: calib alpha and rho  , 0: calib beta and cvxty */
-    long cal_maturity,  /* option maturity  , exercise is 2bd before */
+    int do_smile_calib, /* 1: calibrates alpha and rho      , 0: uses model
+                           input */
+    int cal_stochvol,   /* 1: calib alpha and rho      , 0: calib beta and cvxty
+                         */
+    long cal_maturity,  /* option maturity      , exercise is 2bd before */
     double cal_alpha,   /* SABR alpha */
     double cal_beta,    /* SABR beta */
     double cal_rho,     /* SABR rho */
@@ -119,19 +122,20 @@ Err BarrierOption_autocal(
     double cal_atmprec,   /* Precision on ATM vols */
     int cal_smilemaxiter, /* Maximum number of iterations for ATM calibration */
     double cal_smileprec, /* Precision on ATM vols */
-    int cal_usetotalts, /* 1: when calibrating smile  , consider total TS  , 0:
-                           consider only the corresponding ATM vol */
+    int cal_usetotalts, /* 1: when calibrating smile      , consider total TS ,
+                       0: consider only the corresponding ATM vol */
 
     /* IOD / EOD flags */
-    int eod_fix_flag, /*	EOD Fixing Flag 0: I  , 1: E */
-    int eod_pay_flag, /*	EOD Payment Flag 0: I  , 1: E */
-    int eod_ex_flag,  /*	EOD Exercise Flag 0: I  , 1: E */
+    int eod_fix_flag, /*	EOD Fixing Flag 0: I      , 1: E */
+    int eod_pay_flag, /*	EOD Payment Flag 0: I      , 1: E */
+    int eod_ex_flag,  /*	EOD Exercise Flag 0: I      , 1: E */
 
     /*	Exercised flag */
     int exercised,         /*	Is exercised Flag */
     int knocked,           /*	Has knocked flag */
-    int has_knocked_up,    /*	Knocked on the up barrier:1  , on the down one:
-                              0 */
+    int has_knocked_up,    /*	Knocked on the up barrier:1      , on the down
+                          one:
+                          0 */
     long ex_date_ex,       /*	Date when exercised */
     long ex_date_set,      /*	Corresponding settlement date */
     double spot_fx_fixing, /*	Fixing of the Fx */
@@ -156,9 +160,9 @@ Err ConvexFwdSimple(
     int nb_opt,
 
     /* IOD / EOD flags */
-    int eod_fix_flag,      /*	EOD Fixing Flag 0: I  , 1: E */
-    int eod_pay_flag,      /*	EOD Payment Flag 0: I  , 1: E */
-    int eod_ex_flag,       /*	EOD Exercise Flag 0: I  , 1: E */
+    int eod_fix_flag,      /*	EOD Fixing Flag 0: I      , 1: E */
+    int eod_pay_flag,      /*	EOD Payment Flag 0: I      , 1: E */
+    int eod_ex_flag,       /*	EOD Exercise Flag 0: I      , 1: E */
     double spot_fx_fixing, /*	fixing of the spot fx if today > exercise */
     int exercised,
 
@@ -185,9 +189,9 @@ Err ConvexFwdSABR_static_replication(
     double dig_spread, int calib_strikes,
 
     /* IOD / EOD flags */
-    int eod_fix_flag,      /*	EOD Fixing Flag 0: I  , 1: E */
-    int eod_pay_flag,      /*	EOD Payment Flag 0: I  , 1: E */
-    int eod_ex_flag,       /*	EOD Exercise Flag 0: I  , 1: E */
+    int eod_fix_flag,      /*	EOD Fixing Flag 0: I      , 1: E */
+    int eod_pay_flag,      /*	EOD Payment Flag 0: I      , 1: E */
+    int eod_ex_flag,       /*	EOD Exercise Flag 0: I      , 1: E */
     double spot_fx_fixing, /*	fixing of the spot fx if today > exercise */
     int exercised,
 
@@ -238,9 +242,9 @@ Err fwd_fxoption(
     double strike, int call_put,
 
     /* IOD / EOD flags */
-    int eod_fix_flag, /*	EOD Fixing Flag 0: I  , 1: E */
-    int eod_pay_flag, /*	EOD Payment Flag 0: I  , 1: E */
-    int eod_ex_flag,  /*	EOD Exercise Flag 0: I  , 1: E */
+    int eod_fix_flag, /*	EOD Fixing Flag 0: I      , 1: E */
+    int eod_pay_flag, /*	EOD Payment Flag 0: I      , 1: E */
+    int eod_ex_flag,  /*	EOD Exercise Flag 0: I      , 1: E */
 
     int exercised,         /*	Is exercised Flag */
     double spot_fx_fixing, /*	Fixing of the Fx */
@@ -251,7 +255,7 @@ Err fwd_fxoption(
 
     /* Outputs */
     double *price, double *vol,
-    int export_ts, /*	1: Export TS  , 0: don't */
+    int export_ts, /*	1: Export TS      , 0: don't */
     CPD_UND und_exp);
 
 #endif

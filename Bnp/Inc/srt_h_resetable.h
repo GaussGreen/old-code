@@ -43,7 +43,7 @@ Err NewtonJumps(
     double *DRS, /* term structure des DRS a la date de reset: [1..nmat] */
     double *maturites, /* [1..nmat] */
     double *isFriday,  /* [1..nmat] flag qui indique si chaque	maturite  est
-                          un Friday */
+                      un Friday */
     double *
         *param,   /*parametres de la dynamique de chaque DRS [1..nmat][1..5] */
     double width, /* Largeur du corridor */
@@ -103,7 +103,7 @@ Err optmertonpremiumtimedependent(double dFwd, double Strike, int n_periods,
 
 Err optmertonsmiletimedependent(double dFwd, int n_strikes, double *strikes,
                                 int n_periods, /* The 6 following variables are
-                                                  vectors of length nperiods */
+                                              vectors of length nperiods */
                                 double *param, double *mat, char *Logornorm,
                                 double *impvols);
 
@@ -128,10 +128,10 @@ Err srt_f_resetable_td(int n_resetdates, double *resetdates, double *initparam,
 
 Err srt_f_simpleresetable(
     double StartDate, double EndDate,
-    char *VolType, /*Flat or Sliding or Input*/
-    double *
-        VolsInput, /*If above is "Input"  , this contains 4 vols:lowercallspread
-                      , lower  , upper  , uppercallspread*/
+    char *VolType,     /*Flat or Sliding or Input*/
+    double *VolsInput, /*If above is "Input"      , this contains 4
+                          vols:lowercallspread , lower      , upper      ,
+                          uppercallspread*/
     char *FloatCoupon, SrtCompounding ResetFrequency, double margin,
     double width, double callspread, double VolShift, char *ResetType,
     double lowerbarrier, char *cRefRateCode, char *cMarketId,
@@ -141,7 +141,7 @@ Err srt_f_simpleresetcap(
     long StrikeDate, long StartDate, long EndDate,
     char *VolType,   /*Flat or NormSliding or LogSliding or Input*/
     double VolInput, /*Contains a vol input buy the user used only if above is
-                        input*/
+                    input*/
     char *cRefRateCode, char *cMarketId, char *szVolCurveName,
     char *szYieldCurveName, SrtCallPutType CallPut, double *pv);
 

@@ -25,7 +25,8 @@ typedef struct {
   double dLastBeta2Tolerance;
 
   int iInterpFailedVol;
-  int iInterpVolType; /* 0: linear in Vol  , 1: Linear in Vol / (TEnd - TStart)
+  int iInterpVolType; /* 0: linear in Vol      , 1: Linear in Vol / (TEnd -
+                       * TStart)
                        */
 
 } genmidat_calibparams, *GENMIDAT_CALIBPARAMS;

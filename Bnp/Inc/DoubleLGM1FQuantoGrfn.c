@@ -35,7 +35,7 @@ Err payoff_doublelgm1fquanto_pde(double evt_date, double evt_time,
   global = total->global;
   local = total->local;
 
-  /* Precalculate DFF  , gamma and 0.5 * gamma * gamma */
+  /* Precalculate DFF      , gamma and 0.5 * gamma * gamma */
 
   if (total->num_dom_df > 0 && total->dom_idx != -1) {
     dom_dff = dvector(0, total->num_dom_df - 1);

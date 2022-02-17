@@ -21,7 +21,7 @@ Err translate_bus_day_conv(String *str, SrtBusDayConv m);
 Err interp_unit(const char *constStr, SrtUnit *val);
 
 /* ---------------------------------------------------------------------------
-             SWAP CONVENTIONS: BASIS  , COMPOUNDING
+             SWAP CONVENTIONS: BASIS      , COMPOUNDING
    ---------------------------------------------------------------------------
  */
 
@@ -38,7 +38,7 @@ Err interp_rec_pay(const char *constStr, SrtReceiverType *val);
 Err interp_shift(const char *constStr, SrtShiftType *val);
 
 /* ---------------------------------------------------------------------------
-             OPTIONS : CALL/PUT  , UP/DOWN...
+             OPTIONS : CALL/PUT      , UP/DOWN...
    ---------------------------------------------------------------------------
  */
 

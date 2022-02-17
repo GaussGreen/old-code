@@ -33,7 +33,8 @@ Err swp_f_Cms_Rate(
     double dDelay, double dRateConv,       /* date adjustment */
     SrtDiffusionType VolType,              /* Vol type Lognormal or Normal */
     double dFlatVol,                       /* Flat Vol if used */
-    int iMethod, /* 0: Use Flat Vol  , 1: linear interpolation  , 2: FullSmile*/
+    int iMethod, /* 0: Use Flat Vol      , 1: linear interpolation      , 2:
+                    FullSmile*/
     Date dStart, /* The following parameters are used in the GetVol function */
     Date dEnd,   /* and are useless in the rest of the code */
     SRT_Boolean bAdjForSpread, double dSpread, char *szVolCurveName,
@@ -46,7 +47,8 @@ Err swp_f_Tec_Rate(
     double dPaymentPower,            /* Tec Power */
     double dDelay, double dRateConv, /* date adjustment */
     SrtDiffusionType VolType, double dFlatVol,
-    int iMethod, /* 0: Use Flat Vol  , 1: linear interpolation  , 2: FullSmile*/
+    int iMethod, /* 0: Use Flat Vol      , 1: linear interpolation      , 2:
+                    FullSmile*/
     Date dStart, /* The following parameters are used in the GetVol function */
     Date dEnd,   /* and are useless in the rest of the code */
     SRT_Boolean bAdjForSpread, double dSpread, char *szVolCurveName,

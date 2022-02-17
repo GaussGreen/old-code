@@ -30,7 +30,7 @@ typedef struct {
   double vol_adj;
 } CHEYBETA_MDL;
 
-/*	Initialise  , i.e. set pointers to NULL	*/
+/*	Initialise      , i.e. set pointers to NULL	*/
 void chey_beta_mdl_init(CHEYBETA_MDL *mdl);
 
 /*	Free	*/
@@ -61,7 +61,7 @@ void chey_beta_mdl_build_from_und(CHEYBETA_MDL *mdl, SrtUndPtr und);
 /*
         Diffusion parameters between two given dates:
 
-                sigma  , lambda  , beta  , dt
+                sigma      , lambda      , beta      , dt
 */
 
 typedef struct {
@@ -93,7 +93,7 @@ double chey_beta_mdl_norm_var_at_t(
     /*	Min var	*/
     double minvar);
 
-/*	Get drift  , actually Et2 [ Xt2 - Xt1 / Ft1 ]	*/
+/*	Get drift      , actually Et2 [ Xt2 - Xt1 / Ft1 ]	*/
 double chey_beta_mdl_drift(
     /*	Model	*/
     CHEYBETA_MDL *mdl,
@@ -102,7 +102,7 @@ double chey_beta_mdl_drift(
     /*	Statevars	*/
     double x, double phi);
 
-/*	Get var  , actually Vt2 [ Xt2 - Xt1 / Ft1 ]	*/
+/*	Get var      , actually Vt2 [ Xt2 - Xt1 / Ft1 ]	*/
 double chey_beta_mdl_var(
     /*	Model	*/
     CHEYBETA_MDL *mdl,

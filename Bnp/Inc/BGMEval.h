@@ -41,7 +41,7 @@ Err get_bgm_FIRSTGetEventInfoFromDeal(
     /*	As output from FIRSTGetMaxNumDfFromDeal	*/
     int max_num_df,
 
-    /*	All pointers are allocated inside  ,
+    /*	All pointers are allocated inside      ,
             and must be freed by call to get_bgm_FIRSTFreeEventInfoFromDeal
      */
 

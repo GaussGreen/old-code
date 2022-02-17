@@ -37,7 +37,7 @@ Err am_fill_fund_leg(
     /*	Coupons that started before today are disregarded */
     long today,
     /*	EOD Flag */
-    int eod_flag, /*	0: I  , 1: E */
+    int eod_flag, /*	0: I      , 1: E */
     double *fund_not, int fund_ncpn, long *fund_fix, long *fund_start,
     long *fund_end, long *fund_pay, char **fund_basis, double *fund_spr,
     double *fund_mrg, AM_FUND_LEG fund_leg);
@@ -78,9 +78,9 @@ Err am_fill_fix_leg(
     /*	Coupons that fixed before today are disregarded */
     long today,
     /*	EOD Flag */
-    int eod_flag, /*	0: I  , 1: E */
+    int eod_flag, /*	0: I      , 1: E */
     double *fix_not, int fix_ncpn,
-    // long		*fix_fix  ,
+    // long		*fix_fix      ,
     long *fix_start, long *fix_end, long *fix_pay, char **fix_basis,
     double *fix_rate, double *fix_fee, AM_FIX_LEG fix_leg);
 
@@ -94,7 +94,8 @@ Err am_free_fix_leg(AM_FIX_LEG fix_leg);
 
 /*	Call */
 typedef struct {
-  int pay_rec; /*	0: rec fix upon exercise  , 1: pay fix upon exercise */
+  int pay_rec; /*	0: rec fix upon exercise      , 1: pay fix upon exercise
+                */
   /*	Specs */
   long ex_date;     /*	Exercise date */
   double ex_time;   /*	Exercise time */
@@ -123,8 +124,8 @@ Err am_fill_calls(
     /*	Exercises before today are disregarded */
     long today,
     /*	EOD Flag */
-    int eod_flag,           /*	0: I  , 1: E */
-    int ncall, int pay_rec, /*	0: rec pd  , 1: pay pd */
+    int eod_flag,           /*	0: I      , 1: E */
+    int ncall, int pay_rec, /*	0: rec pd      , 1: pay pd */
     long *ex_date, long *set_date, double *fee, AM_STR am);
 
 /*	Check dates consistency */
@@ -182,7 +183,7 @@ Err am_fill_und(char *lgm2dund, char *vc, char *ref, char *swap_freq,
 Err am_calib_und(
     long today,
     /*	EOD Flag */
-    int eod_flag,     /*	0: I  , 1: E */
+    int eod_flag,     /*	0: I      , 1: E */
     char *yc,         /*	yc */
     char *vc,         /*	vc (only if calib) */
     char *ref,        /*	ref rate (only if calib) */
@@ -196,15 +197,15 @@ Err am_calib_und(
     double mintime, double mininterval,
 
     int notperiod, double max_std_short, int one2F,
-    int fix_lambda, /*	0: calib lambda to cap  , 1: fix lambda calib
-                                                    to diagonal */
+    int fix_lambda, /*	0: calib lambda to cap      , 1: fix lambda calib
+                                                to diagonal */
     int one_f_equi, /*	1F equivalent flag:
-                                                    if set to 1  , then 2F
-                       lambda will calibrate to the cap priced within calibrated
-                       1F with the given lambda */
-    int skip_last,  /*	If 1  , the last option is disregarded
-                                                    and the forward volatility is
-                       flat from option  n-1 */
+                                                if set to 1      , then 2F
+                   lambda will calibrate to the cap priced within calibrated
+                   1F with the given lambda */
+    int skip_last,  /*	If 1      , the last option is disregarded
+                                                and the forward volatility is
+                   flat from option  n-1 */
     double max_var_jump,
 
     int strike_type, int european_model,
@@ -345,7 +346,7 @@ Err am_fill_check_all_struct(
     long today, long theoEndDate,
 
     /*	The underlying */
-    int use_calib, /*	0: use lgm2dund  , 1: calibrate */
+    int use_calib, /*	0: use lgm2dund      , 1: calibrate */
 
     /*		if calib */
     char *yc,         /*	yc */
@@ -374,7 +375,7 @@ Err am_fill_check_all_struct(
     long *fix_pay, char **fix_basis, double *fix_rate, double *fix_fee,
 
     /*		calls */
-    int ncall, int pay_rec, /*	0: rec pd  , 1: pay pd */
+    int ncall, int pay_rec, /*	0: rec pd      , 1: pay pd */
     long *ex_date, long *set_date, double *fee,
 
     /*	Numerical params */
@@ -395,23 +396,24 @@ Err am_fill_check_all_struct(
                       double strike, double *vol),
     char *CorrelName,
 
-    double max_std_short, int fix_lambda, /*	0: calib lambda to cap  , 1: fix
-                                             lambda calib to diagonal */
+    double max_std_short, int fix_lambda, /*	0: calib lambda to cap      , 1:
+                                     fix lambda calib to diagonal */
     int one_f_equi,                       /*	1F equivalent flag:
-                                                                          if set to 1  , then 2F
-                                             lambda will calibrate                       to the cap priced within calibrated
-                                             1F                       with the given lambda */
-    int skip_last, /*	If 1  , the last option is disregarded
-                                                   and the forward volatility is
-                      flat from option n-1 */
+                                                                      if set to 1      , then 2F
+                                         lambda will calibrate                       to the cap priced
+                                         within calibrated                       1F                       with the given
+                                         lambda */
+    int skip_last, /*	If 1      , the last option is disregarded
+                                               and the forward volatility is
+                  flat from option n-1 */
     /*	EOD Flags */
-    int eod_fix_flag, /*	0: I  , 1: E */
-    int eod_ex_flag,  /*	0: I  , 1: E */
+    int eod_fix_flag, /*	0: I      , 1: E */
+    int eod_ex_flag,  /*	0: I      , 1: E */
 
     /*	Results */
     AM_STR am, AM_UND und,
     int *call_feat, /*	0: No callable feature to be valued
-                            1: Callable feature to be valued through adi */
+                        1: Callable feature to be valued through adi */
     AM_ADI_ARG adi_arg);
 
 /*	Fill and check all the relevant structures */
@@ -420,7 +422,7 @@ Err am_fill_check_all_struct_ts(
     long today, long theoEndDate,
 
     /*	The underlying */
-    int use_calib, /*	0: use lgm2dund  , 1: calibrate */
+    int use_calib, /*	0: use lgm2dund      , 1: calibrate */
 
     /*		if calib */
     char *yc,         /*	yc */
@@ -451,7 +453,7 @@ Err am_fill_check_all_struct_ts(
     long *fix_pay, char **fix_basis, double *fix_rate, double *fix_fee,
 
     /*		calls */
-    int ncall, int pay_rec, /*	0: rec pd  , 1: pay pd */
+    int ncall, int pay_rec, /*	0: rec pd      , 1: pay pd */
     long *ex_date, long *set_date, double *fee,
 
     /*	Numerical params */
@@ -472,23 +474,24 @@ Err am_fill_check_all_struct_ts(
                       double strike, double *vol),
     char *CorrelName,
 
-    double max_std_short, int fix_lambda, /*	0: calib lambda to cap  , 1: fix
-                                             lambda calib to diagonal */
+    double max_std_short, int fix_lambda, /*	0: calib lambda to cap      , 1:
+                                     fix lambda calib to diagonal */
     int one_f_equi,                       /*	1F equivalent flag:
-                                                                          if set to 1  , then 2F
-                                             lambda will calibrate                       to the cap priced within calibrated
-                                             1F                       with the given lambda */
-    int skip_last, /*	If 1  , the last option is disregarded
-                                                   and the forward volatility is
-                      flat from option n-1 */
+                                                                      if set to 1      , then 2F
+                                         lambda will calibrate                       to the cap priced
+                                         within calibrated                       1F                       with the given
+                                         lambda */
+    int skip_last, /*	If 1      , the last option is disregarded
+                                               and the forward volatility is
+                  flat from option n-1 */
     /*	EOD Flags */
-    int eod_fix_flag, /*	0: I  , 1: E */
-    int eod_ex_flag,  /*	0: I  , 1: E */
+    int eod_fix_flag, /*	0: I      , 1: E */
+    int eod_ex_flag,  /*	0: I      , 1: E */
 
     /*	Results */
     AM_STR am, AM_UND und,
     int *call_feat, /*	0: No callable feature to be valued
-                            1: Callable feature to be valued through adi */
+                        1: Callable feature to be valued through adi */
     AM_ADI_ARG adi_arg);
 
 Err am_free_all_struct(AM_STR am, AM_UND und, int call_feat,

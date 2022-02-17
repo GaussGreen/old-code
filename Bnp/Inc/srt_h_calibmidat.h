@@ -1,5 +1,5 @@
 /****************************************************************/
-/* Calboot with swaptions for Midat  , and so on
+/* Calboot with swaptions for Midat      , and so on
  */
 /****************************************************************/
 Err SrtGrfnSwaptionCalboot(long *plStartDates, long *plEndDates,

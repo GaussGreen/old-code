@@ -8,12 +8,11 @@
 
   DESCRIPTION:	From Numerical Recipes in C chapter 11
                 The most performent way to perform the diagonalisation of
-                                a real symmetric matrix of large size  , based
-on Householder tridiagonalisation method  , followed by a tridiagonal QL
-                                implicit method
-                In input  , sym_mat[0..n-1][0..n-1] is a real symmetric matrix
-                On output  , eigen_val[0..n-1] returns the eigen values of
-sym_mat. eigen_vec[0..n-1][0..n-1] is a matrix that stores all the corresponding
+                                a real symmetric matrix of large size      ,
+based on Householder tridiagonalisation method      , followed by a tridiagonal
+QL implicit method In input      , sym_mat[0..n-1][0..n-1] is a real symmetric
+matrix On output      , eigen_val[0..n-1] returns the eigen values of sym_mat.
+eigen_vec[0..n-1][0..n-1] is a matrix that stores all the corresponding
 renormalised eigen vectors of sym_mat ( eigen_vec[...][i] corresponds to
 eigen_val[i] )
 

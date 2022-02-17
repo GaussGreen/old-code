@@ -4,7 +4,7 @@
 ////////////////////
 //	warnings
 #pragma warning(disable : 4786) //"identifier was truncated to '255' characters
-                                //in the debug information"
+                                // in the debug information"
 
 // NB: force warnings for unused arguments and local parameters
 #pragma warning(1 : 4100 4101)
@@ -57,26 +57,27 @@ typedef int(__stdcall *PFN_COMPARE_BINARY)(const void * /*pvRight*/,
                                            const void * /*pvLeft */);
 
 // standard interface for unary function
-typedef void(__stdcall *PFN_U)(const void *, // pIn
-                               void *, // pComm  , // common function parameters
-                               void *  // output
+typedef void(__stdcall *PFN_U)(
+    const void *, // pIn
+    void *,       // pComm      , // common function parameters
+    void *        // output
 );
 
 // standard interface for binary function
 typedef void(__stdcall *PFN_BI)(
     const void *, // pIn1
     const void *, // pIn2
-    void *,       // pComm  , // common function parameters
+    void *,       // pComm      , // common function parameters
     void *        // output
 );
 //-------------------------------------------------------------------------------------------------------
 //	Description: transform the matrix pOut by calling the binary function
-//pfnBI
+// pfnBI
 //
 //	Returns : if(n1R)
 //						pOut[n_RBegin+i][nC_Begin+j]=pfnBI(pIn1[i]
-//,pIn2[j]  ,pComm) 					else 						pOut[n_RBegin+j][nC_Begin+i]=pfnBI(pIn1[i]  ,pIn2[j]
-//,pComm)
+//    ,pIn2[j]      ,pComm) 					else
+//    pOut[n_RBegin+j][nC_Begin+i]=pfnBI(pIn1[i]      ,pIn2[j] ,pComm)
 //
 //	NB:  pfnBI must take the order of the arguments pIn1 and pIn2
 //-------------------------------------------------------------------------------------------------------
@@ -91,16 +92,16 @@ void _transform_matrix(
         nSize_Out, // size of elements (in bytes) returned by the binary functor
     PFN_BI pfnBI,  // binary functor
     void *pComm,   // common function parameters
-    void **pOut,   // output-	pOut[nR_Begin  ,...][nC_Begin  ,...]
+    void **pOut,   // output-	pOut[nR_Begin      ,...][nC_Begin      ,...]
     unsigned nR_Begin, unsigned nC_Begin, int n1R);
 
 //+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-// function retuns 1 if dX equals machine precision  , 0 otherwise
+// function retuns 1 if dX equals machine precision      , 0 otherwise
 int is_zero(double dX);
 
 //+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
 //// exp_integrate_pc first integrates y(x) from x= dLB to x = dUB
-//// piece-wise constant  , and then returns the exp of the integration
+//// piece-wise constant      , and then returns the exp of the integration
 double exp_integrate_pc(double dLB, // integration lower bound
                         double dUB, // integration upper bound
                         const double *pdX, const double *pdY, int nBegin,
@@ -108,15 +109,15 @@ double exp_integrate_pc(double dLB, // integration lower bound
 
 //+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
 //// exp_minus_integrate_pc first integrates y(x) from x= dLB to x = dUB
-//// piece-wise constant  , and then returns the exp of -1. * integration
+//// piece-wise constant      , and then returns the exp of -1. * integration
 double exp_minus_integrate_pc(double dLB, // integration lower bound
                               double dUB, // integration upper bound
                               const double *pdX, const double *pdY, int nBegin,
                               int nEnd);
 
 //+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-// performs binary search to determine least n s.t. compare(key  ,begin + m) <=
-// 0 for all m >= n
+// performs binary search to determine least n s.t. compare(key      ,begin + m)
+// <= 0 for all m >= n
 const void *lower_bound(const void *pvKey,   // pointer to key
                         const void *pvBegin, // pointer to base element
                         unsigned nElems,     // # elements
@@ -125,8 +126,8 @@ const void *lower_bound(const void *pvKey,   // pointer to key
 );
 
 //+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-// performs binary search to determine n s.t. compare(key  ,begin + m) < 0 for
-// all m >= n
+// performs binary search to determine n s.t. compare(key      ,begin + m) < 0
+// for all m >= n
 const void *upper_bound(const void *pvKey,   // pointer to key
                         const void *pvBegin, // pointer to base element
                         unsigned nElems,     // # elements
@@ -143,8 +144,8 @@ const void *_memset(const void *pKey,
 );
 
 //+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-///// returns min(n : pvBegin[n]  > *pvKey  , for 0 <= n <nElems )
-///// if no such an index can be found  , return pvBegin+nElems*nSize
+///// returns min(n : pvBegin[n]  > *pvKey      , for 0 <= n <nElems )
+///// if no such an index can be found      , return pvBegin+nElems*nSize
 const void *
 find_min_greater_than(const void *pvKey,   // pointer to key
                       const void *pvBegin, // pointer to base element
@@ -185,8 +186,8 @@ void _bmatch(const void *pcBegin,    // linear coordinates
              void *psubvOut);
 //+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
 // look up psubcBegin in pcBegin and return corresponding pvBegin in psubvOut
-// if elements in psubcBegin are not found in pcBegin  , interpolate according
-// to SORT convention
+// if elements in psubcBegin are not found in pcBegin      , interpolate
+// according to SORT convention
 void _bmatch_ex(const void *pcBegin,   // linear coordinates
                 unsigned ncSize,       // size of coordinates (in bytes)
                 const void *pvBegin,   // # elements in values
@@ -207,8 +208,8 @@ void _sort2(const void *pv1Begin, // base 1
             void *pvOut);
 
 //+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-// combine and then sort pv1Begin  , pv2Begin  and pv3Begin in ascending order
-// results returned in pvOut
+// combine and then sort pv1Begin      , pv2Begin  and pv3Begin in ascending
+// order results returned in pvOut
 void _sort3(const void *pv1Begin, // base 1
             unsigned n1Elems,     // # elements in pv1Begin
             const void *pv2Begin, // base 2
@@ -220,7 +221,7 @@ void _sort3(const void *pv1Begin, // base 1
 
 //+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
 // perform linear interpolation according to the SORT convention : (left open
-// ,righ close] results returned in pv
+//     ,righ close] results returned in pv
 void sort_interpolate(
     const void *pcBegin,   // linear coordinates
     unsigned ncSize,       // size of coordinates (in bytes)

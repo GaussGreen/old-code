@@ -27,4 +27,4 @@ fi
 # Run clang-format -i on all of the things
 files_added=`git diff --cached --name-only | egrep '\.c$|\.cxx$|\.cpp$|\.cu$|\.h$|\.hxx$|\.h.in$|\.hpp$|\.java$' `
 files_existent=`git diff --name-only | egrep '\.c$|\.cxx$|\.cpp$|\.cu$|\.h$|\.hxx$|\.h.in$|\.hpp$|\.java$' `
-"${FMT}" -verbose -i $files_existent
+"${FMT}" -verbose -i $files_existent $files_added

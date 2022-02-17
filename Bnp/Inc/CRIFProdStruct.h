@@ -29,7 +29,7 @@ typedef struct {
   int iNumStartIndex;
   int iNbUsedNumCpn;
 
-  int *iFloatingType; /* 0: no floating  , 1: floating */
+  int *iFloatingType; /* 0: no floating      , 1: floating */
 
   /* Coupon Payoff = dAlpha * PreviousCoupon  + dBeta * CMSS + dGamma  */
   double *dAlpha;
@@ -101,7 +101,7 @@ typedef struct {
 } crif_call_aux, *CRIF_CALL_AUX;
 
 typedef struct {
-  double dPayRec; /* -1: Pay  , +1: Rec */
+  double dPayRec; /* -1: Pay      , +1: Rec */
 
   int iNbCall;
   long *lExeDate;

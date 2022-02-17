@@ -37,9 +37,13 @@ Err MY_LGM2F_Preliminary_Computation_For_Df(long today, long eventDate,
 void MY_LGM2F_Compute_Df_From_Factors_Value(double fact1, double fact2,
                                             MYLGM2F mylgm2f);
 
-// void MY_LGM2F_Compute_Df_From_Factors_Value(long today  , long eventDate  ,
-//										   double fact1  ,
-//double fact2  , 										   MYLGM2F mylgm2f  , TermStruct* l  , 										   char *yc);
+// void MY_LGM2F_Compute_Df_From_Factors_Value(long today      , long eventDate
+// ,
+//										   double fact1
+//,
+// double fact2      ,
+// MYLGM2F mylgm2f      , TermStruct* l      ,
+// char *yc);
 
 Err MY_LGM2F_Compute_Mean_Variance_Covariance(long today, long eventDate,
                                               long probaDate, MYLGM2F mylgm2f,
@@ -91,10 +95,12 @@ Err SWAP_FOR_LGM2F_Preliminary_Computation(long today, long eventDate,
 double SWAP_FOR_LGM2F_SwapRate_From_Factors_Value(double fact1, double fact2,
                                                   swap_for_lgm2f *swapForLgm2f);
 
-// double SWAP_FOR_LGM2F_SwapRate_From_Factors_Value(long today  , long
-// eventDate  , 											double fact1  , double fact2  , 											swap_for_lgm2f *swapForLgm2f  ,
+// double SWAP_FOR_LGM2F_SwapRate_From_Factors_Value(long today      , long
+// eventDate      ,
+// double fact1      , double fact2      ,
+// swap_for_lgm2f *swapForLgm2f      ,
 //											TermStruct*
-//l  , char *yc);
+// l      , char *yc);
 
 Err Free_SWAP_FOR_LGM2F(SWAPFORLGM2F swapForLgm2f);
 

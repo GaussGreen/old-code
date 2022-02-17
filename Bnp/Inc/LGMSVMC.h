@@ -15,7 +15,7 @@ Err lgmSV_mc_balsam(
 
     double *dAlpha, double *dLambdaEps, double *dLvlEps, double *dRho,
 
-    /* Parameters for DF(t  ,T*) reconstruction */
+    /* Parameters for DF(t      ,T*) reconstruction */
     double *dff_star, double *gam_star, double *gam2_star,
 
     /* Parameters */
@@ -58,7 +58,7 @@ Err lgmSV2F_mc_balsam(
     double *dAlpha, double *dLambdaEps, double *dLvlEps, double *dRho,
     double *dRho2,
 
-    /* Parameters for DF(t  ,T*) reconstruction */
+    /* Parameters for DF(t      ,T*) reconstruction */
     double *dff_star, double *gam1_star, double *gam2_star, double *gam1_2_star,
     double *gam2_2_star, double *gam12_star,
 
@@ -101,7 +101,7 @@ Err lgmSV_mc_balsam_rev(
 
     double *dAlpha, double *dLambdaEps, double *dLvlEps, double *dRho,
 
-    /* Parameters for DF(t  ,T*) reconstruction */
+    /* Parameters for DF(t      ,T*) reconstruction */
     double *dff_star, double *gam_star, double *gam2_star,
 
     /* Parameters */
@@ -149,7 +149,7 @@ Err lgmSV2F_mc_balsam_rev(
     double *dAlpha, double *dLambdaEps, double *dLvlEps, double *dRho,
     double *dRho2,
 
-    /* Parameters for DF(t  ,T*) reconstruction */
+    /* Parameters for DF(t      ,T*) reconstruction */
     double *dff_star, double *gam1_star, double *gam2_star, double *gam1_2_star,
     double *gam2_2_star, double *gam12_star,
 
@@ -200,7 +200,7 @@ Err lgmSV2F_mc_balsam_optim_mem(
     double *dAlpha, double *dLambdaEps, double *dLvlEps, double *dRho,
     double *dRho2,
 
-    /* Parameters for DF(t  ,T*) reconstruction */
+    /* Parameters for DF(t      ,T*) reconstruction */
     double *dff_star, double *gam1_star, double *gam2_star, double *gam1_2_star,
     double *gam2_2_star, double *gam12_star,
 

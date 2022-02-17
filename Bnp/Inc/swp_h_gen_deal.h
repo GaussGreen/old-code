@@ -4,8 +4,8 @@
 
         AUTHOR	:	G. Amblard
 
-        First Version:	September 10  , 1993
-        Last Modified:	September 11  , 1993
+        First Version:	September 10      , 1993
+        Last Modified:	September 11      , 1993
 
 **/
 #ifndef SWP_H_GEN_DEAL_H

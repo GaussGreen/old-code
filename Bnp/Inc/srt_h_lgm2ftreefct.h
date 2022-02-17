@@ -25,7 +25,8 @@ Err lgm2f_trelim(SrtStpPtr stp, SrtDiagTwoFacTreeInfo *maxtrinf);
    --------------------------------------------------------------------------------------
  */
 void populate_lgm2f_tree_node(
-    SrtIRMTmInf *tminf, /* time info  , ie. sigma  , tau and rho at step */
+    SrtIRMTmInf
+        *tminf, /* time info      , ie. sigma      , tau and rho at step */
     SrtPentoTreeNodeInfo *node, /* output will be returned in node->forward */
     double dt,                  /* delta t between this step and next */
     SrtDiagTwoFacTreeInfo

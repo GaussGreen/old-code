@@ -318,7 +318,7 @@ Err quadratic_bs(double constant_coef, double linear_coef,
 
 typedef struct {
   double min_time;
-  int numeraire; /*0: QBeta  , 1:QTStar */
+  int numeraire; /*0: QBeta      , 1:QTStar */
   int do_pecs;
   int do_discount;
 

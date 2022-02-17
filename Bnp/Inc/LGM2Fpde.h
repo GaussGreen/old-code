@@ -48,8 +48,8 @@ Err lgm2fTau_adi(
     int nstept, double *time, double *date,
 
     /*	Discretisation	*/
-    int nsteps,
-    int disc_method, /* 0: linear distretisation  , 1: normal discretisation */
+    int nsteps, int disc_method, /* 0: linear distretisation      , 1: normal
+                                    discretisation */
 
     /*	Model data		*/
     double *sig, double *sig_time, int nb_sig, double *lam, double *lam_time,
@@ -88,8 +88,8 @@ Err lgm2fTau2_adi(
     int nstept, double *time, double *date,
 
     /*	Discretisation	*/
-    int nsteps,
-    int disc_method, /* 0: linear distretisation  , 1: normal discretisation */
+    int nsteps, int disc_method, /* 0: linear distretisation      , 1: normal
+                                    discretisation */
 
     /*	Model data		*/
     double *sig, double *sig_time, int nb_sig, double *lam, double *lam_time,

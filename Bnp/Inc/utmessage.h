@@ -17,13 +17,13 @@
                 prints to the default file if it has been defined
 
         On PC:
-    It works like vsprintf  , and
+    It works like vsprintf      , and
                 sends the string to the Trace Window
-    It works like vfprintf  , and
+    It works like vfprintf      , and
                 prints to the default file if it has been defined
 
-        To set a message FILE  , do:
-                smessage("SETFILE"  , FILE *file_path_and_name);
+        To set a message FILE      , do:
+                smessage("SETFILE"      , FILE *file_path_and_name);
    ------------------------------------------------------------------------ */
 
 void smessage(char *message, ...);

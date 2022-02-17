@@ -18,7 +18,8 @@
 typedef SrtListHdr SrtDvdObj;
 
 /* ------------------------------------------------------------------------------------
-   FUNCTIONS TO CREATE  , INSERT AN ELEMENT IN OR DELETE A SrtDvdObj == SrtList
+   FUNCTIONS TO CREATE      , INSERT AN ELEMENT IN OR DELETE A SrtDvdObj ==
+   SrtList
    ------------------------------------------------------------------------------------
  */
 
@@ -29,7 +30,7 @@ Err srt_f_dvdobj_create(Date today, char *dvd_name, SrtDvdObj **dvdobj);
 /* Delete a SrtdvdObject and everything it contains */
 Err srt_f_dvdobj_delete(SrtDvdObj **dvdobj);
 
-/* Insert a point (date  , value) in the forward object */
+/* Insert a point (date      , value) in the forward object */
 Err srt_f_dvdobj_insertpoint(SrtDvdObj *dvdobj, Ddate date, double dvd);
 
 /* ----------------------------------------------------------------------------------

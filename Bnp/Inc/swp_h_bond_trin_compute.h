@@ -2,10 +2,10 @@
 
         SWP_H_BOND_TRIN_COMPUTE.H
 
-authors: A.P.  , O.VE.  , A.B.  , HdL
+authors: A.P.      , O.VE.      , A.B.      , HdL
 version: 24/10/94
 
-Last modified: Dec 2  , 1994 by K L Chau
+Last modified: Dec 2      , 1994 by K L Chau
 Reason: use new SrtMkt structure
 **********************************************/
 
@@ -74,7 +74,7 @@ typedef struct tree_step_struct /* diff from forex tree	*/
 } Step;
 
 typedef struct node_struct {
-  double intrinsic;    /* (S-K) for a call  , (K-S) for a put	*/
+  double intrinsic;    /* (S-K) for a call      , (K-S) for a put	*/
   double asset;        /* Underlying value			*/
   double disc_premium; /* Discounted expected value of the option  */
   double forward;      /* From NODE to OPTION MATURITY		*/

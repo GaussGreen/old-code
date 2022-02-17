@@ -1,7 +1,8 @@
 /* ===================================================================================
    FILENAME:      swp_h_swaption.h
 
-   PURPOSE:       Compute swaption prices and greeks  , and implied volatilities
+   PURPOSE:       Compute swaption prices and greeks      , and implied
+   volatilities
    ===================================================================================
  */
 
@@ -85,7 +86,7 @@ Err swp_f_QuantoCashSettledSwaption_SwapDP(
     SrtGreekType greek, SrtDiffusionType norm_or_log, double precision,
     double *answer);
 
-/*	Alan -- Compute the price of a quanto swaption  ,
+/*	Alan -- Compute the price of a quanto swaption      ,
         Mad spliting -- to include vector of end dates */
 
 Err swp_f_QuantoSwaptionPrice(
@@ -97,7 +98,7 @@ Err swp_f_QuantoSwaptionPrice(
     double *pdCorrelationCmsForwardFx, long lNumOfVolsAndCorrels,
     char *sDomYCName, SRT_Boolean bAdjustCmsVol, double *dQuantoSwaption);
 
-/*	Alan -- Compute the price of a quanto swaption  ,
+/*	Alan -- Compute the price of a quanto swaption      ,
         West version -- Compute all details */
 
 Err swp_f_QuantoSwaption(

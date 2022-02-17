@@ -44,15 +44,16 @@ Err GrfnAutocalCaller(
     double *corr_times, double *correl_dom_for, double *correl_dom_fx,
     double *correl_for_fx, long corr_n_times,
     /*	Structure */
-    /*	If ex_date is NULL  ,
+    /*	If ex_date is NULL      ,
     exercise dates will be generated 2bd before start */
-    int num_ex_dates, /*	Exercise dates  ,
-                                                      all supposed to be on or
-                         after today */
+    int num_ex_dates, /*	Exercise dates      ,
+                                                  all supposed to be on or
+                     after today */
     long *ex_date,    /*	Supposed to be sorted */
-    int *cal_date,    /*	1: use ex_date as calibration date  , 0: don't */
+    int *cal_date,    /*	1: use ex_date as calibration date      , 0: don't */
     /*	If calibration dates are overwritten */
-    int owr_cal_dates,    /*	1: use overwritten dates  , 0: use ex_date */
+    int owr_cal_dates,    /*	1: use overwritten dates      , 0: use ex_date
+                           */
     int num_owr_dates,    /*	Number of overwritten dates */
     long *owr_date,       /*	Overwritten dates */
     char **dom_end_tenor, /*	Tenors of the underlying instruments or "DIAG"
@@ -68,7 +69,7 @@ Err GrfnAutocalCaller(
     /* End of Day Flags */
     int is_end_of_day_fixing, int is_end_of_day_payment,
     /*	Pricing method */
-    int mth, /*	0: Tree  , 1: Monte-Carlo */
+    int mth, /*	0: Tree      , 1: Monte-Carlo */
     /*	Pricing parameters */
     FX3DATC_PARAM pricing_param,
     /*	Calibration output */

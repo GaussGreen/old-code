@@ -2,7 +2,7 @@
 
    FILENAME:   SRT_H_TS_IRM_2F_INIT.H
 
-   PURPOSE:    Initialise a volatility term structure for a two factor model  ,
+   PURPOSE:    Initialise a volatility term structure for a two factor model ,
                straight from raw data (dates + values)
 
    ============================================================================

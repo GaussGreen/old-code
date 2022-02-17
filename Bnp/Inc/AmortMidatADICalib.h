@@ -4,7 +4,7 @@
 ////////////////////
 //	warnings
 #pragma warning(disable : 4786) //"identifier was truncated to '255' characters
-                                //in the debug information"
+                                // in the debug information"
 
 // NB: force warnings for unused arguments and local parameters
 #pragma warning(1 : 4100 4101)
@@ -74,7 +74,8 @@ void Calibrate_MidAt_Preprocess(
     long lToday, const char *szYC,
     /// MidAt General Specs
     const char *szRefRate, // Refrate
-    const char *szFreq,    // frequency of the fixed leg -"M"  ,"Q"  ,"S"  ,"A"
+    const char
+        *szFreq, // frequency of the fixed leg -"M"      ,"Q"      ,"S" ,"A"
     const double *pdCoupon_Begin, // coupon
     // MidAt Exercise
     const long *plEx_Begin,
@@ -98,15 +99,16 @@ const char *_Calibrate_MidAt(
     /// MidAt General Specs
     long lTheoEnd,
     const char *szRefRate, // Refrate
-    const char *szFreq,    // frequency of the fixed leg -"M"  ,"Q"  ,"S"  ,"A"
-    const char *szBasis,   // basis of the fixed leg
+    const char
+        *szFreq, // frequency of the fixed leg -"M"      ,"Q"      ,"S" ,"A"
+    const char *szBasis, // basis of the fixed leg
     // MidAt Exercise
     const long *plEx_Begin,
     const long *plEx_End, // exercise dates
     // calib params
     const char **pszSwapTenor_Begin, const double *pdSwapStrike_Begin,
     const char **pszCapTenor_Begin, const double *pdCapStrike_Begin,
-    int nCalibTauToCap, // 1 - calibrate Tau to cap  , 0 otherwise
+    int nCalibTauToCap, // 1 - calibrate Tau to cap      , 0 otherwise
     const double *pdAlpha, const double *pdGamma, const double *pdRho,
     const cpd_diag_calib_param *pParam_Swaption,
     const cpd_diag_calib_param *pParam_Caplet,
@@ -125,8 +127,9 @@ const char *Calibrate_MidAt(
     /// MidAt General Specs
     long lTheoEnd,
     const char *szRefRate, // Refrate
-    const char *szFreq,    // frequency of the fixed leg -"M"  ,"Q"  ,"S"  ,"A"
-    const char *szBasis,   // basis of the fixed leg
+    const char
+        *szFreq, // frequency of the fixed leg -"M"      ,"Q"      ,"S" ,"A"
+    const char *szBasis,          // basis of the fixed leg
     const double *pdCoupon_Begin, // coupon
     // MidAt Exercise
     const long *plEx_Begin,
@@ -139,7 +142,7 @@ const char *Calibrate_MidAt(
     const long *plFltEnd_Begin, const long *plFltPay_Begin,
     const double *pdMargin_Begin, const double *pdSpread_Begin,
     // term structure
-    int nCalibTauToCap, // 1 - calibrate Tau to cap  , 0 otherwise
+    int nCalibTauToCap, // 1 - calibrate Tau to cap      , 0 otherwise
     const double *pdAlpha, const double *pdGamma, const double *pdRho,
     // calibration Param_Caplet
     const cpd_diag_calib_param *pParam_Swaption,
@@ -159,10 +162,10 @@ const char *Calibrate_GenMidAt(
     const char *szCorrel,
     Err (*get_correl)(char *, double, double, double, double *),
     // GenMidAt general info
-    int eod_flag, //	EOD Flag 0: I  , 1: E
+    int eod_flag, //	EOD Flag 0: I      , 1: E
     long lTheoEnd,
     const char *szRefRate, // ref rate
-    const char *szFreq,    // swap_freq  , //swap freq
+    const char *szFreq,    // swap_freq      , //swap freq
     const char *szBasis,   //	swap basis
     // Exercise info
     const long *plEx_Begin, const long *plEx_End,
@@ -185,11 +188,11 @@ const char *Calibrate_GenMidAt(
     const char *default_swap_freq,  // swap freq
     const char *default_swap_basis, // swap basis
     double dMinTime, double dMinInterval, long lNotice, double dMaxStdShort,
-    int nFixLam, // 0: calib lambda to cap  , 1: fix lambda calib	to
-                 // diagonal
-    int n1FEqui, // 1: 2F lambda will calibrate to the cap priced within
-                 // calibrated 1F	with the given lambda
-    int nSkipLast, // If 1  , the last option is disregardedand the forward
+    int nFixLam,   // 0: calib lambda to cap      , 1: fix lambda calib	to
+                   // diagonal
+    int n1FEqui,   // 1: 2F lambda will calibrate to the cap priced within
+                   // calibrated 1F	with the given lambda
+    int nSkipLast, // If 1      , the last option is disregardedand the forward
                    // volatility is flat from option	n-1
     int nUseJump, double dMaxVarJump, int nStrikeType, int nEuroModel,
     // Calibration results

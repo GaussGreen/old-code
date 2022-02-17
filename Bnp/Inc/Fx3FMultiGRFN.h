@@ -5,9 +5,9 @@
 #include "grf_h_mdlcomm.h"
 
 typedef struct {
-  int num_und;    /* number of underlyings */
-  int nb_dates;   /* number of dates */
-  int *type;      /* 0 for domestic LGM  , 1 for foreign LGM  , 2 for FX */
+  int num_und;  /* number of underlyings */
+  int nb_dates; /* number of dates */
+  int *type; /* 0 for domestic LGM      , 1 for foreign LGM      , 2 for FX */
   int *dom_forex; /* index of the corresponding domestic to the forex i*/
   int *for_forex; /* index of the corresponding foreign to the forex i*/
   int *fx_index;  /* index of the fx underlying FOREIGN LGM / DOMESTIC LGM */

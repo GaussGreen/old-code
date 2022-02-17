@@ -21,11 +21,10 @@ time steps . long 		min_nodes_per_path; Minimum number of time steps
 to create for discretisation . SRT_Boolean 	force_mc; Force the use of Monte
 Carlo for a "neutral" tableau . SRT_Boolean     Jumping; Force the use if
 possible of the Jumping Numeraire method (MC Core). SrtMCSamType
-sample_type; Monte Carlo random number generation method (ABS  , Sobol  , ...) .
-                SrtMCDfSchType 	difference_scheme;
-                                Monte Carlo discretisation scheme (Euler or
-Milshtein) . SRT_Boolean 	mc_renormalize; Force the Cheyette type Monte
-Carlo control variate on dfs .
+sample_type; Monte Carlo random number generation method (ABS      , Sobol ,
+...) . SrtMCDfSchType 	difference_scheme; Monte Carlo discretisation scheme
+(Euler or Milshtein) . SRT_Boolean 	mc_renormalize; Force the Cheyette type
+Monte Carlo control variate on dfs .
 
 - ------------------------------------------------------------------------
         These can be user defined from the spreadsheet and can be useful
@@ -41,14 +40,11 @@ insert_vol_dates; Force the time discretisation to incorporate the volatility
                                 dates .
 
                 SRT_Boolean		end_of_day_flg;
-                                If true  , today's line is conisdered as being
-                                past and payments occurring today will not be
-                                taken into account
-                                and fixings will have of be used
-                SRT_Boolean		end_of_day_fixings;
-                                If true  , today's line is conisdered as being
-                                past and fixings will be required for events
-                                occuring today.
+                                If true      , today's line is conisdered as
+being past and payments occurring today will not be taken into account and
+fixings will have of be used SRT_Boolean		end_of_day_fixings; If
+true      , today's line is conisdered as being past and fixings will be
+required for events occuring today.
    ------------------------------------------------------------------------
         These can be user defined from the spreadsheet and are for debug
    ------------------------------------------------------------------------ .
@@ -61,7 +57,8 @@ insert_vol_dates; Force the time discretisation to incorporate the volatility
 
    ------------------------------------------------------------------------
         These can be user defined from the spreadsheet and are USELESS :
-        they have no effect at all  , but are there for backward compatibility
+        they have no effect at all      , but are there for backward
+compatibility
    ------------------------------------------------------------------------ .
                 SRT_Boolean		spline ;
                                 Only for backward compatibility : not used any
@@ -71,7 +68,7 @@ not used any longer . SRT_Boolean 	insert_tenor_dates; Only for backward
 compatibility : not used any longer .
 
    ------------------------------------------------------------------------
-        These parameters are important  , but are set up by the program
+        These parameters are important      , but are set up by the program
    ------------------------------------------------------------------------ .
                 long 		step_num;
                                 Number of steps in a tree discretisation: set
@@ -145,7 +142,7 @@ typedef struct {
 } SrtGrfnParam;
 
 /* ------------------------------------------------------------------------
-        STRUCT:		SrtMdl  , SrtMdlPtr
+        STRUCT:		SrtMdl      , SrtMdlPtr
 
         PURPOSE:	Store external information required for a Grfn pricing
    ------------------------------------------------------------------------ */

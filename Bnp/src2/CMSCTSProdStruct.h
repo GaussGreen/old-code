@@ -26,8 +26,8 @@ typedef struct {
   /* CMS Informations */
   long lNumStrikesInVol; /*	Array of strikes in vol matrix */
   double *dStrikesInVol;
-  SrtDiffusionType
-      eVolType; /*	Type of vol in matrix  , SRT_NORMAL or SRT_LOGNORMAL */
+  SrtDiffusionType eVolType; /*	Type of vol in matrix        , SRT_NORMAL or
+                                SRT_LOGNORMAL */
   int iCashVol; /*	1: matrix is a cash vol 0: matrix is a swap vol */
   int iIsSABR;
 
@@ -36,7 +36,7 @@ typedef struct {
   double dFundSpotFx;
   long lFundFxSpotDate;
 
-  /* EOD flags 0: Intraday  , 1: End of Day */
+  /* EOD flags 0: Intraday        , 1: End of Day */
   int iEODFixFlag;
   int iEODPayFlag;
   int iEODExeFlag;
@@ -78,7 +78,7 @@ typedef struct {
 } cmscts_fund_aux, *CMSCTS_FUND_AUX;
 
 typedef struct {
-  int iCCY; /*	0: domestic  , 1: other */
+  int iCCY; /*	0: domestic        , 1: other */
   char cRefRate[20];
 
   int iNbCpn;
@@ -89,8 +89,9 @@ typedef struct {
   long *lPayDate;
   double *dCoverage;
   double *dMargin;
-  double *dFixCoupon; /*	Past coupon fixing if relevant  ,
-                         includes spr  , but not mrg  , cvg and notional */
+  double *dFixCoupon; /*	Past coupon fixing if relevant        ,
+                         includes spr        , but not mrg        , cvg and
+                         notional */
 
   /* calculation aux */
   CMSCTS_FUND_AUX sAux;
@@ -119,8 +120,8 @@ typedef struct {
   int iNbUsedNumCpn;
 
   /* Accrual Def */
-  int *iFloatingType; /* 0: no floating  , 1: floating in advance  , 2: floating
-                         in arrears */
+  int *iFloatingType; /* 0: no floating        , 1: floating in advance        ,
+                         2: floating in arrears */
 
   int *iIVNbTrimFix;
   int **iIVTrimIdx;
@@ -229,7 +230,7 @@ typedef struct {
 } cmscts_call_aux, *CMSCTS_CALL_AUX;
 
 typedef struct {
-  double dPayRec; /* -1: Pay  , +1: Rec */
+  double dPayRec; /* -1: Pay        , +1: Rec */
 
   int iNbCall;
   long *lExeDate;
@@ -429,7 +430,8 @@ void cmscts_free_calib(CMSCTS_CALIB sCalib);
 /* For Coupon Pricing */
 typedef struct {
   /* Triming for Accrual */
-  /* 0: no trim  , 1: x fixings max  , 2: x time min between two fixings */
+  /* 0: no trim        , 1: x fixings max        , 2: x time min between two
+   * fixings */
   int iIVTrimType;
   int iIVMaxFix;
   double dIVMinFixTime;

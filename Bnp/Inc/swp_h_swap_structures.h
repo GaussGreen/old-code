@@ -14,7 +14,8 @@
 #include "swp_h_swap_utils.h"
 
 /* ------------------------------------------------------------------------ */
-/* THE structure to represent a swap leg: type  , dates  , df  , cvg  , ... */
+/* THE structure to represent a swap leg: type      , dates      , df      , cvg
+ * , ... */
 typedef struct gen_swap_leg {
   LegType leg_type;
   CcyCode ccy;
@@ -46,7 +47,7 @@ typedef struct gen_swap_leg {
 } GenSwapLeg;
 
 /* ------------------------------------------------------------------------ */
-/* THE structure to represent a full swap  , made of two legs                 */
+/* THE structure to represent a full swap      , made of two legs */
 typedef struct gen_full_swap {
   SwapType swap_type;
   GenSwapLeg leg[2];

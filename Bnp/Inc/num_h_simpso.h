@@ -18,7 +18,7 @@ double sm_trapzd(double (*function)(double), double a, double b, int n,
 
 double sm_qsimp(double (*func)(double), double a, double b, double precision);
 
-/* Same ones  , but works with a variable argument list */
+/* Same ones      , but works with a variable argument list */
 
 double sm_trapzd_list(double (*function)(double, va_list), double a, double b,
                       int n, double accum, va_list argptr);

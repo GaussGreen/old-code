@@ -16,12 +16,12 @@ Err principal_component_analysis(double **covar, int n, double eigen_val[],
    on the main two axes (given by the main two eigen values):
         - the explained percentage of variance expl_per
         - the first two volatilities of the factors (sqrt of the eigen values)
-        - the function that will be used to fit a two factor model  ,
+        - the function that will be used to fit a two factor model      ,
           that defines the correlation (it is linked to correlation by the
           following relationship:
 
                                1 + func(x)*func(y)
-                cor(x  ,y) = ------------------------------------
+                cor(x      ,y) = ------------------------------------
                            sqrt(1+func(x)^2)*sqrt(1+func(y)^2)
 
         - the "new" two factor correlation matrix after projection on the

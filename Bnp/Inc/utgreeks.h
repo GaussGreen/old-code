@@ -69,7 +69,7 @@ typedef enum SrtGreekType {
   LASTGREEKTYPE,
   ALPHA,
   BETA,
-  DU1,      /* sensitivity to the positive amplitude  , in the Merton model */
+  DU1, /* sensitivity to the positive amplitude      , in the Merton model */
   DLAMBDA1, /* sensitivity to the positive intensity*/
   DU2,      /* sensitivity to the negative amplitude */
   DLAMBDA2, /*  sensitivity to the negative intensity*/

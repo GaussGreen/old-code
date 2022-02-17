@@ -20,39 +20,41 @@ double BVM_Second_Order_Perturbation_Price(
     double *x_leg);
 
 /*
-double BVM_Perturbation_Price2(double today  ,
-                                                double Fwd  ,
-                                                double Vol  ,
-                                                double Strike  ,
-                                                double Maturity  ,
-                                                double alpha  ,
-                                                double rho  ,
-                                                int	NQuad_Her  ,
-                                                double *w_her  ,
-                                                double *x_her  ,
-                                                int	NQuad_Leg  ,
-                                                double *w_leg  ,
+double BVM_Perturbation_Price2(double today      ,
+                                                double Fwd      ,
+                                                double Vol      ,
+                                                double Strike      ,
+                                                double Maturity      ,
+                                                double alpha      ,
+                                                double rho      ,
+                                                int	NQuad_Her      ,
+                                                double *w_her      ,
+                                                double *x_her      ,
+                                                int	NQuad_Leg      ,
+                                                double *w_leg      ,
                                                 double *x_leg);
 */
 
-Err sabrBVMmontecarlo(
-    double forw, double vovol, double beta, double rho, double num_paths,
-    double num_steps, double sigma, double maturity, double *strike,
-    int num_strikes, int modeltype,
-    int sampletype, /*0: randsam  , 1: abs  , 2:sobol  , 3: SPECTRUNC*/
-    double *impvol);
+Err sabrBVMmontecarlo(double forw, double vovol, double beta, double rho,
+                      double num_paths, double num_steps, double sigma,
+                      double maturity, double *strike, int num_strikes,
+                      int modeltype,
+                      int sampletype, /*0: randsam      , 1: abs      , 2:sobol
+                                         , 3: SPECTRUNC*/
+                      double *impvol);
 
 Err sabrBVMmontecarlo2(double forward, double *strike, int nb_strike,
                        double maturity, double sigma_beta, double alpha,
                        double beta, double rho, double lambda, int npaths,
                        int nsteps, int do_balsam, double **res);
 
-Err sabrBVMmontecarlo3(
-    double forw, double vovol, double beta, double rho, double lambda,
-    double num_paths, double num_steps, double sigma, double maturity,
-    double *strike, int num_strikes, int modeltype,
-    int sampletype, /*0: randsam  , 1: abs  , 2:sobol  , 3: SPECTRUNC*/
-    double *impvol);
+Err sabrBVMmontecarlo3(double forw, double vovol, double beta, double rho,
+                       double lambda, double num_paths, double num_steps,
+                       double sigma, double maturity, double *strike,
+                       int num_strikes, int modeltype,
+                       int sampletype, /*0: randsam      , 1: abs      , 2:sobol
+                                          , 3: SPECTRUNC*/
+                       double *impvol);
 
 double SABRNormalVol(double forward, double strike, double maturity,
                      double betavol, double vovol, double rho, double beta);

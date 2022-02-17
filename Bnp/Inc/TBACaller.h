@@ -30,7 +30,7 @@ void PrintTweak(double Option,     /* Option price */
 
 void Main_Prepay(
     double **Amort,   /* Array of smms of various speed groups in the interest
-                         rate lattice */
+                     rate lattice */
     double *ParYield, /* Par Yield in the lattice at the current period */
     int CouponNb, /* Coupon Number: = deal_data->Term at the end of the tree */
     long Month,   /* Current month of the year (1 to 12) */

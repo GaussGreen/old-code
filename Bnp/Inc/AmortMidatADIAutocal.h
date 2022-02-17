@@ -4,7 +4,7 @@
 //////////////////////
 //	warnings
 #pragma warning(disable : 4786) //"identifier was truncated to '255' characters
-                                //in the debug information"
+                                // in the debug information"
 // NB: force warnings for unused arguments and local parameters
 #pragma warning(1 : 4100 4101)
 
@@ -24,8 +24,9 @@ typedef struct _Comm_MidAtAutocal {
   /// MidAt General Specs
   const long m_lTheoEnd;
   const char *m_szRefRate; // Refrate
-  const char *m_szFreq;    // frequency of the fixed leg -"M"  ,"Q"  ,"S"  ,"A"
-  const char *m_szBasis;   // basis of the fixed leg
+  const char
+      *m_szFreq; // frequency of the fixed leg -"M"      ,"Q"      ,"S" ,"A"
+  const char *m_szBasis;          // basis of the fixed leg
   const double *m_pdCoupon_Begin; // coupon
   const char *m_szPayRec;         //"REC" or "PAY"
   // MidAt Exercise
@@ -47,7 +48,7 @@ typedef struct _Comm_MidAtAutocal {
   const double *m_pdMargin_Begin;
   const double *m_pdSpread_Begin;
   // term structure
-  const int m_nCalibTauToCap; // 1 - calibrate Tau to cap  , 0 otherwise
+  const int m_nCalibTauToCap; // 1 - calibrate Tau to cap      , 0 otherwise
   const double *m_pdLamT_Begin;
   const double *m_pdLamT_End;
   const double *m_pdLam_Begin;
@@ -80,7 +81,7 @@ const char *GenMidAt_AutoCal(
     Err (*get_correl)(char *, double, double, double, double *),
     /// MidAt Specs
     const char *szRefRate,
-    int eod_flag, //	EOD Flag 0: I  , 1: E
+    int eod_flag, //	EOD Flag 0: I      , 1: E
     long lTheoEnd,
     const char *szPayRec, //"REC" or "PAY"
     // MidAt Exercise
@@ -109,16 +110,16 @@ const char *GenMidAt_AutoCal(
     const char *default_swap_freq,  // swap freq
     const char *default_swap_basis, // swap basis
     double dMinTime, double dMinInterval, long lNotice, double dMaxStdShort,
-    int nFixLam, // 0: calib lambda to cap  , 1: fix lambda calib	to
-                 // diagonal
-    int n1FEqui, // 1: 2F lambda will calibrate to the cap priced within
-                 // calibrated 1F	with the given lambda
-    int nSkipLast, // If 1  , the last option is disregardedand the forward
+    int nFixLam,   // 0: calib lambda to cap      , 1: fix lambda calib	to
+                   // diagonal
+    int n1FEqui,   // 1: 2F lambda will calibrate to the cap priced within
+                   // calibrated 1F	with the given lambda
+    int nSkipLast, // If 1      , the last option is disregardedand the forward
                    // volatility is flat from option	n-1
     int nUseJump, double dMaxVarJump, int nStrikeType, int nEuroModel,
     // grid
     int nNumPointT, int nNumPointX,
-    /// Results  ,
+    /// Results      ,
     // NB: Set the sig related ptrs to 0 to calibrate sigma; else use the sigma
     // passed in !!!
     long **pplSigDate_Begin, long **pplSigDate_End, double **ppdSig_Begin,
@@ -134,8 +135,9 @@ const char *MidAt_AutoCal(
     /// MidAt General Specs
     long lTheoEnd,
     const char *szRefRate, // Refrate
-    const char *szFreq,    // frequency of the fixed leg -"M"  ,"Q"  ,"S"  ,"A"
-    const char *szBasis,   // basis of the fixed leg
+    const char
+        *szFreq, // frequency of the fixed leg -"M"      ,"Q"      ,"S" ,"A"
+    const char *szBasis,          // basis of the fixed leg
     const double *pdCoupon_Begin, // coupon
     const char *szPayRec,         //"REC" or "PAY"
     // MidAt Exercise
@@ -152,7 +154,7 @@ const char *MidAt_AutoCal(
     const double *pdFltCvg_Begin, const double *pdMargin_Begin,
     const double *pdSpread_Begin,
     // term structure
-    int nCalibTauToCap, // 1 - calibrate Tau to cap  , 0 otherwise
+    int nCalibTauToCap, // 1 - calibrate Tau to cap      , 0 otherwise
     double *pdLamT_Begin, double *pdLamT_End, double *pdLam_Begin,
     const double *pdAlpha, const double *pdGamma, const double *pdRho,
     // calibration params
@@ -163,7 +165,7 @@ const char *MidAt_AutoCal(
     const cpd_diag_calib_param *pParam_Swaption,
     const cpd_diag_calib_param *pParam_Caplet,
     const diag_calib_lm_params *pCalibParam,
-    /// results  ,
+    /// results      ,
     double *pdOptionPV, double *pdFixLegPV, double *pdFltLegPV,
     double *pdExProb, double *pdExBoundary, int nUse_Backward);
 
@@ -175,8 +177,9 @@ const char *MidAt_AutoCal_Diag(
     /// MidAt General Specs
     long lTheoEnd,
     const char *szRefRate, // Refrate
-    const char *szFreq,    // frequency of the fixed leg -"M"  ,"Q"  ,"S"  ,"A"
-    const char *szBasis,   // basis of the fixed leg
+    const char
+        *szFreq, // frequency of the fixed leg -"M"      ,"Q"      ,"S" ,"A"
+    const char *szBasis,          // basis of the fixed leg
     const double *pdCoupon_Begin, // coupon
     const char *szPayRec,         //"REC" or "PAY"
     // MidAt Exercise
@@ -193,7 +196,7 @@ const char *MidAt_AutoCal_Diag(
     const double *pdFltCvg_Begin, const double *pdMargin_Begin,
     const double *pdSpread_Begin,
     // term structure
-    int nCalibTauToCap, // 1 - calibrate Tau to cap  , 0 otherwise
+    int nCalibTauToCap, // 1 - calibrate Tau to cap      , 0 otherwise
     const double *pdLam_Begin, const double *pdAlpha, const double *pdGamma,
     const double *pdRho,
     // calibration params
@@ -204,7 +207,7 @@ const char *MidAt_AutoCal_Diag(
     const cpd_diag_calib_param *pParam_Swaption,
     const cpd_diag_calib_param *pParam_Caplet,
     const diag_calib_lm_params *pCalibParam,
-    /// results  ,
+    /// results      ,
     double *pdOptionPV_Begin);
 
 const char *Euro_AutoCal_Diag(
@@ -215,8 +218,9 @@ const char *Euro_AutoCal_Diag(
     /// MidAt General Specs
     long lTheoEnd,
     const char *szRefRate, // Refrate
-    const char *szFreq,    // frequency of the fixed leg -"M"  ,"Q"  ,"S"  ,"A"
-    const char *szBasis,   // basis of the fixed leg
+    const char
+        *szFreq, // frequency of the fixed leg -"M"      ,"Q"      ,"S" ,"A"
+    const char *szBasis,          // basis of the fixed leg
     const double *pdCoupon_Begin, // coupon
     const char *szPayRec,         //"REC" or "PAY"
     // MidAt Exercise
@@ -233,7 +237,7 @@ const char *Euro_AutoCal_Diag(
     const double *pdFltCvg_Begin, const double *pdMargin_Begin,
     const double *pdSpread_Begin,
     // term structure
-    int nCalibTauToCap, // 1 - calibrate Tau to cap  , 0 otherwise
+    int nCalibTauToCap, // 1 - calibrate Tau to cap      , 0 otherwise
     const double *pdLam_Begin, const double *pdAlpha, const double *pdGamma,
     const double *pdRho,
     // calibration params
@@ -244,7 +248,7 @@ const char *Euro_AutoCal_Diag(
     const cpd_diag_calib_param *pParam_Swaption,
     const cpd_diag_calib_param *pParam_Caplet,
     const diag_calib_lm_params *pCalibParam,
-    /// results  ,
+    /// results      ,
     double *pdOptionPV_Begin);
 
 const char *_MidAt_AutoCal(
@@ -255,8 +259,9 @@ const char *_MidAt_AutoCal(
     /// MidAt General Specs
     long lTheoEnd,
     const char *szRefRate, // Refrate
-    const char *szFreq,    // frequency of the fixed leg -"M"  ,"Q"  ,"S"  ,"A"
-    const char *szBasis,   // basis of the fixed leg
+    const char
+        *szFreq, // frequency of the fixed leg -"M"      ,"Q"      ,"S" ,"A"
+    const char *szBasis,          // basis of the fixed leg
     const double *pdCoupon_Begin, // coupon
     const char *szPayRec,         //"REC" or "PAY"
     // MidAt Exercise
@@ -273,7 +278,7 @@ const char *_MidAt_AutoCal(
     const double *pdFltCvg_Begin, const double *pdMargin_Begin,
     const double *pdSpread_Begin,
     // term structure
-    int nCalibTauToCap, // 1 - calibrate Tau to cap  , 0 otherwise
+    int nCalibTauToCap, // 1 - calibrate Tau to cap      , 0 otherwise
     double *pdLamT_Begin, double *pdLamT_End, double *pdLam_Begin,
     const double *pdAlpha, const double *pdGamma, const double *pdRho,
     // calibration params
@@ -284,6 +289,6 @@ const char *_MidAt_AutoCal(
     const diag_calib_lm_params *pCalibParam, int nOnefequi,
     // grid
     int nNumPointT, int nNumPointX,
-    /// results  ,
+    /// results      ,
     double *pdOptionPV, double *pdFixLegPV, double *pdFltLegPV,
     double *pdExProb, double *pdExBoundary, int nUse_Backward);

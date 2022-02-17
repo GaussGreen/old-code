@@ -16,7 +16,7 @@
 #define SRT_H_CHEYDYNAMICS_H
 
 /* ----------------------------------------------------------------------
-   From the short rate  and the power  , returns the local (normal)
+   From the short rate  and the power      , returns the local (normal)
    volatility
    ---------------------------------------------------------------------- */
 

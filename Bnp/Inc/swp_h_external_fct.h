@@ -6,12 +6,12 @@
                   functions that have to be set before calling any SRT
                                   financial function.
                                   This include:
-                                        - DiscFunc (df_curve_id/ccy  , start  ,
-   end  , *df)
-                                        - SpreadFunc (ref_rate_name  , start  ,
-   end  , *spread)
-                                        - VolFunc ( vol_curve_id  , start  , end
-   , strike  , *vol )
+                                        - DiscFunc (df_curve_id/ccy      , start
+   , end      , *df)
+                                        - SpreadFunc (ref_rate_name      , start
+   , end      , *spread)
+                                        - VolFunc ( vol_curve_id      , start ,
+   end , strike      , *vol )
                                         - ....
 
                                   Gives the functions to communicate with this
@@ -47,8 +47,8 @@ typedef Err (*CorrelFuncType)(char *vol_id, double start, double end,
                               double strike, double *vol);
 
 /* The Volatility component function type */
-/* ATMlog  , ATMNorm  , ATMBeta  , Alpha  , Beta  , Rho */
-/* Log  , Norm for a given Strike */
+/* ATMlog      , ATMNorm      , ATMBeta      , Alpha      , Beta      , Rho */
+/* Log      , Norm for a given Strike */
 
 typedef Err (*SABRVolFuncType)(char *vol_id, double start, double end,
                                double strike, double *vol, double *power,

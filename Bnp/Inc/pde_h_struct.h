@@ -23,7 +23,8 @@ typedef Err (*PdeSetUpModelFunc)(void *);
 Operator typedef  Err (*PdeSetUpModelFunc)(struct SrtPdeObject*);
 
 /* A Generic type for the updating of info pointer of the Differential Linear
-Operator typedef   Err (*PdeAttachInfoModelFunc)(struct SrtPdeObject*  , void
+Operator typedef   Err (*PdeAttachInfoModelFunc)(struct SrtPdeObject*      ,
+void
 *);
 */
 
@@ -31,7 +32,7 @@ Operator typedef   Err (*PdeAttachInfoModelFunc)(struct SrtPdeObject*  , void
         TYPE                :   SrtPdeGridObject
         DESCRIPTION   :   A structure that represents the PDE grid and the
 operator at a given time step
-/* A pointer to the discretised PDE  (containing the grid  , the operator  ,
+/* A pointer to the discretised PDE  (containing the grid      , the operator ,
 ...)
    --------------------------------------------------------------------------------------------------------------------------------------------*/
 typedef struct {
@@ -50,7 +51,7 @@ typedef struct {
   double *****old_value;
   double *****temp_value;
 
-  /* The discrete values of  X  , Y  , Z  */
+  /* The discrete values of  X      , Y      , Z  */
   double *vec_x;
   double *vec_y;
   double *vec_z;
@@ -102,18 +103,18 @@ typedef struct {
    --------------------------------------------------------------------------------------------------------------------------------------------*/
 typedef struct {
 
-  /* The Dimension of the problem: one  , two or three space variables */
+  /* The Dimension of the problem: one      , two or three space variables */
   int dimension;
 
   /* The 	grid */
   SrtPdeGridObject *grid;
 
-  /* For the Mesh style:	regular  , exponential  ,...*/
+  /* For the Mesh style:	regular      , exponential      ,...*/
   SrtPdeMeshType mesh_type_x;
   SrtPdeMeshType mesh_type_y;
   SrtPdeMeshType mesh_type_z;
 
-  /* For the Boundary conditions:	Neuman  , Dirichlet  ,... */
+  /* For the Boundary conditions:	Neuman      , Dirichlet      ,... */
   SrtPdeBoundaryCond bound_cond_x;
   SrtPdeBoundaryCond bound_cond_y;
   SrtPdeBoundaryCond bound_cond_z;
@@ -123,20 +124,21 @@ typedef struct {
 
   double theta;
 
-  /* When computing differential of the solution wrt parameters  ,  a source
-   * member comes along: same L  , new PDE */
+  /* When computing differential of the solution wrt parameters      ,  a source
+   * member comes along: same L      , new PDE */
   int nb_second_members;
 
   /* The Number of payoffs to work on (also num of columns in the Grfn tableau
-   * ,...)  */
+   *     ,...)  */
   int nb_payoffs;
 
-  /* For all the time information  , the coefficients for the linear operator
-   * ,...*/
+  /* For all the time information      , the coefficients for the linear
+   * operator
+   *     ,...*/
   void *info;
 
   /* Functions to compute the coeffficients of the linear differential operator
-   * at a givent point (x  ,y  ,z) */
+   * at a givent point (x      ,y      ,z) */
   PdeCoeffModelFunc coeff_0;
   PdeCoeffModelFunc coeff_X;
   PdeCoeffModelFunc coeff_XX;

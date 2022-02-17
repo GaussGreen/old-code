@@ -4,7 +4,7 @@
    PURPOSE:   description of all the functions used to evolve IR or Stock/FX
    models in a Monte-Carlo type discretisation
 
-   DESCRIPTION: all the functions have the same type of name  , and the same
+   DESCRIPTION: all the functions have the same type of name      , and the same
    inputs
    ====================================================================================
  */

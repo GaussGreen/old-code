@@ -47,9 +47,9 @@ void num_f_pde_one_step_backward(
     /*	Number of functions	*/
     int m,
     /*	f values @ t+1	*/
-    /*	i: state  , j: function number */
+    /*	i: state      , j: function number */
     double **f_t_plus_1,
-    /*	Drifts under Qt+1 * dt (actually  , Et+1 [Xt+1 - Xt / Ft] )	*/
+    /*	Drifts under Qt+1 * dt (actually      , Et+1 [Xt+1 - Xt / Ft] )	*/
     double *mu,
     /*	Variances under Qt+1 * dt (actually Vt+1 [Xt+1 - Xt / Ft] )	*/
     double *var,
@@ -69,7 +69,7 @@ void num_f_pde_one_step_forward(
     double *x,
     /*	f values @ t	*/
     double *f_t,
-    /*	Drifts under Qt+1 * dt (actually  , Et+1 [Xt+1 - Xt / Ft] )	*/
+    /*	Drifts under Qt+1 * dt (actually      , Et+1 [Xt+1 - Xt / Ft] )	*/
     double *mu,
     /*	Variances under Qt+1 * dt (actually Vt+1 [Xt+1 - Xt / Ft] )	*/
     double *var,
@@ -115,9 +115,9 @@ void num_f_pde_one_step_backward_2f_lod(
     /*	Number of functions	*/
     int m,
     /*	f values @ t+1	*/
-    /*	i: x state  , j: y state  , k: function number */
+    /*	i: x state      , j: y state      , k: function number */
     double ***f_t_plus_1,
-    /*	Drifts under Qt+1 * dt (actually  , Et+1 [Xt+1 - Xt / Ft] )	*/
+    /*	Drifts under Qt+1 * dt (actually      , Et+1 [Xt+1 - Xt / Ft] )	*/
     double **mux, double **muy,
     /*	Variances under Qt+1 * dt (actually Vt+1 [Xt+1 - Xt / Ft] )	*/
     double **varx, double **vary,
@@ -179,9 +179,9 @@ void num_f_pde_one_step_backward_2f_adi(
     /*	Number of functions	*/
     int mstart, int mend,
     /*	f values @ t+1	*/
-    /*	i: x state  , j: y state  , k: function number */
+    /*	i: x state      , j: y state      , k: function number */
     double ***f_t_plus_1,
-    /*	Drifts under Qt+1 * dt (actually  , Et+1 [Xt+1 - Xt / Ft] )	*/
+    /*	Drifts under Qt+1 * dt (actually      , Et+1 [Xt+1 - Xt / Ft] )	*/
     double **mux, double **muy,
     /*	Variances under Qt+1 * dt (actually Vt+1 [Xt+1 - Xt / Ft] )	*/
     double **varx, double **vary,
@@ -205,9 +205,9 @@ void num_f_pde_one_step_backward_2f_save_adi(
     /*	Number of functions	*/
     int mstart, int mend,
     /*	f values @ t+1	*/
-    /*	i: x state  , j: y state  , k: function number */
+    /*	i: x state      , j: y state      , k: function number */
     double ***f_t_plus_1,
-    /*	Drifts under Qt+1 * dt (actually  , Et+1 [Xt+1 - Xt / Ft] )	*/
+    /*	Drifts under Qt+1 * dt (actually      , Et+1 [Xt+1 - Xt / Ft] )	*/
     double **mux, double **muy,
     /*	Variances under Qt+1 * dt (actually Vt+1 [Xt+1 - Xt / Ft] )	*/
     double **varx, double **vary,
@@ -232,9 +232,9 @@ void num_f_pde_one_step_backward_2f_adi_LGMSV(
     /*	Number of functions	*/
     int mstart, int mend,
     /*	f values @ t+1	*/
-    /*	i: x state  , j: y state  , k: function number */
+    /*	i: x state      , j: y state      , k: function number */
     double ***f_t_plus_1,
-    /*	Drifts under Qt+1 * dt (actually  , Et+1 [Xt+1 - Xt / Ft] )	*/
+    /*	Drifts under Qt+1 * dt (actually      , Et+1 [Xt+1 - Xt / Ft] )	*/
     double **mux, double **muy,
     /*	Variances under Qt+1 * dt (actually Vt+1 [Xt+1 - Xt / Ft] )	*/
     double **varx, double **vary,
@@ -260,9 +260,9 @@ void calculate_proba_backward_2f_adi(
     /*	Number of functions	*/
     int m,
     /*	f values @ t+1	*/
-    /*	i: x state  , j: y state  , k: function number */
+    /*	i: x state      , j: y state      , k: function number */
     double ***f_t_plus_1,
-    /*	Drifts under Qt+1 * dt (actually  , Et+1 [Xt+1 - Xt / Ft] )	*/
+    /*	Drifts under Qt+1 * dt (actually      , Et+1 [Xt+1 - Xt / Ft] )	*/
     double **mux, double **muy,
     /*	Variances under Qt+1 * dt (actually Vt+1 [Xt+1 - Xt / Ft] )	*/
     double **varx, double **vary,
@@ -287,9 +287,9 @@ void num_f_pde_one_step_backward_2f_adi_precalc_proba(
     /*	Number of functions	*/
     int m,
     /*	f values @ t+1	*/
-    /*	i: x state  , j: y state  , k: function number */
+    /*	i: x state      , j: y state      , k: function number */
     double ***f_t_plus_1,
-    /*	Drifts under Qt+1 * dt (actually  , Et+1 [Xt+1 - Xt / Ft] )	*/
+    /*	Drifts under Qt+1 * dt (actually      , Et+1 [Xt+1 - Xt / Ft] )	*/
     double **mux, double **muy,
     /*	Variances under Qt+1 * dt (actually Vt+1 [Xt+1 - Xt / Ft] )	*/
     double **varx, double **vary,
@@ -314,9 +314,9 @@ void num_f_pde_one_step_backward_2f_adi_bar(
     /*	Number of functions	*/
     int mstart, int mend,
     /*	f values @ t+1	*/
-    /*	i: x state  , j: y state  , k: function number */
+    /*	i: x state      , j: y state      , k: function number */
     double ***f_t_plus_1,
-    /*	Drifts under Qt+1 * dt (actually  , Et+1 [Xt+1 - Xt / Ft] )	*/
+    /*	Drifts under Qt+1 * dt (actually      , Et+1 [Xt+1 - Xt / Ft] )	*/
     double **mux, double **muy,
     /*	Variances under Qt+1 * dt (actually Vt+1 [Xt+1 - Xt / Ft] )	*/
     double **varx, double **vary,
@@ -378,9 +378,9 @@ void num_f_pde_one_step_backward_2f_save_LGMSV_adi(
     /*	Number of functions	*/
     int mstart, int mend,
     /*	f values @ t+1	*/
-    /*	i: x state  , j: y state  , k: function number */
+    /*	i: x state      , j: y state      , k: function number */
     double ****f_t_plus_1,
-    /*	Drifts under Qt+1 * dt (actually  , Et+1 [Xt+1 - Xt / Ft] )	*/
+    /*	Drifts under Qt+1 * dt (actually      , Et+1 [Xt+1 - Xt / Ft] )	*/
     double **mux, double **muy,
     /*	Variances under Qt+1 * dt (actually Vt+1 [Xt+1 - Xt / Ft] )	*/
     double **varx, double **vary,

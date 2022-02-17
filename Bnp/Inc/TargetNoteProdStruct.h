@@ -39,7 +39,7 @@ typedef struct {
   char *szVolCurve;
   char *szVolCurveRefRate;
   char *szCcy;
-  double fx_fund_dom;         /* Fx fund/dom  , 2bd fwd */
+  double fx_fund_dom;         /* Fx fund/dom      , 2bd fwd */
   long fx_fund_dom_spot_date; /* FX spot date */
   /* The underlyings (set to "CAL" if calibration required) */
   char *szLGM2FUnd;
@@ -85,7 +85,7 @@ typedef struct {
   SrtBasisCode basisFltr;
   double *dvFltrHistFixings;
   /* The funding */
-  int fund_ccy; /* 0: domestic  ,  1: foreign */
+  int fund_ccy; /* 0: domestic      ,  1: foreign */
   double dFundingNotional;
   int nFundDates;
   long *lvFundFixingDates;
@@ -167,13 +167,13 @@ typedef struct {
   int iPriceSV;
   /* MC */
   double dSpread;
-  int iSpreadType; /* -1:  underprice coupon  , 0:  even spread  , 1:  overprice
-                      coupon */
+  int iSpreadType; /* -1:  underprice coupon      , 0:  even spread      , 1:
+                      overprice coupon */
   int nStepT;
   long num_paths;
   int do_pecs;
-  int iFeeAdjust; /* 1:  adjust price for fee  ,		0: do not adjust price
-                     for fee */
+  int iFeeAdjust; /* 1:  adjust price for fee      ,		0: do not adjust
+                     price for fee */
 } TARN_Pricing_Struct;
 
 typedef struct {
@@ -260,9 +260,9 @@ typedef struct {
   double m_dCouponNotional;
   double m_dFundingNotional;
   TARGET_NOTE_COUPON
-      m_couponType;      // 0:  pay normal coupons		1:   payment at end
-  double m_dFinalCoupon; // 0 if target not reached  , accreted at fltr rate if
-                         // TN_FINAL
+  m_couponType;          // 0:  pay normal coupons		1:   payment at end
+  double m_dFinalCoupon; // 0 if target not reached      , accreted at fltr rate
+                         // if TN_FINAL
   double m_dPrevAccrual; // 1 + Fltr * Cvg
   double m_dFundingNotionalExchange;
   double m_dCouponNotionalExchange;
@@ -450,7 +450,7 @@ typedef struct {
   double dCap;
   // Model Parameters
   void *ptrModel;
-  int iModelType; // 0:  LGM2F  , 1:  LGM1FSV  , 2:  LGM2FSV
+  int iModelType; // 0:  LGM2F      , 1:  LGM1FSV      , 2:  LGM2FSV
   double numeraire_logdff;
   // Control
   double dKnockOutFee; // Fee paid to the funding leg if the deal KOs at this
@@ -477,26 +477,28 @@ char *TargetNoteFunding(TARN_EVENT *targetNotePtr, double *res);
 
 char *TargetNoteCoupon_ZC(TARN_EVENT *targetNotePtr, double dCoupon,
                           double dNotionalRepay,
-                          double *res, // res[0] = fund  , res[1] = coupon
+                          double *res, // res[0] = fund      , res[1] = coupon
                           int *stop_path);
 
 char *TargetNoteCoupon_SWAP(TARN_EVENT *targetNotePtr, double dCoupon,
                             double dNotionalRepay,
-                            double *res, // res[0] = fund  , res[1] = coupon
+                            double *res, // res[0] = fund      , res[1] = coupon
                             int *stop_path);
 
-char *TargetNoteCoupon_FINAL(TARN_EVENT *targetNotePtr, double dCoupon,
-                             double dFloater, double dNotionalRepay,
-                             double *res, // res[0] = fund  , res[1] = coupon
-                             int *stop_path);
+char *
+TargetNoteCoupon_FINAL(TARN_EVENT *targetNotePtr, double dCoupon,
+                       double dFloater, double dNotionalRepay,
+                       double *res, // res[0] = fund      , res[1] = coupon
+                       int *stop_path);
 
-char *TargetNoteCoupon_SWAPKO(TARN_EVENT *event, double dCoupon,
-                              double dNotionalRepay,
-                              double *res, // res[0] = fund  , res[1] = coupon
-                              int *stop_path);
+char *
+TargetNoteCoupon_SWAPKO(TARN_EVENT *event, double dCoupon,
+                        double dNotionalRepay,
+                        double *res, // res[0] = fund      , res[1] = coupon
+                        int *stop_path);
 
 char *TargetNoteCoupon(TARN_EVENT *targetNotePtr,
-                       double *res, // res[0] = fund  , res[1] = coupon
+                       double *res, // res[0] = fund      , res[1] = coupon
                        int *stop_path);
 
 /* Different coupon PV calculators */

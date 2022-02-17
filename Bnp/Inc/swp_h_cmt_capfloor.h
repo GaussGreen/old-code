@@ -29,8 +29,8 @@ Err swp_f_CMCapFloorNY(
     char *cCapBasis, char *szCMTVolName, char *szSwaptionVolName,
     char *szYieldCurveName, char *cRefRateCode, char *cCapFloor,
     char *method, /*BS: BS on CMS Full Smile + Fwd Spread - FS: Full Smile on
-                     Fwd Swap + Fwd Spread - FVBS: BS on CMS Flat Vol + Fwd
-                     Spread - FV: Flat Vol on Fwd Swap + Fwd Spread*/
+                 Fwd Swap + Fwd Spread - FVBS: BS on CMS Flat Vol + Fwd
+                 Spread - FV: Flat Vol on Fwd Swap + Fwd Spread*/
     SRT_Boolean AdjForSpread, int NumStrikesInVol, double *Strikes,
     double **result);
 

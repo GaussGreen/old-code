@@ -2,7 +2,7 @@
 
   FILENAME:  srt_h_calibutils.h
 
-  AUTHORS:   Olivier Van Eyseren  , Antoine Savine
+  AUTHORS:   Olivier Van Eyseren      , Antoine Savine
 
   PURPOSE:   Provide a few utility functions that could help during
              calibration:
@@ -84,7 +84,7 @@ SRT_Boolean are_calib_parameters_within_band(double *pdOptimParams,
 /* ----------------------------------------------------------------------- */
 
 /* -----------------------------------------------------------------------
-        From the calibration parameters (default or input on spreadsheet)  ,
+        From the calibration parameters (default or input on spreadsheet)      ,
         gives the ppdParamBounds of the parameters in an array (for Sobol):
                 [1][1..n] is the minimum value of the parameter
                 [2][1..n] is the maximum value of the parameter
@@ -101,9 +101,10 @@ Err set_calib_parameters_bounds(SrtCalibParam *psCalibParams,
 /* -----------------------------------------------------------------------
         Sets pdMarketWeights for minimisation criteria as in LM for
    SIMPLEX/ANNEALING criteria = Sum(0<=i<n) [(y_i-y0_i)/pdMarketWeights_i]^2 For
-   FRD prices  , pdMarketWeights = pdMktVega * sqrt( n * dOptionsWeight ). For
-   correlation  , pdMarketWeights = n / sqrt( 1- dOptionsWeight ) The global
-   criteria is therefore: dOptionsWeight^2 * 1/n * Sum(i) [(y_i-y0_i)/vega_i]^2
+   FRD prices      , pdMarketWeights = pdMktVega * sqrt( n * dOptionsWeight ).
+   For correlation      , pdMarketWeights = n / sqrt( 1- dOptionsWeight ) The
+   global criteria is therefore: dOptionsWeight^2 * 1/n * Sum(i)
+   [(y_i-y0_i)/vega_i]^2
                                 + (1-frd_weght)^2 * (1/N)^2 * Sum(j) [corr_i -
    mktcorr_i]^2
     ----------------------------------------------------------------------- */

@@ -1,7 +1,7 @@
 /* ===================================================================================
    FILENAME:      swp_h_capfloor.h
 
-   PURPOSE:       Compute cap/floors prices  , and implied volatilities
+   PURPOSE:       Compute cap/floors prices      , and implied volatilities
    ===================================================================================
  */
 

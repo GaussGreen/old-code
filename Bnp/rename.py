@@ -2,7 +2,7 @@ import os
 import re
       
 def renaming(target):
-    return target.replace(',', ' ,').replace('VTK', 'COBRA').replace('Vtk', 'Cobra').replace('.regression', '_1.regression')
+    return target.replace('.cxxxx', '.cxx').replace('Vtk', 'Cobra').replace('.regression', '_1.regression')
     
 def replace_inside_file(file_path):
     with open(file_path, 'r', errors = 'ignore')  as file :

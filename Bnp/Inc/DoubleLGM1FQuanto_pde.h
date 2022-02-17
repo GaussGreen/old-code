@@ -3,9 +3,10 @@
 
 #include "srt_h_all.h"
 
-// void mergeVol(int nb_sig1  , double *sig1_time  , double *sig1  ,
-//	  int nb_sig2  , double *sig2_time  , double *sig2  ,
-//			  int *nb_sig  , double **sig_time  , double **sig);
+// void mergeVol(int nb_sig1      , double *sig1_time      , double *sig1      ,
+//	  int nb_sig2      , double *sig2_time      , double *sig2      ,
+//			  int *nb_sig      , double **sig_time      , double
+//**sig);
 
 Err mergeSchedule(int nb1, double *time1, int nb2, double *time2, int *nb,
                   double **time);
@@ -26,7 +27,7 @@ Err doublelgm1fQuanto_adi(
 
     // Model data
     double domlam, double forlam,
-    double *sig_time, //	domsig  , forsig and fxsig must have
+    double *sig_time, //	domsig      , forsig and fxsig must have
     double *domsig,   //	the same sig_time
     double *forsig, double *fxsig, int nb_sig, double quantorho,
     double domforrho,
@@ -64,7 +65,7 @@ Err doublelgm1fQuanto_adi2(
 
     // Model data
     double domlam, double forlam,
-    double *sig_time, //	domsig  , forsig and fxsig must have
+    double *sig_time, //	domsig      , forsig and fxsig must have
     double *domsig,   //	the same sig_time
     double *forsig, double *fxsig, int nb_sig, double quantorho,
     double domforrho,
@@ -102,7 +103,7 @@ Err doublelgm1fQuanto_adi_correl(
 
     // Model data
     double domlam, double forlam,
-    double *sig_time, //	domsig  , forsig  , fxsig  ,
+    double *sig_time, //	domsig      , forsig      , fxsig      ,
     double *domsig,   //	quantorho and domforrho must have
     double *forsig,   //	the same sig_time
     double *fxsig, int nb_sig, double *quantorho, double *domforrho,
@@ -140,7 +141,7 @@ Err doublelgm1fQuanto_adi_correl2(
 
     // Model data
     double domlam, double forlam,
-    double *sig_time, //	domsig  , forsig and fxsig must have
+    double *sig_time, //	domsig      , forsig and fxsig must have
     double *domsig,   //	the same sig_time
     double *forsig, double *fxsig, int nb_sig, double *quantorho,
     double *domforrho,

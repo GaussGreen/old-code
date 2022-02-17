@@ -22,7 +22,7 @@ enum generate_messages {
 };
 
 /***
-        structure underlying YC_obj  , ZC_obj  , Arg  , ...
+        structure underlying YC_obj      , ZC_obj      , Arg      , ...
 ***/
 
 typedef struct {
@@ -125,7 +125,7 @@ typedef struct {
 #define ZC_field_set_Ilength(zcptr, len)                                       \
   Field_List_set_Ilength(zcptr->data, len)
 
-/******** YC_obj --- hold swap curve  , futures rates & dates ****/
+/******** YC_obj --- hold swap curve      , futures rates & dates ****/
 
 enum YC_DFields {
   YC_SWAPEND_DATE,

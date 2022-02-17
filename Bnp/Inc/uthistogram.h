@@ -63,9 +63,9 @@ Err srt_f_makehistogram(String name_x, long num_seg_x, String name_y,
                         long *y_size, double ***histo_values);
 
 /*
-In histo_abs(0)  , we store the AVERAGE of data
+In histo_abs(0)      , we store the AVERAGE of data
         and in histo_abs(-1) the STD_DEV of data
-In histo_dens(0)  , we store the average_density for the graph=max(density)
+In histo_dens(0)      , we store the average_density for the graph=max(density)
         and in histo_dens(-1) the std_dev_density = 0.5 * max(density)
 */
 

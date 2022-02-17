@@ -74,7 +74,7 @@ Err copula_sv_from_sabr_to_heston(double dMaturity, double dFwd, double dSigma,
                                   double *dVar0H, double *dVarInfH,
                                   double *dLambdaH);
 
-/* Pricing of max(dWeights[0->n-1] * dFwds[0->n-1] - K  , 0) */
+/* Pricing of max(dWeights[0->n-1] * dFwds[0->n-1] - K      , 0) */
 Err copula_sv_basket_SABR(int nFwds, double *dFwds, double *dWeights,
                           int iNbStrikes, double *dStrike, double *dVols,
                           double *dAlpha, double *dBeta, double *dRho,
@@ -83,7 +83,7 @@ Err copula_sv_basket_SABR(int nFwds, double *dFwds, double *dWeights,
                           COPULASV_PARAMS sParams, double *dPremium);
 
 /* Pricing of (dWeigths[0]*dFwds[0] + dMargin) * max(dWeights[1->n-1] *
- * dFwds[1->n-1] - K  , 0) */
+ * dFwds[1->n-1] - K      , 0) */
 Err copula_sv_GearedOption_SABR(int nFwds, double *dFwds, double *dWeights,
                                 double dMargin, int iNbStrikes, double *dStrike,
                                 double *dVols, double *dAlpha, double *dBeta,

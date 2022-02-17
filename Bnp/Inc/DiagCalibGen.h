@@ -80,7 +80,7 @@ typedef struct {
   Err (*SetParam)(void *Model, CALIBGEN_PARAMS CalibConsts, void *GlobalConst,
                   int index_param, double param);
 
-  /* At the end of the calibration  , fill the remaining parameters */
+  /* At the end of the calibration      , fill the remaining parameters */
   Err (*ExtrapolParam)(void *Model, void *GlobalConst, int LastParamIndex);
 
   /* Update of pricing consts after the parameter change */

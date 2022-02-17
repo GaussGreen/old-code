@@ -4,7 +4,7 @@
 
      PURPOSE:      A yield curve can be thought of as composed
                        of sets of instruments of various types
-                       (swap  , cash  , futs);
+                       (swap      , cash      , futs);
                                          here they are.
 
    ===========================================================================
@@ -47,7 +47,7 @@ typedef enum YCInstrType_ {
 } YCInstrType;
 
 typedef struct {
-  YCInstrType type; /* one of Future  , Swap  , Cash */
+  YCInstrType type; /* one of Future      , Swap      , Cash */
   double rate;
   DateParam dp;
 } YCInstr;

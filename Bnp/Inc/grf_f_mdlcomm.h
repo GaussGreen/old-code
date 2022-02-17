@@ -13,16 +13,16 @@
         Objective: define communications between any model and GRFN
 */
 
-/*	Model communicates with GRFN via the FIRSTMktAtT structure  ,
+/*	Model communicates with GRFN via the FIRSTMktAtT structure      ,
         containing all the relevant market information for evaluation
         of GRFN at time T	*/
 
 typedef struct {
-  /*	For internal use only  , please do not touch	*/
+  /*	For internal use only      , please do not touch	*/
   GrfnEvent *evt;
   SrtSample smp;
 
-  /*	Information accessible to the user  , read-only	*/
+  /*	Information accessible to the user      , read-only	*/
   /*	(completed on call to function INIT)	*/
 
   /*	Date	*/
@@ -36,10 +36,10 @@ typedef struct {
   /*	df_mat[i][j] = maturity (in years from today) of the df number j
           from curve number i	*/
   double *df_mat[MAXUNDERLYING];
-  /*	Same  , only dates	*/
+  /*	Same      , only dates	*/
   double *df_mat_dte[MAXUNDERLYING];
 
-  /*	Information to be provided by the user before evaluation  ,
+  /*	Information to be provided by the user before evaluation      ,
           once per node - space is allocated on call to function INIT	*/
 
   /*	Domestic numeraire	*/
@@ -62,7 +62,7 @@ typedef struct {
 } FIRSTMktAtT;
 
 typedef struct {
-  /*	For internal use only  , please do not touch	*/
+  /*	For internal use only      , please do not touch	*/
   GrfnDeal *gd;
   SrtUndInfo *und_info;
 

@@ -9,7 +9,7 @@
 
   ---------------------------------------------------------------------*/
 typedef struct {
-  double df; /* B(0  ,t) */
+  double df; /* B(0      ,t) */
 } SrtBasicTmInf;
 
 /* -----------------------------------------------------------------
@@ -20,7 +20,7 @@ typedef struct {
 
   ---------------------------------------------------------------------*/
 typedef struct {
-  double df;         /* B(0  ,t) */
+  double df;         /* B(0      ,t) */
   SrtMdlDim mdl_dim; /* Number of factors		*/
   union {
     ExpoVolStr onef;
@@ -76,7 +76,7 @@ typedef struct {
   double ajust_init_fwd_val; /* Forward adjusted by exp(-.5*sig^2*T) */
   double inv_exp_int_spread_dt;
 
-  double drift; /* The r for equities  , or rd-rf for FX */
+  double drift; /* The r for equities      , or rd-rf for FX */
 
   /* stochastic rate & volatility gamma smile model parameters */
   double sig;
@@ -156,7 +156,7 @@ typedef struct{
   double sig2;
   double lambda;
   double tau;
-  double F  ,G  ,H  ,J  ,Psi  ,stdev_r;
+  double F      ,G      ,H      ,J      ,Psi      ,stdev_r;
   SrtSample fwd_sam;
   YTatt_param  yp;
 }SrtOneFacTmInf;
@@ -175,9 +175,9 @@ typedef struct{
   double int_sig2_dt;
   double lambda;
   double tau;
-  double F[2]  ,Psi[2]  ,J[2];
-  double stdev_x[2]  ,correl_x;
-  double G[2][2]  ,H[2][2];
+  double F[2]      ,Psi[2]      ,J[2];
+  double stdev_x[2]      ,correl_x;
+  double G[2][2]      ,H[2][2];
   SrtSample fwd_sam;
   YTatt_param  yp;
 }SrtTwoFacTmInf;

@@ -13,8 +13,8 @@
                         Command Linked List is treated.
 
                         CLLNameType is a more general grouping of different
-                        sorts of grfn language functions  , i.e. arithmetic
-                        functions  , booleans  , etc.
+                        sorts of grfn language functions      , i.e. arithmetic
+                        functions      , booleans      , etc.
 
 \*******************************************************************************/
 
@@ -122,7 +122,7 @@ typedef enum {
     TYPE            :   CLLNameType
 
     DESCRIPTION     :   Command Linked List Name Type subdivided Arithmetic
-                        Functions  , SRT_Boolean Functions  , etc ...
+                        Functions      , SRT_Boolean Functions      , etc ...
                         CLLNameType is ONLY used during compilation of
                         the GRFN language (during parsing)
 
@@ -162,8 +162,8 @@ typedef enum {
 
     DESCRIPTION     :   Information about GRFN functions and names.
                         Some of this information is also within grf_f_ytab.c
-                        and grf_f_lex_yy.c (YACC and LEX files)  ,  which take
-                        care of functions with one letter such as '+' directly.
+                        and grf_f_lex_yy.c (YACC and LEX files)      ,  which
+take care of functions with one letter such as '+' directly.
 
                         See grf_f_lngsymtab.c for the table of all GrfnSymbols
                         currently understood by GRFN.
@@ -183,12 +183,12 @@ typedef struct {
 
 /******************************************************************************\
 
-    STRUCTURE       :   COMLL_PTR  , COMLL_STR
+    STRUCTURE       :   COMLL_PTR      , COMLL_STR
 
     DESCRIPTION     :   COMmand Linked List.
 
-                        A command like f(g(x)  ,y  ,4+z) * 2 is represented
-                        as a COMLL_PTR as follows
+                        A command like f(g(x)      ,y      ,4+z) * 2 is
+represented as a COMLL_PTR as follows
 
                         4 -> z -> + -> y -> x -> g -> f -> 2 -> * -> NULL
 
@@ -196,12 +196,12 @@ typedef struct {
 
 
     NOTE            :   [1] Expressions are simplified as mush as possible.
-                            e.g.  2+5 is reduced to 7  , as is d[i]  , i+2
-(since the symbol i is known)  , max  , pow  , cvg  , etc...
+                            e.g.  2+5 is reduced to 7      , as is d[i]      ,
+i+2 (since the symbol i is known)      , max      , pow      , cvg      , etc...
 
                         [2] Financial functions have their arguments evaluated
-                            before hand. Hence swap(s  , e  , c  , b) + 2 is
-                            represented as:
+                            before hand. Hence swap(s      , e      , c      ,
+b) + 2 is represented as:
 
                                 2 -> swap(...) -> +
 
@@ -310,7 +310,7 @@ long comll_create_index(COMLL_PTR a);
 
 /******************************************************************************\
 
-    NAME            :   test_real (index  , "name"  , comllptr)
+    NAME            :   test_real (index      , "name"      , comllptr)
     DESCRIPTION     :   Is comll of type COMLL_REAL.
                         If not return an error message.
                         Index is the index of comll as an argument to some
@@ -327,7 +327,7 @@ long comll_create_index(COMLL_PTR a);
 
 /******************************************************************************\
 
-    NAME            :   test_deterministic (index  , "name"  , comllptr)
+    NAME            :   test_deterministic (index      , "name"      , comllptr)
     DESCRIPTION     :   Is comll of type COMLL_REAL or COMLL_STRING.
 
                         If not return an error message.
@@ -344,9 +344,9 @@ long comll_create_index(COMLL_PTR a);
 
 /******************************************************************************\
 
-    NAME            :   CheckAuxRange1(i  , grfndealptr)
+    NAME            :   CheckAuxRange1(i      , grfndealptr)
     DESCRIPTION     :   Is i a valid index of some auxiliary range in
-                        grfndeal.  If not  , return an error message.
+                        grfndeal.  If not      , return an error message.
 
 \******************************************************************************/
 
@@ -358,10 +358,10 @@ long comll_create_index(COMLL_PTR a);
 
 /******************************************************************************\
 
-    NAME            :   CheckAuxRange2 (i  ,j  ,grfndealptr)
+    NAME            :   CheckAuxRange2 (i      ,j      ,grfndealptr)
     DESCRIPTION     :   Are i and j  both valid indices of auxiliary
                         ranges in grfndeal with the same length.
-                        If not  , return an error message.
+                        If not      , return an error message.
 
 \******************************************************************************/
 
@@ -370,7 +370,7 @@ long comll_create_index(COMLL_PTR a);
     CheckAuxRange1(I, GD);                                                     \
     CheckAuxRange1(J, GD);                                                     \
     if (GD->auxlen[(I)] != GD->auxlen[(J)]) {                                  \
-      return serror("%s: lengths %d  ,%d", GRERR_INTERP_SAME_SIZE,             \
+      return serror("%s: lengths %d      ,%d", GRERR_INTERP_SAME_SIZE,         \
                     gd->auxlen[(I)], gd->auxlen[(J)]);                         \
     }                                                                          \
   }

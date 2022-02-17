@@ -54,8 +54,8 @@ Err calibrate_correl5D_from_histo(
     double lam_for, double alpha_for, double gamma_for, double rho_for,
     int calib_rho_for,    /* if one we calibrate rho_for
                            */
-    double **corr_histo,  /* input of the historical correl SD  , LD  , SF  , LF
-                             , Fx	*/
+    double **corr_histo,  /* input of the historical correl SD      , LD      ,
+                             SF      , LF  , Fx	*/
     double **corr_model); /* ouput for correl between the brownian of the model
                            */
 
@@ -64,7 +64,8 @@ Err get_correlSL_from_model(
     double lam_dom, double alpha_dom, double gamma_dom, double lam_for,
     double alpha_for, double gamma_for,
     double **corr_model, /* input of the model correl  between brownian	*/
-    double **corr_sd);   /* ouput for correl between SD  , LD  , SF  , LF  , Fx
-                          */
+    double **corr_sd); /* ouput for correl between SD      , LD      , SF      ,
+                        * LF      , Fx
+                        */
 
 #endif

@@ -1,7 +1,7 @@
 /* ===================================================================================
    FILENAME:      srt_h_closedform.h
 
-   PURPOSE:       Compute swaption  , bond option  ,caps/floors prices:
+   PURPOSE:       Compute swaption      , bond option      ,caps/floors prices:
                                                 - build the cash flow schedule
                                                 - call the relevant pricing
    function (LGM or EtaBeta)

@@ -64,8 +64,8 @@ Err FxSabrQuad_adi(
 
     /* Additional informations */
     int calc_greeks,
-    double **greeks, /* array 6 * nprod containing delta  , gamma  , theta  ,
-                        vega  , volga and vanna */
+    double **greeks, /* array 6 * nprod containing delta      , gamma      ,
+                    theta      , vega      , volga and vanna */
 
     /* For calibration purpose */
     int calc_at_point, int column, double target, double *vol,
@@ -161,26 +161,27 @@ Err FxSabrQuad_KOOption(
     double floorstd,
 
     /*	Product data */
-    long settlmt_date, double strike, int is_call, /* 1 Call  , 0: Put */
-    int is_american, int is_cvx,                   /* 1 use 1/Fx  , 0: use Fx */
-    int is_digital, /* 1: digital payoff  , 0  , regular option payoff */
+    long settlmt_date, double strike, int is_call, /* 1 Call      , 0: Put */
+    int is_american, int is_cvx, /* 1 use 1/Fx      , 0: use Fx */
+    int is_digital, /* 1: digital payoff      , 0      , regular option payoff
+                     */
     double *bar_lvl_up, double *bar_lvl_down, double rebate_up,
     double rebate_down,
 
     /*	Market data */
     double spot_fx, /*	The cash one */
     char *dom_yc, char *for_yc,
-    int eod_fix_flag, /*	EOD Fixing Flag 0: I  , 1: E */
-    int eod_pay_flag, /*	EOD Payment Flag 0: I  , 1: E */
-    int eod_ex_flag,  /*	EOD Exercise Flag 0: I  , 1: E */
+    int eod_fix_flag, /*	EOD Fixing Flag 0: I      , 1: E */
+    int eod_pay_flag, /*	EOD Payment Flag 0: I      , 1: E */
+    int eod_ex_flag,  /*	EOD Exercise Flag 0: I      , 1: E */
 
     /*	Result */
     double *res,
 
     /* Additional informations */
     int calc_greeks,
-    double *greeks); /* array 6 * nprod containing delta  , gamma  , theta  ,
-                        vega  , volga and vanna */
+    double *greeks); /* array 6 * nprod containing delta      , gamma      ,
+                        theta      , vega      , volga and vanna */
 
 Err FxSabrQuad_KO_MultiOption(
     /*	Time data		*/
@@ -197,25 +198,26 @@ Err FxSabrQuad_KO_MultiOption(
 
     /*	Product data */
     int nb_product, double *notional, long *exercise_date, long *settlmt_date,
-    double *strike, int *is_call, /* 1 Call  , 0: Put */
-    int *is_cvx,                  /* 1 use 1/Fx  , 0: use Fx */
-    int *is_digital, /* 1: digital payoff  , 0  , regular option payoff */
+    double *strike, int *is_call, /* 1 Call      , 0: Put */
+    int *is_cvx,                  /* 1 use 1/Fx      , 0: use Fx */
+    int *is_digital, /* 1: digital payoff      , 0      , regular option payoff
+                      */
     double *bar_lvl_up, double *bar_lvl_down, double *rebate_up,
     double *rebate_down,
 
     /*	Market data */
     double spot_fx, /*	The cash one */
     char *dom_yc, char *for_yc,
-    int eod_fix_flag, /*	EOD Fixing Flag 0: I  , 1: E */
-    int eod_pay_flag, /*	EOD Payment Flag 0: I  , 1: E */
-    int eod_ex_flag,  /*	EOD Exercise Flag 0: I  , 1: E */
+    int eod_fix_flag, /*	EOD Fixing Flag 0: I      , 1: E */
+    int eod_pay_flag, /*	EOD Payment Flag 0: I      , 1: E */
+    int eod_ex_flag,  /*	EOD Exercise Flag 0: I      , 1: E */
 
     /*	Result */
     double *res,
 
     /* Additional informations */
     int calc_greeks,
-    double *greeks); /* array 6 * nprod containing delta  , gamma  , theta  ,
-                        vega  , volga and vanna */
+    double *greeks); /* array 6 * nprod containing delta      , gamma      ,
+                        theta      , vega      , volga and vanna */
 
 #endif

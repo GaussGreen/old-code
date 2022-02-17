@@ -14,7 +14,7 @@ typedef struct {
   double *pay_cpn;
   double *pay_dff;
 
-  /*	Reconstruction formula parameters  , the only ones to be updated
+  /*	Reconstruction formula parameters      , the only ones to be updated
           when model parameters change	*/
   double *pay_gamma;
   double *pay_0_50_gamma_sqr;
@@ -80,7 +80,7 @@ Err chey_beta_fwd_free_swaption_data(SWAPTIONS_DATA *g);
 
 Err chey_beta_fwd_price(
     CHEYBETA_MDL *pmdl, int nt, int nx, int nphi, SWAPTIONS_DATA *g,
-    /*	Allocated inside  , to be freed by caller	*/
+    /*	Allocated inside      , to be freed by caller	*/
     int *ninst, double **inst_prem);
 
 #endif

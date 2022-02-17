@@ -71,8 +71,8 @@ Err merge_lambda_sigma_ts(double *sigma, double *sigma_time, int nb_sigma,
                           double **ts_time, double **lam, double **sig,
                           int *nb_new_time);
 
-// Calculates the fwds  , variances  , phis etc. for a LGM2F with lambda term
-// structure
+// Calculates the fwds      , variances      , phis etc. for a LGM2F with lambda
+// term structure
 Err fill_mc_init_lgm2f_lambda(
     int do_jump, long pay_date, double pay_time, double *date, double *time,
     long nb_dates, double *sig_dates, long nb_sig_dates, double *sig_curve_dom,
@@ -83,12 +83,13 @@ Err fill_mc_init_lgm2f_lambda(
     double *dom_bond_pay, double *dom_gam1_pay, double *dom_gam2_pay,
     double ***covar);
 
-// Calculates gamma_lambda = integral(s  ,T  ,exp(-integral(s  ,u  ,lambda(w)
-// ,w)  ,du when lambda(w) is piecewise constant
+// Calculates gamma_lambda = integral(s      ,T      ,exp(-integral(s      ,u
+// ,lambda(w)
+//     ,w)      ,du when lambda(w) is piecewise constant
 Err gamma_lambda(double s, double T, double *lambda_time, double *lambda,
                  long n_lambda, double *result);
 
-// Calculates exp_lambda = exp(-integral(s  ,T  ,lambda(w)  ,w))
+// Calculates exp_lambda = exp(-integral(s      ,T      ,lambda(w)      ,w))
 // when lambda(w) is piecewise constant
 Err exp_lambda(double s, double T, double *lambda_time, double *lambda,
                long n_lambda, double *result);

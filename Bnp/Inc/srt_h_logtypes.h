@@ -10,7 +10,7 @@
 <%%END---------------------------------------------------------------------*/
 /*<%%STA*/
 typedef struct {
-  double df; /* B(0  ,t) */
+  double df; /* B(0      ,t) */
 } SrtBasicTmInf;
 
 /*<%%STA-----------------------------------------------------------------
@@ -22,7 +22,7 @@ typedef struct {
 <%%END---------------------------------------------------------------------*/
 /*<%%STA*/
 typedef struct {
-  double df;               /* B(0  ,t) */
+  double df;               /* B(0      ,t) */
   double int_sig2_dt;      /* cum vol from node to next node */
   double sqrt_int_sig2_dt; /* sqrt of cum vol from node to next node */
   double int_sig_dt;       /* integral of sig*dt from node to next node */

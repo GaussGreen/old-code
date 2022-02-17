@@ -33,12 +33,12 @@ typedef struct {
   double *calrho2;
   double tstar;
 
-  /* calibrated vol  , tau */
+  /* calibrated vol      , tau */
   int num_sig;
   double *sig_time;
   double *sig;
 
-  /* Vol  , tau  , smile for init und */
+  /* Vol      , tau      , smile for init und */
   double **dmVol;
   double **dmTau;
   int num_tau;

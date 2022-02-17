@@ -10,7 +10,8 @@ Err grfn_payoff_4_3fquanto_tree(
     double r3_lambda, double r3_phi, int lgm2F_is_dom_for,
     /* Nodes data */
     long n1, long n2, long n3,
-    /* i: d1  , j: d2  , k: d3  , l = {0: r1  , 1: r2  , 2: r3} */
+    /* i: d1      , j: d2      , k: d3      , l = {0: r1      , 1: r2      , 2:
+       r3} */
     double ****sv,
     /* Vector of results to be updated */
     long nprod, double ****prod_val);

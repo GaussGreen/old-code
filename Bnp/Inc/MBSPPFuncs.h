@@ -2,8 +2,9 @@
 #define MBSPTPPFUNCS_H
 
 //**MAX****
-#define NBPOINTS 9 /* Number of points used to define the prepayment function  \
-                    */
+#define NBPOINTS                                                               \
+  9 /* Number of points used to define the prepayment function                 \
+     */
 #define MAXSFSNB 200 /* Maximum number of SFS structures that can be priced */
 #define MAXFIXEDPREPAY 180 /* Maximum number of fixed prepayment inputs */
 #define MAXNUMP 6
@@ -70,9 +71,9 @@ void ldensity(double *irates,   /* input rates  */
               double *rate,     /* rate of interest */
               double *weight);  /*  weight at rate of interest */
 
-// 1st payment <-> payment_nb=1; wam = oterm  , calc the scheduled principal
-// paydown during the payment_nb-th payment  , per $1 principal remaining before
-// the payment
+// 1st payment <-> payment_nb=1; wam = oterm      , calc the scheduled principal
+// paydown during the payment_nb-th payment      , per $1 principal remaining
+// before the payment
 double SCHEDULED_AMORT_RATE(int wam, double gwac);
 
 double TOTAL_AMORT_RATE(int wam, double gwac, double smm);

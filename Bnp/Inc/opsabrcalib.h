@@ -5,10 +5,11 @@
 
 Err opsabrcalib(double Fwd, double maturity, int nbr_strikes, double *strikes,
                 double *marketvols, double *ATMVol, double *alpha,
-                int freeze_alpha, /* if 0  , alpha is not calibrated */
+                int freeze_alpha, /* if 0      , alpha is not calibrated */
                 double *beta,
-                int freeze_beta, /* If 0  , beta is not calibrated */
-                double *rho, int freeze_rho, /* if 0  , rho is not calibrated */
+                int freeze_beta, /* If 0      , beta is not calibrated */
+                double *rho,
+                int freeze_rho, /* if 0      , rho is not calibrated */
                 double *fitting_error);
 
 /**********************************************************************

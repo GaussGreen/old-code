@@ -1,14 +1,14 @@
 /* -------------------------------------------------------------------------
    FILENAME		: num_h_uwan.h
 
-   PURPOSE		: generate randon numbers that are uniformely distributed
-   , but with an antithetic noise
+   PURPOSE		: generate randon numbers that are uniformely
+   distributed , but with an antithetic noise
    ------------------------------------------------------------------------- */
 #ifndef NUM_H_UWAN_H
 #define NUM_H_UWAN_H
 
-/* Initialisation function: path  , brownian  , step indexes (low and high
- * values) */
+/* Initialisation function: path      , brownian      , step indexes (low and
+ * high values) */
 Err uwan_init(long pl, long ph, long rl, long rh, long sl, long sh);
 
 /* Generation of Gaussian increments using UWAN (for r[Brow][Step]) */

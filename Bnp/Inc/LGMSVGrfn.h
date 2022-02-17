@@ -12,7 +12,8 @@ typedef struct {
   long *df_dts;
 
   /* For DF reconstruction */
-  /* B(t  ,T) = B(0  ,T) / B(0  , t) * Exp[dff - gam * f(t  ,T*) - gam2 * psi */
+  /* B(t      ,T) = B(0      ,T) / B(0      , t) * Exp[dff - gam * f(t      ,T*)
+   * - gam2 * psi */
   double *dff;
   double *gam;
   double *gam2;
@@ -28,8 +29,8 @@ typedef struct {
   long *df_dts;
 
   /* For DF reconstruction */
-  /* B(t  ,T) = B(0  ,T) / B(0  , t) * Exp[dff - gam1 * f1(t  ,T*) - gam2 * f2(t
-     ,T*)
+  /* B(t      ,T) = B(0      ,T) / B(0      , t) * Exp[dff - gam1 * f1(t ,T*) -
+     gam2 * f2(t ,T*)
                                                                                   - gam1_2  * ps1 - gam2_2  * psi1 - gam12 * psi12 */
   double *dff;
   double *gam1;
@@ -44,22 +45,23 @@ typedef struct {
  *			MODEL UNDER QTstar g(t)	piecewise constant *
  ****************************************************************/
 
-Err payoff_lgmsv_pde(double evt_date, double evt_time, void *func_parm,
+Err payoff_lgmsv_pde(
+    double evt_date, double evt_time, void *func_parm,
 
-                     /* Market data	*/
-                     void *yc,
+    /* Market data	*/
+    void *yc,
 
-                     /* Model data	*/
-                     double lamx, double dTstar, /* In time */
+    /* Model data	*/
+    double lamx, double dTstar, /* In time */
 
-                     /* Grid data	*/
-                     int lphi, int uphi, int lx, int ux, int leps, int ueps,
-                     double *phi, double *ftTstar,
+    /* Grid data	*/
+    int lphi, int uphi, int lx, int ux, int leps, int ueps, double *phi,
+    double *ftTstar,
 
-                     /* Vector of results to be updated */
-                     int nprod,
-                     /* 4 dimensions : Phit  ,Xt  ,Epst  ,Product	*/
-                     double ****prod_val);
+    /* Vector of results to be updated */
+    int nprod,
+    /* 4 dimensions : Phit      ,Xt      ,Epst      ,Product	*/
+    double ****prod_val);
 
 Err payoff_lgmsv_rec_swaption(
     double evt_date, double evt_time, void *func_parm,
@@ -76,7 +78,7 @@ Err payoff_lgmsv_rec_swaption(
 
     /* Vector of results to be updated */
     int nprod,
-    /* 4 dimensions : Phit  ,Xt  ,Epst  ,Product	*/
+    /* 4 dimensions : Phit      ,Xt      ,Epst      ,Product	*/
     double ****prod_val);
 
 /************************************************************************************************************************/
@@ -102,22 +104,23 @@ Err payoff_lgmsv_rec_swaption(
  *						MODEL UNDER QBeta
  **
  ************************************************************/
-Err payoff_lgmsv_pde_QBeta(double evt_date, double evt_time, void *func_parm,
+Err payoff_lgmsv_pde_QBeta(
+    double evt_date, double evt_time, void *func_parm,
 
-                           /* Market data	*/
-                           void *yc,
+    /* Market data	*/
+    void *yc,
 
-                           /* Model data	*/
-                           double lamx,
+    /* Model data	*/
+    double lamx,
 
-                           /* Grid data	*/
-                           int lphi, int uphi, int lx, int ux, int leps,
-                           int ueps, double *phi, double *x,
+    /* Grid data	*/
+    int lphi, int uphi, int lx, int ux, int leps, int ueps, double *phi,
+    double *x,
 
-                           /* Vector of results to be updated */
-                           int nprod,
-                           /* 4 dimensions : Phit  ,Xt  ,Epst  ,Product	*/
-                           double ****prod_val);
+    /* Vector of results to be updated */
+    int nprod,
+    /* 4 dimensions : Phit      ,Xt      ,Epst      ,Product	*/
+    double ****prod_val);
 
 Err payoff_lgmsv_rec_swaption_QBeta(
     double evt_date, double evt_time, void *func_parm,
@@ -134,7 +137,7 @@ Err payoff_lgmsv_rec_swaption_QBeta(
 
     /* Vector of results to be updated */
     int nprod,
-    /* 4 dimensions : Phit  ,Xt  ,Epst  ,Product	*/
+    /* 4 dimensions : Phit      ,Xt      ,Epst      ,Product	*/
     double ****prod_val);
 
 /************************************************************************************************************************/
@@ -176,7 +179,7 @@ Err payoff_lgmsv_pde_UtPieceWise(
 
     /* Vector of results to be updated */
     int *nprod,
-    /* 4 dimensions : Psit  ,Xt  ,Zt  ,Product	*/
+    /* 4 dimensions : Psit      ,Xt      ,Zt      ,Product	*/
     double ****prod_val);
 
 Err payoff_lgmsv_rec_swaption_UtPieceWise(
@@ -193,7 +196,7 @@ Err payoff_lgmsv_rec_swaption_UtPieceWise(
 
     /* Vector of results to be updated */
     int nprod,
-    /* 4 dimensions : Psit  ,Xt  ,Epst  ,Product	*/
+    /* 4 dimensions : Psit      ,Xt      ,Epst      ,Product	*/
     double ****prod_val);
 
 /****************************************************************
@@ -210,25 +213,26 @@ Err payoff_lgmsv_mc(long path_index, double evt_date, double evt_time,
                     /* Result	*/
                     double *prod_val, int *stop_path);
 
-Err payoff_lgmsv_FFT(double evt_date, double evt_time, void *func_parm,
+Err payoff_lgmsv_FFT(
+    double evt_date, double evt_time, void *func_parm,
 
-                     /* Market data	*/
-                     void *yc,
+    /* Market data	*/
+    void *yc,
 
-                     /* Model data	*/
-                     double lamx, double dTstar, /* In time */
+    /* Model data	*/
+    double lamx, double dTstar, /* In time */
 
-                     /* Grid data	*/
-                     int iNbPhi, int iNbft,
+    /* Grid data	*/
+    int iNbPhi, int iNbft,
 
-                     int iIndexPhiMean, int iIndexft0,
+    int iIndexPhiMean, int iIndexft0,
 
-                     double dPhiStep, double dftStep, double dPhitMean,
+    double dPhiStep, double dftStep, double dPhitMean,
 
-                     /* Vector of results to be updated */
-                     int nprod,
-                     /* 4 dimensions : Phit  ,Xt  ,Epst  ,Product	*/
-                     double ***prod_val);
+    /* Vector of results to be updated */
+    int nprod,
+    /* 4 dimensions : Phit      ,Xt      ,Epst      ,Product	*/
+    double ***prod_val);
 
 Err payoff_lgmsv2F_mc(long path_index, double evt_date, double evt_time,
                       void *func_parm,

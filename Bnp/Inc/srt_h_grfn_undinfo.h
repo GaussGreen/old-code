@@ -36,7 +36,7 @@ typedef struct {
 
   SRT_Boolean use_stochastic_vol; /* If stochastic vol  : do not correl */
   int use_corr_ts; /* Attempt to get rid of the correlation TS of sort ! */
-                   /* If set to 0  , we skip in MdlCom the corr TS checks... */
+  /* If set to 0      , we skip in MdlCom the corr TS checks... */
 
 } SrtUndInfo;
 

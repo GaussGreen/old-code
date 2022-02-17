@@ -30,7 +30,7 @@ typedef struct {
 
   /*	For the forward PDE	*/
 
-  /*	AD grids  , idx1 = phi  , idx2 = x	*/
+  /*	AD grids      , idx1 = phi      , idx2 = x	*/
 
   /*	AD prices @ step t1	*/
   double **adt1;
@@ -41,7 +41,8 @@ typedef struct {
 
   int num_prod;
 
-  /*	Value grids  , idx1 = phi  , idx2 = x  , idx3 = product id	*/
+  /*	Value grids      , idx1 = phi      , idx2 = x      , idx3 = product id
+   */
 
   /*	Prices @ step t1	*/
   double ***vt1;
@@ -50,7 +51,7 @@ typedef struct {
 
 } CHEYBETA_GRID;
 
-/*	Initialise  , i.e. set pointers to NULL	*/
+/*	Initialise      , i.e. set pointers to NULL	*/
 void chey_beta_grid_init(CHEYBETA_GRID *grid);
 
 /*	Free	*/
@@ -95,7 +96,7 @@ void chey_beta_density_at_t(
     int *nx, double **x,
     /*	Phi grid	*/
     int *nphi, double **phi,
-    /*	AD grid	idx1 = phi  , idx2 = x	*/
+    /*	AD grid	idx1 = phi      , idx2 = x	*/
     double ***ad);
 
 /*	Free density	*/
@@ -104,7 +105,7 @@ void chey_beta_free_density_at_t(
     int *nx, double **x,
     /*	Phi grid	*/
     int *nphi, double **phi,
-    /*	AD grid	idx1 = phi  , idx2 = x	*/
+    /*	AD grid	idx1 = phi      , idx2 = x	*/
     double ***ad);
 
 /*	For the backward PDE	*/
@@ -128,7 +129,7 @@ void chey_beta_prod_val_at_t(
     double phi,
     /*	Product values	*/
     int *num_prod,
-    /*	Allocated inside  , to be freed by caller	*/
+    /*	Allocated inside      , to be freed by caller	*/
     double **prod_val);
 
 #endif

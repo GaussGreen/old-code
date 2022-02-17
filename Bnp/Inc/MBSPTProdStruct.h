@@ -17,20 +17,20 @@ struct tagMBSPT_CashFlowStruct;
 typedef struct tagMBSPT_CashFlowStruct MBSPT_CashFlowStruct;
 
 struct tagMBSPT_CashFlowStruct {
-  long DealMaturityDate; // for FNM  , this is always the first of the month  ,
-                         // this plus 24 days = last payment day
-  long SettleDate; // spotsettle  , i.e.  , trade date
-  int oterm;       // in months  , for 30Y it is 360
+  long DealMaturityDate; // for FNM      , this is always the first of the month
+                         // , this plus 24 days = last payment day
+  long SettleDate; // spotsettle      , i.e.      , trade date
+  int oterm;       // in months      , for 30Y it is 360
   int cpnFreq;
   double cpn;           // 6 for 6%
-  int PayDelay;         // in days  , for FNM it is 24
+  int PayDelay;         // in days      , for FNM it is 24
   double accrualFactor; // this multiplied with face amount (100 for $100) and
                         // cpn (5 for 5%) gives the accrued interest
   int numCashFlows; // number of coupons that the new owner on SettleDate will
                     // own
   int NbInitialCashFlowToSkip;
-  long *duePeriodEndDates; // always the first of month for FNM  , last
-                           // duePeriodEndDate = DealMaturityDate
+  long *duePeriodEndDates;   // always the first of month for FNM      , last
+                             // duePeriodEndDate = DealMaturityDate
   double *duePeriodEndTimes; // (duePeriodEndDates - SettleDate)/365
   long *CashFlowDates;       // duePeriodEndDate + PayDelay
   double *CashFlowTimes;
@@ -43,13 +43,13 @@ char *MBSPT_CashFlowStruct_Construct(MBSPT_CashFlowStruct *cashflow_struct,
 void MBSPT_CashFlowStruct_Destruct(MBSPT_CashFlowStruct *cashflow_struct);
 
 struct tagMBSPT_DealStruct {
-  long DealMaturityDate; // for FNM  , this is always the first of the month  ,
-                         // this plus 24 days = last payment day
+  long DealMaturityDate; // for FNM      , this is always the first of the month
+                         // , this plus 24 days = last payment day
   MTGPTACYPROG AgencyProgram; // for FNM conventional it is _FNCONVENTIONAL
-  int oterm;                  // in months  , for 30Y it is 360
+  int oterm;                  // in months      , for 30Y it is 360
   int cpnFreq;                // 12
   double cpn;                 // 6 for 6%
-  int PayDelay; // in days  , for FNM it is 24  , for FH Arm it is 44
+  int PayDelay; // in days      , for FNM it is 24      , for FH Arm it is 44
   long TradeDate;
   long SettleDate; // fwdsettle
   MBSPT_CashFlowStruct cashflow_struct;

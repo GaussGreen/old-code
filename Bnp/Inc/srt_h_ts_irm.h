@@ -315,8 +315,8 @@ void G_H_func(double t, TermStruct *l, double *val_G, double *val_H);
 
 Err srt_f_tsupdate(TermStruct **l);
 
-/* -> update TermStruct 'l': fills blank cells  ,
-                             recomputes F  ,Psi  ,G and H */
+/* -> update TermStruct 'l': fills blank cells      ,
+                             recomputes F      ,Psi      ,G and H */
 
 /* -------------------------------------------------------------------------- */
 
@@ -333,9 +333,9 @@ Err srt_f_tsaddsig(TermStruct *list, Ddate date, double today, double sig);
 /* -------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------
-   Computes the LGM cumulative volatility between two dates t1 and t2  ,
+   Computes the LGM cumulative volatility between two dates t1 and t2      ,
    defined by:
-                CumVol(t  , T1  , T2) = [Psi(T2)-Psi(T1)]^2 * G(t)
+                CumVol(t      , T1      , T2) = [Psi(T2)-Psi(T1)]^2 * G(t)
    ------------------------------------------------------------------------- */
 
 double srt_f_lgm_cum_vol(TermStruct *ts, double t, double t1, double t2,

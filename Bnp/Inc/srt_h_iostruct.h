@@ -8,9 +8,9 @@
 typedef SrtList SrtIOStruct;
 
 /* SrtIOStruct is a double linked list.
-   Each element is contains a request for a computation (price  , tau shift  ,
-   sigma shift  ,...) and the result of the computation.
-   IO <=> Input/Output */
+   Each element is contains a request for a computation (price      , tau shift
+   , sigma shift      ,...) and the result of the computation. IO <=>
+   Input/Output */
 
 /* -------------------------------------------------------------------------- */
 
@@ -41,7 +41,7 @@ typedef struct SrtIOVal {
   int type;
   Date bucket_start; /* for tau and sigma shifts only */
   Date bucket_end;
-  double shift_value;          /* for rate  , sigma or tau shifts */
+  double shift_value;          /* for rate      , sigma or tau shifts */
   int shift_type;              /* either relative or absolute */
   SRT_Boolean done;            /* wether the job has been done or not */
   char computation_origin[32]; /* name of the function that computed 'result */
@@ -82,7 +82,7 @@ Err srt_f_IOvalfree(void *ioval);
 Err srt_f_IOstructfree(SrtIOStruct **l);
 
 /* -> free all the list including all the objects pointed
-This function is strictly equivalent srt_lstfree(.  ,SRT_YES) */
+This function is strictly equivalent srt_lstfree(.      ,SRT_YES) */
 
 /* ---------------------------- Conversion function ------------------------- */
 
@@ -206,7 +206,7 @@ Err srt_f_IOstructgetsigmashift(SrtIOStruct l, int bucket_no,
                                 SrtIOVal **ioval_pp);
 
 /* -> return as '*value from the list 'l the value corresponding to a
-        sigma shift of type 'shift_type and shift value 'sigma_shift  ,
+        sigma shift of type 'shift_type and shift value 'sigma_shift      ,
         for the bucket of value 'bucket_value */
 
 /* -------------------------------------------------------------------------- */
@@ -228,7 +228,7 @@ Err srt_f_IOstructgettaushiftval(SrtIOStruct l, int bucket_no,
                                  double *value);
 
 /* -> return as '*value from the list 'l the value corresponding to a tau shift
-        of type 'shift_type and shift value 'tau_shift  ,
+        of type 'shift_type and shift value 'tau_shift      ,
         for the bucket of value 'bucket_value */
 
 /* -------------------------------------------------------------------------- */

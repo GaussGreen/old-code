@@ -14,19 +14,20 @@
 #define MAXNAM 32
 
 typedef struct srtbndcrv {
-  int algo_flag;      /* algo flag 0 constant  , 1 linear  , 2 spline */
+  int algo_flag;      /* algo flag 0 constant      , 1 linear      , 2 spline */
   char ccy[4];        /* currency */
   Ddate today;        /* today */
   Ddate spot;         /* spot */
   Ddate lastdate;     /* last date that the stripper can interpolate */
   int num_knot_point; /* number of knot points */
   int lastknot;       /* index of the last optimised knot */
-  Ddate *knot_date;   /* date of knot points  , indexed from 1 */
-  double *knot_point; /* time in years from today of knot points  , indexed from
-                         1 */
-  double *fwd_rate_coef;  /* coef of fwd rate  , indexed from 0 */
+  Ddate *knot_date;   /* date of knot points      , indexed from 1 */
+  double *
+      knot_point; /* time in years from today of knot points      , indexed from
+                     1 */
+  double *fwd_rate_coef;  /* coef of fwd rate      , indexed from 0 */
   double **zcpn_yld_coef; /* coef of the integral of fwd rate indexed from 0 */
-                          /* for each knot intervals indexed from 0  ,0 */
+                          /* for each knot intervals indexed from 0      ,0 */
 } SrtBndCrv, *SrtBndCrvPtr;
 
 typedef struct srtbndcrvlist {
@@ -93,6 +94,6 @@ SrtErr srt_f_bndcrv_init(
     Ddate today,        /* today's date */
     double coeff_line,  /* coefficient for smoothness */
     int num_iter,       /* Number of iterations for levenberg */
-    int algo_flag);     /* 0 = LINEAR  , 1 = SPLINE */
+    int algo_flag);     /* 0 = LINEAR      , 1 = SPLINE */
 
 #endif

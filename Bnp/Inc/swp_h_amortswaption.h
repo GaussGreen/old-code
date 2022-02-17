@@ -104,38 +104,38 @@ Err AmortizedSwaptionShiftedLogForMAD_(
 /*
 
 Err		AmortizedSwaptionHeston(
-                                                 char *cYCname  ,
-                                                 char *cVCname  ,
-                                                 char *cRefRname  ,
+                                                 char *cYCname      ,
+                                                 char *cVCname      ,
+                                                 char *cRefRname      ,
 
-                                                 long xlStartDate  ,
-                                                 long xlEndDate  ,
+                                                 long xlStartDate      ,
+                                                 long xlEndDate      ,
 
-                                                 SrtCompounding srtFreq  ,
-                                                 SrtBasisCode srtBasis  ,
+                                                 SrtCompounding srtFreq      ,
+                                                 SrtBasisCode srtBasis      ,
 
-                                                 double exer_fee  ,
+                                                 double exer_fee      ,
 
-                                                 long	lNFixNot  ,
-                                                 double *dFixNotionals  ,
-                                                 double *dFixRates  ,
+                                                 long	lNFixNot      ,
+                                                 double *dFixNotionals      ,
+                                                 double *dFixRates      ,
 
-                                                 long	lNFloatNot  ,
-                                                 double *dFloatNotionals  ,
-                                                 double *dMargins  ,
+                                                 long	lNFloatNot      ,
+                                                 double *dFloatNotionals      ,
+                                                 double *dMargins      ,
 
-                                                 SrtCallPutType srtCallPut  ,
+                                                 SrtCallPutType srtCallPut ,
 
-                                                 double xlnStdDev  ,
-                                                 int xlStudDegree  ,
-                                                 int xlNumSim  ,
-                                                 int xlNPts  ,
-                                                 double xlUpBound  ,
-                                                 int xlnClasses  ,
+                                                 double xlnStdDev      ,
+                                                 int xlStudDegree      ,
+                                                 int xlNumSim      ,
+                                                 int xlNPts      ,
+                                                 double xlUpBound      ,
+                                                 int xlnClasses      ,
 
-                                                 int UseVol  ,
+                                                 int UseVol      ,
 
-                                                 double **Correl  ,
+                                                 double **Correl      ,
                                                  double *dPrice
                                     );
 
@@ -143,29 +143,29 @@ Err		AmortizedSwaptionHeston(
 
 /*
 Err		PriceAmortizedSwaptionHeston(
-                                                 char *cYCname  ,
-                                                 char *cVCname  ,
-                                                 char *cRefRname  ,
-                                                 long xlStartDate  ,
-                                                 long xlEndDate  ,
-                                                 SrtCompounding srtFreq  ,
-                                                 SrtBasisCode srtBasis  ,
-                                                 long	lNFixNot  ,
-                                                 double *dFixNotionals  ,
-                                                 long	lNFloatNot  ,
-                                                 double *dFloatNotionals  ,
-                                                 double *dFixRates  ,
-                                                 SrtCallPutType srtCallPut  ,
-                                                 double xlnStdDev  ,
-                                                 int xlStudDegree  ,
-                                                 int xlNumSim  ,
-                                                 char *xlTypeVol  ,
-                                                 int xlNPts  ,
-                                                 double xlUpBound  ,
-                                                 int xlnClasses  ,
-                                                 double **Correl  ,
-                                                 double *dPrice  ,
-                                                 int iPayoffMethod  ,
+                                                 char *cYCname      ,
+                                                 char *cVCname      ,
+                                                 char *cRefRname      ,
+                                                 long xlStartDate      ,
+                                                 long xlEndDate      ,
+                                                 SrtCompounding srtFreq      ,
+                                                 SrtBasisCode srtBasis      ,
+                                                 long	lNFixNot      ,
+                                                 double *dFixNotionals      ,
+                                                 long	lNFloatNot      ,
+                                                 double *dFloatNotionals      ,
+                                                 double *dFixRates      ,
+                                                 SrtCallPutType srtCallPut ,
+                                                 double xlnStdDev      ,
+                                                 int xlStudDegree      ,
+                                                 int xlNumSim      ,
+                                                 char *xlTypeVol      ,
+                                                 int xlNPts      ,
+                                                 double xlUpBound      ,
+                                                 int xlnClasses      ,
+                                                 double **Correl      ,
+                                                 double *dPrice      ,
+                                                 int iPayoffMethod      ,
                                                  int iDistribMethod
                                     );
 */

@@ -33,7 +33,7 @@ double MBS_GetVolTermTenor(void *VC, // VolatilityCurve
 //	* functor represention by unique opaque handles
 //	* usage:
 //		+ SwapRate_Create: create handle for swap rate corresponding to
-//given {yield curve  , ref rate  , basis  , frequency}
+// given {yield curve      , ref rate      , basis      , frequency}
 //		+ SwapRate_Evaluate: evaluate swaprate as bivariate function;
 //		+ SwapRate_Delete: delete handle when done
 
@@ -62,8 +62,8 @@ double MBS_SwapRate_Evaluate( // NB: returns -1 on error
 // NB:
 //	* functor represention by unique opaque handles
 //	* usage:
-//		+ ForwardRate_Create: create handle for swap rate corresponding to
-//given {yield curve  , ref rate  , basis  , frequency}
+//		+ ForwardRate_Create: create handle for swap rate corresponding
+//to given {yield curve      , ref rate      , basis      , frequency}
 //		+ ForwardRate_Evaluate: evaluate swaprate as bivariate function;
 //		+ ForwardRate_Delete: delete handle when done
 

@@ -1,10 +1,10 @@
 /* ===================================================================================
    FILENAME:      srt_h_quickclsdfrm.h
 
-   PURPOSE:       Compute quick prices for saptions  , cap floors for a generic
-   Cheyette Beta model the formula is a complete approximation and offers
-   absolutely no accuracy. It is just used in the calibration with FIXED POINT
-   as a way of getting a Beta sensitivity...
+   PURPOSE:       Compute quick prices for saptions      , cap floors for a
+   generic Cheyette Beta model the formula is a complete approximation and
+   offers absolutely no accuracy. It is just used in the calibration with FIXED
+   POINT as a way of getting a Beta sensitivity...
    ===================================================================================
  */
 

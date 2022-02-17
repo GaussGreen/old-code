@@ -53,54 +53,53 @@ Err fill_lgmQto_und(char *und3dfx, char *dom_vc, char *for_vc, char *dom_ref,
 /*	Fill underlying structure from calibration instruments */
 /*
 Err calib_lgmQto_und(
-long		today  ,
+long		today      ,
 //	EOD Flag
-int			eod_flag  ,
-//	0: I  , 1: E
-char		*yc  , //	yc char		*vc  ,
-//	vc (only if calib) char		*ref  ,
-//	ref rate (only if calib) char		*swap_freq  ,
-//	swap freq (only if calib) char		*swap_basis  ,
-//	swap basis (only if calib) int			lam_ts  ,
-//	0: use unique lambda  , 1: use ts double		lambda  ,
-//	lambda if unique int			tsnlam  ,
-//	number of lambdas if ts double		*tslamtime  ,
+int			eod_flag      ,
+//	0: I      , 1: E
+char		*yc      , //	yc char		*vc      ,
+//	vc (only if calib) char		*ref      ,
+//	ref rate (only if calib) char		*swap_freq      ,
+//	swap freq (only if calib) char		*swap_basis      ,
+//	swap basis (only if calib) int			lam_ts      ,
+//	0: use unique lambda      , 1: use ts double		lambda      ,
+//	lambda if unique int			tsnlam      ,
+//	number of lambdas if ts double		*tslamtime      ,
 //	lambda times i.e. (date - today) / 365 if ts
-double		*tslam  ,
-//	corresponding lambdas if ts double		alpha  ,
+double		*tslam      ,
+//	corresponding lambdas if ts double		alpha      ,
 //	alpha
-double		gamma  , //	gamma
-double		rho  , //	rho
+double		gamma      , //	gamma
+double		rho      , //	rho
 //	Calib params
-int			force_atm  ,
-//	force atm calib double		max_std_long  , double
-max_std_short  , int			fix_lambda  ,
-//	0: calib lambda to cap  , 1: fix lambda calib
+int			force_atm      ,
+//	force atm calib double		max_std_long      , double
+max_std_short      , int			fix_lambda      ,
+//	0: calib lambda to cap      , 1: fix lambda calib
                                                                                         //			to diagonal
-int			one_f_equi  ,
+int			one_f_equi      ,
 //	1F equivalent flag:
-                                                                                        //			if set to 1  , then 2F lambda will calibrate
+                                                                                        //			if set to 1      , then 2F lambda will calibrate
                                                                                         //			to the cap priced within calibrated 1F
                                                                                         //			with the given lambda
-int			skip_last  ,
-//	If 1  , the last option is disregarded
+int			skip_last      ,
+//	If 1      , the last option is disregarded
                                                                                         //			and the forward volatility is flat from option
                                                                                         //			n-1
 //	End of calib params
-CTSQUANTO_STR		ctsquanto  ,
+CTSQUANTO_STR		ctsquanto      ,
 //	structure Err			(*get_cash_vol)(
 //	function to get IR cash vol from the markets char	*vol_curve_name
-, double	start_date  , double	end_date  , double	cash_strike  ,
-                                int		zero  ,
-                                char	*ref_rate_name  ,
-                                double	*vol  ,
-                                double	*power)  ,
-LGMQTO_UND		und  ,
-long		spread_vol_n  ,
-double		*spread_vol_time  ,
-double		*spread_vol_floor  ,
-double		*spread_vol_cap  ,
-int			cvg_sv  ,
+    , double	start_date      , double	end_date      , double
+cash_strike      , int		zero      , char	*ref_rate_name      ,
+                                double	*vol      ,
+                                double	*power)      ,
+LGMQTO_UND		und      ,
+long		spread_vol_n      ,
+double		*spread_vol_time      ,
+double		*spread_vol_floor      ,
+double		*spread_vol_cap      ,
+int			cvg_sv      ,
 int			is_corr);
 
 */

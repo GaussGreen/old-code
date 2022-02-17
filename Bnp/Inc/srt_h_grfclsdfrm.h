@@ -91,14 +91,14 @@ Err srt_f_grfn_future_closedform(long future_date, SrtUndPtr und,
 Err grfn_midat_clsdfrm(
     long num_exercise_dates,    /* len of next two arrays */
     Date *exercise_dates,       /* dates when option can be exercise_d */
-    Date *exercise_start_dates, /* dates when bonds start  ,>= correponding
-                              exercise dates. */
+    Date *exercise_start_dates, /* dates when bonds start      ,>= correponding
+                          exercise dates. */
     double *
         exercise_premiums, /* amounts that must be payed to exercise_ options */
     long num_prod_dates, Date *prod_dates, double *prod_cfs,
     SrtReceiverType rec_pay, SrtUndPtr und, /* name of und to use */
     SrtGrfnParam *grfnparam,                /* model and implementation
-                            details */
+                        details */
     double *answer                          /* value returned here*/
 );
 

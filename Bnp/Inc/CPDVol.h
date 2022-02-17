@@ -45,7 +45,7 @@ typedef struct {
   long dates;
 
   // Specific to blksh beta
-  int Use_BetaQuick_in_MC; // if 1  , uses SABR approx for blkschbeta in the
+  int Use_BetaQuick_in_MC; // if 1      , uses SABR approx for blkschbeta in the
                            // forward pricing.
 } smile_parameters, *SMILE_PARAMETERS;
 
@@ -53,7 +53,8 @@ Err cpd_alloc_smile_vol_market(int num_vols, SMILE_VOL_MARKET smile_mkt);
 
 Err cpd_fill_smile_vol_market(
     long today,
-    int smile_spec_type, // 0 SABR with ATMLOG  , 1 SABR with ATMBETA  , 2 BMM
+    int smile_spec_type, // 0 SABR with ATMLOG      , 1 SABR with ATMBETA      ,
+                         // 2 BMM
                          // ...
     int num_vols, double *forward, double *sigma, double *alpha, double *beta,
     double *rho, double *pi, double *times, long *dates,
@@ -70,11 +71,12 @@ Err cpd_vol_get_vol(double forward, double fix_time, double strike,
 Err cpd_vol_get_price(int type, double Forward, double Maturity, double Strike,
                       SMILE_PARAMETERS smile_params, double *Value);
 
-Err cpd_vol_get_smile_params(int IsTime, // 0 will use date  , 1 will use time
-                             long date, double time, SMILE_VOL_MARKET smile_mkt,
-                             SMILE_PARAMETERS smile_params);
+Err cpd_vol_get_smile_params(
+    int IsTime, // 0 will use date      , 1 will use time
+    long date, double time, SMILE_VOL_MARKET smile_mkt,
+    SMILE_PARAMETERS smile_params);
 
-Err cpd_vol_get_linterpVol(int IsTime, // 0 will use date  , 1 will use time
+Err cpd_vol_get_linterpVol(int IsTime, // 0 will use date      , 1 will use time
                            long date, double time, SMILE_VOL_MARKET smile_mkt,
                            SMILE_PARAMETERS smile_params);
 

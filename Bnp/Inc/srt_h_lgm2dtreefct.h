@@ -8,43 +8,44 @@
         NONO TREE FUNCTIONS
         ATTENTION: THESE FUNCTIONS HAVE BEEN MODIFIED AND WILL WORK ONLY WITH
    LGM 2D TREE BACKUP OF FORMER FUNCTIONS IS AVAILABLE IN
-   SRT_F_TWOFACTREFCT_BACKUP.C (NOT IN PROJECT) AS WELL  , SRT_F_TREBDT2F.C HAS
-   BEEN REMOVED FROM PROJECT
+   SRT_F_TWOFACTREFCT_BACKUP.C (NOT IN PROJECT) AS WELL      , SRT_F_TREBDT2F.C
+   HAS BEEN REMOVED FROM PROJECT
 
         THIS FILE CONTAINS TWO PARTS:
         -	FIRST PART CONTAINS FUNCTIONS USED TO COMPUTE PV OF ASSETS AT
-   SOME NODE  , GIVEN PV OF ASSETS AT ALL NODES AT NEXT TIME STEP -	SECOND
+   SOME NODE      , GIVEN PV OF ASSETS AT ALL NODES AT NEXT TIME STEP -	SECOND
    PART CONTAINS FUNCTIONS USED TO DESIGN THE GEOMETRY OF THE TREE
 */
 
 /*
                                                                                 PART I
                                         DISCOUNTING FROM TIME STEP N+1 TO NODE N
-   ,I  ,J
+       ,I      ,J
 */
 
 /* Computes forwards of statevars and stores in node->forward */
 /* FORWARDS ARE EXPRESSED IN THE DUAL BASIS OF THE NEXT LAYER OF STEPS */
 void lgm2f_forwards(
-    SrtIRMTmInf *tminf, /* Time info  , ie. sigma  , tau and rho at time step */
+    SrtIRMTmInf
+        *tminf, /* Time info      , ie. sigma      , tau and rho at time step */
     SrtNonoTreeNodeInfo *node, /* Output will be returned in node->forward */
     double dt,                 /* Delta t between this step and next */
     double nxt_inverse_basis[2][2]); /* Transfer Matrix to Dual basis at next
                                         layer of steps */
 
-/* Establishes connectivity to next layer of steps  ,
+/* Establishes connectivity to next layer of steps      ,
    stores results in node->son_index and node->son_statevar */
 /* Indexes and Statevars are expressed in dual basis
-   (statevar[MID][0] will not be X1 at mid son node  , but eigenvector1 at mid
-   son node */
-/* Actually  , everything is expressed in dual basis */
+   (statevar[MID][0] will not be X1 at mid son node      , but eigenvector1 at
+   mid son node */
+/* Actually      , everything is expressed in dual basis */
 
 /* ATTENTION:	THE SON INDEXES WILL BE CAPPED AND FLOORED BY TREE GEOMETRY AT
-   NEXT TIME STEP; ON THE CONTRARY  , THE SON STATEVARS WILL BE KEPT AT THEIR
-   TRUE VALUES  , EVEN IF THEY ARE OUTSIDE THE GRID. THIS MEANS THAT WE
-   CORRECTLY DISCRETISE THE DISTRIBUTION (PROBAS IN lgm2f_probas)  , BUT WE
-   SUPPOSE A FLAT EXTRAPOLATION OF THE ASSETS (IN lgm2f_discount_to_node) (ASK
-   AS IF YOU REALLY WANT TO UNDERSTAND) */
+   NEXT TIME STEP; ON THE CONTRARY      , THE SON STATEVARS WILL BE KEPT AT
+   THEIR TRUE VALUES      , EVEN IF THEY ARE OUTSIDE THE GRID. THIS MEANS THAT
+   WE CORRECTLY DISCRETISE THE DISTRIBUTION (PROBAS IN lgm2f_probas)      , BUT
+   WE SUPPOSE A FLAT EXTRAPOLATION OF THE ASSETS (IN lgm2f_discount_to_node)
+   (ASK AS IF YOU REALLY WANT TO UNDERSTAND) */
 void lgm2f_connect(
     SrtDiagTwoFacTreeInfo
         *nxttrinf,            /* Info about tree structure at next time step */
@@ -60,8 +61,8 @@ void lgm2f_probas(
                                                 computes probas (->p) */
 
 /*	Computes PV at some node
-        using information given by moments  , connectivity and probas at this
-   node */
+        using information given by moments      , connectivity and probas at
+   this node */
 void lgm2f_discount_to_node(SrtNonoTreeNodeInfo *node, /* Node info */
                             double ***next_assets, /* Next assets [x1][x2][i] */
                             double *cur_assets,    /* Current assets at node */

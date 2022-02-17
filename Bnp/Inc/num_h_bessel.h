@@ -44,7 +44,7 @@ double bessi(int n, double x);
 Err beschb(double x, double *gam1, double *gam2, double *gampl, double *gammi);
 
 /* -------------------------------------------------------------------------
-   Returns the modified Bessel function ri=I(nu)   , rk=K(nu) and their
+   Returns the modified Bessel function ri=I(nu)       , rk=K(nu) and their
    derivatives rip and rkp for positive x and for xnu >0.
    The relative accuracy is within one or two significant digits of BESSEL_EPS.
    FPMIN is a number close to the machine smallest floating point number.

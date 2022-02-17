@@ -31,7 +31,7 @@ double op_sabrgen_calib(double F, double K, double T, double sigma,
 
 double op_sabr_distri(double F, double K, double T, double sigma, double alpha,
                       double a, double b, double c, double rho, double perc,
-                      int type, /* 0: density  , 1: cumul */
+                      int type, /* 0: density      , 1: cumul */
                       double (*vol_local)(double x, double a, double b,
                                           double c, int type));
 

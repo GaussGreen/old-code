@@ -28,7 +28,7 @@ Err fill_funding_leg(
     /*	Coupons that started before today are disregarded */
     long today,
     /*	EOD Flag */
-    int eod_flag, /*	0: I  , 1: E */
+    int eod_flag, /*	0: I      , 1: E */
     int spot_lag, double fund_not, int fund_ncpn, long *fund_fix,
     long *fund_start, long *fund_pay, char **fund_basis, double *fund_spr,
     double *fund_mrg, FUNDING_LEG fund_leg);

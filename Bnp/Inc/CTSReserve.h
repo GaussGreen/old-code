@@ -61,27 +61,28 @@ Err cts_calc_reserve(/*	Initial results */
                      double vol_shift_short, DIAGCALIB_VOLTYPE vol_type_short,
                      DIAGCALIB_SHIFTTYPE vol_shift_type_short,
                      double lambda_shift,
-                     int calib_strategy, /*	-1: autocal  , 0: swaptions /
-                                            cap  , 1: cap / swaptions */
+                     int calib_strategy, /*	-1: autocal      , 0: swaptions
+                                        / cap      , 1: cap / swaptions */
                      int fix_lambda, char *short_tenor, char *short_refrate,
                      char *short_freq, char *short_basis, int fix_smile,
-                     int smile_calib_months, /* 0: co-terminal swaption  ,
-                                                otherwise underlyings with
-                                                required nb months */
+                     int smile_calib_months, /* 0: co-terminal swaption      ,
+                                            otherwise underlyings with
+                                            required nb months */
                      LGMSV_CalibParams *lgmsv_calib_params, double min_time,
-                     int skip_last,   /*	If 1  , the last option is disregarded
-                                         and the forward volatility is flat from
-                                         option n-1 */
+                     int skip_last,   /*	If 1      , the last option is
+                                     disregarded   and the forward volatility is
+                                     flat from   option n-1 */
                      double min_fact, /*	Maximum down jump on variance */
                      double max_fact, /*	Maximum up jump on variance */
-                     int use_jumps,   /*	1: we allow jumps on vol  , 0: we don't
+                     int use_jumps,   /*	1: we allow jumps on vol      , 0: we
+                                       * don't
                                        */
                      double prec, int maxiter, int keep_first,
                      int long_strike_flag,  /*	0: ATM 1: Coupon 2: Eq (PV/Lvl)
                                              */
-                     int short_strike_flag, /*	0: ATM  , 1: implied digital
-                                               caplet strike 2: same number of
-                                               std */
+                     int short_strike_flag, /*	0: ATM      , 1: implied digital
+                                           caplet strike 2: same number of
+                                           std */
 
                      int calc_fwd_iv, int adj_fee,
 
@@ -89,30 +90,31 @@ Err cts_calc_reserve(/*	Initial results */
                      double lambda_reserve, double lgm_alpha, double lgm_gamma,
                      double lgm_rho, double onetime_vega, int vega_shift_type,
 
-                     int reserve_method,    /*	0: old method  , 1: new method
+                     int reserve_method,    /*	0: old method      , 1: new
+                                             * method
                                              */
                      int lgm_reserve,       /*	1: calculate the reserve in the
-                                               one factor */
+                                           one factor */
                      int midat_reserve,     /*	1: reserve calculated using the
-                                               midat-replication */
-                     int recalib_european,  /*	If set to 1  , then european are
-                                               recalibrated when changing lambda
-                                             */
+                                           midat-replication */
+                     int recalib_european,  /*	If set to 1      , then european
+                                           are  recalibrated when changing lambda
+                                         */
                      int euro_nb_iter,      /*	Number of Levenberg iteration
-                                               for calibration of european */
+                                           for calibration of european */
                      int one_time_index,    /*	One Time callable used for
-                                               reserve calculation */
+                                           reserve calculation */
                      int recalc_one_factor, /*	Recalculate MCEB in one factor
-                                               for reserve */
+                                           for reserve */
 
                      int reserve_nstpt,   /*	number of time steps for reserve
-                                             calculation */
+                                         calculation */
                      int reserve_nstpx,   /*	number of space steps for
-                                             reserve calculation */
+                                         reserve calculation */
                      int reserve_nstppsi, /*	number of time steps for reserve
-                                             calculation */
+                                         calculation */
                      int reserve_nstpvol, /*	number of space steps for
-                                             reserve calculation */
+                                         reserve calculation */
                      double reserve_integ_mintime,
 
                      /*	Results */

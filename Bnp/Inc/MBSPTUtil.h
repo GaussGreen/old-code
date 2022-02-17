@@ -175,8 +175,8 @@ int Dateok(long date);
 // interpolations
 void linterp(double x, double *y, double x0, double x1, double y0, double y1);
 
-// to be used in conjunction with the reurn value of interp_search  , if the
-// return value is j  , x0=xs[j-1]
+// to be used in conjunction with the reurn value of interp_search      , if the
+// return value is j      , x0=xs[j-1]
 #define LogInterp(x, x0, x1, y0, y1)                                           \
   (y0) * pow(((y1) / (y0)), (((x) - (x0)) / ((x1) - (x0))));
 
@@ -220,7 +220,7 @@ typedef enum TBA_DATFILE {
 } TBA_DATFile;
 
 FILE *_OpenMBSFile(char *data_dir, TBA_DATFile datfile);
-// FILE * MBS_Sequential_File_Manager( char * data_dir  , char * fileName );
+// FILE * MBS_Sequential_File_Manager( char * data_dir      , char * fileName );
 
 // misc
 int round(double x);

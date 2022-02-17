@@ -4,7 +4,7 @@
 /*  Associated header: sdplib.h */
 /*  Uses: some nr routines and some BLAS routines.  */
 
-/*  BLAS from the Intel Math Kernel library can be linked directly  ,  */
+/*  BLAS from the Intel Math Kernel library can be linked directly      ,  */
 /*  or the MiniBLAS provided for use in griffin can be used instead. */
 /*  See sdp.h for BLAS library choice. */
 
@@ -55,10 +55,12 @@ Err zero_mat(double **mata, int dim);
 /*  zeros a vector */
 Err zero_vec(double *veca, int dim);
 
-/*  Stack a matrix of dimension dim into a [0  ,...  ,(dim*dim-1);] vector. */
+/*  Stack a matrix of dimension dim into a [0      ,...      ,(dim*dim-1);]
+ * vector. */
 Err stack_mat(double **mata, int dim, double *vecres);
 
-/*  Adds aplha*A+beta*B put it into C (if transpose="T"  , B is transposed); */
+/*  Adds aplha*A+beta*B put it into C (if transpose="T"      , B is transposed);
+ */
 Err add_mat(double alpha, double **mata, double beta, double **matb, int dim,
             double **matc, char *transpose);
 
@@ -83,14 +85,14 @@ Err transp(double **mata, int dim, double **result);
  * [1..n^2][1..n^2] on matrixes. */
 Err fast_imat(double **opera, double **mata, int dim, double **result);
 
-/*  Defines the A(*);B tensor product of matrixes of size dim (A  , B  , must be
- * symetric);. */
+/*  Defines the A(*);B tensor product of matrixes of size dim (A      , B      ,
+ * must be symetric);. */
 /*  Returns a matrix of dimension dim^2 */
 /*  This is the most intensive computation in the algorithm. */
 /*  (ToDo); Look for optimized formulation. */
 Err tensor_prod(double **mata, double **matb, int dim, double **result);
 
-/*  Computes (A(*);B);(O);  , with A  , B  , O symmetric. */
+/*  Computes (A(*);B);(O);      , with A      , B      , O symmetric. */
 /*  Returns a matrix of dimension dim */
 Err tensor_oper(double **mata, double **matb, double **mato, int dim,
                 double **result);
@@ -109,13 +111,14 @@ Err add_vec(double alpha, double *veca, double beta, double *vecb, int dim,
 Err slow_im_vec(double **mata, double *veca, int dim, double *vecres);
 
 /*  Test if a matrix is Positive Definite using Cholesky decomposition. */
-/*  Returns 0 if PD  , or the size of the first  */
+/*  Returns 0 if PD      , or the size of the first  */
 /*  non PD submatrix. */
 int pd_test(double **mata, int dim);
 
-/*  Solves a linear system A.x=b  , returns inv(A) and x. if algo_type is 0  , x
- * otherwise. */
-/*  Algo_type gives the choice between 0:Gauss elimination  , 1:Gauss Siedel. */
+/*  Solves a linear system A.x=b      , returns inv(A) and x. if algo_type is 0
+ * , x otherwise. */
+/*  Algo_type gives the choice between 0:Gauss elimination      , 1:Gauss
+ * Siedel. */
 Err lsolve(double **mata, double *vecb, int dim, double *vecres,
            double **matres, int algo_type, double prec_obj, int num_improve);
 
@@ -157,12 +160,12 @@ void solve_linear(double **A, int row_start, int col_start, int rows, int cols,
 /*  *******************************************************************************
  */
 
-/*  Computes the primal constraints operator (Tr(A1.X);  , ...  ,Tr(Ai.X);  ,
+/*  Computes the primal constraints operator (Tr(A1.X);      , ... ,Tr(Ai.X); ,
  * ....); operating on a matrix mata. */
 Err op_a(double ***con_mat, int num_const, double **mata, int dim,
          double *vecres);
 
-/*  Computes the augmented constraints operator (A  ,-C);. */
+/*  Computes the augmented constraints operator (A      ,-C);. */
 /*  Returns a dim+1 vector. */
 Err op_a_augm(double ***con_mat, int num_const, double **cmat, double **mata,
               int dim, double *vecres);
@@ -181,7 +184,7 @@ Err op_ta_augm(double ***con_mat, int num_const, double **cmat, double *veca,
 double step_length(double **mata, double **dmata, int dim, double tau,
                    double dtau, double kappa, double dkappa, double gamma);
 
-/*  This computes phi  , the infeasibility measure. */
+/*  This computes phi      , the infeasibility measure. */
 double compute_infeas(double ***const_mat, double *const_val, int num_const,
                       double **xmat, double **zmat, double **cmat, int dim,
                       double *yvec, double tau, double *prim, double *dual);
@@ -232,7 +235,8 @@ Err Rc_mat(double **xmat, double **zmat, int dim, double sigma, double mu,
 Err Rq_mat(double **xmat, double **dxmat, double **zmat, double **dzmat,
            int dim, double sigma, double mu, char *srch, double **result);
 
-/*  This computes the right hand side of the (dy  ,dtau); system equation. */
+/*  This computes the right hand side of the (dy      ,dtau); system equation.
+ */
 /*  It uses the big_inv_E computed by system_matrix. */
 Err right_vector(double ***const_mat, int num_const, double **big_inv_E,
                  double **xmat, double **zmat, double **cmat, double **dpxmat,

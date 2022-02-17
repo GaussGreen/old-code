@@ -99,7 +99,7 @@ Err op_sabr_delta_gamma(
     /*	Which vol to freeze when bumping	*/
     SABR_VOL_TYPE freeze_vol_type,
     /*	Calculate delta or gamma	*/
-    /*	0: Delta  , 1: Gamma	*/
+    /*	0: Delta      , 1: Gamma	*/
     int delta_gamma,
     /*	Factor that multiplies result	*/
     double fac,
@@ -121,12 +121,12 @@ Err op_sabr_vega_volga(
     /*	Size of bumps	*/
     double vega_shift, double volga_shift,
     /*	Multiplicative or additive	*/
-    /*	0: Additive  , 1: Multiplicative	*/
+    /*	0: Additive      , 1: Multiplicative	*/
     int vega_mult, int volga_mult,
     /*	Which vol to bump	*/
     SABR_VOL_TYPE bump_vol_type,
     /*	Calculate vega or volga	*/
-    /*	0: Vega  , 1: Volga	*/
+    /*	0: Vega      , 1: Volga	*/
     int vega_volga,
     /*	Factor that multiplies result	*/
     double fac,
@@ -148,7 +148,7 @@ Err op_sabr_vanna(
     /*	Size of bumps	*/
     double delta_shift, double vega_shift,
     /*	Multiplicative or additive vega shift */
-    /*	0: Additive  , 1: Multiplicative	*/
+    /*	0: Additive      , 1: Multiplicative	*/
     int vega_mult,
     /*	Which vol to bump	*/
     SABR_VOL_TYPE bump_vol_type,

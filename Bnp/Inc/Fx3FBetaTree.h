@@ -7,8 +7,8 @@
 Err treeBeta_main_3dfx(
     /*	Time data */
     long nstp, double *time, double *date,
-    int *vol_change, /*	1 if one of the volatlities has changed  ,
-                                             0 otherwise */
+    int *vol_change, /*	1 if one of the volatlities has changed      ,
+                                         0 otherwise */
     double *sig_dom, /*	Term structures */
     double *sig_for, double *sig_fx, double *beta,
     double *dom_ifr, /*	Distributions */
@@ -31,8 +31,8 @@ Err treeBeta_main_3dfx(
                        double for_phi,
                        /* Nodes data */
                        long n1, long n2, long n3,
-                       /* i: d1  , j: d2  , k: d3  ,
-                                       l = {0: xDom  , 1: xFor  , 2: log
+                       /* i: d1      , j: d2      , k: d3      ,
+                                       l = {0: xDom      , 1: xFor      , 2: log
                           (Fx/Fx0)} */
                        double beta, double ****sv,
                        /* Vector of results to be updated */

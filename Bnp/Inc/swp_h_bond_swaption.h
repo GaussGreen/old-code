@@ -1,7 +1,8 @@
 /* ------------------------------------------------------------------------------
    FILENAME:      swp_h_bond_swaption.h
 
-   PURPOSE:       Given a bond option  , finds the swaption that best matches it
+   PURPOSE:       Given a bond option      , finds the swaption that best
+   matches it
    ------------------------------------------------------------------------------
  */
 #ifndef SWP_H_BOND_SWAPTION_H

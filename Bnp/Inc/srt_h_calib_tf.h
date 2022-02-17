@@ -4,7 +4,7 @@
         SORT
 
         Author Adam H. Litke
-        Uses utilities by E. Auld  , G. Amblard  , and A. Litke
+        Uses utilities by E. Auld      , G. Amblard      , and A. Litke
 
         Some routines written by K L Chau
 

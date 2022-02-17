@@ -4,7 +4,7 @@
 **
 ********************************************************************************
 **
-**      SYSTEM:         SRT     SORT  , Fixed Income 2020 Addins
+**      SYSTEM:         SRT     SORT      , Fixed Income 2020 Addins
 **      SUB_SYSTEM:     SP      Special functions
 **
 **      MODULE NAME:    SPECIAL_FNC
@@ -24,7 +24,7 @@
 /* ========================================================================== */
 
 /*******************************************************************************
-**                      Macros  , Typedefs and Constants
+**                      Macros      , Typedefs and Constants
 *******************************************************************************/
 
 #include "srt_h_all.h"
@@ -57,8 +57,8 @@ double srt_f_splocspr(double fwd_cms_quanto_spread, /* forward */
                       double **vols,                /* array of vols */
                       SrtCallPutType call_put,      /* Call or Put */
                       int num_steps,                /* number of steps */
-                      int type,            /* regular = 0  , digital = 1 */
-                      int option,          /* euro = 0  , amer = 1 */
+                      int type,            /* regular = 0      , digital = 1 */
+                      int option,          /* euro = 0      , amer = 1 */
                       SrtGreekType greek); /* Greek */
 
 /*******************************************************************************

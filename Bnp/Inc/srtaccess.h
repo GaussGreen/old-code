@@ -33,7 +33,7 @@ char *SrtGrfnCHEYBETA(char *underlying, int numeventdates, long *eventdates,
                       char ***tableauStrings, int **tableauMask, long auxWidth,
                       long *auxLen, double **aux,
                       /* param */
-                      int method, /* 0 MC  , 1 MC adj  , 2 PDE */
+                      int method, /* 0 MC      , 1 MC adj      , 2 PDE */
                       int nstept,
                       /* for MC */
                       long numpaths, SrtMCSamType gen_method,

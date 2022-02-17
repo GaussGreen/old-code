@@ -7,7 +7,7 @@
 
 /*
  * data structure to represent different products
- * (Futures  , Cashs  , Swaps)
+ * (Futures      , Cashs      , Swaps)
  */
 
 typedef struct deninst {
@@ -22,7 +22,7 @@ typedef struct deninst {
 
 /*
  * data structure to represent Strip Curve (interest rate curve estimated
- * from futures  , cashs and swaps)
+ * from futures      , cashs and swaps)
  */
 
 #define MAXNAM 32
@@ -32,20 +32,20 @@ typedef struct denstrpcrv {
   Ddate today;       /* today */
   double coeff_line; /* coefficient for smoothness */
   int num_iter;      /* Number of iterations for levenberg */
-  int algo_flag;     /* 0 = LINEAR  , 1 = SPLINE */
-  int calib_flag;    /* 0 = LEVENBERG  , 1 = ANNEALING */
+  int algo_flag;     /* 0 = LINEAR      , 1 = SPLINE */
+  int calib_flag;    /* 0 = LEVENBERG      , 1 = ANNEALING */
 
   Ddate lastdate;         /* last date that the stripper can interpolate */
   int numknot;            /* number of knot points */
   int lastknot;           /* index of the last optimised knot */
-  Ddate *knot_date;       /* date of knot points  , indexed from 1 */
+  Ddate *knot_date;       /* date of knot points      , indexed from 1 */
   double *knot_point;     /* time in years from today of knot points */
                           /* indexed from 1 */
   DenInst *inst;          /* Instrument used to optimize over */
   int numinst;            /* Number of instruments indexed from 1 */
-  double *fwd_rate_coef;  /* coef of fwd rate  , indexed from 1 */
+  double *fwd_rate_coef;  /* coef of fwd rate      , indexed from 1 */
   double **zcpn_yld_coef; /* coef of the integral of fwd rate indexed from 0 */
-                          /* for each knot intervals indexed from [0  ,0] */
+                          /* for each knot intervals indexed from [0      ,0] */
 } DenStrpCrv, *DenStrpCrvPtr;
 
 typedef struct denstrpcrvlist {
@@ -95,7 +95,7 @@ SrtErr srt_f_dencrv_init(
     char *ccy,           /* currency */
     double coeff_line,   /* coefficient for smoothness */
     int num_iter,        /* Number of iterations for levenberg */
-    int algo_flag,       /* 0 = LINEAR  , 1 = SPLINE */
-    int calib_flag);     /* 0 = LEVENBERG  , 1 = ANNEALING */
+    int algo_flag,       /* 0 = LINEAR      , 1 = SPLINE */
+    int calib_flag);     /* 0 = LEVENBERG      , 1 = ANNEALING */
 
 #endif

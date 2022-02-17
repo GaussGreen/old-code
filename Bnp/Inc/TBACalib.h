@@ -12,16 +12,16 @@
 double ExpDecay(double a, double t);
 
 void Zero_6m(TERM_DATA *term_data);
-// char* Zero_6m_new (TERM_DATA *term_data  , Zero_Data * zero_data);
+// char* Zero_6m_new (TERM_DATA *term_data      , Zero_Data * zero_data);
 
-void yldconv(
-    double *Zero,    /* output: zeros at money market points */
-    double *ZeroS,   /* output: zeros at mm points */
-    long *Period,    /* output: length of money market periods */
-    double *MMYield, /* Money Market rates (O/N  , 1  ,2  ,3  ,6  ,12 m) */
-    char AoS,        /* 'A'nnual or 'S'emi-Annual frequency */
-    long ValueDate,  /* Value date for the benchmark instruments */
-    int MMB          /* Money Market basis (360 or 365) */
+void yldconv(double *Zero,    /* output: zeros at money market points */
+             double *ZeroS,   /* output: zeros at mm points */
+             long *Period,    /* output: length of money market periods */
+             double *MMYield, /* Money Market rates (O/N      , 1      ,2 ,3
+                                 ,6      ,12 m) */
+             char AoS,        /* 'A'nnual or 'S'emi-Annual frequency */
+             long ValueDate,  /* Value date for the benchmark instruments */
+             int MMB          /* Money Market basis (360 or 365) */
 );
 
 void coupint(
@@ -40,11 +40,11 @@ void spotrate(
 
 /***
 char * Time_new(
-                          MBS_BKTree * tree  ,
-                          MBSPT_CashFlowStruct * cashflow_struct  ,
-                          MBS_Prepay_Engine * prepay_engine  ,
-                  TREE_DATA * tree_data  ,
-                  TERM_DATA * term_data  ,
+                          MBS_BKTree * tree      ,
+                          MBSPT_CashFlowStruct * cashflow_struct      ,
+                          MBS_Prepay_Engine * prepay_engine      ,
+                  TREE_DATA * tree_data      ,
+                  TERM_DATA * term_data      ,
                   DEAL_DATA * deal_data
                   );
 ***/
@@ -66,10 +66,10 @@ void Tree_Alloc(TREE_DATA *tree_data, int NbNodes);
 
 /***
 char *    Build_Tree_New (
-                        MBS_BKTree * tree  ,
-                        Zero_Data * zero_data  ,
-                        Vol_Surface * vol_surface  ,
-                        double OAS  ,
+                        MBS_BKTree * tree      ,
+                        Zero_Data * zero_data      ,
+                        Vol_Surface * vol_surface      ,
+                        double OAS      ,
                                                 TREE_DATA       *tree_data);
 **/
 
@@ -77,8 +77,8 @@ char *Build_Tree(TERM_DATA *term_data, TREE_DATA *tree_data,
                  PREPAY_DATA *prepay_data);
 
 /***
-char * Forward_new( TREE_DATA * old_tree  ,
-                                 MBS_BKTree * new_tree  ,
+char * Forward_new( TREE_DATA * old_tree      ,
+                                 MBS_BKTree * new_tree      ,
                                  Zero_Data * zero_data );
 **/
 
@@ -97,9 +97,9 @@ void Forward_Prepay(
     int NbNodes);    /* Total number of nodes (or time steps) */
 
 /**
-char * Forward_Vol_new( TREE_DATA * old_tree  ,
-                                           MBS_BKTree * new_tree  ,
-                                           Vol_Surface * vol_surface  ,
+char * Forward_Vol_new( TREE_DATA * old_tree      ,
+                                           MBS_BKTree * new_tree      ,
+                                           Vol_Surface * vol_surface      ,
                                            Zero_Data   * zero_data );
 **/
 
@@ -121,7 +121,7 @@ char *Forward_Vol(
     int NbNodes);        /* Total number of nodes (or time steps) */
 
 void Prepay_Vol(double *PrepayVol, /* Output: instantaneous volatility of
-                                      forward prepayment */
+                                  forward prepayment */
                 double SpotVol,    /* Spot volatility of prepayment */
                 int NbNodes);      /* Total number of nodes (or time steps) */
 
@@ -135,7 +135,7 @@ char *Drift_new(TREE_DATA *old_tree, MBS_BKTree *new_tree);
 char *Drift(
     double *Drift, /* Output: drift of the 1 period interest rate in the tree */
     int *NodeMax,  /* Output: maximum node reached in the tree (both top and
-                      bottom) */
+                  bottom) */
     double Jump,   /* Size of the jump (in log space) */
     double *ZeroCoupon, /* Zero coupon price at each node in the tree */
     double *FwdRate,    /* Forward rate at each node in the tree */
@@ -147,7 +147,7 @@ char *Drift(
 void NodeMax2(
     double *Jump2,     /* Output: size of the prepayment jump (in log space) */
     int *NodeMax2,     /* Output: maximum node reached in the tree (both top and
-                          bottom) */
+                      bottom) */
     double SpotVol,    /* Spot volatility of prepayment */
     double *PrepayVol, /* Instantaneous volatility of forward prepayment */
     double Beta,       /* Mean reversion of prepayment */
@@ -157,29 +157,29 @@ void NodeMax2(
 void Print_Term(TERM_DATA *term_data, TREE_DATA *tree_data);
 
 void Lattice_new(double *Discount, /* Output: one period discount factor at each
-                                      node at period NbPer */
+                                  node at period NbPer */
                  double *DiscountS, /* Output: one period discount factor
-                                       including Option Adjusted spread */
+                                   including Option Adjusted spread */
                  double *pu, /* Output: array of probabilities in the up state
-                                in the interest rate tree */
+                            in the interest rate tree */
                  double *pd, /* Output: array of probabilities in the down state
-                                in the interest rate tree */
+                            in the interest rate tree */
                  double *p0, /* Output: array of probabilities in the flat state
-                                in the interest rate tree */
+                            in the interest rate tree */
                  int NbPer,  /* Current time period */
                  MBS_BKTree *tree);
 
 void Lattice(
     double *Discount,  /* Output: one period discount factor at each node at
-                          period NbPer */
+                      period NbPer */
     double *DiscountS, /* Output: one period discount factor including Option
-                          Adjusted spread */
+                      Adjusted spread */
     double *pu,        /* Output: array of probabilities in the up state in the
-                          interest rate tree */
+                      interest rate tree */
     double *pd, /* Output: array of probabilities in the down state in the
-                   interest rate tree */
+               interest rate tree */
     double *p0, /* Output: array of probabilities in the flat state in the
-                   interest rate tree */
+               interest rate tree */
     int NbPer,  /* Current time period */
     int N,      /* Number of additional periods at the beginning of the tree */
     TERM_DATA *term_data,  /* Structure of term structure data */
@@ -187,31 +187,31 @@ void Lattice(
 
 void Zero_Calc_new(
     double ***Zero, /* Set of zeros maturing on each coupon date */
-    //	int             *NbZero  ,                                /* Current
-    //number of zeros being priced */ 	int             TotNbZero  , /* Total
-    //number of zeros needed to calculate the par yield index */ 	int Reset  , /*
-    //Reset the zero price to 1 if TRUE */
+    //	int             *NbZero      ,                                /* Current
+    // number of zeros being priced */ 	int             TotNbZero      , /*
+    // Total number of zeros needed to calculate the par yield index */ 	int
+    // Reset      , /* Reset the zero price to 1 if TRUE */
     int NbPer, /* Current time period */
-    //	int             TotPer  ,                                 /* Total
-    //number of period in the rate tree including the N additional periods */
+    //	int             TotPer      ,                                 /* Total
+    // number of period in the rate tree including the N additional periods */
     int useOAS, MBS_BKTree *tree);
 
 void Zero_Calc(double **Zero, /* Set of zeros maturing on each coupon date */
                int *NbZero,   /* Current number of zeros being priced */
                int TotNbZero, /* Total number of zeros needed to calculate the
-                                 par yield index */
+                             par yield index */
                int Reset,     /* Reset the zero price to 1 if TRUE */
                double *Discount, /* One period discount factor at each node at
-                                    period NbPer */
+                                period NbPer */
                double *pu, /* Array of probabilities in the up state in the
-                              interest rate tree */
+                          interest rate tree */
                double *pd, /* Array of probabilities in the down state in the
-                              interest rate tree */
+                          interest rate tree */
                double *p0, /* Array of probabilities in the flat state in the
-                              interest rate tree */
+                          interest rate tree */
                int NbPer,  /* Current time period */
                int TotPer, /* Total number of period in the rate tree including
-                              the N additional periods */
+                          the N additional periods */
                TREE_DATA *tree_data); /* Structure of tree data */
 
 void Zero_Price_new(
@@ -223,25 +223,25 @@ void Zero_Price_new(
 void Zero_Price(double *Zero, /* Array of zero prices at the current period */
                 int Reset,    /* Reset the zero prices to 1 if TRUE */
                 double *Discount, /* One period discount factor at each node at
-                                     period NbPer */
+                                 period NbPer */
                 double *pu, /* Array of probabilities in the up state in the
-                               interest rate tree */
+                           interest rate tree */
                 double *pd, /* Array of probabilities in the down state in the
-                               interest rate tree */
+                           interest rate tree */
                 double *p0, /* Array of probabilities in the flat state in the
-                               interest rate tree */
+                           interest rate tree */
                 int NbPer,  /* Current time period */
                 TREE_DATA *tree_data); /* Structure of tree data */
 
 void Dev(double *Price,    /* Array of prices that has to be discounted */
          double *Discount, /* One period discount factor at each node at period
-                              NbPer */
+                          NbPer */
          double *pu, /* Array of probabilities in the up state in the interest
-                        rate tree */
+                    rate tree */
          double *pd, /* Array of probabilities in the down state in the interest
-                        rate tree */
+                    rate tree */
          double *p0, /* Array of probabilities in the flat state in the interest
-                        rate tree */
+                    rate tree */
          int NbPer,  /* Current time period */
          TREE_DATA *tree_data); /* Structure of tree data */
 
@@ -250,7 +250,7 @@ void Par_Yield(
         *ParYield, /* Output: par yield at every node at the current period */
     double **Zero, /* Set of zeros maturing on each coupon date */
     int TotNbZero, /* Total number of zeros needed to calculate the par yield
-                      index */
+                  index */
     int F,         /* Frequency of underlying payment as a integer */
     int IndexF,    /* Frequency of index payment as a integer */
     int NodeMax,   /* Maximum node reached in the tree (both top and bottom) */
@@ -258,15 +258,15 @@ void Par_Yield(
 
 /****
 char * Calibrate(
-        MBS_BKTree * tree  ,
-        MBSPT_CashFlowStruct * cashflow_struct  ,
-        double OAS  ,
-        MBS_Prepay_Engine * prepay_engine  ,
-        Zero_Data * zero_data  ,
-        Vol_Surface * vol_surface  ,
+        MBS_BKTree * tree      ,
+        MBSPT_CashFlowStruct * cashflow_struct      ,
+        double OAS      ,
+        MBS_Prepay_Engine * prepay_engine      ,
+        Zero_Data * zero_data      ,
+        Vol_Surface * vol_surface      ,
 /////
-        TREE_DATA * tree_data  ,
-        TERM_DATA * term_data  ,
+        TREE_DATA * tree_data      ,
+        TERM_DATA * term_data      ,
         DEAL_DATA * deal_data);
 ***/
 

@@ -6,14 +6,15 @@
 #include "MBSPTUtil.h"
 
 typedef struct MBS_Prepay_Engine_Tag {
-  int NbSCurve;       // Number of basic S-curves input  , usually = NBPOINTS
-  int NbIndexLevel;   // Number of Index Values in S-curve  , usually = NBPOINTS
-  double *IndexLevel; // Index level that define the prepayment function
-  double **AmortLevel; // Corresponding annual CPR level or Avg Life
-                       // AmortLevel[0..NbSCurve-1][0..NbIndexLevel-1]
+  int NbSCurve;     // Number of basic S-curves input      , usually = NBPOINTS
+  int NbIndexLevel; // Number of Index Values in S-curve      , usually =
+                    // NBPOINTS
+  double *IndexLevel;     // Index level that define the prepayment function
+  double **AmortLevel;    // Corresponding annual CPR level or Avg Life
+                          // AmortLevel[0..NbSCurve-1][0..NbIndexLevel-1]
   double Seasonality[12]; // Seasonality level for each month
   double FebruaryEffect;
-  int NbSeasoningRamps;   // Number of seasoning ramps  , usually 3
+  int NbSeasoningRamps;   // Number of seasoning ramps      , usually 3
   double *SeasoningLevel; // Levels of Refi/Coupon that define seasoning (cf
                           // SeasoningMat)
   double *SeasoningMat;   // Maturities that define seasoning
@@ -35,8 +36,8 @@ typedef struct MBS_Prepay_Engine_Tag {
   // index:
   int IndexMat;    // in years
   int EndIndexMat; // if < IndexMat use it as index at end and progressively
-                   // length as we backward induct  , this is an approximation
-                   // technique
+                   // length as we backward induct      , this is an
+                   // approximation technique
   int IndexFreq;
 } MBS_Prepay_Engine;
 
@@ -53,7 +54,7 @@ char *MBS_Prepay_Engine_Params_Reader(char *data_dir,
                                       MTGPTACYPROG AgencyProg, long oterm,
                                       double gwac, double Speedup,
                                       double rational,
-                                      // double FebruaryEffect  ,
+                                      // double FebruaryEffect      ,
                                       int IndexMat);
 
 char *MBS_Prepay_Engine_SetParams(MBS_Prepay_Engine *prepay_engine,
@@ -110,7 +111,7 @@ char *get_initial_principal_payments(int num_payments, double *out, int wam,
                                      double gwac, int NbFixedPrepay,
                                      double *FixedPrepay);
 
-// void test_MBS_Prepay_Path( MBS_Prepay_Engine * prepay_engine  , long
-// spotYYYYMMDD  , long  wam  , int num_future_rates);
+// void test_MBS_Prepay_Path( MBS_Prepay_Engine * prepay_engine      , long
+// spotYYYYMMDD      , long  wam      , int num_future_rates);
 
 #endif // MBSPREPAY_H

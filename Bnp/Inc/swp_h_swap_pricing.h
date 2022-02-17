@@ -53,13 +53,13 @@ Err swp_f_SwapMargin_SwapDP(double pv, SwapDP *swapdp, String ycName,
 
 /* -----------------------------  PV (SWAP) -------------------------------- */
 
-/* Computes the PV of a Swap  , taking spreads into account (for use outside
+/* Computes the PV of a Swap      , taking spreads into account (for use outside
  * SORT) */
 Err swp_f_SwapPv(double coupon, long start, long end_nfp, String compStr,
                  String basisStr, String ycName, String refRateCode,
                  double *pv);
 
-/* Computes the PV of a Swap  , taking spreads into account */
+/* Computes the PV of a Swap      , taking spreads into account */
 Err swp_f_SwapPv_SwapDP(double coupon, SwapDP *swapdp, String ycName,
                         String refRateCode, double *pv);
 

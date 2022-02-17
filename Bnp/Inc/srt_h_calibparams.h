@@ -5,12 +5,12 @@
    STRUCTURE: SrtCalibParam
 
    FIELDS:
-                - eAlgoType: LEVENBERG_MARQUARDT  , SIMPLEX  ,
-  SIMULATED_ANNEALING  , SOBENBERG Which algorithm to use in the calibration: LM
-  , SimuAnn  , Simplex...
-                - eCalibType: GLOBAL  , FIXED
-                        Which correlation calibration to go for: fixed corr  ,
-  global  , blind on all...
+                - eAlgoType: LEVENBERG_MARQUARDT      , SIMPLEX      ,
+  SIMULATED_ANNEALING      , SOBENBERG Which algorithm to use in the
+  calibration: LM , SimuAnn      , Simplex...
+                - eCalibType: GLOBAL      , FIXED
+                        Which correlation calibration to go for: fixed corr ,
+  global      , blind on all...
                 - lNumIter: any strictly positive long
                         Number of succeeded iterations in the algorithm
                 - lNumSobenPoints: any strictly positive long

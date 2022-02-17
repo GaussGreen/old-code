@@ -3,9 +3,9 @@
 
         EA:	declaration and calling functions for ccy_params
 
-        KNL: 	added SrtYCConvTyp  , 7th Sept 1994
+        KNL: 	added SrtYCConvTyp      , 7th Sept 1994
 
-        KNL:	renamed to standard filename convention  , 28th Nov 1994
+        KNL:	renamed to standard filename convention      , 28th Nov 1994
    ============================================================================================
  */
 

@@ -73,8 +73,8 @@ typedef struct {
   double **KO_FxMatrix;
   double **KO_RatesGauss;
   double **KO_RatesMatrix;
-  double **KO_Barrier; // First row is the barrier and the second row is the
-                       // adjustment
+  double **KO_Barrier;     // First row is the barrier and the second row is the
+                           // adjustment
   int KO_FMC;              // Fast Monte Carlo
   double KO_FMC_precision; // Fast Monte Carlo Precision
   int KO_FMC_min_paths;    // Fast Monte Carlo Min Paths
@@ -106,7 +106,7 @@ void cpd_init_otc_params(
     int nIter, int PayoffFunction, double fwdSmileVisuNstd,
     /* otc */
     int fwdVolMethod,        /*	0=Sliding 3F vol; 1=Converging 3F vol; 2=Sliding
-                                Cvg Sbeta; 3=Cvg Cvg Sbeta */
+                            Cvg Sbeta; 3=Cvg Cvg Sbeta */
     int smileOtc,            /*	use smile parameters for the OTC */
     int smileFee,            /*	use smile parameters for the OTC Fees */
     int smileModel, int otc, /*	which call to keep */

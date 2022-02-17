@@ -32,7 +32,7 @@ Err cpd_calib_diagonal_dlm(
 
     int num_ex_datesl, /*	Long Exercise dates */
     long *ex_datel_,   /*	Supposed to be sorted */
-    int *cal_datel,    /*	1: use ex_date as calibration date  , 0: don't */
+    int *cal_datel,    /*	1: use ex_date as calibration date      , 0: don't */
     char **end_tenorl, /*	Tenors of the underlying instruments */
     long end_datel,    /*	End date for diagonal */
     double *strikel_,  /*	Strikes */
@@ -46,7 +46,7 @@ Err cpd_calib_diagonal_dlm(
 
     int num_ex_datess, /*	Short Exercise dates */
     long *ex_dates_,   /*	Supposed to be sorted */
-    int *cal_dates,    /*	1: use ex_date as calibration date  , 0: don't */
+    int *cal_dates,    /*	1: use ex_date as calibration date      , 0: don't */
     char **end_tenors, /*	Tenors of the underlying instruments */
     long end_dates,    /*	End date for diagonal */
     double *strikes_,  /*	Strikes */
@@ -60,7 +60,7 @@ Err cpd_calib_diagonal_dlm(
     int nlam,            /*	Lambda TS: may NOT be changed in the process */
     double lam_time[], double lam[], double lam_shift[],
     int one2F,    /*	Number of factors */
-    double alpha, /*	Alpha  , Gamma  , Rho (2F only) */
+    double alpha, /*	Alpha      , Gamma      , Rho (2F only) */
     double gamma, double rho,
 
     /*	Shift Parameters */
@@ -107,11 +107,11 @@ Err lgmcalibzetalambda_tauts_dlm(
     double ex_vegas[],   /*	Market vega for short */
 
     double ex_zeta[], /*	Output: zetas */
-    int fix_lambda,   /*	0: calib lambda to cap  , 1: fix lambda calib
-                                              to diagonal */
+    int fix_lambda,   /*	0: calib lambda to cap      , 1: fix lambda calib
+                                          to diagonal */
     int nlam,         /*	Lambda TS: may NOT be changed in the process */
     double lam_time[], double lam[], int one2F, /*	Number of factors */
-    /*	Alpha  , Gamma  , Rho (2F only) */
+    /*	Alpha      , Gamma      , Rho (2F only) */
     double alpha, double gamma, double rho, CPD_DIAG_CALIB_PARAM paraml,
     CPD_DIAG_CALIB_PARAM params, DIAG_CALIB_LM_PARAMS lm_params,
     double *lam_sens);
@@ -241,7 +241,7 @@ Err Construct_CalibSchedule(
     char *yc_name, long today, char *instr_freq, char *instr_basis,
     int num_ex_dates, /*	Exercise dates */
     long *ex_date,    /*	Supposed to be sorted */
-    int *cal_date,    /*	1: use ex_date as calibration date  , 0: don't */
+    int *cal_date,    /*	1: use ex_date as calibration date      , 0: don't */
     char **end_tenor, /*	Tenors of the underlying instruments */
     long end_date, double *strikes, double *strikesS1, double *strikesS2,
     double *weights,

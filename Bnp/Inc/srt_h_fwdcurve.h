@@ -3,8 +3,8 @@
    FILENAME :       srt_h_fwdcurve.h
 
    PURPOSE:         functions to access  information from the SrtCurvePtr object
-   stored in the double linked list  , refering to a SrtFwdDesc  , containing a
-                                        SrtFwdObj
+   stored in the double linked list      , refering to a SrtFwdDesc      ,
+   containing a SrtFwdObj
 
    =======================================================================================
  */
@@ -32,8 +32,8 @@ double srt_f_forward_from_fwdcrv(double start_time, SrtCurvePtr dvdcrv,
                                  SrtCurvePtr repocrv);
 
 /* ----------------------------------------------------------------------------
-   THE FUNCTION TO CREATE  , INITIALISE AND ADD A SrtFwdObj TO THE SrtCurveList
-             (referred to through a SrtFwdDesc and a SrtCrvePtr )
+   THE FUNCTION TO CREATE      , INITIALISE AND ADD A SrtFwdObj TO THE
+   SrtCurveList (referred to through a SrtFwdDesc and a SrtCrvePtr )
    ----------------------------------------------------------------------------
  */
 Err srt_f_init_DividendCurve(Date today, char *ccy, double **forward_curve,

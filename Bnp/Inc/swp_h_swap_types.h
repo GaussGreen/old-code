@@ -68,7 +68,7 @@ typedef enum SwapType {
   /* Fixed leg only in one leg (for level payment) */
   ONE_LEG_FIXED_SWAP,
 
-  /* CMT  , CMS legs... */
+  /* CMT      , CMS legs... */
   ONE_LEG_CMS_MARGIN,
   ONE_LEG_CMT_MARGIN,
   ONE_LEG_CMS_FOR_TEC_MARGIN,

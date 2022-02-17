@@ -55,9 +55,10 @@ typedef struct {
 
 /*	Funding leg */
 typedef struct {
-  int dom_for;     /*	0: funding domestic  , 1: funding foreign */
+  int dom_for;     /*	0: funding domestic      , 1: funding foreign */
   double notional; /*	Notional */
-  int num_cpn;     /*	Number of coupons  , not including notional refund */
+  int num_cpn;     /*	Number of coupons      , not including notional refund
+                    */
   /*	0..num_cpn-1 */
   pd_fund_cpn *cpn;
 } pd_fund_leg, *PD_FUND_LEG;
@@ -66,8 +67,8 @@ Err cpd_fill_fund_leg(
     /*	Coupons that started before today are disregarded */
     long today,
     /*	EOD Flag */
-    int eod_flag,                  /*	0: I  , 1: E */
-    double fund_not, int fund_ccy, /*	0: domestic  , 1: foreign */
+    int eod_flag,                  /*	0: I      , 1: E */
+    double fund_not, int fund_ccy, /*	0: domestic      , 1: foreign */
     int fund_ncpn, long *fund_fix, long *fund_start, long *fund_pay,
     char **fund_basis, double *fund_spr, double *fund_mrg,
     PD_FUND_LEG fund_leg);
@@ -90,9 +91,9 @@ typedef struct {
   double fx_fix_time; /*	Fx fixing times for coupon */
   long fx_val_date;   /*	Fx value dates for coupon */
   double fx_val_time; /*	Fx value times for coupon */
-  /*	Coupon is of the form alpha + beta * Fx [floored  , capped] */
-  /*	Notional and coverage are already included in alpha  , beta  , floor  ,
-   * cap */
+  /*	Coupon is of the form alpha + beta * Fx [floored      , capped] */
+  /*	Notional and coverage are already included in alpha      , beta      ,
+   * floor      , cap */
   double alpha;
   double beta;
   int floored;
@@ -101,7 +102,7 @@ typedef struct {
   double cap;
 
   // Interp coupon specification: coupon is in the form C + W0*Fx + sum[Wi *
-  // max(Fx-Ki  ,0)] Notional and coverage are already included in C and Wi
+  // max(Fx-Ki      ,0)] Notional and coverage are already included in C and Wi
   int use_opt_str;
   int nstrikes;
   double wcst;
@@ -114,7 +115,8 @@ typedef struct {
 /*	Power Dual leg */
 typedef struct {
   /*	Always paid in domestic */
-  int num_cpn; /*	Number of coupons  , not including notional refund */
+  int num_cpn; /*	Number of coupons      , not including notional refund
+                */
   /*	0..num_cpn-1 */
   pd_exo_cpn *cpn;
   /*	Notional refund */
@@ -125,7 +127,7 @@ Err cpd_fill_exo_leg(
     /*	Coupons that fixed before today are disregarded */
     long today,
     /*	EOD Flag */
-    int eod_flag, /*	0: I  , 1: E */
+    int eod_flag, /*	0: I      , 1: E */
     double pd_not, int pd_ncpn, long *pd_fix, long *pd_start, long *pd_pay,
     char **pd_basis, double *pd_alpha, double *pd_beta, int *pd_floored,
     double *pd_floor, int *pd_capped, double *pd_cap,
@@ -155,14 +157,15 @@ Err cpd_free_exo_leg(PD_EXO_LEG exo_leg);
 
 /*	Call */
 typedef struct {
-  int call_type;    /*	0: Call  , 1: KO */
+  int call_type;    /*	0: Call      , 1: KO */
   double barrier;   /*	KO only */
-  double smooth;    /*	Smoothing  , barrier only */
-  int bar_type;     /*	0: up and in  , 1: down and in */
+  double smooth;    /*	Smoothing      , barrier only */
+  int bar_type;     /*	0: up and in      , 1: down and in */
   double fee;       /*  fee if deal is called in domestic currency */
   double extra_fee; /*	fee adjustment if use_sabr = 2 */
   double orig_fee;  /*	original fee saved here if use_sabr = 2 */
-  int pay_rec;      /*	0: rec pd upon exercise  , 1: pay pd upon exercise */
+  int pay_rec;      /*	0: rec pd upon exercise      , 1: pay pd upon exercise
+                     */
   /*	Specs */
   long ex_date;      /*	Exercise date */
   long ex_date2bd;   //	Exercise date + 2bd
@@ -182,7 +185,7 @@ typedef struct {
   int fx_bound; /*	do we optimise on the Fx or on the IV */
 
   // Exotic early redemption specification: redemption is in the form C + W0*Fx
-  // + sum[Wi * max(Fx-Ki  ,0)] Notional is already included in C and Wi
+  // + sum[Wi * max(Fx-Ki      ,0)] Notional is already included in C and Wi
   int use_opt_str;
   int nstrikes;
   double wcst;
@@ -204,7 +207,7 @@ typedef struct {
 typedef struct {
   pd_exo_leg *pd_leg;
   pd_fund_leg *fund_leg;
-  int type; /*	-1: Call KO  , 0: Call only  , 1: KO only */
+  int type; /*	-1: Call KO      , 0: Call only      , 1: KO only */
   int num_calls;
   pd_call *call;
 } cpd_str, *CPD_STR;
@@ -213,13 +216,13 @@ Err cpd_fill_calls(
     /*	Exercises before today are disregarded */
     long today,
     /*	EOD Flag */
-    int eod_flag,         /*	0: I  , 1: E */
-    int ncall, int *type, /*	0: call  , 1: KO */
-    int pay_rec,          /*	0: rec pd  , 1: pay pd */
+    int eod_flag,         /*	0: I      , 1: E */
+    int ncall, int *type, /*	0: call      , 1: KO */
+    int pay_rec,          /*	0: rec pd      , 1: pay pd */
     long *ex_date, long *set_date,
     long *pd_not_ref_fix, // Fx fixing dates in case of exotic redemption at
                           // call date
-    /*	Notionals on both legs in their own currencies  ,
+    /*	Notionals on both legs in their own currencies      ,
                     to be refunded upon call
                     in order to determine the Bond Strike */
     double *fund_not, double *pd_not,
@@ -228,7 +231,7 @@ Err cpd_fill_calls(
     double *pd_not_wspot, double **pd_not_strikes, double **pd_not_weights,
 
     double *barrier, /*	KO only */
-    int *bar_type,   /*	0: up and in  , 1: down and in */
+    int *bar_type,   /*	0: up and in      , 1: down and in */
     double *fees,    /*  fees if deal is called in domestic currency */
     int TARN_Do,     /*  1: Target note powerdual */
     double smooth,   /*	Smoothing factor */
@@ -289,10 +292,10 @@ Err cpd_fill_und(char *fx3dund, CPD_UND und, CPDBETADLMPARAMS cpd_dlm_params,
 Err cpd_calib_und(
     long today,
     /*	EOD Flag */
-    int eod_flag, /*	0: I  , 1: E */
+    int eod_flag, /*	0: I      , 1: E */
     double fx_spot, long fx_spot_date,
     int dom_calib,        /*	Calibrate domestic underlying */
-    char *dom_und,        /*	If no  , domestic underlying to be used */
+    char *dom_und,        /*	If no      , domestic underlying to be used */
     char *dom_yc,         /*	Domestic yc */
     char *dom_vc,         /*	Domestic vc (only if calib) */
     char *dom_ref,        /*	Domestic ref rate (only if calib) */
@@ -641,11 +644,11 @@ Err cpd_fill_check_all_struct(
     /*	Today's date */
     long today,
     /*	The underlying */
-    int use_calib, /*	0: use fx3dund  , 1: calibrate */
+    int use_calib, /*	0: use fx3dund      , 1: calibrate */
     /*		if calib */
     double fx_spot, long fx_spot_date,
     int dom_calib,        /*	Calibrate domestic underlying */
-    char *dom_und,        /*	If no  , domestic underlying to be used */
+    char *dom_und,        /*	If no      , domestic underlying to be used */
     char *dom_yc,         /*	Domestic yc */
     char *dom_vc,         /*	Domestic vc (only if calib) */
     char *dom_ref,        /*	Domestic ref rate (only if calib) */
@@ -673,7 +676,7 @@ Err cpd_fill_check_all_struct(
     char *fx3dund,
     /*	The structure */
     /*		funding */
-    double fund_not, int fund_ccy, /*	0: domestic  , 1: foreign */
+    double fund_not, int fund_ccy, /*	0: domestic      , 1: foreign */
     int fund_ncpn, long *fund_fix, long *fund_start, long *fund_pay,
     char **fund_basis, double *fund_spr, double *fund_mrg,
     /*		pd */
@@ -695,10 +698,10 @@ Err cpd_fill_check_all_struct(
     double *pd_not_wspot, double **pd_not_strikes, double **pd_not_weights,
 
     /*		calls */
-    int *call_type,                                 /*	0: call  , 1: KO */
-    int ncall, int pay_rec,                         /*	0: rec pd  , 1: pay pd */
+    int *call_type,         /*	0: call      , 1: KO */
+    int ncall, int pay_rec, /*	0: rec pd      , 1: pay pd */
     long *ex_date, long *set_date, double *barrier, /*	KO only */
-    int *bar_type, /*	0: up and in  , 1: down and in */
+    int *bar_type, /*	0: up and in      , 1: down and in */
     double *fees,  /*  fees if deal is called in domestic currency */
     int TARN_Do,
 
@@ -707,18 +710,18 @@ Err cpd_fill_check_all_struct(
     int do_optim,    /*	If equal to 1 then the call are replaced by optimal KO
                       */
     int force_optim, /*	If equal to 1 then all call will be replaced by optimal
-                        KO	*/
-    int fx_bound,    /*	If equal to 1 then optimisation on the Fx  , on the IV
-                        otherwise	*/
+                    KO	*/
+    int fx_bound,    /*	If equal to 1 then optimisation on the Fx      , on the
+                    IV    otherwise	*/
     int use_bound, double smooth,
     /*	EOD Flags */
-    int eod_fix_flag, /*	0: I  , 1: E */
-    int eod_ex_flag,  /*	0: I  , 1: E */
+    int eod_fix_flag, /*	0: I      , 1: E */
+    int eod_ex_flag,  /*	0: I      , 1: E */
     /*	Results */
     CPD_STR cpd, CPD_UND und,
     int *call_feat, /*	0: No callable feature to be valued
-                                    1: Callable feature to be valued through
-                       tree 2: Callable feature to be valued through MC	*/
+                                1: Callable feature to be valued through
+                   tree 2: Callable feature to be valued through MC	*/
 
     CPD_TREE_ARG tree_arg, CPD_MC_ARG mc_arg, double dom_vol_shift,
     double for_vol_shift, double fx_vol_shift,
@@ -739,7 +742,8 @@ Err cpd_payoff_4_3dfx_tree(
     double for_lam, double for_phi,
     /* Nodes data */
     long n1, long n2, long n3,
-    /* i: d1  , j: d2  , k: d3  , l = {0: xDom  , 1: xFor  , 2: log (Fx/Fx0)} */
+    /* i: d1      , j: d2      , k: d3      , l = {0: xDom      , 1: xFor      ,
+       2: log (Fx/Fx0)} */
     double ****sv,
     /* Vector of results to be updated */
     long nprod, double ****prod_val,
@@ -763,7 +767,7 @@ Err cpd_launch_tree_ko(CPD_STR cpd, CPD_UND und, CPD_TREE_ARG tree_arg,
 
 Err cpd_fut_intr_val(
     /* State variables */
-    double Xdomfor[], /*	[0]: Xdom  , [1]: Xfor */
+    double Xdomfor[], /*	[0]: Xdom      , [1]: Xfor */
     double Zfx, double spot_fx,
     /* Structure */
     CPD_STR cpd,
@@ -777,7 +781,7 @@ Err cpd_fut_intr_val(
 
 Err cpd_current_pd_cpn_val(
     /* State variables */
-    double Xdomfor[], /*	[0]: Xdom  , [1]: Xfor */
+    double Xdomfor[], /*	[0]: Xdom      , [1]: Xfor */
     double Zfx, double spot_fx,
     /* Structure */
     CPD_STR cpd,
@@ -854,11 +858,11 @@ Err cpd_fill_check_prod_struct(
     /*	Today's date */
     long today,
     /*	EOD Flags */
-    int eod_fix_flag, /*	0: I  , 1: E */
-    int eod_ex_flag,  /*	0: I  , 1: E */
+    int eod_fix_flag, /*	0: I      , 1: E */
+    int eod_ex_flag,  /*	0: I      , 1: E */
     /*	The structure */
     /*		funding */
-    double fund_not, int fund_ccy, /*	0: domestic  , 1: foreign */
+    double fund_not, int fund_ccy, /*	0: domestic      , 1: foreign */
     int fund_ncpn, long *fund_fix, long *fund_start, long *fund_pay,
     char **fund_basis, double *fund_spr, double *fund_mrg,
     /*		pd */
@@ -870,10 +874,10 @@ Err cpd_fill_check_prod_struct(
     int pd_not_ref_floored, double pd_not_ref_floor, int pd_not_ref_capped,
     double pd_not_ref_cap,
     /*		calls */
-    int *call_type,                                 /*	0: Call  , 1: KO */
-    int ncall, int pay_rec,                         /*	0: rec pd  , 1: pay pd */
+    int *call_type,         /*	0: Call      , 1: KO */
+    int ncall, int pay_rec, /*	0: rec pd      , 1: pay pd */
     long *ex_date, long *set_date, double *barrier, /*	KO only */
-    int *bar_type, /*	0: up and in  , 1: down and in */
+    int *bar_type, /*	0: up and in      , 1: down and in */
     double *fees,  /*  fees if deal is called in domestic currency */
     double smooth,
     /*	Result */
@@ -946,10 +950,10 @@ Err cpd_fill_smile_und(char *fx3dund, double alpha, double beta,
 Err cpd_calib_smile_und(
     long today,
     /*	EOD Flag */
-    int eod_flag, /*	0: I  , 1: E */
+    int eod_flag, /*	0: I      , 1: E */
     double fx_spot, long fx_spot_date,
     int dom_calib,        /*	Calibrate domestic underlying */
-    char *dom_und,        /*	If no  , domestic underlying to be used */
+    char *dom_und,        /*	If no      , domestic underlying to be used */
     char *dom_yc,         /*	Domestic yc */
     char *dom_vc,         /*	Domestic vc (only if calib) */
     char *dom_ref,        /*	Domestic ref rate (only if calib) */
@@ -991,11 +995,11 @@ Err call_GRFN_alphabetaModel(
     CPD_UND cpd_und, /* The CPD underlying */
     CPD_STR cpd_str,
 
-    int use_calib,                /*	0: use fx3dund  , 1: calibrate */
+    int use_calib,                /*	0: use fx3dund      , 1: calibrate */
     char *fx_name, int dom_calib, /*	Calibrate domestic underlying */
-    char *dom_name,               /*	If no  , domestic underlying to be used */
-    char *dom_yc,                 /*	Domestic yc */
-    int for_calib,                /*	Same for foreign */
+    char *dom_name, /*	If no      , domestic underlying to be used */
+    char *dom_yc,   /*	Domestic yc */
+    int for_calib,  /*	Same for foreign */
     char *for_name, char *for_yc,
 
     /*	The structure */
@@ -1014,9 +1018,9 @@ Err call_GRFN_alphabetaModel(
     long *fund_pay,                      /*	Pay dates */
     char **fund_basis,                   /*	Basis */
     double *fund_mrg,                    /*	Margins */
-    double *fund_fix_cpn,                /*	Past coupon fixing if relevant  ,
-                                                                         includes spr  , but
-                                            not mrg  , cvg and notional */
+    double *fund_fix_cpn, /*	Past coupon fixing if relevant      ,
+                                                      includes spr      , but
+                         not mrg      , cvg and notional */
     /*		pd */
     double pd_not,   /*	Notional */
     int pd_ncpn,     /*	Number of coupons */
@@ -1025,7 +1029,7 @@ Err call_GRFN_alphabetaModel(
     long *pd_pay,    /*	Pay dates */
     char **pd_basis, /*	Basis */
     double
-        *pd_alpha, /*	Coupon = alpha + beta * fx [capped  , floored] */
+        *pd_alpha, /*	Coupon = alpha + beta * fx [capped      , floored] */
     double *pd_beta, int *pd_floored, double *pd_floor, int *pd_capped,
     double *pd_cap, double *pd_fix_fx, /*	Past Fx fixing if relevant */
 
@@ -1035,9 +1039,9 @@ Err call_GRFN_alphabetaModel(
     double *barrier, /*	in case of a pure KO or a Callable KO */
 
     /*	EOD Fixing Flag */
-    int eod_fix_flag, /*	0: I  , 1: E */
+    int eod_fix_flag, /*	0: I      , 1: E */
     /*	EOD Payment Flag */
-    int eod_pay_flag, /*	0: I  , 1: E */
+    int eod_pay_flag, /*	0: I      , 1: E */
 
     /* Model Parameters */
     double alpha, double beta,
@@ -1064,7 +1068,8 @@ Err cpd_payoff_4_3dfx_BetaDLM_tree(
     double spot_fx, void *dom_yc, void *for_yc,
     /* Nodes data */
     long n1, long n2, long n3,
-    /* i: d1  , j: d2  , k: d3  , l = {0: xDom  , 1: xFor  , 2: log (Fx/Fx0)} */
+    /* i: d1      , j: d2      , k: d3      , l = {0: xDom      , 1: xFor      ,
+       2: log (Fx/Fx0)} */
     double ****sv,
     /* Vector of results to be updated */
     long nprod, double ****prod_val,

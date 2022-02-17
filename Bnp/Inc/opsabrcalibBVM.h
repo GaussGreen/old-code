@@ -15,11 +15,11 @@ Err srt_f_optbvmsabr_mr_vol(double Forward, double Strike, double Maturity,
 Err opBVMsabrcalib(double Fwd, double maturity, int nbr_strikes,
                    double *strikes, double *marketvols, double *ATMVol,
                    double *alpha,
-                   int freeze_alpha, /* if 0  , alpha is not calibrated */
+                   int freeze_alpha, /* if 0      , alpha is not calibrated */
                    double *lambda,
-                   int freeze_lambda, /* If 0  , beta is not calibrated */
+                   int freeze_lambda, /* If 0      , beta is not calibrated */
                    double *rho,
-                   int freeze_rho, /* if 0  , rho is not calibrated */
+                   int freeze_rho, /* if 0      , rho is not calibrated */
                    double *fitting_error);
 
 Err alphaHardLimit(double forward,
@@ -70,7 +70,7 @@ Err SABRGenHardLimitDichoGen(
     double volinput, double Alpha, double a, double b, double c, double Rho,
     double (*vol_local)(double x, double a, double b, double c, int type),
     SrtDiffusionType input,
-    int HardLimType, // 0:Alpha  , 1:a  ,2:b  , 3:c  , 4:Rho
+    int HardLimType, // 0:Alpha      , 1:a      ,2:b      , 3:c      , 4:Rho
     double *HardLimit);
 
 Err alphaHardLimitDichoGen(

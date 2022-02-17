@@ -30,17 +30,17 @@ Err swp_f_freein_GenSwapLeg(GenSwapLeg *leg);
 Err swp_f_freein_GenFullSwap(GenFullSwap *swap);
 
 /* ------------------------------------------------------------------------ */
-/* According to the swap type  , sets what is loop/stripper/mkt dependent */
+/* According to the swap type      , sets what is loop/stripper/mkt dependent */
 
 Err swp_f_populate_GenFullSwap(double margin, SrtCurvePtr crv,
                                GenFullSwap *swap);
 
 /* ------------------------------------------------------------------------- */
-/* Sets discount factors and values the swap  , or the swap leg */
+/* Sets discount factors and values the swap      , or the swap leg */
 Err swp_f_value_GenFullSwap(GenFullSwap *swap, SrtCurvePtr crv);
 
 /* ------------------------------------------------------------------------- */
-/* THESE FUNCTIONS ARE VERY USEFUL  , AND EASIER TO USE IN SIMPLE CASES */
+/* THESE FUNCTIONS ARE VERY USEFUL      , AND EASIER TO USE IN SIMPLE CASES */
 /* ------------------------------------------------------------------------- */
 
 /* Make the dates and coupons for a fixed leg (+ sets payments) */
@@ -87,7 +87,8 @@ Err swp_f_make_FloatLegDatesAndCoverages(SwapDP *swapdp, Date today,
                                          Date **start_dates, Date **end_dates,
                                          double **coverages, int *num_dates);
 
-/* A useful function that creates (and returns) the pay dates  , coverages and
+/* A useful function that creates (and returns) the pay dates      , coverages
+   and
    spreads of a floating leg specified by a SwapDP (memory allocated inside) */
 Err swp_f_make_FloatLegDatesCoveragesAndSpreads(
     SwapDP *swapdp, Date today, String refrate, Date **pay_dates,
@@ -97,7 +98,8 @@ Err swp_f_make_FloatLegDatesCoveragesAndSpreads(
 /* ------------------------------------------------------------------------- */
 
 /* A weird function that can be needed to merge on one leg two different ones:
-dates are merged  , and payment are computed as : + for recleg  , - for payleg
+dates are merged      , and payment are computed as : + for recleg      , - for
+payleg
 */
 
 Err swp_f_merge_SwapLegs(GenSwapLeg *recleg, GenSwapLeg *payleg,

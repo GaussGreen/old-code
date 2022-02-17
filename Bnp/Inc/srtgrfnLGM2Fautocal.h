@@ -3,7 +3,7 @@
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //	Struct s_grfn_pricing_params to hold Grfn pricing Params for a variety
-//of algorithms  //
+// of algorithms  //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 typedef struct {
   long num_steps_time;
@@ -18,15 +18,15 @@ typedef struct {
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //	Sort Static level function to calibrate an LGM 2 factor model and then
-//price a Grfn tableau using	// 	either PDE  , MC or MC with optimal ex
-//boundary.		PMc		29th Sept 03
+// price a Grfn tableau using	// 	either PDE      , MC or MC with optimal
+// ex boundary.		PMc		29th Sept 03
 ////
 //  Note the memory management policy in this routine. In particular the fact
 //  that we free the Product  // Values when there has been an error but leave
 //  the calling routine to free in the absence of errors. //
 //																										//
 //	Modified to return primary and secondary model prices.		PMc
-//1stDec03						//
+// 1stDec03						//
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 Err GrfnLGM2FAutocalCaller(
     char *YieldCurveName, char *VolCubeName,

@@ -59,9 +59,10 @@ double InflationTry(long lToday, long lValDate, WrapInfo *RealCurve);
         Inflation_GetAdjFwdCPI
 
         Calculation of
-        E(under QTp) of (FFX(Tf  ,Tf) knowing Ft) = E(under QTf) of (FFX(Tf ,Tf)
-  knowing Ft) * Cvxty_adj Cvxty_adj = exp (int(t->Tf) (<dFFX(t  ,Tf)/FFX(t  ,Tf)
-  ,(G(t  ,Tp)-G(t  ,Tf))dW>
+        E(under QTp) of (FFX(Tf      ,Tf) knowing Ft) = E(under QTf) of (FFX(Tf
+  ,Tf) knowing Ft) * Cvxty_adj Cvxty_adj = exp (int(t->Tf) (<dFFX(t ,Tf)/FFX(t
+  ,Tf)
+      ,(G(t      ,Tp)-G(t      ,Tf))dW>
 
   -------------------------------------------------------------------------------------------------
 */
@@ -76,7 +77,7 @@ Err Inflation_GetAdjFwdCPI(               /* Inputs */
 /* ------------------------------------------------------------------------------------------------
         Inflation_GetCPIImpliedVol
 
-        calculate the cumulated vol from Tstart to Tend of FFX(t  ,Tval)
+        calculate the cumulated vol from Tstart to Tend of FFX(t      ,Tval)
   -------------------------------------------------------------------------------------------------
 */
 Err Inflation_GetCPIImpliedVol(/* Inputs */
@@ -90,7 +91,7 @@ Err Inflation_GetCPIImpliedVol(/* Inputs */
         Inflation_GetCorrCPI1CPI2
 
         calculate the cumulated vol and corr from Tstart to Tend of FFX(t
-  ,Tval1) and FFX(t  ,Tval2)
+      ,Tval1) and FFX(t      ,Tval2)
   -------------------------------------------------------------------------------------------------
 */
 Err Inflation_GetCorrCPI1CPI2(                 /* Inputs */
@@ -146,7 +147,7 @@ Err Fx3DtsFwdCumCovar_corr(double T0,    /*	Forward start date */
         Map  alpha*Xt+Beta*Yt to a SL model
                 where	dXt = sx * Xt dWx
                                 dYt = sy * Yt dWy
-                                <dWx  ,dWy> = rho dt
+                                <dWx      ,dWy> = rho dt
 
         Z + shiftZ = alpha*Xt + Beta*Yt
 

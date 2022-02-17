@@ -77,7 +77,7 @@ typedef enum BusDayConv_ {
 typedef enum HolidayConv_ { NO_HOLIDAYS, LASTHOLIDAYCONV } HolidayConv;
 
 /* ---------------------------------------------------------------------------
-             SWAP CONVENTIONS: BASIS  , COMPOUNDING
+             SWAP CONVENTIONS: BASIS      , COMPOUNDING
    ---------------------------------------------------------------------------
  */
 
@@ -136,7 +136,7 @@ typedef enum StructType_ {
 } StructType;
 
 /* ---------------------------------------------------------------------------
-             OPTIONS : CALL/PUT  , UP/DOWN...
+             OPTIONS : CALL/PUT      , UP/DOWN...
    ---------------------------------------------------------------------------
  */
 

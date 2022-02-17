@@ -4,7 +4,7 @@
 **
 ********************************************************************************
 **
-**      SYSTEM:         SRT     SORT  , Fixed Income 2020 Addins
+**      SYSTEM:         SRT     SORT      , Fixed Income 2020 Addins
 **      SUB_SYSTEM:     PROB    Proba Tools
 **
 **      MODULE NAME:    PROBA_TOOLs
@@ -18,8 +18,8 @@
 **      DATE:
 **
 **      DESCRIPTION:    Header for the library of general related option
-**						functions used in the SORT program
-*applications
+**						functions used in the SORT
+*program applications
 *******************************************************************************/
 
 /* ========================================================================== */
@@ -30,7 +30,7 @@
 /* ========================================================================== */
 
 /*******************************************************************************
-**                      Macros  , Typedefs and Constants
+**                      Macros      , Typedefs and Constants
 *******************************************************************************/
 
 #define DEFAULT_PROB_TERMS 3
@@ -86,8 +86,8 @@ double probag_yes_no_explo_fct(double spot, double b_yes, double b_no,
                                double vol, double mat, double disc,
                                int nb_term);
 
-/*	Numerical calculation of conditional correlation  ,
-        i.e. correl ( X   , Y / abs ( X * Y ) > k
+/*	Numerical calculation of conditional correlation      ,
+        i.e. correl ( X       , Y / abs ( X * Y ) > k
         where X and Y are Gaussians with correl rho */
 Err proba_cond_corr(double mean1, double mean2, double std1, double std2,
                     double rho, double k, int npth, double *empave1,

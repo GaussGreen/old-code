@@ -3,14 +3,14 @@
    FILENAME:	srt_h_types.h
 
    PURPOSE:     all the names and their equivalent types used all over the
-                library  , to represent;
+                library      , to represent;
                     - model names
                                         - curve types
                                         - underlyings types
                                         - monte carlo methods
                     - calibration methods
 
-   DESCRIPTION: basically  , the functions translate between Strings and
+   DESCRIPTION: basically      , the functions translate between Strings and
                 enumerated types.
                     Note the way the enumerated types in this are strung
   together; eventually all srt enumerated types that are translated into strings
@@ -26,7 +26,7 @@
 typedef struct {
   long ival;        /* int val by which is known 		*/
   long mval;        /* other enumerated type if known (mdl_dim...) 	*/
-  String svals[15]; /* array of possible strings  , last String is NULL */
+  String svals[15]; /* array of possible strings      , last String is NULL */
 } SrtTrnLstEle;
 
 typedef SrtTrnLstEle

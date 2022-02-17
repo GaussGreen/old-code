@@ -15,7 +15,7 @@
 typedef SrtListHdr SrtCorrLst, *SrtCorrLstPtr;
 
 /* -----------------------------------------------------------------------
-   The pval of an element of the SrtCorrLst  , used to store at each date
+   The pval of an element of the SrtCorrLst      , used to store at each date
    the correlation matrix
    ----------------------------------------------------------------------- */
 typedef struct srtcorrlstval {
@@ -34,7 +34,7 @@ typedef struct srtcorrlstval {
 SrtCorrLstPtr srt_f_GetTheCorrelationList(void);
 
 /* -----------------------------------------------------------------------
-   Allocate space for the STATIC SrtCorrLstPtr corr_list  , and gives it a
+   Allocate space for the STATIC SrtCorrLstPtr corr_list      , and gives it a
    name...
    ----------------------------------------------------------------------- */
 Err create_correlation_list(String corr_list_name);
@@ -65,7 +65,7 @@ Err srt_f_init_Corr_TermStruct(int ndates, int ncorr, double **correl,
                                SrtCorrLstPtr *the_corr_list);
 
 /* -----------------------------------------------------------------------
-   Initialises and fills in a local SrtCorrLst  , extracting information
+   Initialises and fills in a local SrtCorrLst      , extracting information
    from the STATIC SrtCorrLstPtr __corr_list according to
    the underlyings used in the deal
                 und_names is a vector with the underlying names: [0..n_und]

@@ -3,7 +3,7 @@
 
    PURPOSE:    All the functions needed to attach at a time step all the
                informaton required for a discretisation that is not SIMULATION
-                           dependent (sigma  , taus  , rho  , ...)
+                           dependent (sigma      , taus      , rho      , ...)
 
    FUNCTIONS:  - srt_f_irministp:      for any interest rate underlying
                - srt_f_lgministp:      specifically for LGM
@@ -38,7 +38,7 @@ Err srt_f_irministp(SrtStpPtr stp, SrtUndPtr und, int und_index,
 
 Err srt_f_lgministp(SrtStpPtr stp, TermStruct *ts, int index, SrtMdlDim mdl_dim,
                     SrtUndPtr numeraire_und, /* THe Numeraire Used for
-                                                Discounting (quanto's...) */
+                                            Discounting (quanto's...) */
                     SrtUndInfo *und_info
 
 );
@@ -70,8 +70,8 @@ Err srt_f_loginistp(SrtStpPtr stp, SrtUndPtr und, int und_index,
 Err srt_f_basicinistp(SrtStpPtr stp, SrtUndPtr und, int und_index);
 
 /* -------------------------------------------------------------------------
-   When Dealing with Multi-Currencies  , an extra initialisation is required:
-   the Quanto adjustment in the drift
+   When Dealing with Multi-Currencies      , an extra initialisation is
+   required: the Quanto adjustment in the drift
    ------------------------------------------------------------------------- */
 
 Err srt_f_steps_set_quanto_adjustment(SrtStpPtr stp, SrtUndInfo *und_info,

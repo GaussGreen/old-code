@@ -31,7 +31,7 @@ Err srt_f_StripCapletVols(
     double *CapMaturities, int nCapMaturities, double *CapStrikes,
     double *CapVols,
     double *CapletVols, /*this one already contains the first caplets provided
-                           by the user  , we here are completing it*/
+                       by the user      , we here are completing it*/
     int ncapletvolsknown, char *szRefRateCode, char *szYieldCurveName,
     double *Alpha, double *Beta, double *Rho);
 

@@ -151,9 +151,9 @@ Err FxSabr_KOOption(
     double floorstd,
 
     /*	Product data */
-    double strike, int is_call, /* 1 Call  , 0: Put */
-    double *bar_lvl, int is_up, /* 1 Up  , 0: Down */
-    int is_cvx,                 /* 1 use 1 / Fx  , 0 use Fx */
+    double strike, int is_call, /* 1 Call      , 0: Put */
+    double *bar_lvl, int is_up, /* 1 Up      , 0: Down */
+    int is_cvx,                 /* 1 use 1 / Fx      , 0 use Fx */
 
     /*	Market data */
     double spot_fx, /*	The cash one */
@@ -168,22 +168,21 @@ double solve_for_next_coef(double **res_iter, int nb_iter, double premium_tgt,
 double find_beta_lim(double forward, double std_beta, double beta,
                      double percent);
 
-Err op_sabrSL_adi(double forward, double *strike, int nb_strike,
-                  double maturity, double disc,
-                  int call_put_var, /*	0:	(F - K)+
-                                                            1:	(K - F)+
-                                                            2:	F^2	*/
-                  double sigma_beta, double alpha, double beta, double rho,
-                  double lambda, double floorstd, int nstp, int nstepx,
-                  int nstepz, double *res,
-                  /* Additional informations */
-                  int calc_greeks,
-                  double **greeks, /* array 6 * nprod containing delta  , gamma
-                                      , theta  , vega  , volga and vanna */
+Err op_sabrSL_adi(
+    double forward, double *strike, int nb_strike, double maturity, double disc,
+    int call_put_var, /*	0:	(F - K)+
+                                          1:	(K - F)+
+                                          2:	F^2	*/
+    double sigma_beta, double alpha, double beta, double rho, double lambda,
+    double floorstd, int nstp, int nstepx, int nstepz, double *res,
+    /* Additional informations */
+    int calc_greeks,
+    double **greeks, /* array 6 * nprod containing delta      , gamma
+                        , theta      , vega      , volga and vanna */
 
-                  /* For calibration purpose */
-                  int calc_at_point, int column, double target, double *vol,
-                  double *res_at_point);
+    /* For calibration purpose */
+    int calc_at_point, int column, double target, double *vol,
+    double *res_at_point);
 
 Err op_sabrSL_calib_adi(double forward, double strike, double maturity,
                         double tgt_vol, SrtDiffusionType input_vol_type,

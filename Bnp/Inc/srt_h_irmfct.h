@@ -17,7 +17,7 @@ SrtErr srt_f_rtinityp(SrtRtFnc rt, SrtUndPtr und, Ddate obsdate);
 
 /*
  * eval the Y_T_at_t_params contained in a SrtRtFnc structure;
- * and set the dfs.  If df field is blank  , will allocate it.
+ * and set the dfs.  If df field is blank      , will allocate it.
  */
 
 SrtErr srt_f_rtevalyp(SrtRtFnc rt, SrtSample *sam, int index, SrtMdlDim mdl_dim,
@@ -52,12 +52,12 @@ void srt_f_chesammatrix(SrtStpPtr top,    /* ptr to top of lst */
 /* ======================================================================
     This function is defined in srt_f_vegatreche2dr.c
    ====================================================================== */
-Err srt_f_treche2dr(
-    SrtUndPtr und,  /* Underlying */
-    SrtMdlPtr mdl,  /* model parameters */
-    SrtStpPtr stp,  /* discretization of deal in time  , wi/ events attached*/
-    SrtDealDesc gd, /* deal descriptor structure */
-    EvalEventFct evalcf, /* cashflow evaluator */
-    double *price);
+Err srt_f_treche2dr(SrtUndPtr und,  /* Underlying */
+                    SrtMdlPtr mdl,  /* model parameters */
+                    SrtStpPtr stp,  /* discretization of deal in time      , wi/
+                                       events attached*/
+                    SrtDealDesc gd, /* deal descriptor structure */
+                    EvalEventFct evalcf, /* cashflow evaluator */
+                    double *price);
 
 #endif

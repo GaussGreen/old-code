@@ -55,7 +55,7 @@ Err get_bgm_SwapNumOfPeriods(double maturity, double underlying,
                              int *VectorSize);
 
 /* Get the Market Vols for a given set of instruments : the instruments are
- * described by : a maturity in number of year  , an underlying in number of
+ * described by : a maturity in number of year      , an underlying in number of
  * year */
 Err get_bgm_MarketVols(double **instruments, int num_of_instruments,
                        double strike, double *VolsMark, char *cRefRateCode,
@@ -106,11 +106,11 @@ Err srt_bgm_MCEvolveCasc(
     double **LiborMatrix, int ndiscretization, int *Indices, double *maturity,
     double *coverages, double *shifts,
     int LastTenor, /* LastTenor-1 is the Last Tenor necessary to compute all the
-                      discount factors  , numeraire of the measure in which we
-                      price*/
+                  discount factors      , numeraire of the measure in which we
+                  price*/
     int FirstTenor, /*FirstTenor for which we actually need to compute the Libor
-                       rate  , typically  , the Tenor just before the first
-                       event date*/
+                   rate      , typically      , the Tenor just before the first
+                   event date*/
     double **Brownianincs, int *factors, double ***VolMatrices,
     double ***VarCovarCasc);
 
@@ -118,11 +118,11 @@ Err srt_bgm_MCEvolveJumping(
     double **LiborMatrix, int ndiscretization, int *Indices,
     int *JumpingIndices, double *maturity, double *coverages,
     int LastTenor, /* LastTenor-1 is the Last Tenor necessary to compute all the
-                      discount factors  , numeraire of the measure in which we
-                      price*/
+                  discount factors      , numeraire of the measure in which we
+                  price*/
     int FirstTenor, /*FirstTenor for which we actually need to compute the Libor
-                       rate  , typically  , the Tenor just before the first
-                       event date*/
+                   rate      , typically      , the Tenor just before the first
+                   event date*/
     double **Brownianincs, int num_of_factors, double **VolMatrix,
     double **VarCovar);
 
@@ -130,11 +130,11 @@ Err srt_bgm_MCEvolveJumpingCasc(
     double **LiborMatrix, int ndiscretization, int *Indices,
     int *JumpingIndices, double *maturity, double *coverages,
     int LastTenor, /* LastTenor-1 is the Last Tenor necessary to compute all the
-                      discount factors  , numeraire of the measure in which we
-                      price*/
+                  discount factors      , numeraire of the measure in which we
+                  price*/
     int FirstTenor, /*FirstTenor for which we actually need to compute the Libor
-                       rate  , typically  , the Tenor just before the first
-                       event date*/
+                   rate      , typically      , the Tenor just before the first
+                   event date*/
     double **Brownianincs, int *factors, double ***VolMatrices,
     double ***VarCovarCasc);
 
@@ -145,7 +145,7 @@ Err srt_bgm_ComputeRollingNumeraire(double **LiborMatrix,
 
 Err srt_bgm_ComputeDiscountFactors(
     double *Libors, long *dfdates, /*discount factor dates for this event date
-                                      augmented by the LastTenor date*/
+                              augmented by the LastTenor date*/
     int numdfdates, double *TenorCoverages, double *EndCoverages,
     double StartCoverage, int StartIndex, int *EndIndices, double *dfs);
 
@@ -155,7 +155,7 @@ Err srt_f_BGMVolMatrix(long MaxNumPeriod, long MaturityInPeriod,
                        char *szVolCurveName, char *szFrequency, char *szBasis,
                        double CapStrike, char *szCapStrikeType,
                        double SwapStrike, char *szSwaptionStrikeType,
-                       int CashOrLibor, /* 0 cash  , 1 Libor */
+                       int CashOrLibor, /* 0 cash      , 1 Libor */
                        char *szCorrelMode, double **answer,
                        double *answershift);
 
@@ -165,7 +165,7 @@ Err srt_f_BGMImpliedCorrel(
     char *szSmileMode,                        /* SLIDING or CONVERGING */
     char *szFrequency, char *szBasis, double CapStrike, char *szCapStrikeType,
     double SwapStrike, char *szSwaptionStrikeType,
-    int CashOrLibor,      /* 0 cash  , 1 Libor */
+    int CashOrLibor,      /* 0 cash      , 1 Libor */
     int InputLiborTSFlag, /* 0 noinput 1 LiborTS already defined */
     double **answerCorrel, double **answerLiborTS, double *Frequency);
 
@@ -175,19 +175,19 @@ Err srt_f_FwdVolMatrix(
     char *szYieldCurveName, char *szVolCurveName, double **VolMatrix,
     long nVolMatrixTime, long nVolMatrixLibor, char *szFrequency, char *szBasis,
     long *MaxNumPeriod, long *FreqFloatRate, long *FreqFixedRate,
-    char *szDisplaytype, /* NULL or TS == term structure  , CUM == cumulative
-                            vol upto expiry of the option */
+    char *szDisplaytype, /* NULL or TS == term structure      , CUM ==
+                        cumulative vol upto expiry of the option */
     double ***answer);
 
 Err srt_f_BGMGetATMSwaptionVol(
     char *BGMUnd, double **ppdCorrelInput, long nCorrelSize, char *szCorrelType,
     double **ppdVolMatrix, long nVolInput, char *szRefRateInput,
     char *szYieldCurveNameInput,
-    int UndOrMatrix, /* 0 if BGMUnd is input  , 1 if ppdCorrel and ppd VolMatrix
-                        are input */
+    int UndOrMatrix, /* 0 if BGMUnd is input      , 1 if ppdCorrel and ppd
+                    VolMatrix are input */
     long *Expiry, long nExpiry, long *Underlying, long nUnderlying,
     char *SwapFrequency, char *SwapBasis,
-    double *Frequency, /* Output  , the frequency of the Swaption */
+    double *Frequency, /* Output      , the frequency of the Swaption */
     double **SwaptionATMVol);
 
 Err srt_f_BGMGetATMSwaptionVolNew(
@@ -198,7 +198,7 @@ Err srt_f_BGMGetATMSwaptionVolNew(
     double
         VolMat, /* The Cumulative Vol up to that maturity is what is returned*/
     char *SwapFrequency, char *SwapBasis, SrtDiffusionType VolType,
-    double *Frequency, /* Output  , the frequency of the Swaption */
+    double *Frequency, /* Output      , the frequency of the Swaption */
     double **SwaptionATMVol);
 
 Err srt_bgm_GetVolMatrixSlidingSliding(double **VolMatrix, double **correl,
@@ -209,7 +209,7 @@ Err srt_bgm_GetVolMatrixSlidingSliding(double **VolMatrix, double **correl,
 Err srt_BGMFwdVolComputeTenors(long MaxNumPeriod, long MaturityInPeriod,
                                long *tStart, long *tPay, char *szRefRate,
                                char *szBasis,
-                               int CashOrLibor, /* 0 Cash  , 1 Libor */
+                               int CashOrLibor, /* 0 Cash      , 1 Libor */
                                double *tLibor, double **tFwdSwap,
                                double **tFwdSwapSpread);
 
@@ -217,7 +217,7 @@ Err srt_BGMFwdVolComputeTenorsNew(long MaxNumPeriod, long MaturityInPeriod,
                                   long *tStart, long *tPay, char *szRefRate,
                                   char *szYieldCurveName, char *szFrequency,
                                   char *szBasis,
-                                  int CashOrLibor, /* 0 Cash  , 1 Libor */
+                                  int CashOrLibor, /* 0 Cash      , 1 Libor */
                                   double *tLibor, double **tFwdSwap,
                                   double **tFwdSwapSpread);
 

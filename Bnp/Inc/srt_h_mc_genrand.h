@@ -44,14 +44,14 @@ Err srt_f_New_gen_random(double ***rand, int first_path, int last_path,
                          SrtMCSamType gen_method, long *seed,
                          double *times_at_steps);
 
-/* perform some sort of setup  , allocation  , whatever */
+/* perform some sort of setup      , allocation      , whatever */
 Err SrtMCRanSrc_start(SrtMCRanSrc *mcrs, long pl, long ph, long sl, long sh,
                       long nbr, SrtMCSamType gen_method, long seed,
                       SrtStpPtr top);
 
-/* return a matrix of random gaussian samples  , the dimension
+/* return a matrix of random gaussian samples      , the dimension
         and computation method of which was determined by a
-        previous call to MCRSrc_start()  , this function do once what
+        previous call to MCRSrc_start()      , this function do once what
    SrtMCRanSrc_next does for each path */
 
 /*New Function which is the same as the previous one only taking times_at_steps
@@ -63,7 +63,7 @@ Err SrtNewMCRanSrc_start(SrtMCRanSrc *mcrs, long pl, long ph, long sl, long sh,
 
 Err SrtMCRanSrc_init(SrtMCRanSrc *mcrs);
 
-/* return a matrix of random gaussian samples  , the dimension
+/* return a matrix of random gaussian samples      , the dimension
         and computation method of which was determined by a
         previous call to MCRSrc_start() and store the result in mrcs->cur_path*/
 

@@ -1,7 +1,7 @@
 #ifndef GRF_H_FLTFLDEFS
 #define GRF_H_FLTFLDEFS
 
-/*** default strings  , etc. for grfn interaction with flat files ***/
+/*** default strings      , etc. for grfn interaction with flat files ***/
 
 #define GRFCOMCHAR '!'
 #define GRFCOMSTR "!\\"

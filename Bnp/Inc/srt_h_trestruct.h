@@ -39,7 +39,8 @@ typedef struct {
   TYPE            :SrtTrinTreNdInf
   AUTHOR          :O. Van Eyseren
   DESCRIPTION     :Information about a particular node in a trinomial tree
-                                  (whether it is LGM  , CHeyette  , Log...
+                                  (whether it is LGM      , CHeyette      ,
+Log...
 -----------------------------------------------------------------------------*/
 
 typedef struct {

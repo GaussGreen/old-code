@@ -17,7 +17,7 @@ typedef struct _smm_swap {
   double *flt_df;  // discount factors
   double *flt_spr; // spreads
 
-  // fix  , start & end:
+  // fix      , start & end:
   long fxg_date, start_date, end_date;
   double fxg_time, start_time, end_time;
   double df_fix, df_start, df_end;
@@ -40,12 +40,12 @@ typedef struct _smm_params {
   double smile_nstd; // number of standard deviations to get strikes for smile
                      // calibration
   double vol_mult;   // vol mult factor for tests
-  int do_match;      // 1: match market (weighted MC)  , 0: original simulation
-  double sv_min;     // relative minimum of a singular value
-  int vol_hyp; // bit0 : converging / sliding on sigma-beta  , bit1: c/s on sabr
-               // params
-  int use_fee; // 1: match IV  , 0: no fees
-  int otc_type; // 0: IV  , 1: call  , 2: put
+  int do_match;  // 1: match market (weighted MC)      , 0: original simulation
+  double sv_min; // relative minimum of a singular value
+  int vol_hyp; // bit0 : converging / sliding on sigma-beta      , bit1: c/s on
+               // sabr params
+  int use_fee;  // 1: match IV      , 0: no fees
+  int otc_type; // 0: IV      , 1: call      , 2: put
 } smm_params;
 
 typedef struct _smm_swaptions_desc {
@@ -100,7 +100,7 @@ Err smm_swaptions_init_product(
     char *bas_str,   // Underlying swaps fixed basis
     char *ref_rate,  // Underlying swaps floating refrate
     char *pay_rec,   // Receiver / payer
-    int is_cms,      // 1: cms options  , 0: swaptions
+    int is_cms,      // 1: cms options      , 0: swaptions
     long start,      // Common swaps start
     int nends,       // Number of underlying swaps
     long *ends,      // Underlying swaps ends

@@ -9,7 +9,7 @@
 #define SRT_H_POWERMODEL_H
 
 /* -------------------------------------------------------------------------------
-   Computes log_S(t  ,x  ,T) defined by log E[exp-h(T)*X_T|x_t]
+   Computes log_S(t      ,x      ,T) defined by log E[exp-h(T)*X_T|x_t]
    -------------------------------------------------------------------------------
  */
 

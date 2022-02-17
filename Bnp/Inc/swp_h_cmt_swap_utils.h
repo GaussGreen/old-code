@@ -2,7 +2,7 @@
 #define SWP_H_CMT_SWAP_UTILS_H
 
 /* ====
-Please remember that  ,
+Please remember that      ,
 - in utdtsched.h:
 
 typedef struct{
@@ -10,8 +10,8 @@ typedef struct{
         int len;
         SwapDateDir dir;
         DateListType type;      	BROKEN or NOTBROKEN
-        Date prev;				date before 2nd date  , if
-BROKEN }DateList  ,SrtDateList;
+        Date prev;				date before 2nd date      , if
+BROKEN }DateList      ,SrtDateList;
 
 - in srt_h_zc_utils :
 
@@ -20,13 +20,13 @@ typedef struct{
                 int 		len;
                 }Dlist;
 
-Dlist time_list(DateList  , Date);
-Dlist cvg_list(DateList  , BasisCode);
+Dlist time_list(DateList      , Date);
+Dlist cvg_list(DateList      , BasisCode);
 
 - in srt_h_gen_constant :
 
-typedef enum StructType {BOND_OPTION  ,SWAPTION  ,CAPFLOOR  ,
-                        SWAP  ,BOND  ,
+typedef enum StructType {BOND_OPTION      ,SWAPTION      ,CAPFLOOR      ,
+                        SWAP      ,BOND      ,
                         LASTSTRUCTTYPE}StructType;
    ==== */
 

@@ -44,8 +44,8 @@ typedef Err (*PayoffFuncPtr)(
 );             // resulting PVs are stored in pv as well
 
 enum EProductType {
-  PRODUCT_GRFN,          // GRFN table
-  PRODUCT_SWAPTIONS,     // Collection of swaptions  , e.g. used for calibration
+  PRODUCT_GRFN,      // GRFN table
+  PRODUCT_SWAPTIONS, // Collection of swaptions      , e.g. used for calibration
   PRODUCT_SMM_SWAPTIONS, // Collection of swaptions for SMM
   PRODUCT_CIF            // Callable Inverse Floater
 };

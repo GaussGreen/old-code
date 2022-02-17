@@ -13,7 +13,7 @@
 
 typedef struct _SCheyBetaPDEGrid {
   int nx, nphi, ninst;
-  double *phi, **ad, ***pv; /* ad for forward  , pv for backward */
+  double *phi, **ad, ***pv; /* ad for forward      , pv for backward */
 } SCheyBetaPDEGrid;
 
 typedef struct _SCheyBetaPDE {

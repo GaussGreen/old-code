@@ -2,7 +2,7 @@
 /* declariation of all functions used by BOND_OPTIONS.C */
 /* Last version June 17th				*/
 /* Author Alexandre BENECH				*/
-/* Last modified: Dec 2  , 1994 */
+/* Last modified: Dec 2      , 1994 */
 /* Author: K L Chau */
 /* Reason: use new SrtMkt structure */
 

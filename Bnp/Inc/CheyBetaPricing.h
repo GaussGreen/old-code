@@ -37,7 +37,7 @@ Err cheybeta_pricing_mc(
     int nstept, double *time, double *date,
 
     /*	Discretisation	*/
-    int numpaths, int method, /* 0 balantisam  , 1 balantisam adjusted */
+    int numpaths, int method, /* 0 balantisam      , 1 balantisam adjusted */
     SrtMCSamType gen_method,
 
     /*	Model data		*/

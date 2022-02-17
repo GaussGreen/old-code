@@ -1,8 +1,8 @@
 /* =========================================================================
    FILENAME: swp_h_swapdp.h
    FUNCTION: swp_f_initSwapDP
-   PURPOSE:  to initialise a SwapDP from start  , end_nfp  , compString  ,
-   basisStr
+   PURPOSE:  to initialise a SwapDP from start      , end_nfp      , compString
+   , basisStr
    ========================================================================= */
 
 #ifndef SWP_H_SWAPDP_H

@@ -57,7 +57,7 @@ Err copula_gaussian_get_BMM_linterp_cumulative(
 
     long *lNumPoints, double **dPoints, double **dCumulative);
 
-/* Pricing of max(dWeights[0->n-1] * dFwds[0->n-1] - K  , 0) */
+/* Pricing of max(dWeights[0->n-1] * dFwds[0->n-1] - K        , 0) */
 /* ******************************************************* */
 
 Err copula_gaussian_basket_SABR(/* Marginales Distributions */

@@ -149,17 +149,17 @@ typedef struct {
         Modelisation
         -------------
 
-        Xt= rt - f(0  ,t)
-        dXt =  [Phit-lambda_X*Xt]dt + sigma(Xt  ,t  ,omega) dWt
+        Xt= rt - f(0      ,t)
+        dXt =  [Phit-lambda_X*Xt]dt + sigma(Xt      ,t      ,omega) dWt
         dPhit = [sigma*sigma - 2*lambda_X*Phit] dt
 
-        sigma : time  , spot dependant and stochastic of the following form
-                sigma(Xt  ,t  ,omega)  = sig(t)*sigma* Epst
+        sigma : time      , spot dependant and stochastic of the following form
+                sigma(Xt      ,t      ,omega)  = sig(t)*sigma* Epst
 
                 Where
                         The stochastic part of the sigma : Epst follows :
                                 dEpst = -lambda_Eps*[Epst-1]dt + alpha * Epst *
-   dZt (mean reverting to 1  , log normal vol)
+   dZt (mean reverting to 1      , log normal vol)
 
    ------------------------------------------------------------------------------------------------
  */
@@ -207,7 +207,8 @@ Err lgmSV_adi(
                        double *GridPhi, double *GridftTstar,
 
                        /* Tensor of results to be updated		*/
-                       /* 4 dimensions : Phit  ,Xt  ,Epst  ,Product	*/
+                       /* 4 dimensions : Phit      ,Xt      ,Epst      ,Product
+                        */
                        int iNbProduct, double ****PayoffTensor),
     /*	Result */
     int iNbProduct, double *dProductArrayPv);
@@ -252,7 +253,8 @@ Err lgmSV_adi_QBeta(
                        double *GridPhi, double *GridX,
 
                        /* Tensor of results to be updated		*/
-                       /* 4 dimensions : Phit  ,Xt  ,Epst  ,Product	*/
+                       /* 4 dimensions : Phit      ,Xt      ,Epst      ,Product
+                        */
                        int iNbProduct, double ****PayoffTensor),
     /*	Result */
     int iNbProduct, double *dProductArrayPv);
@@ -304,7 +306,8 @@ Err lgmSV_adi_UtPieceWise(
                        double *GridPsi, double *GridX, double *GridZ,
 
                        /* Tensor of results to be updated		*/
-                       /* 4 dimensions : Psit  ,Xt  ,Zt  ,Product	*/
+                       /* 4 dimensions : Psit      ,Xt      ,Zt      ,Product
+                        */
                        int *iNbProduct, double ****PayoffTensor),
     /*	Result */
     int iNbProduct, int iMaxNbProduct, double *dProductArrayPv);

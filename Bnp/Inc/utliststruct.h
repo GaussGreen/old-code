@@ -5,7 +5,7 @@
                   of any information
    =========================================================== */
 
-/* If you want to add a new class of object in the list  ,
+/* If you want to add a new class of object in the list      ,
 watch lines where '### How to add a new class ###' is present.
 An easy example is given to help as comments.
 */
@@ -34,10 +34,10 @@ enum OBJECT_TYPE_CODE {
   /* Specific Object Types : I/O list */
   OBJ_PTR_IO = 30,
 
-  /* Specific Object Types : Curve (Yield  , Spread  , ...) */
+  /* Specific Object Types : Curve (Yield      , Spread      , ...) */
   OBJ_PTR_CURVE = 40,
 
-  /* Specific Object Types : Underlying (IRM  , EQ  , FX) */
+  /* Specific Object Types : Underlying (IRM      , EQ      , FX) */
   OBJ_PTR_UND = 41,
 
   /* Specific Object Types : Correlation list */
@@ -69,10 +69,12 @@ typedef struct SrtObject {
   /* The Name of the Object for lookups */
   char name[32];
 
-  /* A Key attached to the object to spot its place in the list (time  ,...) */
+  /* A Key attached to the object to spot its place in the list (time      ,...)
+   */
   double key;
 
-  /* The type of the pval object attached: i  , d  , s  , p  , which p... */
+  /* The type of the pval object attached: i      , d      , s      , p      ,
+   * which p... */
   int type;
 
   /* The VersionNumber of the object ("ticker") if several time the same one */

@@ -30,7 +30,7 @@ Err GrfnFlexiCapMakeTableau(long lNumEventDates, double dStrike,
                             GrfnCell ***pppsTableau);
 
 /* ---------------------------------------------------------------------------
-        Prices a Flexi Cap in Grfn  , building the Schedule and the Tableau
+        Prices a Flexi Cap in Grfn      , building the Schedule and the Tableau
    ---------------------------------------------------------------------------
  */
 

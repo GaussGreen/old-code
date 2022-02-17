@@ -1,13 +1,14 @@
 /******************************************************************************/
 /*                                                                            */
-/*      SYSTEM:         SRT     SORT  , Fixed Income 2020 Addins */
+/*      SYSTEM:         SRT     SORT      , Fixed Income 2020 Addins */
 /*      SUB_SYSTEM:     SWT     Swap Tools                                    */
 /*                                                                            */
 /*      MODULE NAME:    SRT_H_VEGATRELGM.H                                    */
 /*                                                                            */
 /*      PURPOSE:        Functions to compute lgm tree                         */
 /*                                                                            */
-/*      AUTHORS:        G.Amblard  , E.Auld  , K.Chau  , J.Malhi  , A. Sahuguet
+/*      AUTHORS:        G.Amblard      , E.Auld      , K.Chau      , J.Malhi ,
+ * A. Sahuguet
  */
 /*                                                                            */
 /******************************************************************************/
@@ -28,7 +29,8 @@
 /* -------------------------------------------------------------------------- */
 
 /* -> customized version of srt_f_cheinitstp().
-This function initializes each step with the values for sigma  , tau...	    */
+This function initializes each step with the values for sigma      , tau...
+*/
 
 Err srt_f_vegashiftirministp(SrtStpPtr stp, SrtUndPtr und,
                              SrtUndInfo *und_info, /* und info */

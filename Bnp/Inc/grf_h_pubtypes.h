@@ -40,8 +40,8 @@ typedef enum {
   TYPE            :GrfnCellStatus
   DESCRIPTION     :structure used to represent various bits of information
    about the financial event described by a particular GrfnCell.
-   Right now  , this is a vector of SRT_Boolean  , each element corresponding to
-   the StatusType.
+   Right now      , this is a vector of SRT_Boolean      , each element
+  corresponding to the StatusType.
   ---------------------------------------------------------------------*/
 
 typedef SRT_Boolean GrfnCellStatus[GRFNCSLASTSTATUS];
@@ -51,8 +51,8 @@ typedef SRT_Boolean GrfnCellStatus[GRFNCSLASTSTATUS];
   DESCRIPTION     :structure to represent what is contained in one cell of a
                    GrfnTableau.
                                    Note there are public Grfn functions to
-allocate and free matrices of GrfnCells.  To use GRFN  , the user is obliged to
-populate matrix of GrfnCells. DEFINITION      :
+allocate and free matrices of GrfnCells.  To use GRFN      , the user is obliged
+to populate matrix of GrfnCells. DEFINITION      :
   ---------------------------------------------------------------------*/
 
 typedef struct {
@@ -64,11 +64,11 @@ typedef struct {
 } GrfnCell;
 
 /* -----------------------------------------------------------------
-  TYPE            : GrfnRngType  , GrfnRng
+  TYPE            : GrfnRngType      , GrfnRng
   DESCRIPTION     : these do not yet exist; place is provided for them in some
 GRFN functions as a sort of expansion slot for when extra inputs more
 sophistocated than auxiliary ranges are finally supported.  In GRFN functions
-expecting *GrfnRng  , a NULL input should for now be used.
+expecting *GrfnRng      , a NULL input should for now be used.
  ---------------------------------------------------------------------*/
 
 /* one possible future defintion: */

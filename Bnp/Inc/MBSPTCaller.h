@@ -82,7 +82,7 @@ char *MBSPT_OAS_Solver(
     double oas_inc // in bp
 );
 
-char *MBS_Prepay_GetIndexValue( // int * numRow  , int * numCol  ,
+char *MBS_Prepay_GetIndexValue( // int * numRow      , int * numCol      ,
     double **indices, int endIndex, MBS_BKTree *tree,
     MBS_Prepay_Engine *prepay_engine);
 

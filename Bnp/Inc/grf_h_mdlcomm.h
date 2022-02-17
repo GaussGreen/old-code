@@ -12,9 +12,9 @@
 */
 
 /*
-        Model communicates with GRFN via the local FIRSTMktAtT structure  ,
+        Model communicates with GRFN via the local FIRSTMktAtT structure      ,
         containing all the relevant market information for evaluation
-        of GRFN at time T and the global FIRSTAllMkts structure  ,
+        of GRFN at time T and the global FIRSTAllMkts structure      ,
         that contains an array of FIRSTMktAtT
 */
 
@@ -55,7 +55,7 @@ typedef struct {
   double *tms;
   /*	Array of the events	*/
   FIRSTMktAtT *evt;
-  /*	1 if events are AM  , 0 otherwise	*/
+  /*	1 if events are AM      , 0 otherwise	*/
   int *am;
 
 } FIRSTAllMkts, *GRFNCOMMSTRUCT;
@@ -68,8 +68,8 @@ typedef struct {
                         Domestic underlying name
                         GRFN param
 
-        Output:	A pointer on a FIRSTAllMkts structure  ,
-                        fully allocated  ,
+        Output:	A pointer on a FIRSTAllMkts structure      ,
+                        fully allocated      ,
                         with requests on market parameters (df maturities)
 
         Initialise and process GRFN tableau and value historical events
@@ -100,7 +100,7 @@ Err FIRSTGetUndFromDeal(
     GRFNCOMMSTRUCT comm,
     /*	Number of underlyings needed to value the deal	*/
     int *num_und,
-    /*	Pointer is allocated inside  ,
+    /*	Pointer is allocated inside      ,
             and must be freed by call to FIRSTFreeUndFromDeal	*/
     SrtUndPtr **und_ptr);
 
@@ -141,7 +141,7 @@ Err FIRSTGetEvtDatesFromDeal(
     /*	Number of event dates	*/
     int *num_evt,
 
-    /*	Pointers are allocated inside  ,
+    /*	Pointers are allocated inside      ,
             and must be freed by call to FIRSTFreeEvtDatesFromDeal	*/
 
     /*	Event dates and times	*/
@@ -163,7 +163,7 @@ Err FIRSTGetEventInfoFromDeal(
     /*	As output from FIRSTGetMaxNumDfFromDeal	*/
     int max_num_df,
 
-    /*	All pointers are allocated inside  ,
+    /*	All pointers are allocated inside      ,
             and must be freed by call to FIRSTFreeEventInfoFromDeal	*/
 
     /*	Events themselves	*/
@@ -200,10 +200,11 @@ Err FIRSTGetLocalEventInfoFromDeal(
     GRFNCOMMSTRUCT comm,
     /*	Current time	*/
     double time,
-    /*	Return NULL if no event at this time  , or pointer on the event	*/
+    /*	Return NULL if no event at this time      , or pointer on the event
+     */
     FIRSTMktAtT **evt,
 
-    /*	POINTERS num_df_mat  , df_mat_dts and df_mat_tms
+    /*	POINTERS num_df_mat      , df_mat_dts and df_mat_tms
             ARE NOT ALLOCATED INSIDE
             they must be allocated prior to function call	*/
 
@@ -216,7 +217,7 @@ Err FIRSTGetLocalEventInfoFromDeal(
 /*	2.	Set DF values prior to valuation	*/
 
 Err FIRSTSetDFValue(
-    /*	Pointer on the event to be valued  ,
+    /*	Pointer on the event to be valued      ,
             must be a valid non-empty event	*/
     FIRSTMktAtT *evt,
     /*	Index of the underlying	*/
@@ -229,12 +230,12 @@ Err FIRSTSetDFValue(
 /*	3.	Set state variable values prior to valuation	*/
 
 Err FIRSTSetSVValue(
-    /*	Pointer on the event to be valued  ,
+    /*	Pointer on the event to be valued      ,
             must be a valid non-empty event	*/
     FIRSTMktAtT *evt,
     /*	Index of the underlying	*/
     int und_idx,
-    /*	Type of the statevar (SPOT  , R  , PHI  , ...)	*/
+    /*	Type of the statevar (SPOT      , R      , PHI      , ...)	*/
     int sv_type,
     /*	Value of statevar	*/
     double sv_val);
@@ -250,19 +251,19 @@ Err FIRSTSetSVValue(
 Err FIRSTEvalEvent(
     /*	As output from FIRSTInitMktStruct	*/
     GRFNCOMMSTRUCT comm,
-    /*	Pointer on the event to be valued  ,
+    /*	Pointer on the event to be valued      ,
             must be a valid non-empty event	*/
     FIRSTMktAtT *evt,
     /*	Number of columns	*/
     int num_col,
     /*	Information needed by Forward/Backward models only
             Please ask Eric Fournie what these are about...
-            If you don't want to use these  , please set them to default
+            If you don't want to use these      , please set them to default
      */
     int type_eval, /*	Default is 2	*/
     double *fwd,   /*	Default is NULL	*/
     double *cur,   /*	Default is NULL	*/
-    /*	Vector of PVs so far of columns  , will be updated by function
+    /*	Vector of PVs so far of columns      , will be updated by function
             tree only	*/
     double *col_pvs,
     /*	Cash flow
@@ -273,19 +274,19 @@ Err FIRSTEvalEvent(
 Err FIRSTEvalEventCredit(
     /*	As output from FIRSTInitMktStruct	*/
     GRFNCOMMSTRUCT comm,
-    /*	Pointer on the event to be valued  ,
+    /*	Pointer on the event to be valued      ,
             must be a valid non-empty event	*/
     FIRSTMktAtT *evt,
     /*	Number of columns	*/
     int num_col,
     /*	Information needed by Forward/Backward models only
             Please ask Eric Fournie what these are about...
-            If you don't want to use these  , please set them to default
+            If you don't want to use these      , please set them to default
      */
     int type_eval, /*	Default is 2	*/
     double *fwd,   /*	Default is NULL	*/
     double *cur,   /*	Default is NULL	*/
-    /*	Vector of PVs so far of columns  , will be updated by function
+    /*	Vector of PVs so far of columns      , will be updated by function
             tree only	*/
     double *col_pvNr, double *col_pvR, double *col_pvSource, int *sourceStatus,
     /*	Cash flow
@@ -295,21 +296,21 @@ Err FIRSTEvalEventCredit(
 #if 0
 Err FIRSTEvalEvent2(
 /*	As output from FIRSTInitMktStruct	*/
-GRFNCOMMSTRUCT			comm  ,
-/*	Pointer on the event to be valued  , 
+GRFNCOMMSTRUCT			comm      ,
+/*	Pointer on the event to be valued      , 
 	must be a valid non-empty event	*/
-FIRSTMktAtT*			evt  ,
+FIRSTMktAtT*			evt      ,
 /*	Number of columns	*/
-int						num_col  ,
+int						num_col      ,
 /*	Information needed by Forward/Backward models only
 	Please ask Eric Fournie what these are about...
-	If you don't want to use these  , please set them to default	*/
-int						type_eval  ,	/*	Default is 2	*/
-double*					fwd  ,		/*	Default is NULL	*/
-double*					cur  ,		/*	Default is NULL	*/
-/*	Vector of PVs so far of columns  , will be updated by function
+	If you don't want to use these      , please set them to default	*/
+int						type_eval      ,	/*	Default is 2	*/
+double*					fwd      ,		/*	Default is NULL	*/
+double*					cur      ,		/*	Default is NULL	*/
+/*	Vector of PVs so far of columns      , will be updated by function
 	tree only	*/
-double*					col_pvs  ,
+double*					col_pvs      ,
 /*	Cash flow
 	MC only	*/
 double*					cash_flow);

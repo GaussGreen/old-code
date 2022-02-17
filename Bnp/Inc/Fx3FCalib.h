@@ -29,10 +29,10 @@ double Gamma2_Func(double x, double y, double Tx, double Ty, double s,
 /* Defines the long term Fx volatility using the 3F model
                                 5 strategies
                                 1.)	Calibrate all
-                                2.)	Calibrate all  , optimise fvol
-   stationarity in slr 3.) Calibrate partial  , extrapolate with slr 4.)
-   Calibrate partial  , best fit rest with slr 5.) Optimise fvol stationarity
-   under bid/offer constraint */
+                                2.)	Calibrate all      , optimise fvol
+   stationarity in slr 3.) Calibrate partial      , extrapolate with slr 4.)
+   Calibrate partial      , best fit rest with slr 5.) Optimise fvol
+   stationarity under bid/offer constraint */
 
 Err Fx3DDefImpVol(/*	Total number of options */
                   int num_opt,
@@ -89,11 +89,10 @@ Err Fx3DDefImpVol2(/*	Total number of options */
                    /* Vol Function */
                    Err (*get_cash_vol)(/*	Function to get cash vol from
                                           the market */
-                                       char *vol_curve_name,
-                                       double start_date, double end_date,
-                                       double cash_strike, int zero,
-                                       char *ref_rate_name, double *vol,
-                                       double *power),
+                                       char *vol_curve_name, double start_date,
+                                       double end_date, double cash_strike,
+                                       int zero, char *ref_rate_name,
+                                       double *vol, double *power),
 
                    /* Answer */
                    double *vol);
@@ -149,7 +148,7 @@ Err merge_rates_ts(double *sig_dom_mat, double *sig_dom, int sig_n_dom,
                    double **sig_merge_mat, double **sig_merge_dom,
                    double **sig_merge_for, int *sig_merge_n);
 
-/*	Merge rates  , fx and corr term structures */
+/*	Merge rates      , fx and corr term structures */
 Err merge_rates_fx_corr_ts(double *sig_dom_mat, double *sig_dom, int sig_n_dom,
                            double *sig_for_mat, double *sig_for, int sig_n_for,
                            double *sig_fx_mat, double *sig_fx, int sig_n_fx,
@@ -230,7 +229,7 @@ Err Fx3DSpotVol(char *fx_underlying, double maturity, double *fx_vol);
 /*	Compute the expectation of log ( S (T) / S (0) )
                 under a variety of measures */
 
-/*	Calculate adjustment between Q-Tpay and Q-beta  , such that
+/*	Calculate adjustment between Q-Tpay and Q-beta      , such that
         Q-beta expect log ( S ( Tfix ) / S ( 0 ) ) = Q-Tpay expect log ( S (
    Tfix ) / S ( 0 ) ) + adj */
 Err Fx3DtsFwdBetaAdjustment(double T0,   /*	Forward start date */
@@ -247,7 +246,7 @@ Err Fx3DtsFwdBetaAdjustment(double T0,   /*	Forward start date */
                             /*	Result */
                             double *adjust);
 
-/*	Calculate adjustment between Q-Tpay1 and Q-Tpay2  , such that
+/*	Calculate adjustment between Q-Tpay1 and Q-Tpay2      , such that
         Q-Tpay2 expect log ( S ( Tfix ) / S ( 0 ) ) = Q-Tpay1 expect log ( S (
    Tfix ) / S ( 0 ) ) + adj */
 Err Fx3DtsFwdPayAdjustment(double T0,    /*	Forward start date */
@@ -287,7 +286,7 @@ Err Fx3DFwdBeta(char *fx_underlying,
                 double Tfix,
                 /*	Forward value time */
                 double Tval,
-                /*	0: expect [log Fx]  , 1: expect [Fx] */
+                /*	0: expect [log Fx]      , 1: expect [Fx] */
                 int log_flag,
                 /*	Answer */
                 double *expect);
@@ -300,7 +299,7 @@ Err Fx3DFwdTpay(char *fx_underlying,
                 double Tval,
                 /*	Payment time */
                 double Tpay,
-                /*	0: expect [log Fx]  , 1: expect [Fx] */
+                /*	0: expect [log Fx]      , 1: expect [Fx] */
                 int log_flag,
                 /*	Answer */
                 double *expect);
@@ -317,12 +316,12 @@ Err Fx3DFwdQf(char *fx_underlying,
               double Tval,
               /*	F2 Payment time */
               double Tpay,
-              /*	0: expect [log Fx]  , 1: expect [Fx] */
+              /*	0: expect [log Fx]      , 1: expect [Fx] */
               int log_flag,
               /*	Answer */
               double *expect);
 
-/*	Compute covar ( log ( S ( T1 ) )   , log ( S ( T2 ) ) ) */
+/*	Compute covar ( log ( S ( T1 ) )       , log ( S ( T2 ) ) ) */
 Err Fx3DCovar(char *fx_underlying, double Tfix1, double Tval1, double Tfix2,
               double Tval2, double *covar);
 
@@ -462,7 +461,7 @@ Err quanto_correl(
     double dom_lam, double for_lam,
     /*	The 3 standard correlation inputs */
     double corr_dom_for, double corr_spot_fx_dom, double corr_spot_fx_for,
-    /*	The "exotic" correl term structure  , between domestic yield and
+    /*	The "exotic" correl term structure      , between domestic yield and
        domestic index */
     int num_corr, double *corr_mats, double *corr_dom_yld_idx,
     /*	The output */
@@ -495,7 +494,7 @@ Err quanto_correl_corr(
     /*	The 3 standard correlation inputs */
     double *corr_times, double *corr_dom_for_ts, double *corr_dom_fx_ts,
     double *corr_for_fx_ts, long corr_n_times,
-    /*	The "exotic" correl term structure  , between domestic yield and
+    /*	The "exotic" correl term structure      , between domestic yield and
        domestic index */
     int num_corr, double *corr_mats, double *corr_dom_yld_idx,
     /*	The output */
@@ -570,12 +569,12 @@ Err Fx3DFwdBeta_corr(char *fx_underlying,
                      double Tfix,
                      /*	Forward value time */
                      double Tval,
-                     /*	0: expect [log Fx]  , 1: expect [Fx] */
+                     /*	0: expect [log Fx]      , 1: expect [Fx] */
                      int log_flag,
                      /*	Answer */
                      double *expect);
 
-/*	Calculate adjustment between Q-Tpay1 and Q-Tpay2  , such that
+/*	Calculate adjustment between Q-Tpay1 and Q-Tpay2      , such that
         Q-Tpay2 expect log ( S ( Tfix ) / S ( 0 ) ) = Q-Tpay1 expect log ( S (
    Tfix ) / S ( 0 ) ) + adj */
 Err Fx3DtsFwdPayAdjustment_corr(double T0,    /*	Forward start date */

@@ -37,7 +37,7 @@ typedef struct {
   SrtDiffusionType vol_type;
   int cash_vol;
 
-  /*	For DRS adjustment  , strikes in the market volatility matrix for
+  /*	For DRS adjustment      , strikes in the market volatility matrix for
    * replication */
   int num_strikes_in_vol;
   double *strikes_in_vol;
@@ -94,7 +94,7 @@ Err cts_fill_fund_leg(
     CTS_MKT mkt,
     /*	Coupons that started before today are disregarded */
     /*	EOD Flag */
-    int eod_flag, /*	0: I  , 1: E */
+    int eod_flag, /*	0: I      , 1: E */
     int fund_ncpn, double *fund_not, long *fund_fix, long *fund_start,
     long *fund_end, long *fund_pay, char **fund_basis, double *fund_spr,
     double *fund_mrg, CTS_FUND_LEG fund_leg);
@@ -206,8 +206,8 @@ Err cts_init_cpn_payoff(double alpha, double beta, int nstr, double *str,
 
 /* For a range */
 Err cts_init_cpn_payoff_for_range(
-    int buy_sell,   /*	1: BNPP buys  , -1: BNPP sells */
-    int value_zero, /*	0: Do not value low strike options  , 1: do */
+    int buy_sell,   /*	1: BNPP buys      , -1: BNPP sells */
+    int value_zero, /*	0: Do not value low strike options      , 1: do */
     double min_barrier, double max_barrier,
     double lb,     /*	Lower bound of range */
     double ub,     /*	Upper bound of range */
@@ -222,8 +222,8 @@ Err cts_init_cpn_payoff_for_cif(int value_zero, double min_barrier,
 
 /*	Adjust call spread values */
 Err cts_adjust_call_spread(
-    int buy_sell,   /*	1: BNPP buys  , -1: BNPP sells */
-    int value_zero, /*	0: Do not value low strike options  , 1: do */
+    int buy_sell,   /*	1: BNPP buys      , -1: BNPP sells */
+    int value_zero, /*	0: Do not value low strike options      , 1: do */
     double min_barrier, double max_barrier,
     double lb,     /*	Lower bound of range */
     double ub,     /*	Upper bound of range */
@@ -242,8 +242,8 @@ Err cts_init_cpn(
     int fix_lag_bd,
     /*	Coupon type */
     int cpn_type, /*	0:	fixed
-                                  1:	libor fixed at start
-                                  2:	libor fixed at end */
+                              1:	libor fixed at start
+                              2:	libor fixed at end */
     /*	Paid libor details */
     long pay_fix_date, /*	fixing date of the Libor */
     int pay_months,    /*	Length of the paid libor in months */
@@ -255,40 +255,39 @@ Err cts_init_cpn(
     char *fix_tenor,     /*	Fixing tenors */
     char *fix_freq, char *fix_basis,
     double *ref_fwd_spreads, /*	Reference libor spreads corresponding to fixing
-                                dates */
+                            dates */
     /*	Profile details */
-    int tstype, /*	0: generic  , 1: range */
+    int tstype, /*	0: generic      , 1: range */
     /*		Profile 0 */
     double alpha, double beta, int nstr, double *str, double *nbopt,
     /*		Profile 1 */
-    int buy_sell,   /*	1: BNPP buys  , -1: BNPP sells */
-    int value_zero, /*	0: Do not value low strike options  , 1: do */
+    int buy_sell,   /*	1: BNPP buys      , -1: BNPP sells */
+    int value_zero, /*	0: Do not value low strike options      , 1: do */
     double lb,      /*	Lower bound of range */
     double ub,      /*	Upper bound of range */
     double payoff,  /*	Payoff in range */
     double call_spread, double numer_spread,
     /*		Trimming */
     int trim_type, /*	0: no trim
-                                   1: x fixings max
-                                   2: x time min between two fixings */
+                               1: x fixings max
+                               2: x time min between two fixings */
     int max_fix, double min_fix_time, int calc_mkt_iv,
-    int use_cmsopt, /*	Use CmsOption to value fix option  , use BS on CmsRate
-                       otherwise */
+    int use_cmsopt, /*	Use CmsOption to value fix option      , use BS on
+                   CmsRate otherwise */
     /*		Correl */
     double correl_start, /*	Correl between libor fixing and libor paid at
-                            start */
+                        start */
     double
         correl_end, /*	Correl between libor fixing and libor paid at start */
-    int float_adjust_type, /*	type of adjustment for the floating coupon  ,
-                                   0: ATM vol  , 1: Strike Vol */
+    int float_adjust_type, /*	type of adjustment for the floating coupon ,
+                               0: ATM vol      , 1: Strike Vol */
     CTS_CPN cpn);
 
 /*	Trim fixings */
 Err cts_trim_fixings(
-    CTS_CPN cpn,
-    int trim_type, /*	0: no trim
-                                   1: x fixings max
-                                   2: x time min between two fixings */
+    CTS_CPN cpn, int trim_type, /*	0: no trim
+                                            1: x fixings max
+                                            2: x time min between two fixings */
     int max_fix, double min_fix_time);
 
 Err cts_calc_fixed_cpn_mkt_value(
@@ -301,9 +300,9 @@ Err cts_calc_fixed_cpn_mkt_value(
     int fix_lag_bd,
     /*	Coupon type */
     int cpn_type, /*	0:	fixed
-                                  1:	libor fixed at start
-                                  2:	libor fixed at end
-                                  3:	midat */
+                              1:	libor fixed at start
+                              2:	libor fixed at end
+                              3:	midat */
     /*	Paid libor details */
     long pay_fix_date, /*	fixing date of the Libor */
     int pay_months,    /*	Length of the paid libor in months */
@@ -314,29 +313,29 @@ Err cts_calc_fixed_cpn_mkt_value(
     /*		ref libor */
     double *fixed_ref, /*	Fixing dates */
     /*	Profile details */
-    int tstype, /*	0: generic  , 1: range */
+    int tstype, /*	0: generic      , 1: range */
     /*		Profile 0 */
     double alpha, double beta, int nstr, double *str, double *nbopt,
     /*		Profile 1 */
     double lb,                                  /*	Lower bound of range */
     double ub,                                  /*	Upper bound of range */
     double payoff,                              /*	Payoff in range */
-    double accrue_on_barrier, int eod_fix_flag, /*	0: I  , 1: E */
-    int eod_pay_flag,                           /*	0: I  , 1: E */
-    int eod_ex_flag,                            /*	0: I  , 1: E */
+    double accrue_on_barrier, int eod_fix_flag, /*	0: I      , 1: E */
+    int eod_pay_flag,                           /*	0: I      , 1: E */
+    int eod_ex_flag,                            /*	0: I      , 1: E */
     double *mkt_value);
 
 /*	Calc market values */
 Err cts_calc_cpn_mkt_value(
     CTS_CPN cpn, CTS_MKT mkt,
-    int use_cmsopt, /*	Use CmsOption to value fix option  , use BS on CmsRate
-                       otherwise */
+    int use_cmsopt,      /*	Use CmsOption to value fix option      , use BS on
+                        CmsRate      otherwise */
     double correl_start, /*	Correl between libor fixing and libor paid at
-                            start */
+                        start */
     double
         correl_end, /*	Correl between libor fixing and libor paid at start */
-    int float_adjust_type); /*	type of adjustment for the floating coupon  ,
-                                            0: ATM vol  , 1: Strike Vol */
+    int float_adjust_type); /*	type of adjustment for the floating coupon ,
+                                            0: ATM vol      , 1: Strike Vol */
 
 /*	Check */
 Err cts_check_coupon(CTS_CPN cpn);
@@ -357,7 +356,7 @@ Err cts_fill_cpn_leg(
     CTS_MKT mkt,
     /*	Coupons that fixed before today are disregarded */
     /*	EOD Flag */
-    int eod_flag, /*	0: I  , 1: E */
+    int eod_flag, /*	0: I      , 1: E */
     /*	General Libor properties */
     int fix_lag_bd,
     /*	Number of coupons */
@@ -365,8 +364,8 @@ Err cts_fill_cpn_leg(
     /*	Coupon description */
     /*		cpn */
     int *cpn_type, /*	0:	fixed
-                                   1:	libor fixed at start
-                                   2:	libor fixed at end */
+                               1:	libor fixed at start
+                               2:	libor fixed at end */
     long *cpn_start_date, long *cpn_end_date, long *cpn_pay_date,
     double *cpn_coupon, char **cpn_basis, double *cpn_not,
     /*		pay libor */
@@ -379,31 +378,31 @@ Err cts_fill_cpn_leg(
     char **fix_tenor, /*	Fixing tenors */
     char *fix_freq, char *fix_basis, double **ref_fwd_spreads,
     /*	Profiles */
-    int tstype, /*	0: generic  , 1: range */
+    int tstype, /*	0: generic      , 1: range */
     /*	profile 0 */
     double *alpha, double *beta, int *nstr, double **str, double **nbopt,
     /*	profile 1 */
-    int buy_sell,   /*	1: BNPP buys  , -1: BNPP sells */
-    int value_zero, /*	0: Do not value low strike options  , 1: do */
+    int buy_sell,   /*	1: BNPP buys      , -1: BNPP sells */
+    int value_zero, /*	0: Do not value low strike options      , 1: do */
     double *lb,     /*	Lower bounds of ranges */
     double *ub,     /*	Upper bounds of ranges */
     double *payoff, /*	Payoff in ranges */
     double call_spread, double numer_call_spread,
     /*		Trimming */
     int trim_type, /*	0: no trim
-                                   1: x fixings max
-                                   2: x time min between two fixings */
+                               1: x fixings max
+                               2: x time min between two fixings */
     int max_fix, double min_fix_time,
     /*	Extra model parameters*/
-    int calc_mkt_iv, int use_cmsopt, /*	Use CmsOption to value fix option  , use
-                                        BS on CmsRate otherwise */
+    int calc_mkt_iv, int use_cmsopt, /*	Use CmsOption to value fix option      ,
+                                use BS on CmsRate otherwise */
     double correl_start, /*	Correl between libor fixing and libor paid at
-                            start */
+                        start */
     double
         correl_end, /*	Correl between libor fixing and libor paid at start */
-    int float_adjust_type, /*	type of adjustment for the floating coupon  ,
-                                                   0: ATM vol  , 1: Strike Vol
-                            */
+    int float_adjust_type, /*	type of adjustment for the floating coupon , 0:
+                              ATM vol      , 1: Strike Vol
+                        */
     CTS_EXO_LEG exo_leg);
 
 /*	Check */
@@ -415,7 +414,7 @@ void cts_free_exo_leg(CTS_EXO_LEG exo_leg);
 /*	Structures and functions for the calls */
 
 typedef struct {
-  int pay_rec; /*	0: rec exo leg upon exercise  , 1: pay exo leg upon
+  int pay_rec; /*	0: rec exo leg upon exercise      , 1: pay exo leg upon
                   exercise */
   /*	Specs */
   int index;       /*	Index of the call */
@@ -453,8 +452,8 @@ Err cts_fill_calls(
     /*	Exercises before today are disregarded */
     long today,
     /*	EOD Flag */
-    int eod_flag,           /*	0: I  , 1: E */
-    int ncall, int pay_rec, /*	1: rec pd  , -1: pay pd */
+    int eod_flag,           /*	0: I      , 1: E */
+    int ncall, int pay_rec, /*	1: rec pd      , -1: pay pd */
     long *ex_date, long *set_date, double *fee, CTS cts);
 
 /* Adjustment for fixing in floating case */
@@ -482,21 +481,21 @@ typedef struct {
 /*	Fill underlying structure from a predefined underlying */
 Err cts_fill_und(CTS_MKT mkt, char *lgmsvund, double tstar, CTS_UND und);
 
-Err cts_implied_alpha_approx(
-    double maturity,
-    double param[], /* first param = Alpha^2  , second param = 2.0 * LamEps */
-    double *price, double *gradient, int nb_param);
+Err cts_implied_alpha_approx(double maturity,
+                             double param[], /* first param = Alpha^2      ,
+                                                second param = 2.0 * LamEps */
+                             double *price, double *gradient, int nb_param);
 
 Err cts_get_mkt_sabr_beta_param(CTS_MKT mkt, long exe_date, long start_date,
                                 long theo_end_date, double fixed_beta,
                                 int use_levenberg, double *alpha, double *rho,
                                 double *fitting_error);
 
-/*	Calibration of alpha  , rho and lameps to the market smile */
+/*	Calibration of alpha      , rho and lameps to the market smile */
 Err cts_calib_const_alpha_and_rho(
     CTS_MKT mkt, CTS cts,
-    int calib_months, /* 0: co-terminal swaption  , otherwise underlyings with
-                         required nb months */
+    int calib_months, /* 0: co-terminal swaption      , otherwise underlyings
+                     with required nb months */
     double fixed_beta, double min_time, double *alpha, double *rho,
     double *lameps, int save_inst_data, cpd_calib_inst_data *inst_data);
 
@@ -504,7 +503,7 @@ Err cts_calib_const_alpha_and_rho(
 Err cts_calib_und(
     CTS_MKT mkt,
     /*	EOD Flag */
-    int eod_flag,  /*	0: I  , 1: E */
+    int eod_flag,  /*	0: I      , 1: E */
     double lambda, /*	lambda */
     int nb_factor, double lgm_alpha, double lgm_gamma, double lgm_rho,
     int nsmilepar, double *smilepartime, double *alpha, /*	alpha */
@@ -522,28 +521,28 @@ Err cts_calib_und(
     double vol_shift_short, DIAGCALIB_VOLTYPE vol_type_short,
     DIAGCALIB_SHIFTTYPE vol_shift_type_short, double lambda_shift,
 
-    int calib_strategy, /*	-1: autocal  , 0: swaptions / cap  , 1: cap /
-                           swaptions */
-    int fix_lambda,     /*	0: calib lambda to cap  , 1: fix lambda calib to
-                           diagonal */
+    int calib_strategy, /*	-1: autocal      , 0: swaptions / cap      , 1:
+                       cap / swaptions */
+    int fix_lambda,     /*	0: calib lambda to cap      , 1: fix lambda calib to
+                       diagonal */
     char *short_tenor, char *short_refrate, char *short_freq, char *short_basis,
     int fix_smile,          /*	0: calib smile parameters to market smile */
-    int smile_calib_months, /* 0: co-terminal swaption  , otherwise underlyings
-                               with required nb months */
+    int smile_calib_months, /* 0: co-terminal swaption      , otherwise
+                           underlyings with required nb months */
     LGMSV_CalibParams *calib_params, double min_time,
-    int skip_last,   /*	If 1  , the last option is disregarded and the forward
-                        volatility is flat from option n-1 */
+    int skip_last,   /*	If 1      , the last option is disregarded and the
+                    forward   volatility is flat from option n-1 */
     double min_fact, /*	Maximum down jump on variance */
     double max_fact, /*	Maximum up jump on variance */
-    int use_jumps,   /*	1: we allow jumps on vol  , 0: we don't */
+    int use_jumps,   /*	1: we allow jumps on vol      , 0: we don't */
     double prec, int maxiter, int keep_first,
     /*	Strike choice */
     int long_strike_flag,  /*	0: ATM
-                                                   1: Coupon
-                                                   2: Eq (PV/Lvl) */
-    int short_strike_flag, /*	0: ATM  ,
-                                                   1: implied digital caplet
-                              strike 2: same number of std */
+                                               1: Coupon
+                                               2: Eq (PV/Lvl) */
+    int short_strike_flag, /*	0: ATM      ,
+                                               1: implied digital caplet
+                          strike 2: same number of std */
     /*	End of calib params */
     CTS cts, /*	structure */
     CTS_UND und, int save_inst_data, cpd_calib_inst_data *inst_data);
@@ -609,7 +608,8 @@ Err cts_adjust_model_fwd_iv(CTS_UND und, CTS market_cts, CTS model_cts,
 
 typedef struct {
   /*	DF (Tpay) / DF (Tstar) */
-  /*	Reconstruction is exp ( - alpha - beta * f(t  ,T*) - gamma * Psit ) */
+  /*	Reconstruction is exp ( - alpha - beta * f(t      ,T*) - gamma * Psit )
+   */
   double tpay_tstar_alpha;
   double tpay_tstar_beta;
   double tpay_tstar_gamma;
@@ -620,7 +620,8 @@ typedef struct {
   double tpay_tstar_gamma12;
 
   /*	DF (Ts) / DF (Te) */
-  /*	Reconstruction is exp ( - alpha - beta * f(t  ,T*) - gamma * Psit ) */
+  /*	Reconstruction is exp ( - alpha - beta * f(t      ,T*) - gamma * Psit )
+   */
   double ts_te_alpha;
   double ts_te_beta;
   double ts_te_gamma;
@@ -646,13 +647,15 @@ typedef struct {
 
 typedef struct {
   /*	DF (Tpay) / DF (Tstar) */
-  /*	Reconstruction is exp ( - alpha - beta * f(t  ,T*) - gamma * Psit ) */
+  /*	Reconstruction is exp ( - alpha - beta * f(t      ,T*) - gamma * Psit )
+   */
   double tpay_tstar_alpha;
   double tpay_tstar_beta;
   double tpay_tstar_gamma;
 
   /*	DF (Ti) / DF (Tstar) */
-  /*	Reconstruction is exp ( - alpha - beta * f(t  ,T*) - gamma * Psit ) */
+  /*	Reconstruction is exp ( - alpha - beta * f(t      ,T*) - gamma * Psit )
+   */
   double ti_tstar_alpha[MAX_CPN];
   double ti_tstar_beta[MAX_CPN];
   double ti_tstar_gamma[MAX_CPN];
@@ -682,13 +685,15 @@ typedef struct {
 
 typedef struct {
   /*	DF (Tpay) / DF (Tstar) */
-  /*	Reconstruction is exp ( - alpha - beta * f(t  ,T*) - gamma * Psit ) */
+  /*	Reconstruction is exp ( - alpha - beta * f(t      ,T*) - gamma * Psit )
+   */
   double tpay_tstar_alpha;
   double tpay_tstar_beta;
   double tpay_tstar_gamma;
 
   /*	DF (Ts) / DF (Te) */
-  /*	Reconstruction is exp ( - alpha - beta * f(t  ,T*) - gamma * Psit ) */
+  /*	Reconstruction is exp ( - alpha - beta * f(t      ,T*) - gamma * Psit )
+   */
   double ts_te_alpha;
   double ts_te_beta;
   double ts_te_gamma;
@@ -710,19 +715,22 @@ typedef struct {
 
 typedef struct {
   /*	DF (Tfund) / DF (Tstar) */
-  /*	Reconstruction is exp ( - alpha - beta * f(t  ,T*) - gamma * Psit ) */
+  /*	Reconstruction is exp ( - alpha - beta * f(t      ,T*) - gamma * Psit )
+   */
   double tpay_tstar_alpha[MAXDF];
   double tpay_tstar_beta[MAXDF];
   double tpay_tstar_gamma[MAXDF];
 
   /*	DF (Tset) / DF (Tstar) */
-  /*	Reconstruction is exp ( - alpha - beta * f(t  ,T*) - gamma * Psit ) */
+  /*	Reconstruction is exp ( - alpha - beta * f(t      ,T*) - gamma * Psit )
+   */
   double tset_tstar_alpha;
   double tset_tstar_beta;
   double tset_tstar_gamma;
 
   /*	DF (Tpayfixed) / DF (Tstar) */
-  /*	Reconstruction is exp ( - alpha - beta * f(t  ,T*) - gamma * Psit ) */
+  /*	Reconstruction is exp ( - alpha - beta * f(t      ,T*) - gamma * Psit )
+   */
   double tpay_tstar_alpha2[MAXDF];
   double tpay_tstar_beta2[MAXDF];
   double tpay_tstar_gamma2[MAXDF];
@@ -786,7 +794,7 @@ typedef struct {
   int is_cpn;
   int is_call;
 
-  /*	Index of the current fixing  , coupon and call */
+  /*	Index of the current fixing      , coupon and call */
   CTS_FIX fix;
   CTS_CPN cpn;
   CTS_CALL call;
@@ -852,7 +860,7 @@ typedef struct {
 Err cts_find_one_time_index(CTS_UND und, CTS cts, int *one_time_index);
 
 Err cts_fill_algo_arg(
-    CTS_UND und, CTS cts, int pde_or_mc, /* 0: PDE  , 1: MC */
+    CTS_UND und, CTS cts, int pde_or_mc, /* 0: PDE      , 1: MC */
     /*	Required number of steps for PDE */
     int req_stp, int req_stppsi, int req_stpx, int req_stpz,
     /*	Required number of steps for MC */
@@ -861,8 +869,8 @@ Err cts_fill_algo_arg(
     double integ_mintime,
     /*	Flag for extra calculation / adjustment of one-time callable */
     int do_one_time,    /*	1: calc the one time */
-    int one_time_index, /*	0: choose automatically the index  , >0: index
-                           provided by user */
+    int one_time_index, /*	0: choose automatically the index      , >0:
+                       index provided by user */
     /*	T-star */
     CTS_ADI_ARG adi_arg);
 
@@ -880,7 +888,7 @@ Err cts_fill_check_all_struct(
     /*	Market */
     CTS_MKT mkt,
     /*	The underlying */
-    double tstar, int use_calib, /*	0: use lgmsvund  , 1: calibrate */
+    double tstar, int use_calib, /*	0: use lgmsvund      , 1: calibrate */
     /*		if calib */
     double lambda, /*	LGM lambda */
     int nb_factor, double lgm_alpha, double lgm_gamma, double lgm_rho,
@@ -903,8 +911,8 @@ Err cts_fill_check_all_struct(
     /*			coupon description */
     /*				cpn */
     int *cpn_type, /*	0:	fixed
-                                   1:	libor fixed at start
-                                   2:	libor fixed at end */
+                               1:	libor fixed at start
+                               2:	libor fixed at end */
     long *cpn_start_date, long *cpn_end_date, long *cpn_pay_date,
     double *cpn_coupon, char **cpn_basis, double *cpn_not,
     /*				pay libor */
@@ -917,41 +925,41 @@ Err cts_fill_check_all_struct(
     char **fix_tenor, /*	Fixing tenors */
     char *fix_freq, char *fix_basis, double **fix_fwd_spreads,
     /*				profiles */
-    int tstype, /*	0: generic  , 1: range */
+    int tstype, /*	0: generic      , 1: range */
     /*				profile 0 */
     double *alpha, double *beta, int *nstr, double **str, double **nbopt,
     /*				profile 1 */
-    int buy_sell,   /*	1: BNPP buys  , -1: BNPP sells */
-    int value_zero, /*	0: Do not value low strike options  , 1: do */
+    int buy_sell,   /*	1: BNPP buys      , -1: BNPP sells */
+    int value_zero, /*	0: Do not value low strike options      , 1: do */
     double *lb,     /*	Lower bounds of ranges */
     double *ub,     /*	Upper bounds of ranges */
     double *payoff, /*	Payoff in ranges */
     double call_spread, double numer_spread,
     /*		Trimming */
     int trim_type, /*	0: no trim
-                                   1: x fixings max
-                                   2: x time min between two fixings */
+                               1: x fixings max
+                               2: x time min between two fixings */
     int max_fix, double min_fix_time,
     /*	Extra model parameters*/
-    int use_cmsopt, /*	Use CmsOption to value fix option  , use BS on CmsRate
-                       otherwise */
+    int use_cmsopt,      /*	Use CmsOption to value fix option      , use BS on
+                        CmsRate      otherwise */
     double correl_start, /*	Correl between libor fixing and libor paid at
-                            start */
+                        start */
     double
         correl_end, /*	Correl between libor fixing and libor paid at start */
-    int float_adjust_type, /*	type of adjustment for the floating coupon  ,
-                                                   0: ATM vol  , 1: Strike Vol
-                            */
+    int float_adjust_type, /*	type of adjustment for the floating coupon , 0:
+                              ATM vol      , 1: Strike Vol
+                        */
     /*	Calls */
-    int ncall, int pay_rec, /*	1: rec pd  , -1: pay pd */
+    int ncall, int pay_rec, /*	1: rec pd      , -1: pay pd */
     long *ex_date, long *set_date, double *fee, int adj_fee,
 
     /*	Flag for extra calculation / adjustment of one-time callable */
     int do_one_time,    /*	1: calc the one time */
-    int one_time_index, /*	0: choose automatically the index  , >0: index
-                           provided by user */
+    int one_time_index, /*	0: choose automatically the index      , >0:
+                       index provided by user */
     int just_recalib,   /*	Just recalibrate the underlying and skip all the
-                           other parts */
+                       other parts */
 
     /*	Numerical params */
     /*		CF */
@@ -966,39 +974,39 @@ Err cts_fill_check_all_struct(
     DIAGCALIB_VOLTYPE vol_type_long, DIAGCALIB_SHIFTTYPE vol_shift_type_long,
     double vol_shift_short, DIAGCALIB_VOLTYPE vol_type_short,
     DIAGCALIB_SHIFTTYPE vol_shift_type_short, double lambda_shift,
-    int calib_strategy, /*	-1: autocal  , 0: swaptions / cap  , 1: cap /
-                           swaptions */
-    int fix_lambda,     /*	0: calib lambda to cap  , 1: fix lambda calib
-                                        to diagonal */
+    int calib_strategy, /*	-1: autocal      , 0: swaptions / cap      , 1:
+                       cap / swaptions */
+    int fix_lambda,     /*	0: calib lambda to cap      , 1: fix lambda calib
+                                    to diagonal */
     char *short_tenor, char *short_refrate, char *short_freq, char *short_basis,
     int fix_smile,          /*	0: calib smile parameters to market smile */
-    int smile_calib_months, /* 0: co-terminal swaption  , otherwise underlyings
-                               with required nb months */
+    int smile_calib_months, /* 0: co-terminal swaption      , otherwise
+                           underlyings with required nb months */
     LGMSV_CalibParams *calib_params, double min_time,
-    int skip_last,   /*	If 1  , the last option is disregarded and the forward
-                        volatility is flat from option n-1 */
+    int skip_last,   /*	If 1      , the last option is disregarded and the
+                    forward   volatility is flat from option n-1 */
     double min_fact, /*	Maximum down jump on variance */
     double max_fact, /*	Maximum up jump on variance */
-    int use_jumps,   /*	1: we allow jumps on vol  , 0: we don't */
+    int use_jumps,   /*	1: we allow jumps on vol      , 0: we don't */
     double numer_tstar, double prec, int maxiter, int keep_first,
     /*	Strike choice */
     int long_strike_flag,  /*	0: ATM
-                                                   1: Coupon
-                                                   2: Eq (PV/Lvl) */
-    int short_strike_flag, /*	0: ATM  ,
-                                                   1: implied digital caplet
-                              strike 2: same number of std */
+                                               1: Coupon
+                                               2: Eq (PV/Lvl) */
+    int short_strike_flag, /*	0: ATM      ,
+                                               1: implied digital caplet
+                          strike 2: same number of std */
     CTS cts_iv,            /*	Needed to compute implied strike */
     /*	Flags */
     /*		IV calculation */
     int calc_mkt_iv, int calc_fwd_iv,
     /*		EOD */
-    int eod_fix_flag, /*	0: I  , 1: E */
-    int eod_ex_flag,  /*	0: I  , 1: E */
+    int eod_fix_flag, /*	0: I      , 1: E */
+    int eod_ex_flag,  /*	0: I      , 1: E */
     /*	Results */
     CTS cts, CTS_UND und, int *call_feat, /*	0: No callable feature to be
-                                             valued 1: Callable feature to be
-                                             valued through adi */
+                                 valued 1: Callable feature to be
+                                 valued through adi */
     CTS_ADI_ARG adi_arg,
     /*	Feedback */
     int save_inst_data, cpd_calib_inst_data *inst_data, int save_fwdiv,
@@ -1007,8 +1015,8 @@ Err cts_fill_check_all_struct(
 /*	Free all structures */
 void cts_free_all_struct(CTS cts, CTS_UND und,
                          int call_feat, /*	0: No callable feature to be
-                                           valued 1: Callable feature to be
-                                           valued through adi */
+                                       valued 1: Callable feature to be
+                                       valued through adi */
                          CTS_ADI_ARG adi_arg);
 
 /*	Payoff function for adi (callable) */

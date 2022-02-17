@@ -38,7 +38,8 @@ typedef struct _SFxSVComm_ODE {
   double sig_d, sig_f, lam_d, lam_f;
   double beta, alpha, gamma, **rho;
   double T_pay, u_re, u_im;
-  int want[4]; // Flags "want derivatives" : { beta  , alpha  , gamma  , rho }
+  int want[4]; // Flags "want derivatives" : { beta      , alpha      , gamma ,
+               // rho }
   int is_cur_idx; // Flag showing whether the current piece is being calibrated
 } SFxSVComm_ODE;
 
@@ -48,7 +49,7 @@ struct _SFxSVCache {
   int maxpts;       // Max number of stored points in cache
   int cur_pt;       // Currently requested point
   double *v;        // Stored points
-  double ***fn;     // Stored integrand values: per v  , per k  , per fn
+  double ***fn;     // Stored integrand values: per v      , per k      , per fn
   SFxSVCache *next; // Linked list
 };
 
@@ -61,7 +62,8 @@ typedef struct _SFxSVComm_InvFT {
   double T_pay; // Option pay time
   int idx_from; // Index of the first piece being calibrated
   int idx_to;   // Index of the last piece being calibrated
-  int want[4];  // Flags "want derivatives" : { beta  , alpha  , gamma  , rho }
+  int want[4];  // Flags "want derivatives" : { beta      , alpha      , gamma ,
+               // rho }
   double v_max; // Upper limit of integration
 
   int nk;      // Number of strikes
@@ -91,15 +93,16 @@ typedef struct _SFxSVComm_Calib {
                  // calibrated
   int idx_to;    // Index of the last piece smile params of which are being
                  // calibrated
-  int **calib; // Flags "calibrate parameters" : { beta  , alpha  , gamma  , rho
-               // } (per ex date)
+  int **calib;   // Flags "calibrate parameters" : { beta      , alpha      ,
+               // gamma      , rho } (per ex date)
 
   int *nk;          // Number of strikes (per ex date)
   double **k;       // Strikes ( log(K/FFX0) ) (per ex date)
   double **mkt_val; // Market prices (per ex date)
 
   double bl[4],
-      bu[4]; // Lower and upper bounds { beta  , alpha  , gamma  , rho }
+      bu[4]; // Lower and upper bounds { beta      , alpha      , gamma      ,
+             // rho }
 
   int ntimes_last;
 
@@ -107,8 +110,8 @@ typedef struct _SFxSVComm_Calib {
 
 Err FxSVCalibrate(SrtUndPtr und, // Starting points and params not calibrated
                                  // must be initialized
-                  int **calib,   // Flags calibrate { beta  , alpha  , gamma  ,
-                                 // rho } (per ex date)
+                  int **calib,   // Flags calibrate { beta      , alpha      ,
+                               // gamma      , rho } (per ex date)
                   int *nK,       // Number of strikes per exercise date
                   double **K,    // Strikes per exercise date
                   double **vol); // Vols per exercise date per strike

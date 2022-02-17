@@ -54,7 +54,7 @@ Err srt_f_CheyBeta2f_phi_forwards(SrtIRMTmInf *tminf, SrtSample *cur_sample,
                                   double *forward_phi1, double *forward_phi2,
                                   double *forward_phi12);
 
-/* Populates fwd_sample with the forwardvalues of the state varaibles  ,
+/* Populates fwd_sample with the forwardvalues of the state varaibles      ,
    computed
    taking cur_sample as a starting point from cur_step to the next one */
 Err srt_f_CheyBeta2f_forward_sample(SrtStpPtr cur_step, SrtSample *cur_sample,

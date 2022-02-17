@@ -20,73 +20,75 @@ Err AmortMidat_lgmprcapgivenlambda(
     double ex_fee[],      /*	Exercise Fee for diagonal */
     double ex_sstrike[],  /*	Strikes for cap */
     double floatcoupon[], /*	Float Coupon */
-    // double			swaption_strikes[]  ,					/*	Strikes for standard swaptions
+    // double			swaption_strikes[]      ,					/*	Strikes for standard
+    // swaptions
     // */
     double swaption_cpn[], /*	Discounted Cash-Flows */
-    // double			cpn_cvg_standard[]  ,					/*	standard cvg from i-1 to i
+    // double			cpn_cvg_standard[]      ,					/*	standard cvg from i-1 to
+    // i
     // */
     double ex_zeta[],       /*	Output: zetas */
     double floatnotional[], /*	Float Notional	*/
     double lambda,          /*	Lambda */
     int one2F,              /*	Number of factors */
-    /*	Alpha  , Gamma  , Rho (2F only) */
+    /*	Alpha      , Gamma      , Rho (2F only) */
     double alpha, double gamma, double rho,
-    int skip_last,      /*	If 1  , the last option is disregarded
-                                                and the forward volatility is flat
-                           from option      n-1 */
+    int skip_last,      /*	If 1      , the last option is disregarded
+                                            and the forward volatility is flat
+                       from option      n-1 */
     int price_cap,      /*	0: just calibrate */
     double *ex_sprice); /*	Cap price as output */
 
 double
-amortMidat_lgmcapval1F_b(int ncpn,     /*	Number of cash-flow dates  , including
-                                                               start and end date */
-                         double cpn[], /*	Notional */
-                         double df[],  /*	Df to cash flow dates */
-                         double cvg[], /*	cvg from i-1 to i */
-                         double cpn_G1[],      /*	G1 at cash-flow dates */
-                         int nex,              /*	Number of exercise dates */
+amortMidat_lgmcapval1F_b(int ncpn,        /*	Number of cash-flow dates      ,
+                                             including        start and end date */
+                         double cpn[],    /*	Notional */
+                         double df[],     /*	Df to cash flow dates */
+                         double cvg[],    /*	cvg from i-1 to i */
+                         double cpn_G1[], /*	G1 at cash-flow dates */
+                         int nex,         /*	Number of exercise dates */
                          double ex_sstrike[],  /*	Strikes for cap */
                          double floatcoupon[], /*	Float Coupon*/
-                         int ex_cpn[],      /*	For each exercise date  , first
-                                               coupon      to be exercised */
-                         int ex_ncpn[],     /*	For each exercise date  , number
-                                               of coupons     to be exercised */
-                         double ex_zeta1[], /*	Z1 at exercise date */
-                         double ex_G1[]);   /*	G1 at exercise date */
+                         int ex_cpn[],         /*	For each exercise date      ,
+                                              first         coupon      to be exercised */
+                         int ex_ncpn[],        /*	For each exercise date      ,
+                                              number        of coupons     to be exercised */
+                         double ex_zeta1[],    /*	Z1 at exercise date */
+                         double ex_G1[]);      /*	G1 at exercise date */
 
 double
-amortMidat_lgmcapval2F_b(int ncpn,     /*	Number of cash-flow dates  , including
-                                                               start and end date */
-                         double cpn[], /*	Notional */
-                         double df[],  /*	Df to cash flow dates */
-                         double cvg[], /*	cvg from i-1 to i */
-                         double cpn_G1[],      /*	G1 at cash-flow dates */
-                         double cpn_G2[],      /*	G2 at cash-flow dates */
-                         int nex,              /*	Number of exercise dates */
+amortMidat_lgmcapval2F_b(int ncpn,        /*	Number of cash-flow dates      ,
+                                             including        start and end date */
+                         double cpn[],    /*	Notional */
+                         double df[],     /*	Df to cash flow dates */
+                         double cvg[],    /*	cvg from i-1 to i */
+                         double cpn_G1[], /*	G1 at cash-flow dates */
+                         double cpn_G2[], /*	G2 at cash-flow dates */
+                         int nex,         /*	Number of exercise dates */
                          double ex_sstrike[],  /*	Strikes for cap */
                          double floatcoupon[], /*	Float Coupon*/
-                         int ex_cpn[],       /*	For each exercise date  , first
-                                                coupon       to be exercised */
-                         int ex_ncpn[],      /*	For each exercise date  , number
-                                                of coupons      to be exercised */
-                         double ex_zeta1[],  /*	Z1 at exercise date */
-                         double ex_zeta2[],  /*	Z2 at exercise date */
-                         double ex_zeta12[], /*	Z12 at exercise date */
-                         double ex_G1[],     /*	G1 at exercise date */
-                         double ex_G2[]);    /*	G2 at exercise date */
+                         int ex_cpn[],         /*	For each exercise date      ,
+                                              first         coupon       to be exercised */
+                         int ex_ncpn[],        /*	For each exercise date      ,
+                                              number        of coupons      to be exercised */
+                         double ex_zeta1[],    /*	Z1 at exercise date */
+                         double ex_zeta2[],    /*	Z2 at exercise date */
+                         double ex_zeta12[],   /*	Z12 at exercise date */
+                         double ex_G1[],       /*	G1 at exercise date */
+                         double ex_G2[]);      /*	G2 at exercise date */
 
-double amortMidat_lgmcapval2F(int ncpn,        /*	Number of cash-flow dates  ,
-                                                  including        start and end date */
-                              double cpn[],    /*	Notional */
-                              double df[],     /*	Df to cash flow dates */
-                              double cvg[],    /*	cvg from i-1 to i */
+double amortMidat_lgmcapval2F(int ncpn,     /*	Number of cash-flow dates      ,
+                                           including        start and end date */
+                              double cpn[], /*	Notional */
+                              double df[],  /*	Df to cash flow dates */
+                              double cvg[], /*	cvg from i-1 to i */
                               double cpn_G1[], /*	G1 at cash-flow dates */
                               double cpn_G2[], /*	G2 at cash-flow dates */
                               int nex,         /*	Number of exercise dates */
-                              int ex_cpn[],  /*	For each exercise date  , first
-                                                coupon  to be exercised */
-                              int ex_ncpn[], /*	For each exercise date  , number
-                                                of coupons to be exercised */
+                              int ex_cpn[],    /*	For each exercise date      ,
+                                              first    coupon  to be exercised */
+                              int ex_ncpn[],   /*	For each exercise date      ,
+                                              number   of coupons to be exercised */
                               double ex_zeta1[],  /*	Z1 at exercise date */
                               double ex_zeta2[],  /*	Z2 at exercise date */
                               double ex_zeta12[], /*	Z12 at exercise date */
@@ -107,16 +109,17 @@ Err AmortMidat_lgmcalibzeta2F_ts(
     int ex_cpn[],      /*	Index of the first cash-flow to be exercised */
     double ex_G1[],    /*	G1 at exercise date */
     double ex_G2[],    /*	G2 at exercise date */
-    // double			strike[]  ,							/*	Strikes
+    // double			strike[]      ,							/*
+    // Strikes
     // */
     double mkt_price[],     /*	Market prices */
     double ex_fee[],        /*	Exercise Fees for Diagonal */
     double ex_zeta[],       /*	Output: zetas (1) */
     double floatnotional[], /*	Float Notional	*/
-    /*	Lambda  , Alpha  , gamma  , rho */
+    /*	Lambda      , Alpha      , gamma      , rho */
     int nlambda, double lambda_time[], double lambda[], double alpha,
     double gamma, double rho,
-    int skip_last); /*	If 1  , the last option is disregarded
+    int skip_last); /*	If 1      , the last option is disregarded
                                             and the forward volatility is flat
                        from option n-1 */
 /*	Calibrate zeta to amortized diagonal given G: 2F case */
@@ -135,14 +138,15 @@ Err zcAmortMidat_lgmcalibzeta2F(
     int ex_cpn[],         /*	Index of the first cash-flow to be exercised */
     double ex_G1[],       /*	G1 at exercise date */
     double ex_G2[],       /*	G2 at exercise date */
-    // double			strike[]  ,							/*	Strikes
+    // double			strike[]      ,							/*
+    // Strikes
     // */
     double mkt_price[],     /*	Market prices */
     double ex_zeta[],       /*	Output: zetas (1) */
     double floatnotional[], /*	Float Notional	*/
-    /*	Lambda  , Alpha  , gamma  , rho */
+    /*	Lambda      , Alpha      , gamma      , rho */
     double lambda, double alpha, double gamma, double rho,
-    int skip_last); /*	If 1  , the last option is disregarded
+    int skip_last); /*	If 1      , the last option is disregarded
                                             and the forward volatility is flat
                        from option n-1 */
 
@@ -162,9 +166,9 @@ Err zcAmortMidat_lgmcalibzeta1F(
     double mkt_price[],     /*	Market prices */
     double ex_zeta[],       /*	Output: zetas */
     double floatnotional[], /*	Float Notional	*/
-    double lambda, int skip_last); /*	If 1  , the last option is disregarded
-                                                           and the forward
-                                      volatility is flat from option n-1 */
+    double lambda, int skip_last); /*	If 1      , the last option is
+                                  disregarded and the forward
+                                  volatility is flat from option n-1 */
 Err AmortMidat_lgmprcapgivenlambda_ts(
     int ncpn,             /*	Total number of cash-flow dates */
     double cpn[],         /*	Discounted Cash-Flows */
@@ -180,10 +184,12 @@ Err AmortMidat_lgmprcapgivenlambda_ts(
     double ex_fee[],      /*	Exercise Fee for diagonal */
     double ex_sstrike[],  /*	Strikes for cap */
     double floatcoupon[], /*	Float Coupon */
-    // double			swaption_strikes[]  ,					/*	Strikes for standard swaptions
+    // double			swaption_strikes[]      ,					/*	Strikes for standard
+    // swaptions
     // */
     double swaption_cpn[], /*	Discounted Cash-Flows */
-    // double			cpn_cvg_standard[]  ,					/*	standard cvg from i-1 to i
+    // double			cpn_cvg_standard[]      ,					/*	standard cvg from i-1 to
+    // i
     // */
     double ex_zeta[],       /*	Output: zetas */
     double floatnotional[], /*	Float Notional	*/
@@ -191,11 +197,11 @@ Err AmortMidat_lgmprcapgivenlambda_ts(
     int nNumLambdas, double *pdLambdaValue, double *pdLambdaTime,
 
     int one2F, /*	Number of factors */
-    /*	Alpha  , Gamma  , Rho (2F only) */
+    /*	Alpha      , Gamma      , Rho (2F only) */
     double alpha, double gamma, double rho,
-    int skip_last,      /*	If 1  , the last option is disregarded
-                                                and the forward volatility is flat
-                           from option      n-1 */
+    int skip_last,      /*	If 1      , the last option is disregarded
+                                            and the forward volatility is flat
+                       from option      n-1 */
     int price_cap,      /*	0: just calibrate */
     double *ex_sprice); /*	Cap price as output */
 
@@ -218,11 +224,11 @@ Err zcAmortMidat_lgmprcapgivenlambda(
     double floatnotional[], /*	Float Notional	*/
     double lambda,          /*	Lambda */
     int one2F,              /*	Number of factors */
-    /*	Alpha  , Gamma  , Rho (2F only) */
+    /*	Alpha      , Gamma      , Rho (2F only) */
     double alpha, double gamma, double rho,
-    int skip_last,      /*	If 1  , the last option is disregarded
-                                                and the forward volatility is flat
-                           from option      n-1 */
+    int skip_last,      /*	If 1      , the last option is disregarded
+                                            and the forward volatility is flat
+                       from option      n-1 */
     int price_cap,      /*	0: just calibrate */
     double *ex_sprice); /*	Cap price as output */
 
@@ -245,17 +251,18 @@ Err amortMidat_lgmcalibzetalambda(
     double ex_zeta[],       /*	Output: zetas */
     double floatnotional[], /*	Float Notional	*/
     double swaption_cpn[],  /*	Standard Swaption Coupons	*/
-    // double			standard_cvg[]  ,						/*	Standard Coverages
+    // double			standard_cvg[]      ,						/*	Standard
+    // Coverages
     // */
-    int fix_lambda,      /*	0: calib lambda to cap  , 1: fix lambda calib
-                                                 to diagonal */
-    int cap_or_swaption, /*	0: calib lambda to cap  , 1: calib lambda to sum
-                            of diag swaptions */
+    int fix_lambda,      /*	0: calib lambda to cap      , 1: fix lambda calib
+                                             to diagonal */
+    int cap_or_swaption, /*	0: calib lambda to cap      , 1: calib lambda to
+                        sum of diag swaptions */
     double *lambda,      /*	Lambda: may be changed in the process */
     int one2F,           /*	Number of factors */
-    /*	Alpha  , Gamma  , Rho (2F only) */
+    /*	Alpha      , Gamma      , Rho (2F only) */
     double alpha, double gamma, double rho,
-    int skip_last); /*	If 1  , the last option is disregarded
+    int skip_last); /*	If 1      , the last option is disregarded
                                             and the forward volatility is flat
                        from option n-1 */
 
@@ -278,19 +285,20 @@ Err amortMidat_lgmcalibzetalambda_ts(
     double ex_zeta[],       /*	Output: zetas */
     double floatnotional[], /*	Float Notional	*/
     double swaption_cpn[],  /*	Standard Swaption Coupons	*/
-    // double			standard_cvg[]  ,						/*	Standard Coverages
+    // double			standard_cvg[]      ,						/*	Standard
+    // Coverages
     // */
-    int fix_lambda,      /*	0: calib lambda to cap  , 1: fix lambda calib
-                                                 to diagonal */
-    int cap_or_swaption, /*	0: calib lambda to cap  , 1: calib lambda to sum
-                            of diag swaptions */
+    int fix_lambda,      /*	0: calib lambda to cap      , 1: fix lambda calib
+                                             to diagonal */
+    int cap_or_swaption, /*	0: calib lambda to cap      , 1: calib lambda to
+                        sum of diag swaptions */
 
     int nNumLambda, double *pdLambdaValue, double *pdLambdaTime,
 
     int one2F, /*	Number of factors */
-    /*	Alpha  , Gamma  , Rho (2F only) */
+    /*	Alpha      , Gamma      , Rho (2F only) */
     double alpha, double gamma, double rho,
-    int skip_last); /*	If 1  , the last option is disregarded
+    int skip_last); /*	If 1      , the last option is disregarded
                                             and the forward volatility is flat
                        from option n-1 */
 Err amortMidat_modify_dates2(
@@ -321,19 +329,19 @@ Err zcamortMidat_lgmcalibzetalambda(
     double ex_sprice,       /*	Market price for cap */
     double ex_zeta[],       /*	Output: zetas */
     double floatnotional[], /*	Float Notional	*/
-    int fix_lambda,         /*	0: calib lambda to cap  , 1: fix lambda calib
-                                                    to diagonal */
+    int fix_lambda,         /*	0: calib lambda to cap      , 1: fix lambda calib
+                                                to diagonal */
     double *lambda,         /*	Lambda: may be changed in the process */
     int one2F,              /*	Number of factors */
-    /*	Alpha  , Gamma  , Rho (2F only) */
+    /*	Alpha      , Gamma      , Rho (2F only) */
     double alpha, double gamma, double rho,
-    int skip_last); /*	If 1  , the last option is disregarded
+    int skip_last); /*	If 1      , the last option is disregarded
                                             and the forward volatility is flat
                        from option n-1 */
 
 double amortMidat_lgmsumsopval1F_b(
-    int ncpn,               /*	Number of cash-flow dates  , including
-                                                    start and end date */
+    int ncpn,               /*	Number of cash-flow dates      , including
+                                                start and end date */
     int nex,                /*	Number of exercise dates */
     int ex_cpn[],           /*	Index of the first cash-flow to be exercised */
     double df[],            /*	Df to cash flow dates */
@@ -343,8 +351,8 @@ double amortMidat_lgmsumsopval1F_b(
     double swaption_cpn[]); /*	Standard Swaption Coupons */
 
 double amortMidat_lgmsumsopval2F_b(
-    int ncpn,               /*	Number of cash-flow dates  , including
-                                                    start and end date */
+    int ncpn,               /*	Number of cash-flow dates      , including
+                                                start and end date */
     int nex,                /*	Number of exercise dates */
     int ex_cpn[],           /*	Index of the first cash-flow to be exercised */
     double df[],            /*	Df to cash flow dates */
@@ -366,46 +374,45 @@ Err amortMidat_cpd_calib_diagonal(
                         char *vol_curve_name, double start_date,
                         double end_date, double cash_strike, int zero,
                         char *ref_rate_name, double *vol, double *power),
-    double vol_shift,
-    int shift_type,        /*	0:	Additive
-                                           1:	Multiplicative */
-    int *ex_bool,          /*	Exercise or not
-                                                   NULL = True */
-    long start_date,       /*	Start date of the amortised swap */
-    long end_date,         /*	End date for the amortised swap */
-    double *long_strike,   /*	Diagonal swaption strikes
-                                                                   NULL = ATM */
-    double *short_strike,  /*	Short swaption strikes
-                                                           NULL = ATM */
-    int strike_type,       /*	0: ATM
-                                                   1: CASH
-                                                   2: SWAP
-                                                   3: STD */
-    double *diag_prices,   /* Diagonal Prices */
-    double *ex_fee,        /* Exercise Fees of Diagonal Swaptions */
-    double *fixNotional,   /* Amortised Notional
-                                           NULL = No amortisation */
-    double *floatNotional, /* Amortised Notional
-                                   NULL = No amortisation */
+    double vol_shift, int shift_type, /*	0:	Additive
+                                                  1:	Multiplicative */
+    int *ex_bool,                     /*	Exercise or not
+                                                          NULL = True */
+    long start_date,                  /*	Start date of the amortised swap */
+    long end_date,                    /*	End date for the amortised swap */
+    double *long_strike,              /*	Diagonal swaption strikes
+                                                                          NULL = ATM */
+    double *short_strike,             /*	Short swaption strikes
+                                                                  NULL = ATM */
+    int strike_type,                  /*	0: ATM
+                                                          1: CASH
+                                                          2: SWAP
+                                                          3: STD */
+    double *diag_prices,              /* Diagonal Prices */
+    double *ex_fee,                   /* Exercise Fees of Diagonal Swaptions */
+    double *fixNotional,              /* Amortised Notional
+                                                  NULL = No amortisation */
+    double *floatNotional,            /* Amortised Notional
+                                          NULL = No amortisation */
     double *margin,
 
     double max_std_short, char *ref_rate_name,
-    char *swaption_freq, /*	Frequency  , basis and ref. rate of calibrated
-                            swaptions */
-    char *swaption_basis, int fix_lambda, /*	0: calib lambda to cap  , 1: fix
-                                             lambda calib to diagonal */
+    char *swaption_freq, /*	Frequency      , basis and ref. rate of
+                        calibrated swaptions */
+    char *swaption_basis, int fix_lambda, /*	0: calib lambda to cap      , 1:
+                                     fix lambda calib to diagonal */
     int one_f_equi,                       /*	1F equivalent flag:
-                                                                  if set to 1  , then 2F lambda will
-                                             calibrate                       to the cap priced within calibrated 1F
-                                                                  with the given lambda */
-    int skip_last,       /*	If 1  , the last option is disregarded
-                                                 and the forward volatility is flat
-                            from option       n-1 */
+                                                              if set to 1      , then 2F lambda will
+                                         calibrate                       to the cap priced within
+                                         calibrated 1F                       with the given lambda */
+    int skip_last,       /*	If 1      , the last option is disregarded
+                                             and the forward volatility is flat
+                        from option       n-1 */
     double max_var_jump, /*	Maximum multiplicative variation in vol */
 
     double *lambda, /*	Lambda: may be changed in the process */
     int one2F,      /*	Number of factors */
-    /*	Alpha  , Gamma  , Rho (2F only) */
+    /*	Alpha      , Gamma      , Rho (2F only) */
     double alpha, double gamma, double rho, int *num_sig, /*	Answer */
     double **sig_time, double **sig,
     /*	Calibration instrument data */
@@ -423,9 +430,8 @@ Err amortMidat_cpd_calib_diagonal_new(
                         char *vol_curve_name, double start_date,
                         double end_date, double cash_strike, int zero,
                         char *ref_rate_name, double *vol, double *power),
-    double vol_shift,
-    int shift_type, /*	0:	Additive
-                                    1:	Multiplicative */
+    double vol_shift, int shift_type, /*	0:	Additive
+                                                  1:	Multiplicative */
 
     int *ex_bool,        /*	Exercise or not : NULL = True */
     double *diag_prices, /* Diagonal Prices */
@@ -448,32 +454,32 @@ Err amortMidat_cpd_calib_diagonal_new(
 
     /* Calibration Parameters*/
     double *short_strike, /*	For Calibration : Short swaption strikes NULL =
-                             ATM */
+                         ATM */
     int strike_type,      /*	0: ATM
-                                                  1: CASH
-                                                  2: SWAP
-                                                  3: STD
-                                                  4: IRR Flat
-                                                  5: IRR with vol
-                                                  6: SWAPTION */
+                                              1: CASH
+                                              2: SWAP
+                                              3: STD
+                                              4: IRR Flat
+                                              5: IRR with vol
+                                              6: SWAPTION */
 
     double max_std_short,
 
-    int fix_lambda,      /*	0: calib lambda to cap  , 1: fix lambda calib
-                                                 to diagonal */
+    int fix_lambda,      /*	0: calib lambda to cap      , 1: fix lambda calib
+                                             to diagonal */
     int one_f_equi,      /*	1F equivalent flag:
-                                                 if set to 1  , then 2F lambda will
-                            calibrate      to the cap priced within calibrated 1F
-                                                 with the given lambda */
-    int skip_last,       /*	If 1  , the last option is disregarded
-                                                 and the forward volatility is flat
-                            from option       n-1 */
+                                             if set to 1      , then 2F lambda will
+                        calibrate      to the cap priced within calibrated 1F
+                                             with the given lambda */
+    int skip_last,       /*	If 1      , the last option is disregarded
+                                             and the forward volatility is flat
+                        from option       n-1 */
     int use_jump,        /*	Allow Jump (and vol = 0) in vol TS */
     double max_var_jump, /*	Maximum multiplicative variation in variance */
 
     double *lambda, /*	Lambda: may be changed in the process */
     int one2F,      /*	Number of factors */
-    /*	Alpha  , Gamma  , Rho (2F only) */
+    /*	Alpha      , Gamma      , Rho (2F only) */
     double alpha, double gamma, double rho,
 
     int *num_sig, /*	Answer */
@@ -511,7 +517,7 @@ Err amortMidat_cpd_calib_diagonal_new_ts(
     int nNum_lambda, double *pdLambdaValue, double *pdLambdaDate,
 
     int one2F,
-    //	Alpha  , Gamma  , Rho (2F only)
+    //	Alpha      , Gamma      , Rho (2F only)
     double alpha, double gamma, double rho,
 
     int *num_sig, double **sig_time, double **sig);
@@ -524,47 +530,46 @@ Err ZCamortMidat_cpd_calib_diagonal(
                         char *vol_curve_name, double start_date,
                         double end_date, double cash_strike, int zero,
                         char *ref_rate_name, double *vol, double *power),
-    double vol_shift,
-    int shift_type,        /*	0:	Additive
-                                           1:	Multiplicative */
-    int *ex_bool,          /*	Exercise or not
-                                                   NULL = True */
-    long start_date,       /*	Start date of the amortised swap */
-    long end_date,         /*	End date for the amortised swap */
-    double *long_strike,   /*	Diagonal swaption strikes
-                                                                   NULL = ATM */
-    double *short_strike,  /*	Short swaption strikes
-                                                           NULL = ATM */
-    int strike_type,       /*	0: ATM
-                                                   1: CASH
-                                                   2: SWAP
-                                                   3: STD
-                                                   4: IRR Flat
-                                                   5: IRR with Vol*/
-    double *diag_prices,   /* Diagonal Prices */
-    double *fixNotional,   /* Amortised Notional
-                                           NULL = No amortisation */
-    double *floatNotional, /* Amortised Notional
-                                   NULL = No amortisation */
+    double vol_shift, int shift_type, /*	0:	Additive
+                                                  1:	Multiplicative */
+    int *ex_bool,                     /*	Exercise or not
+                                                          NULL = True */
+    long start_date,                  /*	Start date of the amortised swap */
+    long end_date,                    /*	End date for the amortised swap */
+    double *long_strike,              /*	Diagonal swaption strikes
+                                                                          NULL = ATM */
+    double *short_strike,             /*	Short swaption strikes
+                                                                  NULL = ATM */
+    int strike_type,                  /*	0: ATM
+                                                          1: CASH
+                                                          2: SWAP
+                                                          3: STD
+                                                          4: IRR Flat
+                                                          5: IRR with Vol*/
+    double *diag_prices,              /* Diagonal Prices */
+    double *fixNotional,              /* Amortised Notional
+                                                  NULL = No amortisation */
+    double *floatNotional,            /* Amortised Notional
+                                          NULL = No amortisation */
     double *margin,
 
     double max_std_short, char *ref_rate_name,
-    char *swaption_freq, /*	Frequency  , basis and ref. rate of calibrated
-                            swaptions */
-    char *swaption_basis, int fix_lambda, /*	0: calib lambda to cap  , 1: fix
-                                             lambda calib to diagonal */
+    char *swaption_freq, /*	Frequency      , basis and ref. rate of
+                        calibrated swaptions */
+    char *swaption_basis, int fix_lambda, /*	0: calib lambda to cap      , 1:
+                                     fix lambda calib to diagonal */
     int one_f_equi,                       /*	1F equivalent flag:
-                                                                  if set to 1  , then 2F lambda will
-                                             calibrate                       to the cap priced within calibrated 1F
-                                                                  with the given lambda */
-    int skip_last,       /*	If 1  , the last option is disregarded
-                                                 and the forward volatility is flat
-                            from option       n-1 */
+                                                              if set to 1      , then 2F lambda will
+                                         calibrate                       to the cap priced within
+                                         calibrated 1F                       with the given lambda */
+    int skip_last,       /*	If 1      , the last option is disregarded
+                                             and the forward volatility is flat
+                        from option       n-1 */
     double max_var_jump, /*	Maximum multiplicative variation in variance */
 
     double *lambda, /*	Lambda: may be changed in the process */
     int one2F,      /*	Number of factors */
-    /*	Alpha  , Gamma  , Rho (2F only) */
+    /*	Alpha      , Gamma      , Rho (2F only) */
     double alpha, double gamma, double rho, int *num_sig, /*	Answer */
     double **sig_time, double **sig,
     /*	Calibration instrument data */
@@ -618,20 +623,20 @@ Err amortMidat_modify_dates(
     long *float_start_datesOut, /*	Start date of the amortised swap */
     long *float_end_datesOut);  /*	End date for the amortised swap */
 
-double amortMidat_lgmamortsopval1F(int ncpn,     /*	Number of cash-flow dates  ,
-                                                    including     start and end date */
-                                   double cpn[], /*	Notional */
-                                   double df[],  /*	Df to cash flow dates */
-                                   double cvg[], /*	cvg from i-1 to i */
+double amortMidat_lgmamortsopval1F(int ncpn, /*	Number of cash-flow dates      ,
+                                            including     start and end date */
+                                   double cpn[],    /*	Notional */
+                                   double df[],     /*	Df to cash flow dates */
+                                   double cvg[],    /*	cvg from i-1 to i */
                                    double cpn_G1[], /*	G1 at cash-flow dates */
                                    double ex_zeta1, /*	Z1 at exercise date */
                                    double ex_G1);   /*	G1 at exercise date */
 
-double amortMidat_lgmamortsopval2F(int ncpn,     /*	Number of cash-flow dates  ,
-                                                    including     start and end date */
-                                   double cpn[], /*	Notional */
-                                   double df[],  /*	Df to cash flow dates */
-                                   double cvg[], /*	cvg from i-1 to i */
+double amortMidat_lgmamortsopval2F(int ncpn, /*	Number of cash-flow dates      ,
+                                            including     start and end date */
+                                   double cpn[],     /*	Notional */
+                                   double df[],      /*	Df to cash flow dates */
+                                   double cvg[],     /*	cvg from i-1 to i */
                                    double cpn_G1[],  /*	G1 at cash-flow dates */
                                    double cpn_G2[],  /*	G2 at cash-flow dates */
                                    double ex_zeta1,  /*	Z1 at exercise date */

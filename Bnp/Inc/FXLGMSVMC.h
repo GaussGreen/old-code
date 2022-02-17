@@ -22,7 +22,7 @@ Err fxlgmsv_mc_balsam(
 
     double *domzcvol1_star, double *domzcvol2_star,
 
-    /* Parameters for DF(t  ,T*) reconstruction */
+    /* Parameters for DF(t      ,T*) reconstruction */
     double *ddomff_star, double *domgam1_star, double *domgam2_star,
     double *domgam1_2_star, double *domgam2_2_star, double *domgam12_star,
 
@@ -37,7 +37,7 @@ Err fxlgmsv_mc_balsam(
 
     double *forzcvol1_star, double *forzcvol2_star,
 
-    /* Parameters for DF(t  ,T*) reconstruction */
+    /* Parameters for DF(t      ,T*) reconstruction */
     double *dforff_star, double *forgam1_star, double *forgam2_star,
     double *forgam1_2_star, double *forgam2_2_star, double *forgam12_star,
 
@@ -148,55 +148,54 @@ Err qtolgmsv2f_mc_balsam(
 /* ORIGINAL CALL
 Err	 qtolgmsv2f_mc_balsam(
                                         //	Time Information
-                                        int			iNbTime  ,
-                                        int			iNbEvent  ,
-                                        double		*dTime  ,
-                                        double		*dDate  ,
+                                        int			iNbTime      ,
+                                        int			iNbEvent      ,
+                                        double		*dTime      ,
+                                        double		*dDate      ,
 
-                                        int			iNumPaths  ,
+                                        int			iNumPaths      ,
 
                                         //Domestic
                                         //	Model data Information
-                                        double		ddomLambdaX  ,
+                                        double		ddomLambdaX      ,
 
-                                        double		*ddomSigma  ,
+                                        double		*ddomSigma      ,
 
-                                        double		*domzcvol_star  ,
+                                        double		*domzcvol_star      ,
 
-                                        // Parameters for DF(t  ,T*)
-reconstruction double		*ddomff_star  , double		*domgam1_star  ,
-                                        double		*domgam1_2_star  ,
+                                        // Parameters for DF(t      ,T*)
+reconstruction double		*ddomff_star      , double
+*domgam1_star      , double		*domgam1_2_star      ,
 
                                         //Foreign
                                         //	Model data Information
-                                        double		dforLambdaX1  ,
-                                        double		dforLambdaX2  ,
+                                        double		dforLambdaX1      ,
+                                        double		dforLambdaX2      ,
 
-                                        double		*dforSigma  ,
-                                        double		*dforAlphaLGM  ,
-                                        double		*dforRhoLGM  ,
+                                        double		*dforSigma      ,
+                                        double		*dforAlphaLGM      ,
+                                        double		*dforRhoLGM      ,
 
-                                        double		*dforAlpha  ,
-                                        double		*dforLambdaEps  ,
-                                        double		*dforLvlEps  ,
-                                        double		*dforRho  ,
-                                        double		*dforRho2  ,
+                                        double		*dforAlpha      ,
+                                        double		*dforLambdaEps      ,
+                                        double		*dforLvlEps      ,
+                                        double		*dforRho      ,
+                                        double		*dforRho2      ,
 
-                                        double		*forzcvol1_star  ,
-                                        double		*forzcvol2_star  ,
+                                        double		*forzcvol1_star      ,
+                                        double		*forzcvol2_star      ,
 
-                                        // Parameters for DF(t  ,T*)
-reconstruction double		*dforff_star  , double		*forgam1_star  ,
-                                        double		*forgam2_star  ,
-                                        double		*forgam1_2_star  ,
-                                        double		*forgam2_2_star  ,
-                                        double		*forgam12_star  ,
+                                        // Parameters for DF(t      ,T*)
+reconstruction double		*dforff_star      , double
+*forgam1_star      , double		*forgam2_star      , double
+*forgam1_2_star      , double		*forgam2_2_star      , double
+*forgam12_star      ,
 
                                         //FX Vol
-                                        double		*fx_vol  ,
+                                        double		*fx_vol      ,
 
                                         //	Correlation
-                                        double		***CorrMatrix  ,
+                                        double		***CorrMatrix      ,
                                         //	0 : Dom
                                         //	1 : For1
                                         //	2 : For2
@@ -204,44 +203,44 @@ reconstruction double		*dforff_star  , double		*forgam1_star  ,
                                         //	4 : FX
 
                                         //	Product data
-                                        void		**func_parm_tab  ,
-                                        int			*EvalEvent  ,
+                                        void		**func_parm_tab      ,
+                                        int			*EvalEvent ,
 
                                         // for Optimisation of exercise boundary
-                                        int do_optimisation  ,
-                                        int			*optimise  ,
-                                        MCEBPARAMS	params  ,
+                                        int do_optimisation      ,
+                                        int			*optimise      ,
+                                        MCEBPARAMS	params      ,
 
                                         //	Initialisation function to be
 called at the beggining of each path or NULL if none
-                                        void		(*init_func)()  ,
+                                        void		(*init_func)()      ,
 
                                         //	Payoff function
                                         Err (*payoff_func)(	long
-path_index  , double	evt_date  , double	evt_time  ,
-                                                                                void	*func_parm  ,
+path_index      , double	evt_date      , double	evt_time      ,
+                                                                                void	*func_parm      ,
 
                                                                                 //Domestic
                                                                                 // Model data
-                                                                                double	domft  ,
-                                                                                double	domphi  ,
+                                                                                double	domft      ,
+                                                                                double	domphi      ,
 
                                                                                 //Foreign
                                                                                 //Model data
-                                                                                double	forft1  ,
-                                                                                double	forft2  ,
-                                                                                double	forphi1  ,
-                                                                                double	forphi2  ,
-                                                                                double	forphi12  ,
-                                                                                double	forv  ,
+                                                                                double	forft1      ,
+                                                                                double	forft2      ,
+                                                                                double	forphi1      ,
+                                                                                double	forphi2      ,
+                                                                                double	forphi12      ,
+                                                                                double	forv      ,
 
                                                                                 //Vector of results to be updated
-                                                                                int		nprod  ,
+                                                                                int		nprod      ,
                                                                                 //Result
-                                                                                double	*prod_val  ,
-                                                                                int		*stop_path)  ,
+                                                                                double	*prod_val      ,
+                                                                                int		*stop_path)      ,
                                         //Result
-                                        int			iNbProduct  ,
+                                        int			iNbProduct ,
                                         double		**res);
                                         */
 
@@ -259,7 +258,7 @@ Err qtolgmsv1f_mc_balsam(
 
     double *domzcvol_star,
 
-    /* Parameters for DF(t  ,T*) reconstruction */
+    /* Parameters for DF(t      ,T*) reconstruction */
     double *ddomff_star, double *domgam1_star, double *domgam1_2_star,
 
     // Foreign
@@ -273,7 +272,7 @@ Err qtolgmsv1f_mc_balsam(
 
     double *forzcvol_star,
 
-    /* Parameters for DF(t  ,T*) reconstruction */
+    /* Parameters for DF(t      ,T*) reconstruction */
     double *dforff_star, double *forgam1_star, double *forgam1_2_star,
 
     // FX Vol

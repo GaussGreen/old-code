@@ -4,7 +4,7 @@
 /********************************************************************
         srt_h_mdl_TYPES.H
         STRUCTURES FOR REPRESENTING
-        BOTH FINANCIAL mdlS (IN PARTICULAR  , INTEREST RATE mdlS)  ,
+        BOTH FINANCIAL mdlS (IN PARTICULAR      , INTEREST RATE mdlS)      ,
         AND THE WAYS IN WHICH THEY ARE DISCRETIZED)
  ********************************************************************/
 

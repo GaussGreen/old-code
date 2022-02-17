@@ -72,16 +72,15 @@ typedef enum {
     STRUCTURE           :   GrfnSSParam
 
     DESCRIPTION         :   Contains values of all pre-declared variables in
-                            the GRFN language viz. VA  , VB  , etc.
+                            the GRFN language viz. VA      , VB      , etc.
 
-                            During compilation  , COMLL nodes that contain
+                            During compilation      , COMLL nodes that contain
                             references to these variables are populated with
-                            pointers to the locations of VA  , VB  , ... in this
-                            structure  , which itself is contained within a
-                            GrfnDeal.
+                            pointers to the locations of VA      , VB      , ...
+in this structure      , which itself is contained within a GrfnDeal.
 
     NOTE                :   In order to declare more variableso modify
-                            GRFN_SS_NUM_PARAM  , declare the variable in
+                            GRFN_SS_NUM_PARAM      , declare the variable in
                             GRFN symbol table grf_f_lngsymtab.c
 
 \******************************************************************************/
@@ -104,7 +103,7 @@ typedef double *GrfnLatticeVec; /* Representation of data being passed
 
     ELEMENTS            :   t       Summary of grammatical information
                             d       Date in long integer format
-                            dflen   Length of dft  , dfd  , df and yp
+                            dflen   Length of dft      , dfd      , df and yp
                             dft     Times in years at which we need to eval df
                             dfd     Times as dates as above
                             df      Discount factors from time t to t+dt
@@ -117,8 +116,8 @@ typedef double *GrfnLatticeVec; /* Representation of data being passed
 
                                                         sprdlen Length of spread
                                                                         ( = 0 if
-no spread  , = dflen otherwise) spread  Spread of the reference rate to cash
-rate  , stored on payment date (end of period)  , for all the df dates
+no spread      , = dflen otherwise) spread  Spread of the reference rate to cash
+rate      , stored on payment date (end of period)      , for all the df dates
 \******************************************************************************/
 
 typedef struct {
@@ -149,9 +148,8 @@ typedef enum {
                    This is useful for passing pointers to
                                    functions to other machines ---
                                    A function will have a different address on
-                                   other machine  , so pointer will be invalid.
-                                   So we use the name field to find the new
-  address.
+                                   other machine      , so pointer will be
+  invalid. So we use the name field to find the new address.
   --------------------------------------------------------------*/
 
 typedef struct {
@@ -169,43 +167,42 @@ typedef struct {
 
                         (1) Parsing environment for the creation of GrfnEvents
                             i.e. all data EXCEPT MARKET DATA that the GRFN
-                            compilation routines (e.g. grf_f_lang  , etc) will
-                            need in order to create GrfnEvents.  This includes
-                            the locations of the areas that will be used to
-                            keep track of path dependent data  , viz. the place
-                            where values of the cells in the tableau are stored.
+                            compilation routines (e.g. grf_f_lang      , etc)
+will need in order to create GrfnEvents.  This includes the locations of the
+areas that will be used to keep track of path dependent data      , viz. the
+place where values of the cells in the tableau are stored.
 
                         (2) Co-ordinates of the GrfnCell currently being
-                            compiled  , and the time of the GrfnEvent currently
-                            being created.
+                            compiled      , and the time of the GrfnEvent
+currently being created.
 
                         (3) Values of each cell after evaluation together with
-                            values of variables  , etc.
+                            values of variables      , etc.
 
                         (4) Diagnostic information that results from parsing a
-                            GRFN tableau  , i.e. whether or not a  particular
+                            GRFN tableau      , i.e. whether or not a particular
                             numerical method has been forced.  (??? Not needed)
 
 \******************************************************************************/
 
 typedef struct {
-  Date today;             /* Today                                  */
-  Date *event_dates;      /* Days of input financial events         */
-  int num_event_dates;    /* Length of event_dates                  */
-  int sswidth;            /* Cols in gcells                         */
-  int sslength;           /* Rows in gcells                         */
-  GrfnCell **gcells;      /* Input spreadsheet                      */
-  double **cells;         /* Work area returned by @grfn_cell       */
-                          /* Used to keep track of path dependence  */
-  int first_unkn_index;   /* Index of first unknown financial event */
-  int end_of_day_index;   /* If end-of-day flag is true=1  , else=0   */
-  int end_of_day_fixing;  /* If end-of-day fixing flag is true=1  , else=0   */
+  Date today;            /* Today                                  */
+  Date *event_dates;     /* Days of input financial events         */
+  int num_event_dates;   /* Length of event_dates                  */
+  int sswidth;           /* Cols in gcells                         */
+  int sslength;          /* Rows in gcells                         */
+  GrfnCell **gcells;     /* Input spreadsheet                      */
+  double **cells;        /* Work area returned by @grfn_cell       */
+                         /* Used to keep track of path dependence  */
+  int first_unkn_index;  /* Index of first unknown financial event */
+  int end_of_day_index;  /* If end-of-day flag is true=1      , else=0   */
+  int end_of_day_fixing; /* If end-of-day fixing flag is true=1      , else=0 */
   int end_of_day_payment; /* Due to misuse of the two previous ones.
                                                                               This
                              one is only use by the GRFN language PAY function
                            */
 
-  GrfnSSParam ssparam;       /* Predeclared vars (va  , vb  ,...)          */
+  GrfnSSParam ssparam; /* Predeclared vars (va      , vb      ,...)          */
   GrfnSSParam hist_ssparam;  /* Value of pre-declared vars usable after
                                 historical events have been evaluated  */
   long sptr_last_index;      /* Index of last element of sptr          */
@@ -229,27 +226,27 @@ typedef struct {
   double *pay_amounts;   /* Amounts to be paid on these dates (PAY fct) */
   long numpay;
 
-  int pass;               /* If 1 parse tableau  , else create even   */
+  int pass;               /* If 1 parse tableau      , else create even   */
   SRT_Boolean is_history; /* If current date is in the past         */
   SRT_Boolean american;   /* If input string now being evaluated is
                          an auto generated string corresponding
                          to an american cashflow                */
-  long amdays;            /* If (american)  , no. of days between
+  long amdays;            /* If (american)      , no. of days between
                              generated event time and input event   */
   double amdt;            /* Fraction of a day to add to amdays     */
   int I, J;               /* Row and col of current cell in gcells. */
-  Ddate nowdt;            /* If grfn deal is being initialized  , now */
-  Ddate prvdt;            /* If grfn deal is being initialized  ,
+  Ddate nowdt;            /* If grfn deal is being initialized      , now */
+  Ddate prvdt;            /* If grfn deal is being initialized      ,
                              the previous event date                */
-  Ddate nxtstpdt;         /* If grfn deal is being initialized  ,
+  Ddate nxtstpdt;         /* If grfn deal is being initialized      ,
                              the date of the next step              */
-  Ddate nxtevdt;          /* If grfn deal is being initialized  ,
+  Ddate nxtevdt;          /* If grfn deal is being initialized      ,
                              the date of the next prespecified event*/
   double **aux;           /* Auxiliary information                  */
   long *auxlen;           /* Lengths of arrays on aux i.e.
                               aux[i] is an array running from
                               aux[i][0] to aux[i][auxlen[i]-1]      */
-  long auxwidth;          /* Length of auxlen and aux  , i.e. aux and
+  long auxwidth;          /* Length of auxlen and aux      , i.e. aux and
                               auxlen go from aux[0] and auxlen[0] to
                               aux[auxwidth-1] and auxlen[auxwidth-1]*/
   GrfnRng *grng;          /* Extra named ranges (unused)            */

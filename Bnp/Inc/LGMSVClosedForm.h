@@ -73,7 +73,7 @@ void LGMSVFillPayoff(/* Input */
                      int iNbPhi, int iNbft, double dLambdaX, double dPhitMean,
                      int iIndexPhiMean, double dPhiStep, int iIndexft0,
                      double dftStep, double dExTime, /* Exercice of the swaption
-                                                        in years from today */
+                                                in years from today */
                      double dTStar,                  /* Tstar */
                      int iNbCoupon, /* Description of the cashflows */
                      double *CouponTime, double *Coupon,
@@ -361,7 +361,8 @@ Err LGMSVOptionGRFNPrice(
                        double dftStep, double dPhitMean,
 
                        /* Tensor of results to be updated		*/
-                       /* 4 dimensions : Phit  ,Xt  ,Epst  ,Product	*/
+                       /* 4 dimensions : Phit      ,Xt      ,Epst      ,Product
+                        */
                        int iNbProduct, double ***PayoffTensor),
 
     int iNbProduct, double *Price);
@@ -406,18 +407,18 @@ Err cpd_calibSV_diagonal_2(
                         char *ref_rate_name, double *vol, double *power),
     char *instr_freq, /*	Frequency and basis of instruments */
     char *instr_basis,
-    /*	If ex_date is NULL  ,
+    /*	If ex_date is NULL      ,
     exercise dates will be generated 2bd before start */
     /*	Structure */
-    int num_ex_dates, /*	Exercise dates  ,
-                                                      all supposed to be on or
-                         after today */
+    int num_ex_dates, /*	Exercise dates      ,
+                                                  all supposed to be on or
+                     after today */
     long *ex_date,    /*	Supposed to be sorted */
     char **end_tenor, /*	Tenors of the underlying instruments
-                                                              or "DIAG" */
+                                                          or "DIAG" */
     long end_date,    /*	End date for diagonal */
     double *strike,   /*	Strikes
-                                              0: ATM */
+                                          0: ATM */
     /*	Model */
     double dLambdaX, double dAlpha, double dLambdaEps, double dRho,
     double dTStar,
@@ -452,18 +453,18 @@ Err cpd_calibSV_diagonal_new(
                         char *ref_rate_name, double *vol, double *power),
     char *instr_freq, /*	Frequency and basis of instruments */
     char *instr_basis,
-    /*	If ex_date is NULL  ,
+    /*	If ex_date is NULL      ,
     exercise dates will be generated 2bd before start */
     /*	Structure */
-    int num_ex_dates, /*	Exercise dates  ,
-                                                      all supposed to be on or
-                         after today */
+    int num_ex_dates, /*	Exercise dates      ,
+                                                  all supposed to be on or
+                     after today */
     long *ex_date,    /*	Supposed to be sorted */
     char **end_tenor, /*	Tenors of the underlying instruments
-                                                              or "DIAG" */
+                                                          or "DIAG" */
     long end_date,    /*	End date for diagonal */
     double *strike,   /*	Strikes
-                                              0: ATM */
+                                          0: ATM */
     /*	Model */
     double dLambdaX, double dAlpha, double dLambdaEps, double dRho,
     double dTStar,

@@ -12,7 +12,7 @@ typedef struct {
   char ycid[256];
   char vcid[256];
 
-  // Today  , SpotDate and SpotLag
+  // Today      , SpotDate and SpotLag
   long today;
   long spot;
   long spotLag;
@@ -44,10 +44,11 @@ typedef struct {
   double *dFloatSpreads;
 
   // Vol TS
-  double shift; // -1 : Normal  , 0 : Lognormal  , others Shifted Lognormal
-  int converging_sliding;  // 0 : converging  , 1: sliding
-  int interpollation_mode; // 0 : piecewise constant  , 1 : continuous piecewise
-                           // linear
+  double
+      shift; // -1 : Normal      , 0 : Lognormal      , others Shifted Lognormal
+  int converging_sliding;  // 0 : converging      , 1: sliding
+  int interpollation_mode; // 0 : piecewise constant      , 1 : continuous
+                           // piecewise linear
   int nbOfDates;
   double *vol_dates; // vol_dates[DateIndex]
   double *vol_times; // vol_times[DateIndex]
@@ -68,7 +69,7 @@ typedef struct {
   double **pillars_vols_norm; // pillars_vols_norm[DateIndex][PillarIndex]
 
   // Parametric Sensitivities
-  int sensi_type;          // 0 : use spline  , 1 : custom  , 2 : linear
+  int sensi_type;          // 0 : use spline      , 1 : custom      , 2 : linear
   double **lambdas;        // lambdas[DateIndex][PillarIndex]
   double **sensitivities;  // pillars_sensitivities[PillarIndex][MaturityIndex]
   double **sensitivities2; // pillars_sensitivities[PillarIndex][MaturityIndex]

@@ -50,10 +50,10 @@ Err FxSabrAdiKO(char *underlying, double alpha, double beta, double rho,
                 double lambda, double floormu,
                 /*	Product data */
                 double maturity, double strike,
-                int is_call,               /* 1 Call  , 0: Put */
-                double barrier, int is_up, /* 1 Up  , 0: Down */
-                int is_ko,                 /* 1 KO  , 0: KI */
-                int is_cvx,                /* 1 use 1 / Fx  , 0 use Fx */
+                int is_call,               /* 1 Call      , 0: Put */
+                double barrier, int is_up, /* 1 Up      , 0: Down */
+                int is_ko,                 /* 1 KO      , 0: KI */
+                int is_cvx,                /* 1 use 1 / Fx      , 0 use Fx */
                 int nstp, int nstpfx, int nstpvol, double *res);
 
 char *SrtGrfnLGM2Fpde(char *underlying, int numeventdates, long *eventdates,
@@ -221,21 +221,21 @@ char *SrtGrfn3DFXTree(char *und3dfx, int numeventdates, long *eventdates,
 
 /*
 char *SrtGrfn3DFXTree_thread(
-                                  char		*und3dfx  ,
-                      int		numeventdates  ,
-                                  long		*eventdates  ,
-                  long		tableauRows  ,
-                                  long		tableauCols  ,
-                                  char		***tableauStrings  ,
-                                  int		**tableauMask  ,
-                                  long		auxWidth  ,
-                                  long		*auxLen  ,
-                                  double	**aux  ,
-                                  double	*barrier  ,
-                                  int		*bar_col  ,
-                                  long		num_stp  ,
-                                  int		*num_prod  ,
-                                  int		discount  ,
+                                  char		*und3dfx      ,
+                      int		numeventdates      ,
+                                  long		*eventdates      ,
+                  long		tableauRows      ,
+                                  long		tableauCols      ,
+                                  char		***tableauStrings      ,
+                                  int		**tableauMask      ,
+                                  long		auxWidth      ,
+                                  long		*auxLen      ,
+                                  double	**aux      ,
+                                  double	*barrier      ,
+                                  int		*bar_col      ,
+                                  long		num_stp      ,
+                                  int		*num_prod      ,
+                                  int		discount      ,
                                   double	**prod_val);
 */
 
@@ -257,21 +257,22 @@ char *SrtGrfn3DFXBetaTree(char *und3dfx, double alpha, double beta,
 
 /*
 char *SrtGrfn3DFXBetaTree_thread(
-                                                  char		*und3dfx  ,
-                                                  double	alpha  ,
-                                                  double	beta  ,
-                                                  int		numeventdates  ,
-                                                  long		*eventdates  ,
-                                                  long		tableauRows  ,
-                                                  long		tableauCols  ,
-                                                  char ***tableauStrings  , int
-**tableauMask  , long		auxWidth  , long		*auxLen  ,
-                                                  double	**aux  ,
-                                                  double	*barrier  ,
-                                                  int		*bar_col  ,
-                                                  long		num_stp  ,
-                                                  int		*num_prod  ,
-                                                  int		discount  ,
+                                                  char		*und3dfx      ,
+                                                  double	alpha      ,
+                                                  double	beta      ,
+                                                  int		numeventdates ,
+                                                  long		*eventdates ,
+                                                  long		tableauRows ,
+                                                  long		tableauCols ,
+                                                  char ***tableauStrings      ,
+int
+**tableauMask      , long		auxWidth      , long *auxLen      ,
+                                                  double	**aux      ,
+                                                  double	*barrier      ,
+                                                  int		*bar_col      ,
+                                                  long		num_stp      ,
+                                                  int		*num_prod      ,
+                                                  int		discount      ,
                                                   double	**prod_val);
 */
 
@@ -287,19 +288,18 @@ char *SrtGrfn3DFXAlphaBetaTree(char *und3dfx, double alpha, double beta,
 
 /*
 char *SrtGrfn3DFXAlphaBetaTree_thread(
-                                                          char *und3dfx  ,
-                                                          double	alpha  ,
-                                                          double	beta  ,
+                                                          char *und3dfx      ,
+                                                          double	alpha ,
+                                                          double	beta ,
                                                           int
-numeventdates  , long		*eventdates  , long		tableauRows  ,
-                                                          long
-tableauCols  , char		***tableauStrings  ,
+numeventdates      , long		*eventdates      , long
+tableauRows      , long tableauCols      , char		***tableauStrings      ,
                                                           int
-**tableauMask  , long		auxWidth  , long		*auxLen  ,
-                                                          double	**aux  ,
+**tableauMask      , long		auxWidth      , long *auxLen      ,
+                                                          double	**aux ,
                                                           double	*barrier
-, int		*bar_col  , long		num_stp  , int *num_prod  , int
-discount  , double	**prod_val);
+    , int		*bar_col      , long		num_stp      , int *num_prod      ,
+int discount      , double	**prod_val);
 
 */
 
@@ -389,42 +389,47 @@ char *SrtGrfnFxSabrQuadAdi(char *underlying, double alpha, double gamma,
                            int nstp, int nstpfx, int nstpvol, int *nprod,
                            double **prod_val);
 
-Err FxSabrSLAdiKO(
-    char *underlying, double alpha, double beta, double rho, double lambda,
-    double floormu,
-    /*	Product data */
-    double maturity, double strike, int is_call, /* 1 Call  , 0: Put */
-    int is_ko,                                   /* 1 KO  , 0: KI */
-    int is_cvx,                                  /* 1 use 1 / Fx  , 0 use Fx */
-    int is_digital, /* 1: digital payoff  , 0  , regular option payoff */
-    int is_american, double barrier_up, double barrier_down, double rebate_up,
-    double rebate_down, int nstp, int nstpfx, int nstpvol, double *res,
-    double **greeks);
+Err FxSabrSLAdiKO(char *underlying, double alpha, double beta, double rho,
+                  double lambda, double floormu,
+                  /*	Product data */
+                  double maturity, double strike,
+                  int is_call,    /* 1 Call      , 0: Put */
+                  int is_ko,      /* 1 KO      , 0: KI */
+                  int is_cvx,     /* 1 use 1 / Fx      , 0 use Fx */
+                  int is_digital, /* 1: digital payoff      , 0      , regular
+                                     option payoff */
+                  int is_american, double barrier_up, double barrier_down,
+                  double rebate_up, double rebate_down, int nstp, int nstpfx,
+                  int nstpvol, double *res, double **greeks);
 
-Err FxSabrQuadAdiKO(
-    char *underlying, double alpha, double gamma, double beta, double rho,
-    double lambda, double floormu,
-    /*	Product data */
-    double maturity, double strike, int is_call, /* 1 Call  , 0: Put */
-    int is_ko,                                   /* 1 KO  , 0: KI */
-    int is_cvx,                                  /* 1 use 1 / Fx  , 0 use Fx */
-    int is_digital, /* 1: digital payoff  , 0  , regular option payoff */
-    int is_american, double barrier_up, double barrier_down, double rebate_up,
-    double rebate_down, int nstp, int nstpfx, int nstpvol, double *res,
-    double **greeks);
+Err FxSabrQuadAdiKO(char *underlying, double alpha, double gamma, double beta,
+                    double rho, double lambda, double floormu,
+                    /*	Product data */
+                    double maturity, double strike,
+                    int is_call,    /* 1 Call      , 0: Put */
+                    int is_ko,      /* 1 KO      , 0: KI */
+                    int is_cvx,     /* 1 use 1 / Fx      , 0 use Fx */
+                    int is_digital, /* 1: digital payoff      , 0      , regular
+                                       option payoff */
+                    int is_american, double barrier_up, double barrier_down,
+                    double rebate_up, double rebate_down, int nstp, int nstpfx,
+                    int nstpvol, double *res, double **greeks);
 
-Err FxSabrQuadAdi_MultiKO(
-    char *underlying, double alpha, double gamma, double beta, double rho,
-    double lambda, double floormu,
-    /*	Product data */
-    int nb_product, double *notional, long *maturity, long *settlmt,
-    double *strike, int *is_call, /* 1 Call  , 0: Put */
-    int is_ko,                    /* 1 KO  , 0: KI */
-    int *is_cvx,                  /* 1 use 1 / Fx  , 0 use Fx */
-    int *is_digital, /* 1: digital payoff  , 0  , regular option payoff */
-    double barrier_up, double barrier_down, double *rebate_up,
-    double *rebate_down, int nstp, int nstpfx, int nstpvol, double *res,
-    double **greeks);
+Err FxSabrQuadAdi_MultiKO(char *underlying, double alpha, double gamma,
+                          double beta, double rho, double lambda,
+                          double floormu,
+                          /*	Product data */
+                          int nb_product, double *notional, long *maturity,
+                          long *settlmt, double *strike,
+                          int *is_call,    /* 1 Call      , 0: Put */
+                          int is_ko,       /* 1 KO      , 0: KI */
+                          int *is_cvx,     /* 1 use 1 / Fx      , 0 use Fx */
+                          int *is_digital, /* 1: digital payoff      , 0      ,
+                                              regular option payoff */
+                          double barrier_up, double barrier_down,
+                          double *rebate_up, double *rebate_down, int nstp,
+                          int nstpfx, int nstpvol, double *res,
+                          double **greeks);
 
 char *SrtGrfn3DFXMcEB(char *und3dfx, int numeventdates, long *eventdates,
                       int *nUsedEventDates, int *optimise, double *fwd_iv,

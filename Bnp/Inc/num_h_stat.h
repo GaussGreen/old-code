@@ -8,7 +8,7 @@
 #define NUM_H_STAT_H
 
 /*
- * returns stdev of data1  , or of its returns or differences depending:
+ * returns stdev of data1      , or of its returns or differences depending:
  * if flg=0 returns stdev of log of returns
  * if flg=1 returns stdev of first differences
  * if flg=2 returns stdev

@@ -2,7 +2,7 @@
 
    FILENAME:   	utlist.h
 
-   PURPOSE:     The famous SrtList  , that is used everywhere
+   PURPOSE:     The famous SrtList      , that is used everywhere
 
    =============================================================================
  */
@@ -31,7 +31,7 @@ Err srt_f_lstset(SrtList *l, SrtObject *obj);
 
 /* ------------------------------------------------------------------------- */
 
-/* -> insert an element in the list with name  , key
+/* -> insert an element in the list with name      , key
 Its value type is defined by type and Ptr points to its value */
 
 Err srt_f_lstins(SrtList *l, char *name, double key, int type, void *Ptr,
@@ -76,7 +76,7 @@ Err srt_f_objset(char *name, double key, int type, SrtObjVal *val,
 
 /* -------------------------------------------------------------------------- */
 
-/* -> return 0 if both objects are equal : same name  , same key number */
+/* -> return 0 if both objects are equal : same name      , same key number */
 SRT_Boolean srt_f_objequal(SrtObject *obj1, SrtObject *obj2);
 
 /* -------------------------------------------------------------------------- */

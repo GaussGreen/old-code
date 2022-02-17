@@ -14,7 +14,8 @@
 #define SRT_H_GRFNKNOCKINSWAP_H
 
 /* ---------------------------------------------------------------------------
-                Prices a KnockIn Swap in Grfn  , building the Tableau internally
+                Prices a KnockIn Swap in Grfn      , building the Tableau
+   internally
    ---------------------------------------------------------------------------
  */
 

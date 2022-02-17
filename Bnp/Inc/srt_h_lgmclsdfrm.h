@@ -1,8 +1,8 @@
 /* ===================================================================================
    FILENAME:      srt_h_lgmclsdfrm.h
 
-   PURPOSE:       Compute swaption  , bond option  ,caps/floors prices in LGM  ,
-   via a closed form analytical solution.
+   PURPOSE:       Compute swaption      , bond option      ,caps/floors prices
+   in LGM      , via a closed form analytical solution.
    ===================================================================================
  */
 

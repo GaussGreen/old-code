@@ -1,8 +1,8 @@
 /* ======================================================
    FILENAME:  utmemory.h
 
-   PURPOSE:   memory allocation functions for vectors  ,
-              arrays  , f3tensor...
+   PURPOSE:   memory allocation functions for vectors      ,
+              arrays      , f3tensor...
    ====================================================== */
 
 #ifndef UTMEMORY_H

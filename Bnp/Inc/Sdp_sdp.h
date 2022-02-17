@@ -7,7 +7,7 @@
 // Associated code: sdp.c
 // Uses: some nr routines and some BLAS routines.
 
-// BLAS from the Intel Math Kernel library can be linked directly  ,
+// BLAS from the Intel Math Kernel library can be linked directly      ,
 // or the MiniBLAS provided for use in griffin can be used instead.
 // Use sdplib.h for lib choices.
 
@@ -16,7 +16,7 @@
 // a matrix for the optimisation direction.
 
 // ------------------------------------------------------------------
-// If in debug  , include the Monitor header for convergence tracing.
+// If in debug      , include the Monitor header for convergence tracing.
 // ------------------------------------------------------------------
 
 Err srt_sdp(double ***const_mat, double *const_val, double **cmat, int dim,

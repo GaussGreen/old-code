@@ -32,7 +32,7 @@ Err ccf_fill_fund_leg(
     /*	Coupons that started before today are disregarded */
     long today,
     /*	EOD Flag */
-    int eod_flag, /*	0: I  , 1: E */
+    int eod_flag, /*	0: I      , 1: E */
     double fund_not, int fund_ncpn, long *fund_fix, long *fund_start,
     long *fund_pay, char **fund_basis, double *fund_spr, double *fund_mrg,
     CF_FUND_LEG fund_leg);
@@ -87,13 +87,13 @@ typedef struct {
   double slvol;
 
   /*	CMS Adjustment */
-  int adj_type; /*	0: no adjustment  , 1: atm normal adjustment  , 2: smile
-                   adjustment */
-  /*	If smile is used  , CMS = F+lambda*F^(2*beta)*mat
-          beta is input  , lambda = (CMS-F)/(F^(2*beta)*mat)
+  int adj_type; /*	0: no adjustment      , 1: atm normal adjustment      ,
+                   2: smile adjustment */
+  /*	If smile is used      , CMS = F+lambda*F^(2*beta)*mat
+          beta is input      , lambda = (CMS-F)/(F^(2*beta)*mat)
 
-          if shifted log is used  , if smile is used  , ignores the input beta
-     , CMS = F + lambda*(F+slshift)^2*mat
+          if shifted log is used      , if smile is used      , ignores the
+     input beta , CMS = F + lambda*(F+slshift)^2*mat
           (calibrated to hit today's adjustment) */
   double lambda;
   double beta;
@@ -111,7 +111,7 @@ typedef struct {
 
   double cvg; /*	Coupon coverage * notional */
 
-  int ncms; /*	0 for type 0  , 1 for types 1 and 2  , 2 for type 3 */
+  int ncms; /*	0 for type 0      , 1 for types 1 and 2      , 2 for type 3 */
   cf_cms_desc cms[2];
 
   /*	Coupon type
@@ -121,9 +121,9 @@ typedef struct {
   3:	CMS Spread */
   int type;
 
-  /*	Coupon is of the form alpha * CMS1 + beta * CMS2 + gamma [floored  ,
+  /*	Coupon is of the form alpha * CMS1 + beta * CMS2 + gamma [floored      ,
    * capped] */
-  double alphabeta[2]; /*	0: alpha  , 1: beta */
+  double alphabeta[2]; /*	0: alpha      , 1: beta */
   double gamma;
   int floored;
   double floor;
@@ -150,8 +150,9 @@ typedef struct {
   0:	Midat			(all coupons are Midat)
   1:	CIF				(all coupons are Midat and at least 1 is
   CIF)
-  2:	CMS				(all coupons are Midat or CIF and at least
-  1 is CMS) 3:	CMS Spread		(at least 1 coupon is CMS spread) */
+  2:	CMS				(all coupons are Midat or CIF and at
+  least 1 is CMS) 3:	CMS Spread		(at least 1 coupon is CMS
+  spread) */
   int type;
 
   int num_cpn; /*	Number of coupons */
@@ -165,7 +166,7 @@ Err ccf_fill_exo_leg(
     /*	Coupons that fixed before today are disregarded */
     long today,
     /*	EOD Flag */
-    int eod_flag, /*	0: I  , 1: E */
+    int eod_flag, /*	0: I      , 1: E */
     double cf_not, int cf_ncpn, long *cf_fix, long *cf_start, long *cf_pay,
     char **cf_basis, char **cf_cms_tenor1, char *cf_cms_freq1,
     char *cf_cms_basis1, double *cf_cms_spread1, char **cf_cms_tenor2,
@@ -183,34 +184,34 @@ Err ccf_fill_exo_leg(
     int **cf_typeopt,      /* spread option type 0 call 1 put */
 
     int use_SL,   /*  1: use Shifted Log
-                      0: don't use				*/
+                  0: don't use				*/
     int calib_SL, /*  1: Calibrate the Shifted Log models on CMS1 and on CMS2 *
-                                  0: use the Shifted Log beta given */
+                              0: use the Shifted Log beta given */
     double NbStdcalib_SL, /*  Nb of std for the calibration of to the skew */
     int calib_correl_SL,  /*	1: Calibrate the correlation between the two SL
-                             to get the same ATM  normal spread vol  0: use the
-                             normal spread correl for the sl correl */
+                         to get the same ATM  normal spread vol  0: use the
+                         normal spread correl for the sl correl */
     int use_cfoptions, /*  1: Use the spread options and don't take into account
-                                               the floor and cap in the cf
-                          coupons
-                                       0: take into account the floor and cap in
-                          the cf coupons */
+                                           the floor and cap in the cf
+                      coupons
+                                   0: take into account the floor and cap in
+                      the cf coupons */
 
     int cms_adj, int cms_smile, int cms_vol_adj, /*	1: adjust for CMS vol
-                                                    effect 0: don't */
+                                        effect 0: don't */
     double cms_beta1, double cms_beta2,
     int num_strikes_in_vol, /*	Array of strikes in vol matrix */
     double *strikes_in_vol,
-    SrtDiffusionType
-        vol_type,     /*	Type of vol in matrix  , SRT_NORMAL or SRT_LOGNORMAL */
-    int cash_vol,     /*	1: matrix is a cash vol
-/*	Needed to calculate ATM (converging) normal volatility associated to
-    CMS coupons */
-    char *yc,         /*	yc */
-    char *vc,         /*	vc */
-    char *ref,        /*	ref rate */
-    char *swap_freq,  /*	swap freq */
-    char *swap_basis, /*	swap basis */
+    SrtDiffusionType vol_type, /*	Type of vol in matrix      , SRT_NORMAL
+                                  or SRT_LOGNORMAL */
+    int cash_vol,              /*	1: matrix is a cash vol
+     /*	Needed to calculate ATM (converging) normal volatility associated to
+         CMS coupons */
+    char *yc,                  /*	yc */
+    char *vc,                  /*	vc */
+    char *ref,                 /*	ref rate */
+    char *swap_freq,           /*	swap freq */
+    char *swap_basis,          /*	swap basis */
     Err (*get_cash_vol)(/*	function to get IR cash vol from the markets */
                         char *vol_curve_name, double start_date,
                         double end_date, double cash_strike, int zero,
@@ -227,7 +228,8 @@ Err ccf_free_exo_leg(CF_EXO_LEG exo_leg);
 
 /*	Call */
 typedef struct {
-  int pay_rec; /*	0: rec pd upon exercise  , 1: pay pd upon exercise */
+  int pay_rec; /*	0: rec pd upon exercise      , 1: pay pd upon exercise
+                */
   /*	Specs */
   long ex_date;     /*	Exercise date */
   double ex_time;   /*	Exercise time */
@@ -254,8 +256,8 @@ Err ccf_fill_calls(
     /*	Exercises before today are disregarded */
     long today,
     /*	EOD Flag */
-    int eod_flag,           /*	0: I  , 1: E */
-    int ncall, int pay_rec, /*	0: rec pd  , 1: pay pd */
+    int eod_flag,           /*	0: I      , 1: E */
+    int ncall, int pay_rec, /*	0: rec pd      , 1: pay pd */
     long *ex_date, long *set_date, double *fee, CCF_STR ccf);
 
 /*	Check dates consistency */
@@ -317,13 +319,13 @@ Err ccf_fill_und(char *lgm2dund, char *vc, char *ref, char *swap_freq,
 Err ccf_calib_und(
     long today,
     /*	EOD Flag */
-    int eod_flag,      /*	0: I  , 1: E */
+    int eod_flag,      /*	0: I      , 1: E */
     char *yc,          /*	yc */
     char *vc,          /*	vc (only if calib) */
     char *ref,         /*	ref rate (only if calib) */
     char *swap_freq,   /*	swap freq (only if calib) */
     char *swap_basis,  /*	swap basis (only if calib) */
-    int lam_ts,        /*	0: use unique lambda  , 1: use ts */
+    int lam_ts,        /*	0: use unique lambda      , 1: use ts */
     double lambda,     /*	lambda if unique */
     int tsnlam,        /*	number of lambdas if ts */
     double *tslamtime, /*	lambda times i.e. (date - today) / 365 if ts */
@@ -334,17 +336,17 @@ Err ccf_calib_und(
     /*	Calib params */
     int force_atm, /*	force atm calib */
     double max_std_long, double max_std_short,
-    int fix_lambda,          /*	0: calib lambda to cap  , 1: fix lambda calib
-                                                             to diagonal */
-    int cal_vol_shift_type,  /*	vol shift type for volatility */
-    double cal_vol_shift,    /*	vol shift */
+    int fix_lambda,         /*	0: calib lambda to cap      , 1: fix lambda calib
+                                                        to diagonal */
+    int cal_vol_shift_type, /*	vol shift type for volatility */
+    double cal_vol_shift,   /*	vol shift */
     double cal_lambda_shift, /*	shift on lambda after calibration */
     int one_f_equi,          /*	1F equivalent flag:
-                                                             if set to 1  , then 2F
-                                lambda will calibrate          to the cap priced within calibrated
-                                1F          with the given lambda */
-    int skip_last,     /*	If 1  , the last option is disregarded and the forward
-                          volatility is flat from option n-1 */
+                                                         if set to 1      , then 2F
+                            lambda will calibrate          to the cap priced within
+                            calibrated          1F          with the given lambda */
+    int skip_last,     /*	If 1      , the last option is disregarded and the
+                      forward     volatility is flat from option n-1 */
     double long_prec,  /*	Precision on primary instruments */
     double short_prec, /*	Precision on secondary instruments */
     double min_fact,   /*	Maximum down jump on variance */
@@ -521,14 +523,14 @@ Err ccf_fill_check_all_struct(
     /*	Today's date */
     long today,
     /*	The underlying */
-    int use_calib, /*	0: use fx3dund  , 1: calibrate */
+    int use_calib, /*	0: use fx3dund      , 1: calibrate */
     /*		if calib */
     char *yc,          /*	yc */
     char *vc,          /*	vc (only if calib) */
     char *ref,         /*	ref rate (only if calib) */
     char *swap_freq,   /*	swap freq (only if calib) */
     char *swap_basis,  /*	swap basis (only if calib) */
-    int lam_ts,        /*	0: use unique lambda  , 1: use ts */
+    int lam_ts,        /*	0: use unique lambda      , 1: use ts */
     double lambda,     /*	lambda if unique */
     int tsnlam,        /*	number of lambdas if ts */
     double *tslamtime, /*	lambda times i.e. (date - today) / 365 if ts */
@@ -568,45 +570,45 @@ Err ccf_fill_check_all_struct(
     int **cf_typeopt,      /* spread option type 0 call 1 put */
 
     int use_SL,   /*  1: use Shifted Log
-                      0: don't use				*/
+                  0: don't use				*/
     int calib_SL, /*  1: Calibrate the Shifted Log models on CMS1 and on CMS2 *
-                                  0: use the Shifted Log beta given */
+                              0: use the Shifted Log beta given */
     double NbStdcalib_SL, /*  Nb of std for the calibration of to the skew */
     int calib_correl_SL,  /*	1: Calibrate the correlation between the two SL
-                             to get the same ATM  normal spread vol  0: use the
-                             normal spread correl for the sl correl */
+                         to get the same ATM  normal spread vol  0: use the
+                         normal spread correl for the sl correl */
     int use_cfoptions, /*  1: Use the spread options and don't take into account
-                                               the floor and cap in the cf
-                          coupons
-                                       0: take into account the floor and cap in
-                          the cf coupons */
+                                           the floor and cap in the cf
+                      coupons
+                                   0: take into account the floor and cap in
+                      the cf coupons */
 
     int cms_adj, int cms_smile, int cms_vol_adj, /*	1: adjust for CMS vol
-                                                    effect 0: don't */
+                                        effect 0: don't */
     double cms_beta1, double cms_beta2,
     int num_strikes_in_vol, /*	Array of strikes in vol matrix */
     double *strikes_in_vol,
-    SrtDiffusionType
-        vol_type, /*	Type of vol in matrix  , SRT_NORMAL or SRT_LOGNORMAL */
-    int cash_vol, /*	1: matrix is a cash vol
-/*		calls */
-    int ncall, int pay_rec, /*	0: rec pd  , 1: pay pd */
+    SrtDiffusionType vol_type, /*	Type of vol in matrix      , SRT_NORMAL
+                                  or SRT_LOGNORMAL */
+    int cash_vol,              /*	1: matrix is a cash vol
+         /*		calls */
+    int ncall, int pay_rec,    /*	0: rec pd      , 1: pay pd */
     long *ex_date, long *set_date, double *fee,
     /*	Numerical params */
     int req_stp, int req_stpx, long req_paths,
     /*	Calib params */
     int force_atm, double max_std_long, double max_std_short,
-    int fix_lambda,          /*	0: calib lambda to cap  , 1: fix lambda calib
-                                                                     to diagonal */
-    int cal_vol_shift_type,  /*	vol shift type for volatility */
-    double cal_vol_shift,    /*	vol shift */
+    int fix_lambda,         /*	0: calib lambda to cap      , 1: fix lambda calib
+                                                                to diagonal */
+    int cal_vol_shift_type, /*	vol shift type for volatility */
+    double cal_vol_shift,   /*	vol shift */
     double cal_lambda_shift, /*	shift on the calibrated lambda */
     int one_f_equi,          /*	1F equivalent flag:
-                                                             if set to 1  , then 2F
-                                lambda will calibrate          to the cap priced within calibrated
-                                1F          with the given lambda */
-    int skip_last,     /*	If 1  , the last option is disregarded and the forward
-                          volatility is flat from option n-1 */
+                                                         if set to 1      , then 2F
+                            lambda will calibrate          to the cap priced within
+                            calibrated          1F          with the given lambda */
+    int skip_last,     /*	If 1      , the last option is disregarded and the
+                      forward     volatility is flat from option n-1 */
     double long_prec,  /*	Precision on primary instruments */
     double short_prec, /*	Precision on secondary instruments */
     double min_fact,   /*	Maximum down jump on variance */
@@ -614,13 +616,13 @@ Err ccf_fill_check_all_struct(
     int use_jumps,     /*	Allow vol term structure to jump */
     int proba_weight,
     /*	EOD Flags */
-    int eod_fix_flag, /*	0: I  , 1: E */
-    int eod_ex_flag,  /*	0: I  , 1: E */
+    int eod_fix_flag, /*	0: I      , 1: E */
+    int eod_ex_flag,  /*	0: I      , 1: E */
     /*	Results */
     CCF_STR ccf, CCF_UND und,
     int *call_feat, /*	0: No callable feature to be valued
-                                    1: Callable feature to be valued through adi
-                     */
+                                1: Callable feature to be valued through adi
+                 */
     CCF_ADI_ARG adi_arg);
 
 /*	Free all structures */

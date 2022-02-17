@@ -3,8 +3,8 @@
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //	Struct s_grfn_SV_pricing_params to hold Grfn pricing Params for a
-//variety of algorithms. // 	Observe how the structure contains the basic non-SV
-//equivalent  , s_grfn_pricing_params	 //
+// variety of algorithms. // 	Observe how the structure contains the basic
+// non-SV equivalent      , s_grfn_pricing_params	 //
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 typedef struct {
   s_grfn_pricing_params standard_params;
@@ -16,21 +16,22 @@ typedef struct {
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 //	Sort Static level function to calibrate an LGM SV model having either 1
-//or 2 LGM factors and 1 SV	// 	factor  , initialise a SV underlying then
-//price a Grfn tableau using either PDE  , MC or MC with		//
-//	optimal ex boundary.
-//// 						Author:  Paul McCallum				Date:  13th Oct 2003
+// or 2 LGM factors and 1 SV	// 	factor      , initialise a SV underlying
+// then price a Grfn tableau using either PDE      , MC or MC with
+// // 	optimal ex boundary.
+//// 						Author:  Paul McCallum
+///Date:  13th Oct 2003
 ////
 //																										//
 //  Note the memory management policy in this routine. In particular the fact
 //  that we free the Product  // Values when there has been an error but leave
 //  the calling routine to free in the absence of errors. //
 //	Also how we have the capability to reassign smile values in the same
-//arrays as the trial values by	// 	repointing the pointers.
+// arrays as the trial values by	// 	repointing the pointers.
 ////
 //																										//
 //	Modified to return primary and secondary model prices.		PMc
-//2ndDec03						//
+// 2ndDec03						//
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 Err GrfnLGMSVAutocalCaller(
     char *YieldCurveName, char *VolCubeName,

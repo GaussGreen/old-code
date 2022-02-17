@@ -92,16 +92,17 @@ Err find_and_optimise_boundary(double ***save_values, long nb_dates,
 Err find_linear_coef(
     long p, /* number of variables = number of row in Transp(X) */
     long n, /* number of observations */
-    double *y, double **x, double *b, double **mat /* matrix p row  , n col */);
+    double *y, double **x, double *b,
+    double **mat /* matrix p row      , n col */);
 
 Err find_best_optim_dates(double ***save_values, long nb_dates, long nb_target,
                           long nb_paths, int *optimise, MCEBPARAMS params,
                           double *value, double *error);
 
-Err optimise_boundary_info(double ***save_values, long nb_dates, long nb_paths,
-                           int *optimise, int call_current, int is_ko,
-                           double *boundary, double *value, double *error,
-                           double **infos); /* Col 1: One time Call  , Col2:
-                                               Exerc Proba  , Col3: New PV */
+Err optimise_boundary_info(
+    double ***save_values, long nb_dates, long nb_paths, int *optimise,
+    int call_current, int is_ko, double *boundary, double *value, double *error,
+    double **infos); /* Col 1: One time Call      , Col2:
+                        Exerc Proba      , Col3: New PV */
 
 #endif

@@ -92,9 +92,9 @@ typedef struct {
 typedef struct {
   /* Description of one Coupon */
   /* at Tpay we receive if floored  Coupon*(max((alpha * CPI(Tf1) + beta *
-   * CPI(Tf2))/DRIRef + gamma  , Floor)) */
-  /*					  if not     Coupon*((alpha * CPI(Tf1) + beta *
-   * CPI(Tf2))/DRIRef + gamma)			  */
+   * CPI(Tf2))/DRIRef + gamma      , Floor)) */
+  /*					  if not     Coupon*((alpha * CPI(Tf1) + beta
+   * * CPI(Tf2))/DRIRef + gamma)			  */
 
   long lTheoPayDate;   /* Theoritical PayDate */
   long lPayDate;       /* PayDate			 */
@@ -110,9 +110,9 @@ typedef struct {
   double dGamma; /* Constant */
 
   double dCvxtyAdj1; /* Convexty adj such that E under QTp(CPI(Tf)) = FwdCPI(t
-                        ,Tf)* CvxtyAdj */
+                            ,Tf)* CvxtyAdj */
   double dCvxtyAdj2; /* Convexty adj such that E under QTp(CPI(Tf)) = FwdCPI(t
-                        ,Tf)* CvxtyAdj */
+                            ,Tf)* CvxtyAdj */
 
   int iIsFloored; /* Is floored coupon */
   double dFloor;  /* floor strike */
@@ -167,8 +167,8 @@ double Inflation_GetFixing(long lValDate, Inflation_CPIFixing *CPIFixing);
 /* ------------------------------------------------------------------------------------------------
         Inflation_FwdCPI
 
-        calculate the classical FwdCPI(t  ,ValDate) = E(under QTval)
-  (FwdCPI(ValDate  ,ValDate)
+        calculate the classical FwdCPI(t      ,ValDate) = E(under QTval)
+  (FwdCPI(ValDate      ,ValDate)
   -------------------------------------------------------------------------------------------------
 */
 double
@@ -193,7 +193,7 @@ Inflation_FwdDRI_givenAdj(/* Inputs */
                           const char *NomCurve,     /* Nominal Curve name*/
                           WrapInfo
                               *RealCurve, /* Real curve either a name if
-                                             WestWrapper or  a c++ object ptr */
+                                         WestWrapper or  a c++ object ptr */
 
                           /* Other Outputs */
                           double *ptr_dFwdCPI1, double *ptr_dFwdCPI2);
@@ -203,12 +203,12 @@ Inflation_FwdDRI_givenAdj(/* Inputs */
 
         Fill the convexity adj of all CPI and vols in the cash flows structure
 
-        Assume that alpha  , beta FixDate1  , FixDate2  , and paydate have been
-  filled
+        Assume that alpha      , beta FixDate1      , FixDate2      , and
+  paydate have been filled
   ---------------------------------------------------------------------------------------------------------
 */
 Err		Inflation_FillAdjInCashFlows(	/* Input */
-										InflationModel		*Model  ,		/*	Model used */
+										InflationModel		*Model      ,		/*	Model used */
 										/* Output */
 										InflationCashFlows	*CashFlows	/* Description of the cash flows */);
 
@@ -221,18 +221,18 @@ Err		Inflation_FillAdjInCashFlows(	/* Input */
   ---------------------------------------------------------------------------------------------------------
 */
 Err	Inflation_BondValue(/* Inputs */
-							long				lSettleDate  ,
-							InflationCashFlows	*BondCashFlows  ,			/* Description of Bond cash flows */
+							long				lSettleDate      ,
+							InflationCashFlows	*BondCashFlows      ,			/* Description of Bond cash flows */
 
-							InflationAssetSwapType	iAssetSwapType  ,		/* Assetswap type */
-							InflationCashFlows	*AssetSwapCashFlows  ,	/* Description of Bond cash flows */
+							InflationAssetSwapType	iAssetSwapType      ,		/* Assetswap type */
+							InflationCashFlows	*AssetSwapCashFlows      ,	/* Description of Bond cash flows */
 					   
-							Inflation_CPIMkt	*CPIMkt  ,				/* CPI Market */
-							const char			*NomCurve  ,				/* Nominal Curve name*/
-							WrapInfo			*RealCurve  ,				/* Real curve either a name if WestWrapper or  a c++ object ptr */
+							Inflation_CPIMkt	*CPIMkt      ,				/* CPI Market */
+							const char			*NomCurve      ,				/* Nominal Curve name*/
+							WrapInfo			*RealCurve      ,				/* Real curve either a name if WestWrapper or  a c++ object ptr */
 
 							/* Outputs */
-							double				*ptr_DirtyPrice  ,		/* Fwd Dirty price at settle date */
+							double				*ptr_DirtyPrice      ,		/* Fwd Dirty price at settle date */
 							double				*ptr_DfSettle			/* Disount factor nominal at settlement date */);
 
 /* -------------------------------------------------------------------------------------------------------
@@ -243,13 +243,14 @@ Err	Inflation_BondValue(/* Inputs */
 
         Description of the Cash flows
                  at Tpay we receive if floored  Coupon*(max(alpha * CPI(Tf1) +
-  beta * CPI(Tf2) + gamma  , Floor)) if not      Coupon*(alpha * CPI(Tf1) + beta
+  beta * CPI(Tf2) + gamma      , Floor)) if not      Coupon*(alpha * CPI(Tf1) +
+  beta
   * CPI(Tf2) + gamma)
   ---------------------------------------------------------------------------------------------------------
 */
-double	Inflation_ValueCashFlow(InflationCashFlows	*CashFlows  ,	/* Description of the cash flows */
-								Inflation_CPIMkt	*CPIMkt  ,	/* CPI Market */
-								const char			*NomCurve  ,	/* Nominal Curve name*/
+double	Inflation_ValueCashFlow(InflationCashFlows	*CashFlows      ,	/* Description of the cash flows */
+								Inflation_CPIMkt	*CPIMkt      ,	/* CPI Market */
+								const char			*NomCurve      ,	/* Nominal Curve name*/
 								WrapInfo			*RealCurve	/* Real curve either a name if WestWrapper or  a c++ object ptr */);
 
 /* -------------------------------------------------------------------------------------------------------
@@ -261,10 +262,10 @@ double	Inflation_ValueCashFlow(InflationCashFlows	*CashFlows  ,	/* Description o
   ---------------------------------------------------------------------------------------------------------
 */
 Err		Inflation_InitNotionalAssetSwap(/* Input */
-										  InflationAssetSwapType	iAssetSwapType  ,			/* Assetswap type */	
-										  InflationCashFlows		*BondCashFlows  ,			/* Description of Bond cash flows */
-										  double					dTodayCBP  ,				/* dTodayCBP of the bond */	
-										  double					dDf_Tsettle  ,			/* df nom at settle date */
+										  InflationAssetSwapType	iAssetSwapType      ,			/* Assetswap type */	
+										  InflationCashFlows		*BondCashFlows      ,			/* Description of Bond cash flows */
+										  double					dTodayCBP      ,				/* dTodayCBP of the bond */	
+										  double					dDf_Tsettle      ,			/* df nom at settle date */
 										  /* OutPut */
 										  InflationCashFlows		*AssetSwapCashFlows		/* Description of the assetswap cash flows	 */ );
 

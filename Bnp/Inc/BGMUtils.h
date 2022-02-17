@@ -28,7 +28,8 @@ Err srt_BGM_FwdRate(long start, long theoend, char *szRefRate,
 
 Err srt_BGM_FwdSwapRate(long start, long theoend, char *szRefRate,
                         char *szYieldCurveName, char *szFrequency,
-                        char *szBasis, int CashOrLibor, /* 0 cash  , 1 Libor */
+                        char *szBasis,
+                        int CashOrLibor, /* 0 cash      , 1 Libor */
                         double *FwdRate);
 
 Err srt_BGM_Level(long start, long theoend, char *szRefRate,
@@ -83,7 +84,7 @@ Err srt_f_BGMSABRtoFudge(
     double forward, double maturity, double *alphaSABR, double *betaSABR,
     double *rhoSABR, double *betavolSABR, double *shift, double *volup,
     double *voldown,
-    int way /* 0 for from SABR to Fudge  , 1 for from Fudge to SABR */
+    int way /* 0 for from SABR to Fudge      , 1 for from Fudge to SABR */
 );
 
 Err srt_f_BGMFillsCapletforSABRRisk(

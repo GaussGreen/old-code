@@ -52,7 +52,7 @@ typedef struct _RangeAccrualStruct {
   char tenor_f_char[256];
   int quanto;
 
-  int typeVol; /* 0 : Beta Vol  , 1 : Normal Vol  , 2 : Lognormal Vol*/
+  int typeVol; /* 0 : Beta Vol      , 1 : Normal Vol      , 2 : Lognormal Vol*/
 
   RangeAccrualObservStep *
       *obs_steps;       /* pointers to first observation steps in periods */
@@ -99,7 +99,7 @@ Err ra_init_struct(
     // Params for floating coupon
     double correl_start, double correl_end, int float_adj_strike,
 
-    int eod_flag, /*	0: I  , 1: E */
+    int eod_flag, /*	0: I      , 1: E */
     RangeAccrualStruct *RA);
 
 Err ra_free(RangeAccrualStruct *RA);

@@ -1,13 +1,14 @@
 /******************************************************************************/
 /*                                                                            */
-/*      SYSTEM:         SRT     SORT  , Fixed Income 2020 Addins */
+/*      SYSTEM:         SRT     SORT      , Fixed Income 2020 Addins */
 /*      SUB_SYSTEM:     SWT     Swap Tools                                    */
 /*                                                                            */
 /*      MODULE NAME:    SRT_H_LGMTREEFCT.H                                    */
 /*                                                                            */
 /*      PURPOSE:        Functions to compute LGM tree 	                      */
 /*                                                                            */
-/*      AUTHORS:        E. Auld  , K.L. Chau  , J. Malhi  , O. Van Eyseren */
+/*      AUTHORS:        E. Auld      , K.L. Chau      , J. Malhi      , O. Van
+ * Eyseren */
 /*                                                                            */
 /******************************************************************************/
 

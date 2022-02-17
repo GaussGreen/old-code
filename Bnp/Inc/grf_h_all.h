@@ -3,10 +3,9 @@
 
 /*<%%STA>-----------------------------------------------------------------
   DESCRIPTION     :Grfn include file with all function declarations that are
-not considered public  , and which do not operate on the COMLL structure. (Those
-are in grf_h_lang.h; public functions are declared in grf_h_public.h or one of
-the files it includes).
-This file #includes grf_h_lex.h;
+not considered public      , and which do not operate on the COMLL structure.
+(Those are in grf_h_lang.h; public functions are declared in grf_h_public.h or
+one of the files it includes). This file #includes grf_h_lex.h;
 
 <%%END>---------------------------------------------------------------------*/
 
@@ -110,7 +109,8 @@ Err grfn_create_historical_event(GrfnDeal *gd, GrfnEvent **event,
 Err grfn_attach_past_info_to_future(GrfnDeal *gd, GrfnEvent **today_event);
 
 /*
-Err grfn_attach_events(GrfnDeal *gd  , SrtStpPtr sptr  , SRT_Boolean flag);
+Err grfn_attach_events(GrfnDeal *gd      , SrtStpPtr sptr      , SRT_Boolean
+flag);
 */
 
 /*======evaluate================================================*/
@@ -125,23 +125,23 @@ Err grfn_eval_event(
     SrtUndInfo *und_info,   /* Underlying Information             */
     double *cashflow);      /* CashFlow calculated via the comll  */
 
-Err grfn_eval_event_ammc(int type_eval, /* 0: fwd  , 1: bwd  , 2: nostatus */
-                         GrfnEvent *event, SrtSample *sample, GrfnDeal *gd,
-                         GrfnLatticeVec lattice, double *fwd, double *cur,
-                         EvalEventDfsFct evaldf, SrtUndInfo *und_info,
-                         double *cashflow);
+Err grfn_eval_event_ammc(
+    int type_eval, /* 0: fwd      , 1: bwd      , 2: nostatus */
+    GrfnEvent *event, SrtSample *sample, GrfnDeal *gd, GrfnLatticeVec lattice,
+    double *fwd, double *cur, EvalEventDfsFct evaldf, SrtUndInfo *und_info,
+    double *cashflow);
 
 /*
 Err grfn_eval_event_ammc2
-    (    int               type_eval  ,
-                GrfnEvent       *event   ,
-                SrtSample       *sample  ,
-        GrfnDeal        *gd  ,
-        GrfnLatticeVec   lattice  ,
-                double           *fwd  ,
-                double           *cur  ,
-        EvalEventDfsFct       evaldf  ,
-        SrtUndInfo      *und_info  ,
+    (    int               type_eval      ,
+                GrfnEvent       *event       ,
+                SrtSample       *sample      ,
+        GrfnDeal        *gd      ,
+        GrfnLatticeVec   lattice      ,
+                double           *fwd      ,
+                double           *cur      ,
+        EvalEventDfsFct       evaldf      ,
+        SrtUndInfo      *und_info      ,
                 double			*cashflow );
 */
 

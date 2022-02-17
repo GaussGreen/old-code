@@ -15,22 +15,22 @@
 
         ft and gt are either solution of the same type of diff eq
         or equal to the function 1
-        a  , b and c are three constants
+        a      , b and c are three constants
    ------------------------------------------------------------------------------------------------
  */
 typedef struct {
   double dXt1;    /* X(t1) */
   double dLambda; /* Lambda */
 
-  int bIsft1; /* =1 if ft is the function 1  , = 0 either */
+  int bIsft1; /* =1 if ft is the function 1      , = 0 either */
   double a;   /* constant */
   void *pft;  /* pointeur on function ft */
 
-  int bIsgt1; /* =1 if gt is the function 1  , = 0 either */
+  int bIsgt1; /* =1 if gt is the function 1      , = 0 either */
   double b;   /* constant */
   void *pgt;  /* pointeur on function gt */
 
-  int bIsht1; /* =1 if gt is the function 1  , = 0 either */
+  int bIsht1; /* =1 if gt is the function 1      , = 0 either */
   double c;   /* constant */
   void *pht;  /* pointeur on function gt */
 
@@ -51,7 +51,8 @@ typedef struct {
   double dLambda; /* Lambda */
 
   int iNbFunction;                 /* Number of function ft */
-  int bIsft1[LGMSV_NbMaxFunction]; /* =1 if ft is the function 1  , = 0 either
+  int bIsft1[LGMSV_NbMaxFunction]; /* =1 if ft is the function 1      , = 0
+                                    * either
                                     */
   double a[LGMSV_NbMaxFunction];   /* constant */
   void *pft[LGMSV_NbMaxFunction];  /* pointeur on function ft */
