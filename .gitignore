@@ -11,3 +11,4 @@
 !*/
 !.gitignore
 !README.md
+/arm/ARMProject/armgenpricer/gp_base/._argconv.cpp

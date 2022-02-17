@@ -1,0 +1,35 @@
+/*!
+ * Copyright (c) CDC IXIS CM July 2003 Paris
+ *
+ * Version initiale 01/15/2004
+ *
+ *  basic functions for the closed form framework 
+ *
+ *	\file spreadoption_shiftedlognormal.cpp
+ *
+ *  \brief
+ *
+ *	\author  O. Croissant
+ *	\version 1.0
+ *	\date January 2004
+ */
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+///
+///   Pricing Functions
+///
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+/// uses the template PowerSpreadOption_Pricing_With_Limits which is declared in powerspreadoption.h
+
+/// no specific functions here
+
+
+
+
+/*---------------------------------------------------------------------------*/
+/*---- End of file ----*/

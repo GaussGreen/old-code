@@ -1,0 +1,1486 @@
+#ifndef ARM_XL_MOD_LOCAL_H
+#define ARM_XL_MOD_LOCAL_H
+
+
+
+//#include "XL_local_api.h"
+
+/// by now YCMod can take two models
+/// one for the zero curve, one for the discount curve
+/// if second curve is not provided... creates a standard YC Model
+__declspec(dllexport) LPXLOPER WINAPI Local_YCMOD(LPXLOPER XL_zeroCurve,
+												  LPXLOPER XL_discCurve);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_YCMOD(LPXLOPER XL_zeroCurve,
+													  LPXLOPER XL_discCurve);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_BSMODEL(LPXLOPER XL_date,
+													LPXLOPER XL_spot,
+													LPXLOPER XL_dividend,
+													LPXLOPER XL_discrate,
+													LPXLOPER XL_volat,
+													LPXLOPER XL_typstk);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_BSMODEL(LPXLOPER XL_date,
+														LPXLOPER XL_spot,
+														LPXLOPER XL_dividend,
+														LPXLOPER XL_discrate,
+														LPXLOPER XL_volat,
+														LPXLOPER XL_typstk);
+
+
+__declspec(dllexport) LPXLOPER WINAPI Local_NEWBSMODEL(LPXLOPER XL_yieldcurve,													
+													   LPXLOPER XL_swaptionVolat,
+                                                       LPXLOPER XL_correlmanger,
+													   LPXLOPER XL_cnvxManger,
+                                                       LPXLOPER XL_convadjVolat,
+													   LPXLOPER XL_spreadLock
+                                                       LPXLOPER XL_discountcurve);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_NEWBSMODEL(LPXLOPER XL_yieldcurve,													
+													       LPXLOPER XL_swaptionVolat,
+                                                           LPXLOPER XL_correlmanger,
+														   LPXLOPER XL_cnvxManger,
+                                                           LPXLOPER XL_convadjVolat,
+														   LPXLOPER XL_spreadLock,
+                                                           LPXLOPER XL_discountcurve);
+
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_BSMODELGEN(	LPXLOPER XL_yieldcurve,
+															LPXLOPER XL_volatility,
+															LPXLOPER XL_correlmanger,
+															LPXLOPER XL_cnvxManager,
+															LPXLOPER XL_capletVol,
+															LPXLOPER XL_spreadLock,
+															LPXLOPER XL_discountcurve,
+															LPXLOPER XL_correl,
+															LPXLOPER XL_cashVol,
+															LPXLOPER XL_spreadVol,
+															LPXLOPER XL_modelType,
+															LPXLOPER XL_spreadVolType,
+															LPXLOPER XL_sabrModId,
+                                                            LPXLOPER XL_LnOrNorVol,
+															LPXLOPER XL_numSteps);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_ARM_BSMODELGEN(	LPXLOPER XL_yieldcurve,
+																LPXLOPER XL_volatility,
+																LPXLOPER XL_correlmanger,
+																LPXLOPER XL_cnvxManager,
+																LPXLOPER XL_capletVol,
+																LPXLOPER XL_spreadLock,
+																LPXLOPER XL_discountcurve,
+																LPXLOPER XL_correl,
+																LPXLOPER XL_cashVol,
+																LPXLOPER XL_spreadVol,
+																LPXLOPER XL_modelType,
+																LPXLOPER XL_spreadVolType,
+																LPXLOPER XL_sabrModId,
+                                                                LPXLOPER XL_LnOrNorVol);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_BSPricingModel(	LPXLOPER XL_yieldCurve,
+																LPXLOPER XL_convexityManager,
+																LPXLOPER XL_capModel,
+																LPXLOPER XL_swoptModel,
+																LPXLOPER XL_correlManager,
+																LPXLOPER XL_modelType,
+																LPXLOPER XL_spreadVolCurve,
+																LPXLOPER XL_discountCurve,
+																LPXLOPER XL_spreadLockCurve,
+																LPXLOPER XL_calibInfos,
+																LPXLOPER XL_numInfos);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_ARM_BSPricingModel(	LPXLOPER XL_yieldCurve,
+																	LPXLOPER XL_convexityManager,
+																	LPXLOPER XL_capModel,
+																	LPXLOPER XL_swoptModel,
+																	LPXLOPER XL_correlManager,
+																	LPXLOPER XL_modelType,
+																	LPXLOPER XL_spreadVolCurve,
+																	LPXLOPER XL_discountCurve,
+																	LPXLOPER XL_spreadLockCurve,
+																	LPXLOPER XL_calibInfos,
+																	LPXLOPER XL_numInfos);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_GTWOYC (LPXLOPER XL_dMeanRevSpeed,
+													LPXLOPER XL_dSigma,
+													LPXLOPER XL_dZcId,
+													LPXLOPER XL_fZcId,
+													LPXLOPER XL_ratesCorr,
+													LPXLOPER XL_fMeanRevSpeed,
+													LPXLOPER XL_fSigma);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_GTWOYC (LPXLOPER XL_dMeanRevSpeed,
+														LPXLOPER XL_dSigma,
+														LPXLOPER XL_dZcId,
+														LPXLOPER XL_fZcId,
+														LPXLOPER XL_ratesCorr,
+														LPXLOPER XL_fMeanRevSpeed,
+														LPXLOPER XL_fSigma);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_GYCMODEL(LPXLOPER XL_zcId,
+													 LPXLOPER XL_a,
+													 LPXLOPER XL_sigma);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_GYCMODEL(LPXLOPER XL_zcId,
+														 LPXLOPER XL_a,
+														 LPXLOPER XL_sigma);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_HWFNMONTECARLOSV (LPXLOPER XL_zc,
+															  LPXLOPER XL_horizon,
+															  LPXLOPER XL_a,
+															  LPXLOPER XL_sigmaDate,
+															  LPXLOPER XL_sigmaVal,
+															  LPXLOPER XL_nbTraj);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_HWFNMONTECARLOSV (LPXLOPER XL_zc,
+																  LPXLOPER XL_horizon,
+																  LPXLOPER XL_a,
+																  LPXLOPER XL_sigmaDate,
+																  LPXLOPER XL_sigmaVal,
+																  LPXLOPER XL_nbTraj);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_HWFNMONTECARLO (LPXLOPER XL_zc,
+															LPXLOPER XL_horizon,
+															LPXLOPER XL_a,
+															LPXLOPER XL_sigma,
+															LPXLOPER XL_nbTraj);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_HWFNMONTECARLO (LPXLOPER XL_zc,
+																LPXLOPER XL_horizon,
+																LPXLOPER XL_a,
+																LPXLOPER XL_sigma,
+																LPXLOPER XL_nbTraj);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_DFHWSIGVARTREE (LPXLOPER XL_startDate,
+															LPXLOPER XL_horizon,
+															LPXLOPER XL_numSteps,
+															LPXLOPER XL_dZc,
+															LPXLOPER XL_fZc,
+															LPXLOPER XL_dMeanRevSpeed,
+															LPXLOPER XL_dDate,
+															LPXLOPER XL_dSigma,
+															LPXLOPER XL_fMeanRevSpeed,
+															LPXLOPER XL_fDate,
+															LPXLOPER XL_fSigma,
+															LPXLOPER XL_dFxCorr,
+															LPXLOPER XL_fFxCorr,
+															LPXLOPER XL_fxVol,
+															LPXLOPER XL_ratesCorr,
+															LPXLOPER XL_fxSpotRate);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_DFHWSIGVARTREE (LPXLOPER XL_startDate,
+																LPXLOPER XL_horizon,
+																LPXLOPER XL_numSteps,
+																LPXLOPER XL_dZc,
+																LPXLOPER XL_fZc,
+																LPXLOPER XL_dMeanRevSpeed,
+																LPXLOPER XL_dDate,
+																LPXLOPER XL_dSigma,
+																LPXLOPER XL_fMeanRevSpeed,
+																LPXLOPER XL_fDate,
+																LPXLOPER XL_fSigma,
+																LPXLOPER XL_dFxCorr,
+																LPXLOPER XL_fFxCorr,
+																LPXLOPER XL_fxVol,
+																LPXLOPER XL_ratesCorr,
+																LPXLOPER XL_fxSpotRate);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_DFHWBASISTREE (LPXLOPER XL_startDate,
+														   LPXLOPER XL_horizon,
+														   LPXLOPER XL_numSteps,
+														   LPXLOPER XL_dZc,
+														   LPXLOPER XL_fZc,
+														   LPXLOPER XL_dMeanRevSpeed,
+														   LPXLOPER XL_dDate,
+														   LPXLOPER XL_dSigma,
+														   LPXLOPER XL_fDate,
+														   LPXLOPER XL_fSigma,
+														   LPXLOPER XL_FxCorr,
+														   LPXLOPER XL_fxVol,
+														   LPXLOPER XL_fxSpotRate,
+														   LPXLOPER XL_dNonBasisZeroCurve,
+														   LPXLOPER XL_fNonBasisZeroCurve,
+														   LPXLOPER XL_dSwaptionBSVol,
+														   LPXLOPER XL_dSwaptionBSSmile,
+														   LPXLOPER XL_calagetype,
+														   LPXLOPER XL_pftype,
+														   LPXLOPER XL_data);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_DFHWBASISTREE (LPXLOPER XL_startDate,
+															   LPXLOPER XL_horizon,
+															   LPXLOPER XL_numSteps,
+															   LPXLOPER XL_dZc,
+															   LPXLOPER XL_fZc,
+															   LPXLOPER XL_dMeanRevSpeed,
+															   LPXLOPER XL_dDate,
+															   LPXLOPER XL_dSigma,
+															   LPXLOPER XL_fDate,
+															   LPXLOPER XL_fSigma,
+															   LPXLOPER XL_FxCorr,
+															   LPXLOPER XL_fxVol,
+															   LPXLOPER XL_fxSpotRate,
+															   LPXLOPER XL_dNonBasisZeroCurve,
+															   LPXLOPER XL_fNonBasisZeroCurve,
+															   LPXLOPER XL_dSwaptionBSVol,
+															   LPXLOPER XL_dSwaptionBSSmile,
+															   LPXLOPER XL_calagetype,
+															   LPXLOPER XL_pftype,
+															   LPXLOPER XL_data);
+
+
+__declspec(dllexport) LPXLOPER WINAPI Local_GetParameter(LPXLOPER XL_modId,
+														 LPXLOPER XL_paramId);
+
+
+__declspec(dllexport) LPXLOPER WINAPI Local_FRMTREE(LPXLOPER XL_FrmAnaId,
+													LPXLOPER XL_horizon,
+													LPXLOPER XL_fineMonth,
+													LPXLOPER XL_corrMatu,
+													LPXLOPER XL_corrMatrix,
+													LPXLOPER XL_corr2Matu);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_FRMTREE(LPXLOPER XL_FrmAnaId,
+														LPXLOPER XL_horizon, 
+														LPXLOPER XL_fineMonth,
+														LPXLOPER XL_corrMatu,
+														LPXLOPER XL_corrMatrix,
+														LPXLOPER XL_corr2Matu);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_FRMTREE_AUTO(LPXLOPER XL_zcId,
+														 LPXLOPER XL_volId,
+														 LPXLOPER XL_smileId,
+														 LPXLOPER XL_autoMode,
+														 LPXLOPER XL_horizon,
+														 LPXLOPER XL_fineMonth,
+														 LPXLOPER XL_shapeDecay,
+														 LPXLOPER XL_shapeSlope,
+														 LPXLOPER XL_shapeAsymptote,
+														 LPXLOPER XL_nbFactor,
+														 LPXLOPER XL_corrMatu,
+														 LPXLOPER XL_corrMatrix,
+														 LPXLOPER XL_corr2Matu);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_FRMTREE_AUTO(LPXLOPER XL_zcId,
+															 LPXLOPER XL_volId,
+															 LPXLOPER XL_smileId,
+															 LPXLOPER XL_autoMode,
+															 LPXLOPER XL_horizon,
+															 LPXLOPER XL_fineMonth,
+															 LPXLOPER XL_shapeDecay,
+															 LPXLOPER XL_shapeSlope,
+															 LPXLOPER XL_shapeAsymptote,
+															 LPXLOPER XL_nbFactor,
+															 LPXLOPER XL_corrMatu,
+															 LPXLOPER XL_corrMatrix,
+															 LPXLOPER XL_corr2Matu);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_FRMTREE_AUTO_G(LPXLOPER XL_zcId,
+														   LPXLOPER XL_zdId,
+														   LPXLOPER XL_volId,
+														   LPXLOPER XL_smileId,
+														   LPXLOPER XL_irgvolId,
+														   LPXLOPER XL_irgsmileId,
+														   LPXLOPER XL_autoMode,
+														   LPXLOPER XL_horizon,
+														   LPXLOPER XL_fineMonth,
+														   LPXLOPER XL_shapeDecay,
+														   LPXLOPER XL_shapeSlope,
+														   LPXLOPER XL_shapeAsymptote,
+														   LPXLOPER XL_nbFactor,
+														   LPXLOPER XL_corrMatu,
+														   LPXLOPER XL_corrMatrix,
+														   LPXLOPER XL_corr2Matu);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_FRMTREE_AUTO_G(LPXLOPER XL_zcId,
+															   LPXLOPER XL_zdId,
+															   LPXLOPER XL_volId,
+															   LPXLOPER XL_smileId,
+															   LPXLOPER XL_irgvolId,
+															   LPXLOPER XL_irgsmileId,
+															   LPXLOPER XL_autoMode,
+															   LPXLOPER XL_horizon,
+															   LPXLOPER XL_fineMonth,
+															   LPXLOPER XL_shapeDecay,
+															   LPXLOPER XL_shapeSlope,
+															   LPXLOPER XL_shapeAsymptote,
+															   LPXLOPER XL_nbFactor,
+															   LPXLOPER XL_corrMatu,
+															   LPXLOPER XL_corrMatrix,
+															   LPXLOPER XL_corr2Matu);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_FRMANA(LPXLOPER XL_zcId,
+												   LPXLOPER XL_resetDates,
+												   LPXLOPER XL_spotVols,
+												   LPXLOPER XL_shapeType,
+												   LPXLOPER XL_shapeDecay,
+												   LPXLOPER XL_shapeSlope,
+												   LPXLOPER XL_shapeAsymptote,
+												   LPXLOPER XL_nbFactor,
+												   LPXLOPER XL_corrMatu,
+												   LPXLOPER XL_corrMatrix,
+												   LPXLOPER XL_corr2Matu); 
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_FRMANA(LPXLOPER XL_zcId,
+													   LPXLOPER XL_resetDates,
+													   LPXLOPER XL_spotVols,
+													   LPXLOPER XL_shapeType,
+													   LPXLOPER XL_shapeDecay,
+													   LPXLOPER XL_shapeSlope,
+													   LPXLOPER XL_shapeAsymptote,
+													   LPXLOPER XL_nbFactor,
+													   LPXLOPER XL_corrMatu,
+													   LPXLOPER XL_corrMatrix,
+													   LPXLOPER XL_corr2Matu);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_FRMANA_PORT(LPXLOPER XL_zcId,
+														LPXLOPER XL_portId,
+														LPXLOPER XL_resetDates,
+														LPXLOPER XL_precision,
+														LPXLOPER XL_min_paras,
+														LPXLOPER XL_max_paras,
+														LPXLOPER XL_max_iters,
+														LPXLOPER XL_fineMonth,
+														LPXLOPER XL_shapeDecay,
+														LPXLOPER XL_shapeSlope,
+														LPXLOPER XL_shapeAsymptote,
+														LPXLOPER XL_nbFactor,
+														LPXLOPER XL_corrMatu,
+														LPXLOPER XL_corrMatrix,
+														LPXLOPER XL_corr2Matu); 
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_FRMANA_PORT(LPXLOPER XL_zcId,
+															LPXLOPER XL_portId,
+															LPXLOPER XL_resetDates,
+															LPXLOPER XL_precision,
+															LPXLOPER XL_min_paras,
+															LPXLOPER XL_max_paras,
+															LPXLOPER XL_max_iters,
+															LPXLOPER XL_fineMonth,
+															LPXLOPER XL_shapeDecay,
+															LPXLOPER XL_shapeSlope,
+															LPXLOPER XL_shapeAsymptote,
+															LPXLOPER XL_nbFactor,
+															LPXLOPER XL_corrMatu,
+															LPXLOPER XL_corrMatrix,
+															LPXLOPER XL_corr2Matu); 
+
+__declspec(dllexport) LPXLOPER WINAPI Local_FRMLSMC(LPXLOPER XL_FrmAnaId,
+													LPXLOPER XL_horizon,
+													LPXLOPER XL_nbTraj,
+													LPXLOPER XL_fineMonth,
+													LPXLOPER XL_mcMethod,
+													LPXLOPER XL_corrMatu,
+													LPXLOPER XL_corrMatrix,
+													LPXLOPER XL_corr2Matu);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_FRMLSMC(LPXLOPER XL_FrmAnaId,
+														LPXLOPER XL_horizon,
+														LPXLOPER XL_nbTraj,
+														LPXLOPER XL_fineMonth,
+														LPXLOPER XL_mcMethod,
+														LPXLOPER XL_corrMatu,
+														LPXLOPER XL_corrMatrix,
+														LPXLOPER XL_corr2Matu);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_FRMLSMC_AUTO(LPXLOPER XL_zcId,
+														 LPXLOPER XL_volId,
+														 LPXLOPER XL_smileId,
+														 LPXLOPER XL_autoMode,
+														 LPXLOPER XL_horizon,
+														 LPXLOPER XL_nbTraj,
+														 LPXLOPER XL_fineMonth,
+														 LPXLOPER XL_mcMethod,
+														 LPXLOPER XL_noControl,
+														 LPXLOPER XL_shapeDecay,
+														 LPXLOPER XL_shapeSlope,
+														 LPXLOPER XL_shapeAsymptote,
+														 LPXLOPER XL_nbFactor,
+														 LPXLOPER XL_corrMatu,
+														 LPXLOPER XL_corrMatrix,
+														 LPXLOPER XL_corr2Matu);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_FRMLSMC_AUTO(LPXLOPER XL_zcId,
+															 LPXLOPER XL_volId,
+															 LPXLOPER XL_smileId,
+															 LPXLOPER XL_autoMode,
+															 LPXLOPER XL_horizon,
+															 LPXLOPER XL_nbTraj,
+															 LPXLOPER XL_fineMonth,
+															 LPXLOPER XL_mcMethod,
+															 LPXLOPER XL_noControl,
+															 LPXLOPER XL_shapeDecay,
+															 LPXLOPER XL_shapeSlope,
+															 LPXLOPER XL_shapeAsymptote,
+															 LPXLOPER XL_nbFactor,
+															 LPXLOPER XL_corrMatu,
+															 LPXLOPER XL_corrMatrix,
+															 LPXLOPER XL_corr2Matu);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_FRMLSMC_AUTO_2(LPXLOPER XL_zcId,
+														   LPXLOPER XL_swoptVolId,
+														   LPXLOPER XL_swoptSmileId,
+														   LPXLOPER XL_irgVolId,
+														   LPXLOPER XL_irgSmileId,
+														   LPXLOPER XL_nbTraj,
+														   LPXLOPER XL_fineMonth,
+														   LPXLOPER XL_mcMethod,
+														   LPXLOPER XL_noControl,
+														   LPXLOPER XL_shapeDecay,
+														   LPXLOPER XL_shapeSlope,
+														   LPXLOPER XL_shapeAsymptote,
+														   LPXLOPER XL_nbFactor,
+														   LPXLOPER XL_corrMatu,
+														   LPXLOPER XL_corrMatrix,
+														   LPXLOPER XL_corr2Matu); 
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_FRMLSMC_AUTO_2(LPXLOPER XL_zcId,
+															   LPXLOPER XL_swopVolId,
+															   LPXLOPER XL_swopSmileId,
+															   LPXLOPER XL_irgVolId,
+															   LPXLOPER XL_irgSmileId,
+															   LPXLOPER XL_autoMode,
+															   LPXLOPER XL_horizon,
+															   LPXLOPER XL_nbTraj,
+															   LPXLOPER XL_fineMonth,
+															   LPXLOPER XL_mcMethod,
+															   LPXLOPER XL_noControl,
+															   LPXLOPER XL_shapeDecay,
+															   LPXLOPER XL_shapeSlope,
+															   LPXLOPER XL_shapeAsymptote,
+															   LPXLOPER XL_nbFactor,
+															   LPXLOPER XL_corrMatu,
+															   LPXLOPER XL_corrMatrix,
+															   LPXLOPER XL_corr2Matu);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_FRMLSMC_AUTO_G(LPXLOPER XL_zcId,
+														   LPXLOPER XL_zdId,
+														   LPXLOPER XL_swopVolId,
+														   LPXLOPER XL_swopSmileId,
+														   LPXLOPER XL_irgVolId,
+														   LPXLOPER XL_irgSmileId,
+														   LPXLOPER XL_autoMode,
+														   LPXLOPER XL_horizon,
+														   LPXLOPER XL_nbTraj,
+														   LPXLOPER XL_fineMonth,
+														   LPXLOPER XL_mcMethod,
+														   LPXLOPER XL_noControl,
+														   LPXLOPER XL_shapeDecay,
+														   LPXLOPER XL_shapeSlope,
+														   LPXLOPER XL_shapeAsymptote,
+														   LPXLOPER XL_nbFactor,
+														   LPXLOPER XL_corrMatu,
+														   LPXLOPER XL_corrMatrix,
+														   LPXLOPER XL_corr2Matu);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_FRMLSMC_AUTO_G(LPXLOPER XL_zcId,
+															   LPXLOPER XL_zdId,
+															   LPXLOPER XL_swopVolId,
+															   LPXLOPER XL_swopSmileId,
+															   LPXLOPER XL_irgVolId,
+															   LPXLOPER XL_irgSmileId,
+															   LPXLOPER XL_autoMode,
+															   LPXLOPER XL_horizon,
+															   LPXLOPER XL_nbTraj,
+															   LPXLOPER XL_fineMonth,
+															   LPXLOPER XL_mcMethod,
+															   LPXLOPER XL_noControl,
+															   LPXLOPER XL_shapeDecay,
+															   LPXLOPER XL_shapeSlope,
+															   LPXLOPER XL_shapeAsymptote,
+															   LPXLOPER XL_nbFactor,
+															   LPXLOPER XL_corrMatu,
+															   LPXLOPER XL_corrMatrix,
+															   LPXLOPER XL_corr2Matu);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_BSSLMODEL(LPXLOPER XL_date,
+													  LPXLOPER XL_zerocurve,
+													  LPXLOPER XL_volSpreadLock,
+													  LPXLOPER XL_cvCapVol,
+													  LPXLOPER XL_cvIndexVol);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_BSSLMODEL(LPXLOPER XL_date,
+														  LPXLOPER XL_zerocurve,
+														  LPXLOPER XL_volSpreadLock,
+														  LPXLOPER XL_cvCapVol,
+														  LPXLOPER XL_cvIndexVol);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_BKIRTREE (LPXLOPER XL_zc,
+													  LPXLOPER XL_startDate,
+													  LPXLOPER XL_endDate,
+													  LPXLOPER XL_pas,
+													  LPXLOPER XL_a,
+													  LPXLOPER XL_sigma);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_BKIRTREE (LPXLOPER XL_zc,
+														  LPXLOPER XL_startDate,
+														  LPXLOPER XL_endDate,
+														  LPXLOPER XL_pas,
+														  LPXLOPER XL_a,
+														  LPXLOPER XL_sigma);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_LDCMC_FROM_ANA(LPXLOPER XL_anaModId,
+														   LPXLOPER XL_horizon,
+														   LPXLOPER XL_nbTraj,
+														   LPXLOPER XL_mcmethod);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_LDCMC_FROM_ANA(LPXLOPER XL_anaModId,
+															   LPXLOPER XL_horizon,
+															   LPXLOPER XL_nbTraj,
+															   LPXLOPER XL_mcmethod);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_HWTREE(LPXLOPER XL_zcId,
+												   LPXLOPER XL_begDate,
+												   LPXLOPER XL_endDate,
+												   LPXLOPER XL_nbSteps,
+												   LPXLOPER XL_a,
+												   LPXLOPER XL_sigma);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_HWTREE(LPXLOPER XL_zcId,
+													   LPXLOPER XL_begDate,
+													   LPXLOPER XL_endDate,
+													   LPXLOPER XL_nbSteps,
+													   LPXLOPER XL_a,
+													   LPXLOPER XL_sigma);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_HWSIGCONST(LPXLOPER XL_zcId,
+													   LPXLOPER XL_begDate,
+													   LPXLOPER XL_endDate,
+													   LPXLOPER XL_nbSteps,
+													   LPXLOPER XL_a,
+													   LPXLOPER XL_sigma);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_HWSIGCONST(LPXLOPER XL_zcId,
+														   LPXLOPER XL_begDate,
+														   LPXLOPER XL_endDate,
+														   LPXLOPER XL_nbSteps,
+														   LPXLOPER XL_a,
+														   LPXLOPER XL_sigma);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_HWSIGVAR(XLOPER XL_zcId,
+													 LPXLOPER XL_begDate,
+													 LPXLOPER XL_endDate,
+													 LPXLOPER XL_nbSteps,
+													 LPXLOPER XL_a,
+													 LPXLOPER XL_datesSigma);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_HWSIGVAR(LPXLOPER XL_zcId,
+														 LPXLOPER XL_begDate,
+														 LPXLOPER XL_endDate,
+														 LPXLOPER XL_nbSteps,
+														 LPXLOPER XL_a,
+														 LPXLOPER XL_datesSigma);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_DFGYC (LPXLOPER XL_dMeanRevSpeed,
+												   LPXLOPER XL_fMeanRevSpeed,
+												   LPXLOPER XL_dSigma,
+												   LPXLOPER XL_fSigma,
+												   LPXLOPER XL_fxCorr,
+												   LPXLOPER XL_fxVol,
+												   LPXLOPER XL_ratesCorr,
+												   LPXLOPER XL_dZc,
+												   LPXLOPER XL_fZc);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_DFGYC (LPXLOPER XL_dMeanRevSpeed,
+													   LPXLOPER XL_fMeanRevSpeed,
+													   LPXLOPER XL_dSigma,
+													   LPXLOPER XL_fSigma,
+													   LPXLOPER XL_fxCorr,
+													   LPXLOPER XL_fxVol,
+													   LPXLOPER XL_ratesCorr,
+													   LPXLOPER XL_dZc,
+													   LPXLOPER XL_fZc);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_IDTREEHW(LPXLOPER XL_startDate,
+													 LPXLOPER XL_horizon,
+													 LPXLOPER XL_nbSteps,
+													 LPXLOPER XL_dMeanRevSpeed,
+													 LPXLOPER XL_fMeanRevSpeed,
+													 LPXLOPER XL_dSigma,
+													 LPXLOPER XL_fSigma,
+													 LPXLOPER XL_prtyCorr,
+													 LPXLOPER XL_prtyVol,
+													 LPXLOPER XL_ratesCorr,
+													 LPXLOPER XL_dZcId,
+													 LPXLOPER XL_fZcId);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_IDTREEHW(LPXLOPER XL_startDate,
+														 LPXLOPER XL_horizon,
+														 LPXLOPER XL_nbSteps,
+														 LPXLOPER XL_dMeanRevSpeed,
+														 LPXLOPER XL_fMeanRevSpeed,
+														 LPXLOPER XL_dSigma,
+														 LPXLOPER XL_fSigma,
+														 LPXLOPER XL_prtyCorr,
+														 LPXLOPER XL_prtyVol,
+														 LPXLOPER XL_ratesCorr,
+														 LPXLOPER XL_dZcId,
+														 LPXLOPER XL_fZcId);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_HWANALYTICSIGVAR(LPXLOPER XL_zcId,
+															 LPXLOPER XL_a,
+															 LPXLOPER XL_datesSigma);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_HWANALYTICSIGVAR(LPXLOPER XL_zcId,
+																 LPXLOPER XL_a,
+																 LPXLOPER XL_datesSigma);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_BASISMCFRM(LPXLOPER XL_zcId,
+													   LPXLOPER XL_baZcId,
+													   LPXLOPER XL_volId,
+													   LPXLOPER XL_smileId,
+													   LPXLOPER XL_productType,
+													   LPXLOPER XL_horizon,
+													   LPXLOPER XL_nbTraj,
+													   LPXLOPER XL_MCGeneratorType,
+													   LPXLOPER XL_shapeDecay,
+													   LPXLOPER XL_shapeSlope,
+													   LPXLOPER XL_shapeAsymptote,
+													   LPXLOPER XL_nbFactor,
+													   LPXLOPER XL_indexes,
+													   LPXLOPER XL_correlatedIndex,
+													   LPXLOPER XL_corrMatrix,
+													   LPXLOPER XL_control,
+													   LPXLOPER XL_seed);
+__declspec(dllexport) LPXLOPER WINAPI LOCAL_PXL_BASISMCFRM(LPXLOPER XL_zcId,
+														   LPXLOPER XL_baZcId,
+														   LPXLOPER XL_volId, 
+														   LPXLOPER XL_smileId,
+														   LPXLOPER XL_productType,
+														   LPXLOPER XL_horizon,
+														   LPXLOPER XL_nbTraj,
+														   LPXLOPER XL_MCGeneratorType,
+														   LPXLOPER XL_shapeDecay,
+														   LPXLOPER XL_shapeSlope,
+														   LPXLOPER XL_shapeAsymptote,
+														   LPXLOPER XL_nbFactor,
+														   LPXLOPER XL_indexes,
+														   LPXLOPER XL_correlatedIndex,
+														   LPXLOPER XL_corrMatrix,
+														   LPXLOPER XL_control,
+														   LPXLOPER XL_seed);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_BASISMCFRM2CR(LPXLOPER XL_zcId,
+														  LPXLOPER XL_baZcId,
+														  LPXLOPER XL_swoptvolId,
+														  LPXLOPER XL_swoptsmileId,
+														  LPXLOPER XL_irgvolId,
+														  LPXLOPER XL_irgsmileId,
+														  LPXLOPER XL_productType,
+														  LPXLOPER XL_horizon,
+														  LPXLOPER XL_nbTraj,
+														  LPXLOPER XL_MCGeneratorType,
+														  LPXLOPER XL_shapeDecay,
+														  LPXLOPER XL_shapeSlope,
+														  LPXLOPER XL_shapeAsymptote,
+														  LPXLOPER XL_nbFactor,
+														  LPXLOPER XL_indexes,
+														  LPXLOPER XL_correlatedIndex,
+														  LPXLOPER XL_corrMatrix,
+														  LPXLOPER XL_control,
+														  LPXLOPER XL_seed);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_BASISMCFRM2CR(LPXLOPER XL_zcId,
+															  LPXLOPER XL_baZcId,
+															  LPXLOPER XL_swoptvolId,
+															  LPXLOPER XL_swoptsmileId,
+															  LPXLOPER XL_irgvolId,
+															  LPXLOPER XL_irgsmileId,
+															  LPXLOPER XL_productType,
+															  LPXLOPER XL_horizon,
+															  LPXLOPER XL_nbTraj,
+															  LPXLOPER XL_MCGeneratorType,
+															  LPXLOPER XL_shapeDecay,
+															  LPXLOPER XL_shapeSlope,
+															  LPXLOPER XL_shapeAsymptote,
+															  LPXLOPER XL_nbFactor,
+															  LPXLOPER XL_indexes,
+															  LPXLOPER XL_correlatedIndex,
+															  LPXLOPER XL_corrMatrix,
+															  LPXLOPER XL_control,
+															  LPXLOPER XL_seed);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_GetCalibrationOutput(LPXLOPER XL_modId);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_SMILEDLDCANA(LPXLOPER XL_anaModId,
+														 LPXLOPER XL_dVolSpotUp,
+														 LPXLOPER XL_Asymp_RowUp,
+														 LPXLOPER XL_Asymp_ColUp,
+														 LPXLOPER XL_pUp,
+														 LPXLOPER XL_dVolSpotDo,
+														 LPXLOPER XL_Asymp_RowDo,
+														 LPXLOPER XL_Asymp_ColDo,
+														 LPXLOPER XL_pDo);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_SMILEDLDCANA(LPXLOPER XL_anaModId,
+															 LPXLOPER XL_dVolSpotUp,
+															 LPXLOPER XL_Asymp_RowUp,
+															 LPXLOPER XL_Asymp_ColUp,
+															 LPXLOPER XL_pUp,
+															 LPXLOPER XL_dVolSpotDo,
+															 LPXLOPER XL_Asymp_RowDo,
+															 LPXLOPER XL_Asymp_ColDo,
+															 LPXLOPER XL_pDo);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_SMILEDLDCFROMANA(LPXLOPER XL_anaModId,
+															 LPXLOPER XL_horizon,
+															 LPXLOPER XL_nbTraj,
+															 LPXLOPER XL_mcmethod);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_SMILEDLDCFROMANA(LPXLOPER XL_anaModId,
+																 LPXLOPER XL_horizon,
+																 LPXLOPER XL_nbTraj,
+																 LPXLOPER XL_mcmethod);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_BSSMILEDMODEL(LPXLOPER XL_date,
+														  LPXLOPER XL_spot,
+														  LPXLOPER XL_dividend,
+														  LPXLOPER XL_discrate,
+														  LPXLOPER XL_volat,
+														  LPXLOPER XL_typstk,
+														  LPXLOPER XL_maturities,
+														  LPXLOPER XL_rho,
+														  LPXLOPER XL_nu,
+														  LPXLOPER XL_isSABR,
+														  LPXLOPER XL_beta,
+														  LPXLOPER XL_weight,
+                                                          LPXLOPER XL_sigmaOrAlphaFlag,
+                                                          LPXLOPER XL_correlManager,
+														  LPXLOPER XL_rdiscrate,
+														  LPXLOPER XL_adjCvxVol,
+														  LPXLOPER XL_convToAdjVolWhenAlpha);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_BSSMILEDMODEL(LPXLOPER XL_date,
+															  LPXLOPER XL_spot,
+															  LPXLOPER XL_dividend,
+															  LPXLOPER XL_discrate,
+															  LPXLOPER XL_volat,
+															  LPXLOPER XL_typstk,
+															  LPXLOPER XL_maturities,
+															  LPXLOPER XL_rho,
+															  LPXLOPER XL_nu,
+															  LPXLOPER XL_isSABR,
+															  LPXLOPER XL_beta,
+															  LPXLOPER XL_weight,
+                                                              LPXLOPER XL_sigmaOrAlphaFlag,
+															  LPXLOPER XL_correlManager,
+															  LPXLOPER XL_rdiscrate,
+															  LPXLOPER XL_adjCvxVol,
+															  LPXLOPER XL_convToAdjVolWhenAlpha);
+
+
+//----------------------------------------------------------------------------------//
+// BS Smiled Model with SABR structure (ARM_SABRVol)								//
+//----------------------------------------------------------------------------------//
+__declspec(dllexport) LPXLOPER WINAPI Local_SABR_BSSMILEDMODEL(LPXLOPER XL_date,
+															   LPXLOPER XL_spot,
+															   LPXLOPER XL_dividend,
+															   LPXLOPER XL_discrate,
+															   LPXLOPER XL_SABRVol,
+															   LPXLOPER XL_typstk,
+															   LPXLOPER XL_correlManager,
+															   LPXLOPER XL_rdiscrate,
+															   LPXLOPER XL_adjCvxVol,
+															   LPXLOPER XL_convToAdjVolWhenAlpha);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_SABR_BSSMILEDMODEL(LPXLOPER XL_date,
+																   LPXLOPER XL_spot,
+																   LPXLOPER XL_dividend,
+															       LPXLOPER XL_discrate,
+															       LPXLOPER XL_SABRVol,
+															       LPXLOPER XL_typstk,
+															       LPXLOPER XL_correlManager,
+															       LPXLOPER XL_rdiscrate,
+																   LPXLOPER XL_adjCvxVol,
+																   LPXLOPER XL_convToAdjVolWhenAlpha);
+
+
+
+__declspec(dllexport) LPXLOPER WINAPI Local_CRRTREE(LPXLOPER XL_begDate,
+													LPXLOPER XL_endDate,
+													LPXLOPER XL_nbSteps,
+													LPXLOPER XL_spot,
+													LPXLOPER XL_dividend,
+													LPXLOPER XL_discrate,
+													LPXLOPER XL_volat);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_CRRTREE(LPXLOPER XL_begDate,
+														LPXLOPER XL_endDate,
+														LPXLOPER XL_nbSteps,
+														LPXLOPER XL_spot,
+														LPXLOPER XL_dividend,
+														LPXLOPER XL_discrate,
+														LPXLOPER XL_volat);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_BSCORRMODEL(LPXLOPER XL_startDate,
+														LPXLOPER XL_zeroCurve,
+														LPXLOPER XL_spreadLock,
+														LPXLOPER XL_capIrgVol,
+														LPXLOPER XL_capCashVol,
+														LPXLOPER XL_indexVolAdj,
+														LPXLOPER XL_spreadVol,
+														LPXLOPER XL_correlations,
+														LPXLOPER XL_modelType,
+														LPXLOPER XL_volType);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_BSCORRMODEL(LPXLOPER XL_startDate,
+															LPXLOPER XL_zeroCurve,
+															LPXLOPER XL_spreadLock,
+															LPXLOPER XL_capIrgVol,
+															LPXLOPER XL_capCashVol,
+															LPXLOPER XL_indexVolAdj,
+															LPXLOPER XL_spreadVol,
+															LPXLOPER XL_correlations,
+															LPXLOPER XL_modelType,
+															LPXLOPER XL_volType);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_FRMTREE_AUTO_B(LPXLOPER XL_zcId,
+													 LPXLOPER XL_zdId,
+													 LPXLOPER XL_volId,
+													 LPXLOPER XL_smileId,
+													 LPXLOPER XL_autoMode,
+													 LPXLOPER XL_horizon,
+													 LPXLOPER XL_fineMonth,
+													 LPXLOPER XL_shapeDecay,
+													 LPXLOPER XL_shapeSlope,
+													 LPXLOPER XL_shapeAsymptote,
+													 LPXLOPER XL_nbFactor,
+													 LPXLOPER XL_corrMatu,
+													 LPXLOPER XL_corrMatrix,
+													 LPXLOPER XL_corr2Matu);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_FRMTREE_AUTO_B(LPXLOPER XL_zcId,
+														 LPXLOPER XL_zdId,
+														 LPXLOPER XL_volId,
+														 LPXLOPER XL_smileId,
+														 LPXLOPER XL_autoMode,
+														 LPXLOPER XL_horizon,
+														 LPXLOPER XL_fineMonth,
+														 LPXLOPER XL_shapeDecay,
+														 LPXLOPER XL_shapeSlope,
+														 LPXLOPER XL_shapeAsymptote,
+														 LPXLOPER XL_nbFactor,
+														 LPXLOPER XL_corrMatu,
+														 LPXLOPER XL_corrMatrix,
+														 LPXLOPER XL_corr2Matu);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_DFFXBS (LPXLOPER XL_dVol,
+													LPXLOPER XL_fVol,
+													LPXLOPER XL_dZc,
+													LPXLOPER XL_fZc,
+													LPXLOPER XL_dFxCorr,
+													LPXLOPER XL_fFxCorr,
+													LPXLOPER XL_fxVol,
+													LPXLOPER XL_ratesCorr,
+													LPXLOPER XL_dBSZc,
+													LPXLOPER XL_fBSZc,
+													LPXLOPER XL_spot,
+                                                    PXLOPER XL_FundZc,
+													LPXLOPER XL_FundBSZc,
+													LPXLOPER XL_fundFxSpot,
+													LPXLOPER XL_fxSmile,
+                                                    LPXLOPER XL_LnOrNorVols,
+													LPXLOPER XL_sabrDom,
+													LPXLOPER XL_sabrFor,
+													LPXLOPER XL_fxVolModel);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_DFFXBS (LPXLOPER XL_dVol,
+														LPXLOPER XL_fVol,
+														LPXLOPER XL_dZc,
+														LPXLOPER XL_fZc,
+														LPXLOPER XL_dFxCorr,
+														LPXLOPER XL_fFxCorr,
+														LPXLOPER XL_fxVol,
+														LPXLOPER XL_ratesCorr,
+														LPXLOPER XL_dBSZc,
+														LPXLOPER XL_fBSZc,
+														LPXLOPER XL_spot,
+                                                        PXLOPER XL_FundZc,
+													    LPXLOPER XL_FundBSZc,
+													    LPXLOPER XL_fundFxSpot,
+														LPXLOPER XL_fxSmile,
+                                                        LPXLOPER XL_LnOrNorVols,
+														LPXLOPER XL_sabrDom,
+														LPXLOPER XL_sabrFor,
+														LPXLOPER XL_fxVolModel);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_DFFXBS_from2BS (LPXLOPER XL_dBS,
+															LPXLOPER XL_fBS,
+															LPXLOPER XL_dFxCorr,
+															LPXLOPER XL_fFxCorr,
+															LPXLOPER XL_fxVol,
+															LPXLOPER XL_ratesCorr,
+															LPXLOPER XL_dBSZc,
+															LPXLOPER XL_fBSZc,
+															LPXLOPER XL_spot,
+															PXLOPER XL_FundZc,
+															LPXLOPER XL_FundBSZc,
+															LPXLOPER XL_fundFxSpot,
+															LPXLOPER XL_fxSmile,
+															LPXLOPER XL_fxVolModel);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_DFFXBS_from2BS (LPXLOPER XL_dBS,
+																LPXLOPER XL_fBS,
+																LPXLOPER XL_dFxCorr,
+																LPXLOPER XL_fFxCorr,
+																LPXLOPER XL_fxVol,
+																LPXLOPER XL_ratesCorr,
+																LPXLOPER XL_dBSZc,
+																LPXLOPER XL_fBSZc,
+																LPXLOPER XL_spot,
+																PXLOPER XL_FundZc,
+																LPXLOPER XL_FundBSZc,
+																LPXLOPER XL_fundFxSpot,
+																LPXLOPER XL_fxSmile,
+																LPXLOPER XL_fxVolModel);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_CALIBRATIONHWSV(LPXLOPER XL_asof,
+																LPXLOPER XL_curve,
+																LPXLOPER XL_vol,
+																LPXLOPER XL_sec,
+																LPXLOPER XL_amin,
+																LPXLOPER XL_amax,
+																LPXLOPER XL_volmin,
+																LPXLOPER XL_volmax,
+																LPXLOPER XL_dates,
+																LPXLOPER XL_pf,
+																LPXLOPER XL_rhoswopt,
+																LPXLOPER XL_nuswopt,
+																LPXLOPER XL_betaswopt);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_ARM_CALIBRATIONHWSV(LPXLOPER XL_asof,
+																	LPXLOPER XL_curve,
+																	LPXLOPER XL_vol,
+																	LPXLOPER XL_sec,
+																	LPXLOPER XL_amin,
+																	LPXLOPER XL_amax,
+																	LPXLOPER XL_volmin,
+																	LPXLOPER XL_volmax,
+																	LPXLOPER XL_dates,
+																	LPXLOPER XL_pf,
+																	LPXLOPER XL_rhoswopt,
+																	LPXLOPER XL_nuswopt,
+																	LPXLOPER XL_betaswopt);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_CALIBRATE(LPXLOPER XL_calibrator,
+														  LPXLOPER XL_calibType);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_ARM_CALIBRATE(LPXLOPER XL_calibrator,
+															  LPXLOPER XL_calibType);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_HWSIGVARFromAna(LPXLOPER XL_modId,
+																LPXLOPER XL_endDate,
+																LPXLOPER XL_nbSteps);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_ARM_HWSIGVARFromAna(LPXLOPER XL_modId,
+																	LPXLOPER XL_endDate,
+																	LPXLOPER XL_nbSteps);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_BSSMILEDCALIBRATE(LPXLOPER XL_model,
+																  LPXLOPER XL_pf,
+																  LPXLOPER XL_calVolOrNot,
+																  LPXLOPER XL_calRhoOrNot,
+																  LPXLOPER XL_calNuOrNot,
+																  LPXLOPER XL_volTenor,
+																  LPXLOPER XL_timeStep,
+																  LPXLOPER XL_minSig,
+																  LPXLOPER XL_maxSig,
+																  LPXLOPER XL_minRho,
+																  LPXLOPER XL_maxRho,
+																  LPXLOPER XL_minNu,
+																  LPXLOPER XL_maxNu,
+																  LPXLOPER XL_interpMethod,
+																  LPXLOPER XL_tol,
+																  LPXLOPER XL_maxIter,
+																  LPXLOPER XL_gradCalc,
+																  LPXLOPER XL_lambda,
+																  LPXLOPER XL_globOrBootstrap,
+																  LPXLOPER XL_SmoothMatuBetaParam);
+                     
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_ARM_BSSMILEDCALIBRATE(LPXLOPER XL_model,
+																	  LPXLOPER XL_pf,
+																	  LPXLOPER XL_calVolOrNot,
+																	  LPXLOPER XL_calRhoOrNot,
+																	  LPXLOPER XL_calNuOrNot,
+																	  LPXLOPER XL_volTenor,
+																	  LPXLOPER XL_timeStep,
+																	  LPXLOPER XL_minSig,
+																	  LPXLOPER XL_maxSig,
+																	  LPXLOPER XL_minRho,
+																	  LPXLOPER XL_maxRho,
+																	  LPXLOPER XL_minNu,
+																	  LPXLOPER XL_maxNu,
+																	  LPXLOPER XL_interpMethod,
+																	  LPXLOPER XL_tol,
+																	  LPXLOPER XL_maxIter,
+																	  LPXLOPER XL_gradCalc,
+																	  LPXLOPER XL_lambda,
+																	  LPXLOPER XL_globOrBootstrap,
+																	  LPXLOPER XL_SmoothMatuBetaParam);
+               
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_GETCALIBRATED_SIGRHONU(LPXLOPER XL_model,
+																	   LPXLOPER XL_param);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_ARM_GETCALIBRATED_SIGRHONU(LPXLOPER XL_model,
+																		   LPXLOPER XL_param);
+
+_declspec(dllexport) LPXLOPER WINAPI Local_ARM_CalibrationFRMModel( LPXLOPER XL_zcId,
+																	LPXLOPER XL_liborType,
+                                                                    LPXLOPER XL_nbFactors,
+                                                                    LPXLOPER XL_initA,
+																	LPXLOPER XL_initK,
+                                                                    LPXLOPER XL_meanRevA,
+																	LPXLOPER XL_meanRevK,                                                                    
+                                                                    LPXLOPER XL_mdec,
+                                                                    LPXLOPER XL_schedPrice,
+                                                                    LPXLOPER XL_pf1Id,
+                                                                    LPXLOPER XL_pf2Id,
+                                                                    LPXLOPER XL_ACalibrationSchedule,
+																	LPXLOPER XL_KCalibrationSchedule,                                                                    
+                                                                    LPXLOPER XL_powers,
+																	LPXLOPER XL_smoothParams,
+																	LPXLOPER XL_bounds,
+																	LPXLOPER XL_optimizerParams,
+                                                                    LPXLOPER XL_calib);
+
+_declspec(dllexport) LPXLOPER WINAPI Local_PXL_ARM_CalibrationFRMModel( LPXLOPER XL_zcId,
+																	    LPXLOPER XL_liborType,
+                                                                        LPXLOPER XL_nbFactors,
+                                                                        LPXLOPER XL_initA,
+																	    LPXLOPER XL_initK,
+                                                                        LPXLOPER XL_meanRevA,
+																	    LPXLOPER XL_meanRevK,                                                                        
+                                                                        LPXLOPER XL_mdec,
+                                                                        LPXLOPER XL_schedPrice,
+                                                                        LPXLOPER XL_pf1Id,
+                                                                        LPXLOPER XL_pf2Id,
+                                                                        LPXLOPER XL_ACalibrationSchedule,
+																	    LPXLOPER XL_KCalibrationSchedule,                                                                    
+                                                                        LPXLOPER XL_powers,
+																	    LPXLOPER XL_smoothParams,
+																	    LPXLOPER XL_bounds,
+																	    LPXLOPER XL_optimizerParams,
+                                                                        LPXLOPER XL_calib);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_GETFROMFRMMODEL(LPXLOPER XL_model,
+																LPXLOPER XL_param);
+
+
+
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_BootstCalibFRMModel(LPXLOPER XL_zcId,
+																	LPXLOPER XL_liborType,
+																	LPXLOPER XL_CalibParams,
+																	LPXLOPER XL_initCurve,
+																	LPXLOPER XL_mdec,
+																	LPXLOPER XL_meanRev,
+                                                                    LPXLOPER XL_pf1Id,
+                                                                    LPXLOPER XL_nbfactor,	
+                                                                    LPXLOPER XL_correlmatrix,
+																	LPXLOPER XL_pf2Id,
+                                                                    LPXLOPER XL_VolType,
+                                                                    LPXLOPER XL_Calib,
+                                                                    LPXLOPER XL_pf3Id,
+                                                                    LPXLOPER XL_marketmodelId,
+                                                                    LPXLOPER XL_flagPreInit,
+                                                                    LPXLOPER XL_precision,
+                                                                    LPXLOPER XL_vegaLevel);
+
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_ARM_BootstCalibFRMModel(LPXLOPER XL_zcId,																		
+																		LPXLOPER XL_liborType,
+																		LPXLOPER XL_CalibParams,
+																		LPXLOPER XL_initCurve,
+																		LPXLOPER XL_mdec,
+																		LPXLOPER XL_meanRev,                          									
+																	    LPXLOPER XL_pf1Id,
+                                                                        LPXLOPER XL_nbfactor,	
+                                                                        LPXLOPER XL_correlmatrix,
+																		LPXLOPER XL_pf2Id,
+																		LPXLOPER XL_VolType,
+																		LPXLOPER XL_Calib,
+                                                                        LPXLOPER XL_pf3Id,
+                                                                        LPXLOPER XL_marketmodelId,
+                                                                        LPXLOPER XL_flagPreInit,
+                                                                        LPXLOPER XL_precision,
+                                                                        LPXLOPER XL_vegaLevel);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_MCFRMMODEL(LPXLOPER XL_FRMModId,
+													       LPXLOPER XL_nbTraj,
+													       LPXLOPER XL_nbStepIn,
+                                                           LPXLOPER XL_pricerType
+                                                           LPXLOPER XL_mcMethod);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_ARM_MCFRMMODEL(LPXLOPER XL_FRMModId,
+															   LPXLOPER XL_nbTraj,
+															   LPXLOPER XL_nbStepIn,
+															   LPXLOPER XL_pricerType,
+                                                               LPXLOPER XL_mcMethod);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_FRMMARKOVTREE(LPXLOPER XL_startDate,
+                                                              LPXLOPER XL_horizon,
+                                                              LPXLOPER XL_zc,
+                                                              LPXLOPER XL_pathNumber,
+                                                              LPXLOPER XL_Params,
+                                                              LPXLOPER XL_FRMModel);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_ARM_FRMMARKOVTREE(LPXLOPER XL_startDate,
+                                                                  LPXLOPER XL_horizon,
+                                                                  LPXLOPER XL_zc,
+                                                                  LPXLOPER XL_pathNumber,
+                                                                  LPXLOPER XL_Params,
+                                                                  LPXLOPER XL_FRMModel);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_LOGDECALANA(LPXLOPER XL_zc,
+															LPXLOPER XL_freq,
+															LPXLOPER XL_resetMatu,
+															LPXLOPER XL_shifts,
+															LPXLOPER XL_fwdVols,
+															LPXLOPER XL_isWeighted);
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_ARM_LOGDECALANA(LPXLOPER XL_zc,
+																LPXLOPER XL_freq,
+																LPXLOPER XL_resetMatu,
+																LPXLOPER XL_shifts,
+																LPXLOPER XL_fwdVols,
+																LPXLOPER XL_isWeighted);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_QMODEL(LPXLOPER XL_date,
+													   LPXLOPER XL_spot,
+													   LPXLOPER XL_dividend,
+													   LPXLOPER XL_discrate,
+													   LPXLOPER XL_volat,
+													   LPXLOPER XL_q0,
+													   LPXLOPER XL_q1,
+													   LPXLOPER XL_typstk);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_ARM_QMODEL(LPXLOPER XL_date,
+														   LPXLOPER XL_spot,
+														   LPXLOPER XL_dividend,
+														   LPXLOPER XL_discrate,
+														   LPXLOPER XL_volat,
+														   LPXLOPER XL_q0,
+														   LPXLOPER XL_q1,
+														   LPXLOPER XL_typstk);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_GLOBDFBS(LPXLOPER XL_DomBSId,
+													 LPXLOPER XL_DomCurrId,
+													 LPXLOPER XL_FrgBSId,
+													 LPXLOPER XL_FrgCurrId,
+													 LPXLOPER XL_fxVolCrvId,
+													 LPXLOPER XL_FFxCorrId,
+													 LPXLOPER XL_RatesCorrId,
+													 LPXLOPER XL_fxVolModel);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_GLOBDFBS(LPXLOPER XL_DomBSId,
+														 LPXLOPER XL_DomCurrId,
+														 LPXLOPER XL_FrgBSId,
+														 LPXLOPER XL_FrgCurrId,
+														 LPXLOPER XL_fxVolCrvId,
+														 LPXLOPER XL_FFxCorrId,
+														 LPXLOPER XL_RatesCorrId,
+														 LPXLOPER XL_fxVolModel);
+
+
+
+_declspec(dllexport) LPXLOPER WINAPI Local_ARM_CROSSMODEL (LPXLOPER XL_date,
+															LPXLOPER XL_dBSmodel,
+															LPXLOPER XL_fBSmodel,
+															LPXLOPER XL_fxVol,
+															LPXLOPER XL_dFxCorr,
+															LPXLOPER XL_fFxCorr,
+															LPXLOPER XL_domfgnCorr,
+															LPXLOPER XL_discountZC,
+															LPXLOPER XL_correlforAdj,
+															LPXLOPER XL_adjustflag,
+															LPXLOPER XL_slopeflag);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_ARM_CROSSMODEL (LPXLOPER XL_date,
+															LPXLOPER XL_dBSmodel,
+															LPXLOPER XL_fBSmodel,
+															LPXLOPER XL_fxVol,
+															LPXLOPER XL_dFxCorr,
+															LPXLOPER XL_fFxCorr,
+															LPXLOPER XL_domfgnCorr,
+															LPXLOPER XL_discountZC,
+															LPXLOPER XL_correlforAdj,
+															LPXLOPER XL_adjustflag,
+															LPXLOPER XL_slopeflag);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_BSConvAdjust_Create();
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_BSConvAdjust_Create(
+                                                                    LPXLOPER XL_monthList,
+                                                                    LPXLOPER XL_seasonSpreadList);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ReplicConvAdjust_Create(
+	LPXLOPER XL_Payoff_ReplicMode,
+	LPXLOPER XL_Payoff_ReplicPrecision,
+	LPXLOPER XL_Payoff_StopMode,
+	LPXLOPER XL_Payoff_StopThreshold,
+	LPXLOPER XL_Sensi_ReplicMode,
+	LPXLOPER XL_Sensi_ReplicPrecision,
+	LPXLOPER XL_Sensi_StopMode,
+	LPXLOPER XL_Sensi_StopThreshold,
+    LPXLOPER XL_SUMMITFormulaeUsed,
+	LPXLOPER XL_StrikeMinReplic,
+	LPXLOPER XL_StrikeMaxReplic);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_ReplicConvAdjust_Create(
+    LPXLOPER XL_Payoff_ReplicMode,
+	LPXLOPER XL_Payoff_StepOrReplicPrecision,
+	LPXLOPER XL_Payoff_StopMode,
+	LPXLOPER XL_Payoff_StopThreshold,
+	LPXLOPER XL_Sensi_ReplicMode,
+	LPXLOPER XL_Sensi_StepOrReplicPrecision,
+	LPXLOPER XL_Sensi_StopMode,
+	LPXLOPER XL_Sensi_StopThreshold,
+    LPXLOPER XL_SUMMITFormulaeUsed,
+	LPXLOPER XL_StrikeMinReplic,
+	LPXLOPER XL_StrikeMaxReplic);
+
+_declspec(dllexport) LPXLOPER WINAPI Local_BSConvAdjustRep_Create(
+	LPXLOPER XL_UsedModelId,
+	LPXLOPER XL_SwoptVolId,
+	LPXLOPER XL_MR,
+	LPXLOPER XL_Stddev,
+	LPXLOPER XL_NbPtsForRepliq,
+	LPXLOPER XL_FullRepliq, 
+	LPXLOPER XL_UpperProba,
+	LPXLOPER XL_LowerProba);
+
+_declspec(dllexport) LPXLOPER WINAPI Local_PXL_BSConvAdjustRep_Create(
+	LPXLOPER XL_UsedModelId,
+	LPXLOPER XL_SwoptVolId,
+	LPXLOPER XL_MR,
+	LPXLOPER XL_Stddev,
+	LPXLOPER XL_NbPtsForRepliq,
+	LPXLOPER XL_FullRepliq,
+	LPXLOPER XL_UpperProba,
+	LPXLOPER XL_LowerProba);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ReplicModel_Create(
+															LPXLOPER XL_ReplicMode,
+															LPXLOPER XL_StepOrReplicPrecision,
+															LPXLOPER XL_StopMode,
+															LPXLOPER XL_StopThreshold,
+                                                            LPXLOPER XL_SensiReplicMode,
+															LPXLOPER XL_SensiStepOrReplicPrecision,
+															LPXLOPER XL_SensiStopMode,
+                                                            LPXLOPER XL_SensiStopThreshold,
+                                                            LPXLOPER XL_UsedModel,
+                                                            LPXLOPER XL_SUMMITFormulaeUsed,
+															LPXLOPER XL_StrikeMinReplic,
+															LPXLOPER XL_StrikeMaxReplic);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_ReplicModel_Create(
+															LPXLOPER XL_ReplicMode,
+															LPXLOPER XL_StepOrReplicPrecision,
+															LPXLOPER XL_StopMode,
+															LPXLOPER XL_StopThreshold,
+                                                            LPXLOPER XL_SensiReplicMode,
+															LPXLOPER XL_SensiStepOrReplicPrecision,
+															LPXLOPER XL_SensiStopMode,
+                                                            LPXLOPER XL_SensiStopThreshold,
+                                                            LPXLOPER XL_UsedModel,
+                                                            LPXLOPER XL_SUMMITFormulaeUsed,
+															LPXLOPER XL_StrikeMinReplic,
+															LPXLOPER XL_StrikeMaxReplic);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_SetDebugMode(LPXLOPER XL_DebugMode);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_SetDebugMode(LPXLOPER XL_DebugMode);
+	
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_TRIBS (LPXLOPER XL_Model1,
+                                                       LPXLOPER XL_Model2,
+                                                       LPXLOPER XL_DiscountModel,
+                                                       LPXLOPER XL_Fx1DiscVol,
+                                                       LPXLOPER XL_Fx2DiscVol,
+                                                       LPXLOPER XL_Idx1Idx2Corr,
+                                                       LPXLOPER XL_Idx1DiscIdxCorr,
+                                                       LPXLOPER XL_Idx2DiscIdxCorr,
+                                                       LPXLOPER XL_Idx1FxCorr,
+                                                       LPXLOPER XL_Idx2FxCorr,
+                                                       LPXLOPER XL_quantoflag);														
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_TRIBS (LPXLOPER XL_Model1,
+                                                       LPXLOPER XL_Model2,
+                                                       LPXLOPER XL_DiscountModel,
+                                                       LPXLOPER XL_Fx1DiscVol,
+                                                       LPXLOPER XL_Fx2DiscVol,
+                                                       LPXLOPER XL_Idx1Idx2Corr,
+                                                       LPXLOPER XL_Idx1DiscIdxCorr,
+                                                       LPXLOPER XL_Idx2DiscIdxCorr,
+                                                       LPXLOPER XL_Idx1FxCorr,
+                                                       LPXLOPER XL_Idx2FxCorr,
+                                                       LPXLOPER XL_quantoflag);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_SetDiscountPricingMode(LPXLOPER XL_model,
+																	   LPXLOPER XL_discPriceMode);
+
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_CALIBRATORSFRM(LPXLOPER XL_sec,
+															   LPXLOPER XL_capModel,
+															   LPXLOPER XL_swoptModel,
+															   LPXLOPER XL_meanRev,
+															   LPXLOPER XL_calibParams,
+															   LPXLOPER XL_preInitFlag,
+															   LPXLOPER XL_initSigmaCurve,
+															   LPXLOPER XL_initBetaOrShift,
+															   LPXLOPER XL_sigmaPF,
+															   LPXLOPER XL_betaPF,
+															   LPXLOPER XL_meanrevPF,
+															   LPXLOPER XL_voltype,
+															   LPXLOPER XL_correl,
+                                                               LPXLOPER XL_calibParams,
+                                                               LPXLOPER XL_tocalswaptatm);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_ARM_CALIBRATORSFRM(LPXLOPER XL_sec,
+																   LPXLOPER XL_capModel,
+																   LPXLOPER XL_swoptModel,
+																   LPXLOPER XL_meanRev,
+																   LPXLOPER XL_calibParams,
+																   LPXLOPER XL_preInitFlag,
+																   LPXLOPER XL_initSigmaCurve,
+																   LPXLOPER XL_initBetaOrShift,
+																   LPXLOPER XL_sigmaPF,
+																   LPXLOPER XL_betaPF,
+																   LPXLOPER XL_meanrevPF,
+																   LPXLOPER XL_voltype,
+																   LPXLOPER XL_correl,
+                                                                   LPXLOPER XL_calibParams,
+                                                                   LPXLOPER XL_tocalswaptatm);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_SFRMCALIBRATE(LPXLOPER XL_calibratorSFRM,
+                                                              LPXLOPER XL_kerneltoGP,
+                                                              LPXLOPER XL_MktCapModel,
+                                                              LPXLOPER XL_MktSwaptModel,
+                                                              LPXLOPER XL_ToCalibrateBeta,
+                                                              LPXLOPER XL_ToCalibrateMR);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_ARM_SFRMCALIBRATE(LPXLOPER XL_calibratorSFRM,
+                                                                  LPXLOPER XL_kerneltoGP,
+                                                                  LPXLOPER XL_MktCapModel,
+                                                                  LPXLOPER XL_MktSwaptModel,
+                                                                  LPXLOPER XL_ToCalibrateBeta,
+                                                                  LPXLOPER XL_ToCalibrateMR);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_TRIBSDUAL (LPXLOPER XL_Model1,
+                                                           LPXLOPER XL_Model2,
+                                                           LPXLOPER XL_DiscountModel,
+                                                           LPXLOPER XL_Fx1DiscVol,
+                                                           LPXLOPER XL_Fx2DiscVol,
+                                                           LPXLOPER XL_Idx1Idx2Corr,
+                                                           LPXLOPER XL_Idx1DiscIdxCorr,
+                                                           LPXLOPER XL_Idx2DiscIdxCorr,
+                                                           LPXLOPER XL_Idx1FxCorr,
+                                                           LPXLOPER XL_Idx2FxCorr,
+                                                           LPXLOPER XL_quantoflag,
+                                                           LPXLOPER XL_correlforadj,
+                                                           LPXLOPER XL_withslopeflag);														
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_TRIBSDUAL (LPXLOPER XL_Model1,
+                                                           LPXLOPER XL_Model2,
+                                                           LPXLOPER XL_DiscountModel,
+                                                           LPXLOPER XL_Fx1DiscVol,
+                                                           LPXLOPER XL_Fx2DiscVol,
+                                                           LPXLOPER XL_Idx1Idx2Corr,
+                                                           LPXLOPER XL_Idx1DiscIdxCorr,
+                                                           LPXLOPER XL_Idx2DiscIdxCorr,
+                                                           LPXLOPER XL_Idx1FxCorr,
+                                                           LPXLOPER XL_Idx2FxCorr,
+                                                           LPXLOPER XL_quantoflag,
+                                                           LPXLOPER XL_correlforadj,
+                                                           LPXLOPER XL_withslopeflag);
+														
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_CRACALCULATOR(LPXLOPER XL_sec,
+															  LPXLOPER XL_zc,
+															  LPXLOPER XL_capVolATM,
+															  LPXLOPER XL_rho,
+															  LPXLOPER XL_nu,
+															  LPXLOPER XL_swptVol,
+															  LPXLOPER XL_meanRev,
+															  LPXLOPER XL_calibParams,
+															  LPXLOPER XL_preInitFlag,
+															  LPXLOPER XL_initSigmaCurve,
+															  LPXLOPER XL_initBetaOrShift,
+															  LPXLOPER XL_voltype,
+                                                              LPXLOPER XL_SecurityParams,
+															  LPXLOPER XL_horizon,
+															  LPXLOPER XL_pathNumber,
+															  LPXLOPER XL_TreeParams,
+															  LPXLOPER XL_CalibVect,
+															  LPXLOPER XL_CalswaptATM,
+															  LPXLOPER XL_betaSABR,
+															  LPXLOPER XL_SwoptSABRParams);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_ARM_CRACALCULATOR(LPXLOPER XL_sec,
+															  LPXLOPER XL_zc,
+															  LPXLOPER XL_capVolATM,
+															  LPXLOPER XL_rho,
+															  LPXLOPER XL_nu,
+															  LPXLOPER XL_swptVol,
+															  LPXLOPER XL_meanRev,
+															  LPXLOPER XL_calibParams,
+															  LPXLOPER XL_preInitFlag,
+															  LPXLOPER XL_initSigmaCurve,
+															  LPXLOPER XL_initBetaOrShift,
+															  LPXLOPER XL_voltype,
+                                                              LPXLOPER XL_SecurityParams,
+															  LPXLOPER XL_horizon,
+															  LPXLOPER XL_pathNumber,
+															  LPXLOPER XL_TreeParams,
+															  LPXLOPER XL_CalibVect
+															  LPXLOPER XL_CalswaptATM,
+															  LPXLOPER XL_betaSABR,
+															  LPXLOPER XL_SwoptSABRParams);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_BUMPCRACALCULATOR(LPXLOPER XL_CraCalculator,
+																  LPXLOPER XL_date,
+																  LPXLOPER XL_zc,
+																  LPXLOPER XL_capVolATM,
+																  LPXLOPER XL_rho,
+																  LPXLOPER XL_nu,
+																  LPXLOPER XL_swptVol,
+																  LPXLOPER XL_betaSABR);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_ComputeFwdBSDelta(	LPXLOPER XL_fwd,
+																	LPXLOPER XL_strike,
+																	LPXLOPER XL_vol,
+																	LPXLOPER XL_T,
+																	LPXLOPER XL_CallPut);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_ComputeSplinedSigmaATMF(LPXLOPER XL_deltas,
+																		LPXLOPER XL_sigmas,
+																		LPXLOPER XL_matu,
+																		LPXLOPER XL_SigmaZDS,
+																		LPXLOPER XL_Precision,
+                                                                        LPXLOPER XL_FxSpot);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_ComputeDeltaFwdFromDeltaWP(	LPXLOPER XL_AsOf,
+																		    LPXLOPER XL_matu,
+																		    LPXLOPER XL_sigma,
+																		    LPXLOPER XL_fxSpot,
+																		    LPXLOPER XL_deltaWithPremium,
+																		    LPXLOPER XL_domCrvId,
+																		    LPXLOPER XL_foreignCrvId);
+
+_declspec(dllexport) LPXLOPER WINAPI Local_ARM_CalculateImpliedStrikeFromDeltaWithPremium  (LPXLOPER XL_AsOf,
+																							LPXLOPER XL_matu,
+																							LPXLOPER XL_sigma,
+																							LPXLOPER XL_fxSpot,
+																							LPXLOPER XL_deltaWithPremium,
+																							LPXLOPER XL_domCrvId,
+                                                                                            LPXLOPER XL_foreignCrvId);
+
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_CalcFwdFXSpot(	LPXLOPER XL_AsOfDate,
+																LPXLOPER XL_Spot,
+																LPXLOPER XL_aFwdDate,
+																LPXLOPER XL_NumDiscountCurveID,
+																LPXLOPER XL_UndDiscountCurveID);
+
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_GetQVolatility(	LPXLOPER XL_QModel);
+
+_declspec(dllexport) LPXLOPER WINAPI Local_ARM_FromSigmaToAlpha (LPXLOPER XL_bssmiledId,
+																 LPXLOPER XL_sigmaCurveId,
+																 LPXLOPER XL_strike);
+
+_declspec(dllexport) LPXLOPER WINAPI Local_ARM_FromAlphaToSigma (LPXLOPER XL_bssmiledId,
+																 LPXLOPER XL_sigmaCurveId,
+																 LPXLOPER XL_strike);
+_declspec(dllexport) LPXLOPER WINAPI Local_PXL_ARM_FromSigmaToAlpha (LPXLOPER XL_bssmiledId,
+																	 LPXLOPER XL_sigmaCurveId,
+																	 LPXLOPER XL_strike);
+
+_declspec(dllexport) LPXLOPER WINAPI Local_PXL_ARM_FromAlphaToSigma (LPXLOPER XL_bssmiledId,
+																	 LPXLOPER XL_sigmaCurveId,
+																	 LPXLOPER XL_strike);
+
+_declspec(dllexport) LPXLOPER WINAPI Local_ExtractTree3FVol(LPXLOPER XL_FxOptIdx);
+
+__declspec(dllexport) LPXLOPER WINAPI Local_ARM_TRIXBS (LPXLOPER XL_Model1,
+														LPXLOPER XL_Model2,
+														LPXLOPER XL_Model3,
+														LPXLOPER XL_Idx1Idx2Corr,
+														LPXLOPER XL_Idx1Idx3Corr,
+														LPXLOPER XL_Idx2Idx3Corr);
+														
+__declspec(dllexport) LPXLOPER WINAPI Local_PXL_TRIXBS (LPXLOPER XL_Model1,
+														LPXLOPER XL_Model2,
+														LPXLOPER XL_Model3,
+														LPXLOPER XL_Idx1Idx2Corr,
+														LPXLOPER XL_Idx1Idx3Corr,
+														LPXLOPER XL_Idx2Idx3Corr);
+#endif	/* ARM_XL_MOD_LOCAL_H */

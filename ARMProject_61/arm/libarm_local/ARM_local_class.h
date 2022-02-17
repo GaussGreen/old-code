@@ -1,0 +1,563 @@
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/* FILE        : ARM_local_class.h                                            */
+/*                                                                            */
+/* DESCRIPTION : ARM LOCAL classes names                                      */
+/*                                                                            */
+/* DATE        : Thu Mar 22 2001                                              */
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+ 
+ 
+ 
+ 
+/*----------------------------------------------------------------------------*/
+
+#ifndef ARM_LOCAL_CLASS_H 
+#define ARM_LOCAL_CLASS_H
+ 
+
+ 
+#ifndef ARM_FRF_CCY_OBJECT
+	#define ARM_FRF_CCY_OBJECT -11112
+#endif
+
+
+/*---- Class Names ----*/
+ 
+#define LOCAL_CCY_CLASS							"LCCYC"
+
+#define LOCAL_ZERO_CURVE_LIN_CLASS				"LZCLI"
+
+#define LOCAL_ZERO_CURVE_VSK_CLASS				"LZCVS"
+
+#define LOCAL_ZERO_CURVE_FLAT_CLASS				"LZCFL"
+
+#define LOCAL_VOL_CURVE_LIN_CLASS				"LVOLI"
+
+#define LOCAL_VOL_FLAT_CLASS					"LVOLF"
+
+#define LOCAL_VOLAT_FX_CLASS                    "LVOFX"
+
+#define LOCAL_YIELD_CURVE_BASIC_CLASS			"LYCMD"
+
+#define LOCAL_BSMODEL_CLASS						"LBSMD"
+
+#define LOCAL_SWAP_CLASS						"LSWAP"
+
+#define LOCAL_SWAPTION_CLASS					"LSWOP"
+
+#define LOCAL_BOND_CLASS						"LBOND"
+
+#define LOCAL_BDFUT_CLASS						"LBDFT"
+
+#define LOCAL_CAPFLOOR_CLASS					"LCAPF"
+
+#define LOCAL_ZERO_CURVE_INTSMO_CLASS			"LZCIS"
+
+#define LOCAL_GAUSSIAN_2YC_MODEL_CLASS			"LG2YC"
+
+#define LOCAL_IRINDEX_CLASS						"LIRIX"
+
+#define LOCAL_MULTIINDEX_CLASS					"LMIRX"
+
+#define LOCAL_SWAPLEG_CLASS						"LSWLG"
+
+#define LOCAL_IRFUT_CLASS						"LIRFT"
+
+#define LOCAL_GYCMODEL_CLASS					"LGYCM"
+
+#define LOCAL_HWFNMONTECARLOSV_CLASS			"LMCHS"
+
+#define LOCAL_REVERSE_CLASS						"LREVE"
+
+#define LOCAL_REVERSECOUPON_CLASS				"LRVCP"
+
+#define LOCAL_REFVAL_CLASS						"LRFVL"
+
+#define LOCAL_FRMTREE_CLASS						"LFRMT"
+
+#define LOCAL_XSTYLE_CLASS						"LXSTY"
+
+#define LOCAL_DFHWSIGVARTREE_CLASS				"LDFTR"
+
+#define LOCAL_PF_CLASS							"LPORT"
+
+#define LOCAL_HWSIGVAR_ANALYTIC_CLASS			"LGYSV"
+
+#define LOCAL_FRMANA_CLASS						"LFRMA"
+
+#define LOCAL_FRMLSMONTECARLO_CLASS				"LFRMC"
+
+#define LOCAL_CMSLEG_CLASS						"LCMSL"
+
+#define LOCAL_OPTION_CLASS						"LOPTC"
+
+#define LOCAL_REVERSEFLOATER_CLASS				"LREVF"
+
+#define LOCAL_BKIRTREE_CLASS					"LBKTR"
+
+#define LOCAL_CORRIDORLEG_CLASS					"LCRDL"	
+
+#define LOCAL_LOGDECANA_CLASS					"LLCDA"
+
+#define LOCAL_LOGDECMONTECARLO_CLASS			"LMCLD"
+
+#define LOCAL_FLEXIBLECAPFLOOR_CLASS			"LFLCF"
+
+#define LOCAL_YIELD_CURVE_HWTREE_CLASS			"LHWTM"
+
+#define LOCAL_HWSIGCONST_TREE_CLASS				"LHWSC"
+
+#define LOCAL_HWSIGVAR_TREE_CLASS				"LHWSV"
+
+#define LOCAL_DFG_YIELD_CURVE_HWTREE_CLASS		"LDFGY"
+
+#define LOCAL_I3DTREE_HWTREE_CLASS				"LI3TH"
+
+#define LOCAL_HWSIGVAR_ANALYTIC_CLASS			"LGYSV"
+
+#define LOCAL_CMTLEG_CLASS						"LCMTL"
+
+#define LOCAL_T4MLEG_CLASS						"LT4ML"
+
+#define LOCAL_VOL_CUBE_CLASS					"LVOLC"
+
+#define LOCAL_SPARSE_VOL_CUBE_CLASS				"LSVOC"
+
+#define LOCAL_OPTIONALACCRUALZC_CLASS			"LOPZC"
+
+#define LOCAL_MATCAPFLOOR_CLASS					"LMATC"
+
+#define LOCAL_SWAPTION_CAPFLOOR_CLASS			"LSWCF"
+
+#define LOCAL_ZERO_CURVE_CUBDIFF_CLASS			"LZCCD"
+
+#define LOCAL_BMCFRM_CLASS						"LBMCF"
+
+#define LOCAL_IAREFVAL_CLASS					"LIARF"
+
+#define LOCAL_IASEC_CLASS						"LIASC"
+
+#define LOCAL_STICKY_CLASS						"LSTKY"
+
+#define LOCAL_HW2FMODEL_CLASS					"LHW2F"
+
+#define LOCAL_BASKET_CLASS						"LBSKT"
+
+#define LOCAL_SMILEVIEWER_CLASS					"LSMVW"
+
+#define LOCAL_GYCLSMODEL_CLASS					"LGYLS"
+
+#define LOCAL_ZERO_CURVE_SPLCUB_CLASS			"LZCSC"
+
+#define LOCAL_ZERO_CURVE_SPL_CLASS				"LZCSP"
+
+#define LOCAL_ZERO_CURVE_SPLSUM_CLASS           "LZCSU"
+
+#define LOCAL_SPREAD_OPTION_CLASS				"LSPRO"
+
+#define LOCAL_BSCORRMODEL_CLASS					"LBCOR"
+
+#define LOCAL_BSMODELGEN_CLASS					"LBSGN"
+
+#define LOCAL_DFFXBS_CLASS						"LDXBS"
+
+#define LOCAL_OPTION_PORTFOLIO_CLASS			"LPFOP"
+
+#define LOCAL_LOCAL_PORTFOLIO_CLASS				"LPFLO"
+
+#define LOCAL_RATCHET_CLASS						"LRTCH"
+
+#define LOCAL_REVERSESTICKYLEG_CLASS			"LRSLG"
+
+#define LOCAL_CALIB_HWSV_CLASS					"LCHSV"
+
+#define LOCAL_DIGITAL_CLASS						"LDIGI"
+
+#define LOCAL_FLEX_SWAPTION_CLASS				"LFLSW"
+
+#define LOCAL_FRMMODEL_CLASS                    "LFRMM"
+
+#define LOCAL_FRMMODELMIXTURE_CLASS             "LFMIX"
+
+#define LOCAL_FRMMCMODEL_CLASS                  "LFMCM"
+
+#define LOCAL_FRMMCMODELMIXTURE_CLASS			"LFMMC"
+
+#define LOCAL_FRM_MARKOVTREE_CLASS				"LMTRE"
+
+#define LOCAL_FOREX_CLASS						"LFXCL"
+
+#define LOCAL_CRR_TREE_CLASS					"LCRRT"
+
+#define LOCAL_POWER_REVERSE_CLASS				"LPREV"
+
+#define LOCAL_BARRIER_CLASS						"LBBAR"
+
+#define LOCAL_HWFNMONTECARLO_CLASS				"LMCHW"
+
+#define LOCAL_DUALCAP_CLASS						"LDUCF"
+
+#define LOCAL_DATESTRIP_CLASS					"LDSTR"
+
+#define LOCAL_FXSTRIP_CLASS						"LFXOS"
+
+#define LOCAL_TREE_3FACT_CLASS					"LTR3F"
+
+#define LOCAL_QMODEL_CLASS						"LQMOD"
+
+#define LOCAL_CROSSMOD_CLASS					"LCMOD"
+
+#define LOCAL_BSCONVADJUST_CLASS				"LBSCX"
+
+#define LOCAL_REPLICCONVADJUST_CLASS			"LRPCX"
+
+#define LOCAL_MAPCONVADJUST_CLASS				"LMPCX"
+
+#define LOCAL_REPLICMODEL_CLASS					"LRPCM"
+
+#define LOCAL_TRIBSMOD_CLASS					"LTRIM"
+
+#define LOCAL_CALIBRATORSFRM_CLASS				"LCSFR"
+
+#define LOCAL_SUMOPT_CLASS						"LSMOP"
+
+#define LOCAL_HYPER_CUBE_CLASS					"LHYPC"
+
+#define LOCAL_INDEX_INDEX_CORREL_CUBE_CLASS		"LIICC"
+
+#define LOCAL_SECURITY_FLOWS_CLASS				"LSECF"
+
+#define LOCAL_GLOBALCAP_CLASS					"LGCAP"
+
+#define LOCAL_MIXTURE_PARAMS_CLASS				"LPMFX"
+
+#define LOCAL_TRIXBSMOD_CLASS					"LTRIX"
+
+#define LOCAL_SABR_VOL_CLASS					"LSABR"
+
+#define LOCAL_FXSTRIP_CLASS						"LFXOS"
+
+/*---- Class Names Mercure Specific ----*/
+
+#define LOCAL_MERCURE_CLASS						"LMRCR"
+
+#define LOCAL_MARKETDATAMANAGER_CLASS			"LMMDM"
+
+#define	LOCAL_ARMVAL_CLASS						"LMVAL"
+
+#define LOCAL_ARMSCALARDATA_CLASS				"LMSCD"
+
+#define LOCAL_MERCURE_HELP_CLASS				"LMHLP"
+
+
+/*---- Class Names Inflation Specific ----*/
+
+#define LOCAL_INFCURV_CLASS						"LICRV"
+
+#define LOCAL_INFIDX_CLASS						"LIIDX"
+
+#define LOCAL_INFSWAPLEG_CLASS					"LILEG"
+
+#define LOCAL_INFCAPFLOOR_CLASS					"LICAF"
+
+#define LOCAL_GP_INFCAPFLOOR_CLASS				"LGICF"
+
+#define LOCAL_GP_INFDIGITAL_CLASS				"LGIDT"
+
+#define LOCAL_GP_INFCALLSPREAD_CLASS			"LGICS"
+
+#define LOCAL_INFCURVMODEL_CLASS				"LIYCM"
+
+#define LOCAL_INFBSMODEL_CLASS					"LIBSM"
+
+#define LOCAL_RESETMANAGER_CLASS				"LRESM"
+
+#define LOCAL_SEASONMANAGER_CLASS				"LSESM"
+
+#define LOCAL_CORRELMATRIX_CLASS				"LCORR"
+
+#define LOCAL_CORRELMANAGER_CLASS				"LCORM"
+
+#define LOCAL_INFMULTIBSMODEL_CLASS				"LIMBS"
+
+/*---- Class Names Generic Pricer Specific ----*/
+#define LOCAL_DEALDES_CLASS						"LDDES"
+
+#define LOCAL_GENSEC_CLASS						"LGPGS"
+
+#define LOCAL_IRFWDMOD_CLASS					"LIRFM"
+
+#define LOCAL_BINUMMETHOD_CLASS					"LGBNM"
+
+#define LOCAL_FINUMMETHOD_CLASS					"LGFNM"
+
+#define LOCAL_MIXTENUMMETHOD_CLASS				"LGMNM"
+
+#define LOCAL_GRAMHELPER_CLASS					"LGPGH"
+
+#define LOCAL_NUMERAIRE_CLASS					"LNUMR"
+
+#define LOCAL_MODELPARAM_CLASS					"LMDLP"
+
+#define LOCAL_HW1FMOD_CLASS					    "LHW1M"
+
+#define LOCAL_HW2FMOD_CLASS					    "LHW2M"
+
+#define LOCAL_MF1FMOD_CLASS					    "LMF1M"
+
+#define LOCAL_TREEMETHOD_CLASS					"LTREM"
+
+#define LOCAL_CALIBMETHOD_CLASS					"LCALM"
+
+#define LOCAL_SFRMMODEL_CLASS					"LSFRM"
+
+#define LOCAL_MCMETHOD_CLASS					"LMCME"
+
+#define LOCAL_GENPRICER_CLASS					"LGENP"
+
+#define LOCAL_DATESTRIPCOMBINER_CLASS			"LDSCB"
+
+#define LOCAL_GC_CRF_CLASS			            "LCRFC"
+
+#define LOCAL_GC_TARN_CLASS			            "LTARN"
+
+#define LOCAL_GC_TARNFX_CLASS					"LTRFX"
+
+#define LOCAL_GC_CAPTION_CLASS			        "LCAPC"
+
+#define LOCAL_GC_MATURITYCAP_CLASS			    "LMCAP"
+
+#define LOCAL_GC_CALLABLE_SB_CLASS			    "LCASB"
+
+#define LOCAL_GC_CALLABLE_SO_CLASS			    "LCSOC"
+
+#define LOCAL_GC_BERMUDASWAPTION_CLASS		    "LCBSA"
+
+#define LOCAL_GC_CRA_CLASS					    "LCCRA"
+
+#define LOCAL_GC_GLOBALCAP_CLASS			    "LCGCF"
+
+#define LOCAL_GC_CFCRA_CLASS					"LCRAC"
+
+#define LOCAL_GC_CCSO_CLASS					    "LCCSO"
+
+#define LOCAL_GC_CRAQUANTO_CLASS			    "LCRAQ"
+
+#define LOCAL_GC_CALLABLE_SRG_CLASS				"LCSRG"
+
+#define LOCAL_GC_FXVANILLA_CLASS				"LCFXV"
+
+#define LOCAL_GC_VOLBOND_CLASS					"LCVBD"
+
+#define LOCAL_MKTDATAMANAGER_CLASS				"LMKTM"
+
+#define LOCAL_RANDGEN_CLASS						"LRAND"
+
+#define LOCAL_BASISFWDIRMOD_CLASS				"LBFIR"
+
+#define LOCAL_GENERICCURVE_CLASS				"LGENC"
+
+#define LOCAL_EQHYBMODELMOD_CLASS				"LEQHM"
+
+#define LOCAL_EQLOGNORMALMOD_CLASS				"LEQLM"
+
+#define LOCAL_QGM1FMOD_CLASS					"LQGM1"
+
+#define LOCAL_QGM2FMOD_CLASS					"LQGM2"
+
+#define LOCAL_Q1FMOD_CLASS						"LQM1F"
+
+#define LOCAL_CSTMANAGER_CLASS					"LCSTM"
+
+#define LOCAL_FLATSURFACE_CLASS					"LFSUR"
+
+#define LOCAL_LINSURFACE_CLASS					"LLSUR"
+
+#define LOCAL_BS_MODEL_CLASS					"LBSHM"
+
+#define LOCAL_CEV_MODEL_CLASS					"LCEVM"
+
+#define LOCAL_MERTON_MODEL_CLASS				"LMERM"
+
+#define LOCAL_NORMAL_MODEL_CLASS				"LNORM"
+
+#define LOCAL_SABR_MODEL_CLASS					"LSABM"
+
+#define LOCAL_SLN_MODEL_CLASS					"LSLNM"
+
+#define LOCAL_HESTON_MODEL_CLASS				"LHESM"
+
+#define LOCAL_SURFACE_MODEL_PARAM_CLASS			"LSUMP"
+
+#define LOCAL_MODELFITTERDES_CLASS				"LMFDS"
+
+#define LOCAL_AMCANDERSEN_CLASS					"LAMCA"
+
+#define LOCAL_AMCLS_CLASS						"LAMLS"
+
+#define LOCAL_TREEND_CLASS					    "LTRND"
+
+#define LOCAL_QNF_MODEL_CLASS					"LQNFM"
+
+#define LOCAL_HW1F_MODELPARAM_CLASS			    "LHW1P"
+
+#define LOCAL_QNF_MODELPARAM_CLASS				"LQNFP"
+	
+#define LOCAL_GP_MATRIX_CLASS					"LGMAT"
+
+#define LOCAL_FX_MODEL_CLASS					"LFXMO"
+
+#define LOCAL_EQ_MODEL_CLASS					"LEQMO"
+
+#define LOCAL_MODELNAMEMAP_CLASS				"LMMAP"
+
+#define LOCAL_MULTIASSETSMODEL_CLASS			"LMAMO"
+
+#define LOCAL_CFMETHOD_CLASS					"LCFME"
+
+#define LOCAL_SMILEDFRMMODEL_CLASS				"LSBGM"
+
+#define LOCAL_HWHWQTOMODEL_CLASS				"LHWQT"
+
+#define LOCAL_HWHW2FQTOMODEL_CLASS				"LHW2Q"
+
+#define LOCAL_SVBGMMODEL_CLASS					"LSVMM"
+
+#define LOCAL_BGMSV1FMODEL_CLASS				"LMSV1"
+
+#define LOCAL_BiSVMM_CLASS						"L2SVM"
+
+#define LOCAL_XXX_MKTDATAS_CLASS				"LMKTD"
+
+#define LOCAL_PROXY_CLASS						"LPROX"
+
+#define LOCAL_SABRHESTONCALIB_CLASS				"LSHCA"
+
+/// very specific to the market data manager!
+#define LOCAL_ANY_CLASS							"LANYC"
+
+#define LOCAL_NOID_CLASS						"LNOID"
+ 
+#define LOCAL_EVENT_VIEWER_CLASS				"LEVTV"
+
+#define LOCAL_ERR_VIEWER_CLASS					"LERRV"
+
+/*---- Class Names Credit Specific ----*/
+
+#define LOCAL_ZERO_PARY_CLASS					"LZCPY"
+
+#define LOCAL_ZERO_CURVE_CDS_CLASS				"LZDEF"
+
+#define LOCAL_CDS_CLASS							"LCDSW"
+
+#define LOCAL_CDSINDEX_CLASS					"LCDSX"
+
+#define LOCAL_FRN_CLASS							"LSFRN"
+
+#define LOCAL_CLN_CLASS							"LSCLN"
+
+#define LOCAL_ZCCLN_CLASS						"LZCLN"
+
+#define LOCAL_BONDDEF_CLASS						"LBDDF"
+
+#define LOCAL_FTD_CLASS							"LFTDW"
+
+#define LOCAL_NTHTD_CLASS						"LFNTH"
+
+#define LOCAL_CBOPTION_CLASS                    "LCBOP"
+
+#define LOCAL_CONVERTIBLE_CLASS                 "LCONV"
+
+#define LOCAL_MEZ_CLASS							"LMEZZ"
+
+#define LOCAL_CMCDS_CLASS						"LCMDS"
+
+#define LOCAL_SIMPLE_MEZ_CLASS					"LSMEZ"
+
+#define LOCAL_CDO2_CLASS						"LCCD2"
+
+#define LOCAL_ICM_LEG_CLASS						"LFLEG"
+
+#define LOCAL_CPPI_CLASS						"LCPPI"
+
+#define LOCAL_ICM_CORRIDOR_LEG_CLASS			"LCLEG"
+
+#define LOCAL_CPDO_CLASS						"LCPDO"
+
+#define LOCAL_CBASW_CLASS                       "LCASW"
+
+#define LOCAL_MCCREDIT_CLASS					"LMCCM"
+
+#define LOCAL_DEFPROBMODEL_CLASS				"LDEFM"
+
+#define LOCAL_MULTICURVESMODEL_CLASS			"LMDMC"
+
+#define LOCAL_PRICER_DEF_CLASS					"LPRDF"
+
+#define LOCAL_PRICER_MC_FTD_CLASS				"LMCFT"
+
+#define LOCAL_PRICER_MC_NTHTD_CLASS				"LMCNT"
+
+#define LOCAL_PRICER_MC_MEZ_CLASS				"LMCME"
+
+#define LOCAL_PRICER_CLD_FTD_CLASS				"LCLFT"
+
+#define LOCAL_PRICER_CLD_NTH_CLASS				"LCNTH"
+
+#define LOCAL_PRICER_CLD_MEZ_CLASS				"LCMEZ"
+
+#define LOCAL_PRICER_SIMPLE_MEZ_CLASS			"LPSMZ"
+
+#define LOCAL_CREDIT_PORTFOLIO_CLASS			"LPFCR"
+
+#define LOCAL_CREDIT_CASHFLOWS_CLASS			"LCFCR"
+
+#define LOCAL_CREDIT_VOLCURVE_CLASS				"LCVOL"
+
+#define LOCAL_CREDIT_CORCURVE_CLASS				"LCCOR"
+
+#define LOCAL_DEFAULTTREEMODEL_CLASS			"LDTRM"
+
+#define LOCAL_DEFAULTSTOCK_CLASS				"LSTOC"
+
+#define LOCAL_STOCKCALLOPTION_CLASS				"LSCOP"
+
+#define LOCAL_PRICER_DEF_CLASS					"LPRDF"
+
+#define LOCAL_PRICER_DIFFUSION_CLASS			"LDDPR"
+
+#define LOCAL_PRICER_CORRMATRIX_CLASS			"LCORM"
+
+#define LOCAL_PRICER_CLD_CDO2_CLASS 			"LCDO2"
+
+#define LOCAL_PRICER_CLASS 						"LPRIC"
+
+#define LOCAL_LIVRET_A_CURVE_CLASS				"LLVAC"
+
+#define LOCAL_CUSTOMIZED_CDO_CLASS				"LCCDO"
+
+#define LOCAL_CUSTOMIZED_CREDIT_MULTI_CURVES_CLASS			"LCCMC"
+
+#define LOCAL_CREDIT_INDEX_OPTION_GEN			"LCIOG"
+
+#define LOCAL_CREDIT_INDEX_CORRIDOR_GEN			"LCICG"
+
+#define LOCAL_CREDIT_UTIL						"LUTIL"
+
+#define LOCAL_SCHEDULE_INFO_CLASS				"LSCHE"
+
+#define LOCAL_CORRIDOR_INFIR_CLASS				"LCINF"
+
+#define LOCAL_FIXING_CURVE_CLASS				"LFIXC"
+
+#define	LOCAL_CREDIT_RANDOM_GENERATOR			"LCRDG"
+
+#define	LOCAL_INFHYBRIDMKT_CLASS				"LINFM"
+
+#define	LOCAL_INFHYBRIDPAYOFF_CLASS				"LINFP"
+
+#define	LOCAL_FIXING_SCHED_CLASS 				"LFXSC"
+
+#endif /* ARM_LOCAL_CLASS_H */

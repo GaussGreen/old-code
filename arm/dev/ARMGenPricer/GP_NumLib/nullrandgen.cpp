@@ -1,0 +1,71 @@
+/*!
+ *
+ * Copyright (c) CDC IXIS CM December 2003 Paris
+ *
+ *	\file nullrandgen.cpp
+ *  \brief 
+ *	\author  R. Guillemot
+ *	\version 1.0
+ *	\date December 2005
+ */
+
+
+#include "gpnumlib/nullrandgen.h"
+
+CC_BEGIN_NAMESPACE( ARM )
+
+////////////////////////////////////////////////////
+////////////////////////////////////////////////////
+//////////	ARM_NullRandGen
+////////////////////////////////////////////////////
+////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////
+///	Class  : ARM_NullRandGen
+///	Routine: DrawOne
+///	Returns: double
+///	Action : Draw 0
+////////////////////////////////////////////////////
+double ARM_NullRandGen::DrawOne()
+{
+	return itsSeed;
+}
+
+
+/////////////////////////////////////////////////////////////////
+///	Class  : ARM_NullRandGen
+///	Routine: copy constructor
+///	Returns: ARM_Object*
+///	Action :
+/////////////////////////////////////////////////////////////////
+ARM_NullRandGen::ARM_NullRandGen( const ARM_NullRandGen& rhs )
+:	ARM_UniformGenerator( rhs ),
+itsSeed(rhs.itsSeed)
+{}
+
+
+////////////////////////////////////////////////////
+///	Class  : ARM_NullRandGen
+///	Routine: desctructor (necessary even for pure virtual case)
+///	Action : draw a vector of uniform random numbers
+////////////////////////////////////////////////////
+ARM_NullRandGen::~ARM_NullRandGen()
+{}
+
+
+/////////////////////////////////////////////////////////////////
+///	Class  : ARM_NullRandGen
+///	Routine: Clone
+///	Returns: ARM_Object*
+///	Action :
+/////////////////////////////////////////////////////////////////
+ARM_Object* ARM_NullRandGen::Clone() const
+{
+	return new ARM_NullRandGen(*this);
+}
+
+
+CC_END_NAMESPACE()
+
+///---------------------------------------------------------------------------
+///---- End of file ----
