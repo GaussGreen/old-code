@@ -25,47 +25,41 @@
 /*                                                                            */
 /******************************************************************************/
 
-
 /**  Include Statements  ******************************************************/
 
 #include "srt_h_all.h"
 
 /**  Static Declarations  *****************************************************/
 
-static SrtIOStruct *__request_list;
-
+static SrtIOStruct* __request_list;
 
 /* -------------------------------------------------------------------------- */
 
-Err create_request_list( String request_list_name)
+Err create_request_list(String request_list_name)
 {
-	Err err ;
+    Err err;
 
-	if ( err=srt_f_IOstructcreate(&__request_list,request_list_name) )
-		return err ;
+    if (err = srt_f_IOstructcreate(&__request_list, request_list_name))
+        return err;
 
-	return NULL ;
+    return NULL;
 }
 
 Err destroy_request_list()
 {
-	Err	err;
+    Err err;
 
     if (err = srt_f_IOstructfree(&__request_list))
-	{
-		return err;
-	}	
+    {
+        return err;
+    }
 
-	return NULL;	
+    return NULL;
 }
 
-	
-SrtIOStruct * get_request_list(void)
+SrtIOStruct* get_request_list(void)
 {
-	return __request_list;
+    return __request_list;
 }
-
 
 /* ========================================================================== */
-
-

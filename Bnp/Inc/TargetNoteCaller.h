@@ -3,8 +3,6 @@
 
 #include "TargetNoteProdStruct.h"
 
-char* TargetNoteCaller( TARN_Struct* tarn );
+char* TargetNoteCaller(TARN_Struct* tarn);
 
-
-
-#endif // _TARGET_NOTES_CALLER_H_
+#endif  // _TARGET_NOTES_CALLER_H_

@@ -1,5 +1,5 @@
 /**********************************************************************
- *      Name: bndfnctns.h                                             * 
+ *      Name: bndfnctns.h                                             *
  *  Function: Header for SORT BOND TOOLS                              *
  * Copyright: (C) Paribas Capital Markets Ltd.                        *
  *--------------------------------------------------------------------*
@@ -10,9 +10,8 @@
 #ifndef _BNDFNCTNS
 #define _BNDFNCTNS
 
-
 /* Global Constants */
-#define	REDEMPTION_DEFAULT	1
-#define	STEEPNESS_DEFAULT	0.03
+#define REDEMPTION_DEFAULT 1
+#define STEEPNESS_DEFAULT 0.03
 
 #endif

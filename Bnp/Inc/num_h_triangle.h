@@ -6,51 +6,48 @@
 /*****************************************************************************/
 
 #ifndef NUM_H_TRIANGLE_H
-#define	NUM_H_TRIANGLE_H								    
-
-
+#define NUM_H_TRIANGLE_H
 
 /*****************************************************************************/
 /* structure pour stocker la triangulation */
 
-typedef struct  {
-  double   *pointlist;                                               /* In / out */
-  double   *pointattributelist;                                      /* In / out */
-  int      *pointmarkerlist;                                          /* In / out */
-  int       numberofpoints;                                            /* In / out */
-  int       numberofpointattributes;                                   /* In / out */
+typedef struct
+{
+    double* pointlist;               /* In / out */
+    double* pointattributelist;      /* In / out */
+    int*    pointmarkerlist;         /* In / out */
+    int     numberofpoints;          /* In / out */
+    int     numberofpointattributes; /* In / out */
 
-  int      *trianglelist;                                             /* In / out */
-  double   *triangleattributelist;                                   /* In / out */
-  double   *triangleadoubleist;                                         /* In only */
-  int      *neighborlist;                                             /* Out only */
-  int       numberoftriangles;                                         /* In / out */
-  int       numberofcorners;                                           /* In / out */
-  int       numberoftriangleattributes;                                /* In / out */
+    int*    trianglelist;               /* In / out */
+    double* triangleattributelist;      /* In / out */
+    double* triangleadoubleist;         /* In only */
+    int*    neighborlist;               /* Out only */
+    int     numberoftriangles;          /* In / out */
+    int     numberofcorners;            /* In / out */
+    int     numberoftriangleattributes; /* In / out */
 
-  int      *segmentlist;                                              /* In / out */
-  int      *segmentmarkerlist;                                        /* In / out */
-  int       numberofsegments;                                          /* In / out */
+    int* segmentlist;       /* In / out */
+    int* segmentmarkerlist; /* In / out */
+    int  numberofsegments;  /* In / out */
 
-  double   *holelist;                        /* In / pointer to array copied out */
-  int       numberofholes;                                      /* In / copied out */
+    double* holelist;      /* In / pointer to array copied out */
+    int     numberofholes; /* In / copied out */
 
-  double   *regionlist;                      /* In / pointer to array copied out */
-  int       numberofregions;                                    /* In / copied out */
+    double* regionlist;      /* In / pointer to array copied out */
+    int     numberofregions; /* In / copied out */
 
-  int      *edgelist;                                                 /* Out only */
-  int      *edgemarkerlist;            /* Not used with Voronoi diagram; out only */
-  double   *normlist;                /* Used only with Voronoi diagram; out only */
-  int       numberofedges;                                             /* Out only */
+    int*    edgelist;       /* Out only */
+    int*    edgemarkerlist; /* Not used with Voronoi diagram; out only */
+    double* normlist;       /* Used only with Voronoi diagram; out only */
+    int     numberofedges;  /* Out only */
 
-}SrtTriangulationIO, *SrtTriangulationIOPtr;
-
+} SrtTriangulationIO, *SrtTriangulationIOPtr;
 
 /*-----------------------------------------------------------------------------------------------------------------*/
 
 /* THE FUNCTION THAT DOES THE FULL TRIANGULATION */
-void triangulate_srt(char *, SrtTriangulationIO *);
-
+void triangulate_srt(char*, SrtTriangulationIO*);
 
 /*-----------------------------------------------------------------------------------------------------------------*/
 
@@ -58,8 +55,13 @@ void triangulate_srt(char *, SrtTriangulationIO *);
 /*   search indicates that the TriPoint falls in the interior of a TriTriangle, on */
 /*   an edge, on a vertex, or outside the mesh.                              */
 
-typedef enum {INTRIANGLE, ONEDGE, ONVERTEX, OUTSIDE} TriLocateResultType ;
-
+typedef enum
+{
+    INTRIANGLE,
+    ONEDGE,
+    ONVERTEX,
+    OUTSIDE
+} TriLocateResultType;
 
 /*****************************************************************************/
 /*                                                                           */
@@ -175,43 +177,42 @@ typedef enum {INTRIANGLE, ONEDGE, ONVERTEX, OUTSIDE} TriLocateResultType ;
 /*   Because the size and structure of a `TriTriangle' is not decided until     */
 /*   runtime, I haven't simply defined the type `TriTriangle' to be a struct.   */
 
-typedef double **TriTriangle;            /* doublely:  typedef TriTriangle *TriTriangle   */
+typedef double** TriTriangle; /* doublely:  typedef TriTriangle *TriTriangle   */
 
 /* An oriented TriTriangle:  includes a pointer to a TriTriangle and orientation.  */
 /*   The orientation denotes an edge of the TriTriangle.  Hence, there are      */
 /*   three possible orientations.  By convention, each edge is always        */
 /*   directed to TriPoint counterclockwise about the corresponding TriTriangle.    */
 
-typedef struct {
-  TriTriangle  *tri;
-  int           orient;                                         /* Ranges from 0 to 2. */
-}TriOrientedTriangle ;
+typedef struct
+{
+    TriTriangle* tri;
+    int          orient; /* Ranges from 0 to 2. */
+} TriOrientedTriangle;
 
 /* The shell data structure.  Each shell edge contains two pointers to       */
 /*   adjoining shell edges, plus two pointers to vertex points, plus two     */
 /*   pointers to adjoining triangles, plus one shell marker.                 */
 
-typedef double **TriShell;                  /* doublely:  typedef TriShell *TriShell   */
+typedef double** TriShell; /* doublely:  typedef TriShell *TriShell   */
 
 /* An oriented shell edge:  includes a pointer to a shell edge and an        */
 /*   orientation.  The orientation denotes a side of the edge.  Hence, there */
 /*   are two possible orientations.  By convention, the edge is always       */
 /*   directed so that the "side" denoted is the right side of the edge.      */
 
-typedef struct {
-  TriShell    *sh;
-  int          shorient;                                       /* Ranges from 0 to 1. */
-}TriOrientedShell;
-
+typedef struct
+{
+    TriShell* sh;
+    int       shorient; /* Ranges from 0 to 1. */
+} TriOrientedShell;
 
 /* The TriPoint data structure.  Each TriPoint is actually an array of doubles.      */
 /*   The number of doubles is unknown until runtime.  An integer boundary      */
 /*   marker, and sometimes a pointer to a TriTriangle, is appended after the    */
 /*   doubles.                                                                  */
 
-typedef double *TriPoint;
-
-
+typedef double* TriPoint;
 
 /*****************************************************************************/
 /*                                                                           */
@@ -241,65 +242,62 @@ typedef double *TriPoint;
 /**                                                                         **/
 /**                                                                         **/
 
-
 /********* Primitives for triangles                                  *********/
 /*                                                                           */
 
 /* decode() converts a pointer to an oriented TriTriangle.  The orientation is  */
 /*   extracted from the two least significant bits of the pointer.           */
 
-#define decode(ptr, TriOrientedTriangle)                                                  \
-  (TriOrientedTriangle).orient = (int) ((unsigned long) (ptr) & (unsigned long) 3l);      \
-  (TriOrientedTriangle).tri = (TriTriangle *)                                                \
-                  ((unsigned long) (ptr) ^ (unsigned long) (TriOrientedTriangle).orient)
+#define decode(ptr, TriOrientedTriangle)                                            \
+    (TriOrientedTriangle).orient = (int)((unsigned long)(ptr) & (unsigned long)3l); \
+    (TriOrientedTriangle).tri =                                                     \
+        (TriTriangle*)((unsigned long)(ptr) ^ (unsigned long)(TriOrientedTriangle).orient)
 
 /* encode() compresses an oriented TriTriangle into a single pointer.  It       */
 /*   relies on the assumption that all triangles are aligned to four-byte    */
 /*   boundaries, so the two least significant bits of (TriOrientedTriangle).tri are zero.*/
 
-#define encode(TriOrientedTriangle)                                                       \
-  (TriTriangle) ((unsigned long) (TriOrientedTriangle).tri | (unsigned long) (TriOrientedTriangle).orient)
-
+#define encode(TriOrientedTriangle) \
+    (TriTriangle)(                  \
+        (unsigned long)(TriOrientedTriangle).tri | (unsigned long)(TriOrientedTriangle).orient)
 
 /* sym() finds the abutting TriTriangle, on the same edge.  Note that the       */
 /*   edge direction is necessarily reversed, because TriTriangle/edge handles   */
 /*   are always directed counterclockwise around the TriTriangle.               */
 
-#define sym(TriOrientedTriangle1, TriOrientedTriangle2)                                               \
-  ptr = (TriOrientedTriangle1).tri[(TriOrientedTriangle1).orient];                                    \
-  decode(ptr, TriOrientedTriangle2);
+#define sym(TriOrientedTriangle1, TriOrientedTriangle2)              \
+    ptr = (TriOrientedTriangle1).tri[(TriOrientedTriangle1).orient]; \
+    decode(ptr, TriOrientedTriangle2);
 
-#define symself(TriOrientedTriangle)                                                      \
-  ptr = (TriOrientedTriangle).tri[(TriOrientedTriangle).orient];                                      \
-  decode(ptr, TriOrientedTriangle);
-
+#define symself(TriOrientedTriangle)                               \
+    ptr = (TriOrientedTriangle).tri[(TriOrientedTriangle).orient]; \
+    decode(ptr, TriOrientedTriangle);
 
 /* These primitives determine or set the origin, destination, or apex of a   */
 /* TriTriangle.                                                                 */
 
-#define org(TriOrientedTriangle, pointptr)                                                \
-  pointptr = (TriPoint) (TriOrientedTriangle).tri[plus1mod3[(TriOrientedTriangle).orient] + 3]
+#define org(TriOrientedTriangle, pointptr) \
+    pointptr = (TriPoint)(TriOrientedTriangle).tri[plus1mod3[(TriOrientedTriangle).orient] + 3]
 
-#define dest(TriOrientedTriangle, pointptr)                                               \
-  pointptr = (TriPoint) (TriOrientedTriangle).tri[minus1mod3[(TriOrientedTriangle).orient] + 3]
+#define dest(TriOrientedTriangle, pointptr) \
+    pointptr = (TriPoint)(TriOrientedTriangle).tri[minus1mod3[(TriOrientedTriangle).orient] + 3]
 
-#define apex(TriOrientedTriangle, pointptr)                                               \
-  pointptr = (TriPoint) (TriOrientedTriangle).tri[(TriOrientedTriangle).orient + 3]
-
+#define apex(TriOrientedTriangle, pointptr) \
+    pointptr = (TriPoint)(TriOrientedTriangle).tri[(TriOrientedTriangle).orient + 3]
 
 /**                                                                         **/
 /********* Mesh manipulation primitives end here                     *********/
 /**                                                                         **/
 
-
 /*  locate()   Find a TriTriangle or edge containing a given TriPoint.             */
 
-TriLocateResultType locate(TriPoint searchpoint, TriOrientedTriangle *searchtri);
+TriLocateResultType locate(TriPoint searchpoint, TriOrientedTriangle* searchtri);
 
 void triangledeinit(void);
 
-TriTriangle *getdummytri();
+TriTriangle* getdummytri();
 
 #endif
-											   
-/*-------------- End of file -----------------------------------------------------------------------------------*/
+
+/*-------------- End of file
+ * -----------------------------------------------------------------------------------*/

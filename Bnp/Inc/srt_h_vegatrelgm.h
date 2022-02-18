@@ -21,7 +21,6 @@
 /*                                                                            */
 /******************************************************************************/
 
-
 #ifndef VEGATRELGM_H
 #define VEGATRELGM_H
 
@@ -31,35 +30,31 @@
 This function initializes each step with the values for sigma, tau...	    */
 
 Err srt_f_vegashiftirministp(
-		SrtStpPtr 	stp,
-		 SrtUndPtr 	und,
-		SrtUndInfo *und_info,              /* und info */
-		double 		sigma_bucket_start,
-		double 		sigma_bucket_end,
-		double 		sigma_shift,
-		int 		sigma_shift_type,
-       		double 		tau_bucket_start,
-		double 		tau_bucket_end,
-		double 		tau_shift,
-		int 		tau_shift_type
-);
+    SrtStpPtr   stp,
+    SrtUndPtr   und,
+    SrtUndInfo* und_info, /* und info */
+    double      sigma_bucket_start,
+    double      sigma_bucket_end,
+    double      sigma_shift,
+    int         sigma_shift_type,
+    double      tau_bucket_start,
+    double      tau_bucket_end,
+    double      tau_shift,
+    int         tau_shift_type);
 
-
-  
 /* -------------------------------------------------------------------------- */
 
 /* -> Customized version of function srt_f_srt_f_trelgm1d().
-This function fills answers the request through 1 sweep of an Hull & White 
+This function fills answers the request through 1 sweep of an Hull & White
 tree.									*/
 
-Err srt_f_vegashifttrelgm1d(	
-		SrtUndPtr 	und, 
-		SrtGrfnParam   *grfparam,
-		SrtStpPtr 	stp, 
-		GrfnDeal	   *gd,
-		EvalEventFct 	evalcf, 
-		SrtIOStruct	*iolist,
-		SrtUndInfo 	*und_info);
-
+Err srt_f_vegashifttrelgm1d(
+    SrtUndPtr     und,
+    SrtGrfnParam* grfparam,
+    SrtStpPtr     stp,
+    GrfnDeal*     gd,
+    EvalEventFct  evalcf,
+    SrtIOStruct*  iolist,
+    SrtUndInfo*   und_info);
 
 #endif

@@ -1,6 +1,6 @@
 /* ===================================================================================
    FILENAME:      swp_h_swaption.h
-   
+
    PURPOSE:       Compute a fwd swaption with the CMS methos compatible with the smile
    =================================================================================== */
 
@@ -9,145 +9,140 @@
 
 #include "swp_h_all.h"
 
-Err		AmortizedSwaptionShiftedLog(
-						 char *cYCname,
-						 char *cVCname,
-						 char *cRefRname,
+Err AmortizedSwaptionShiftedLog(
+    char* cYCname,
+    char* cVCname,
+    char* cRefRname,
 
-						 long xlStartDate,
-						 long xlEndDate,
+    long xlStartDate,
+    long xlEndDate,
 
-						 SrtCompounding srtFreq,
-						 SrtBasisCode srtBasis,
-						 
-						 double exer_fee,
+    SrtCompounding srtFreq,
+    SrtBasisCode   srtBasis,
 
-						 long	lNFixNot,
-						 double *dFixNotionals,
-						 double *dFixRates,
+    double exer_fee,
 
-						 long	lNFloatNot,
-						 double *dFloatNotionals,
-						 double *dMargins,
+    long    lNFixNot,
+    double* dFixNotionals,
+    double* dFixRates,
 
-						 SrtCallPutType srtCallPut,
+    long    lNFloatNot,
+    double* dFloatNotionals,
+    double* dMargins,
 
-						 int xlStudDegree,
-						 int xlNumSim,
-						 double xlUpBound,
-						 int xlnClasses,
-						 
-						 int UseVol,
+    SrtCallPutType srtCallPut,
 
-						 double **Correl,
-						 double *dPrice
-			            );
+    int    xlStudDegree,
+    int    xlNumSim,
+    double xlUpBound,
+    int    xlnClasses,
+
+    int UseVol,
+
+    double** Correl,
+    double*  dPrice);
 
 Err AmortizedSwaptionShiftedLogForMAD_NotOpt(
-						 char *cYCname,
-						 char *cVCname,
-						 char *cRefRname,
+    char* cYCname,
+    char* cVCname,
+    char* cRefRname,
 
-						 SrtCompounding srtFreq,
-						 SrtBasisCode srtBasis,
+    SrtCompounding srtFreq,
+    SrtBasisCode   srtBasis,
 
-						 double exer_fee,
-						 
-						 long	*lFixStartDates,
-						 long	*lFixEndDates,
-						 long	lNFixDates,
-						 double *dFixNotionals,
-						 double *dFixRates,
+    double exer_fee,
 
-						 long	*lFloatStartDates,
-						 long	*lFloatEndDates,
-						 long	lNFloatDates,
-						 double *dFloatNotionals,
-						 double *dFloatMargins,
-						 double *dFloatSpreads,
+    long*   lFixStartDates,
+    long*   lFixEndDates,
+    long    lNFixDates,
+    double* dFixNotionals,
+    double* dFixRates,
 
-						 SrtCallPutType srtCallPut,
+    long*   lFloatStartDates,
+    long*   lFloatEndDates,
+    long    lNFloatDates,
+    double* dFloatNotionals,
+    double* dFloatMargins,
+    double* dFloatSpreads,
 
-						 int xlNumSim,
+    SrtCallPutType srtCallPut,
 
-						 int iCalibShift,
-						 double  Shift,
-						 int UseVol,
+    int xlNumSim,
 
-						 double **Correl,
-						 double *dPrice
-			            );
+    int    iCalibShift,
+    double Shift,
+    int    UseVol,
 
-Err		AmortizedSwaptionShiftedLogForMAD(
-						 char *cYCname,
-						 char *cVCname,
-						 char *cRefRname,
+    double** Correl,
+    double*  dPrice);
 
-						 SrtCompounding srtFreq,
-						 SrtBasisCode srtBasis,
+Err AmortizedSwaptionShiftedLogForMAD(
+    char* cYCname,
+    char* cVCname,
+    char* cRefRname,
 
-						 double exer_fee,
-						 
-						 long	*lFixStartDates,
-						 long	*lFixEndDates,
-						 long	lNFixDates,
-						 double *dFixNotionals,
-						 double *dFixRates,
+    SrtCompounding srtFreq,
+    SrtBasisCode   srtBasis,
 
-						 long	*lFloatStartDates,
-						 long	*lFloatEndDates,
-						 long	lNFloatDates,
-						 double *dFloatNotionals,
-						 double *dFloatMargins,
-						 double *dFloatSpreads,
+    double exer_fee,
 
-						 SrtCallPutType srtCallPut,
+    long*   lFixStartDates,
+    long*   lFixEndDates,
+    long    lNFixDates,
+    double* dFixNotionals,
+    double* dFixRates,
 
-						 int xlNumSim,
+    long*   lFloatStartDates,
+    long*   lFloatEndDates,
+    long    lNFloatDates,
+    double* dFloatNotionals,
+    double* dFloatMargins,
+    double* dFloatSpreads,
 
-						 int iCalibShift,
-						 double  Shift,
-						 int UseVol,
+    SrtCallPutType srtCallPut,
 
-						 double **Correl,
-						 double *dPrice
-			            );
+    int xlNumSim,
 
-Err		AmortizedSwaptionShiftedLogForMAD_(
-						 char *cYCname,
-						 char *cVCname,
-						 char *cRefRname,
+    int    iCalibShift,
+    double Shift,
+    int    UseVol,
 
-						 SrtCompounding srtFreq,
-						 SrtBasisCode srtBasis,
+    double** Correl,
+    double*  dPrice);
 
-						 double exer_fee,
-						 
-						 long	*lFixStartDates,
-						 long	*lFixEndDates,
-						 long	lNFixDates,
-						 double *dFixNotionals,
-						 double *dFixRates,
+Err AmortizedSwaptionShiftedLogForMAD_(
+    char* cYCname,
+    char* cVCname,
+    char* cRefRname,
 
-						 long	*lFloatStartDates,
-						 long	*lFloatEndDates,
-						 long	lNFloatDates,
-						 double *dFloatNotionals,
-						 double *dFloatMargins,
-						 double *dFloatSpreads,
+    SrtCompounding srtFreq,
+    SrtBasisCode   srtBasis,
 
-						 SrtCallPutType srtCallPut,
+    double exer_fee,
 
-						 int xlNumSim,
+    long*   lFixStartDates,
+    long*   lFixEndDates,
+    long    lNFixDates,
+    double* dFixNotionals,
+    double* dFixRates,
 
-						 int iCalibShift,
-						 double  Shift,
-						 int UseVol,
+    long*   lFloatStartDates,
+    long*   lFloatEndDates,
+    long    lNFloatDates,
+    double* dFloatNotionals,
+    double* dFloatMargins,
+    double* dFloatSpreads,
 
-						 double **Correl,
-						 double *dPrice
-			            );
+    SrtCallPutType srtCallPut,
 
+    int xlNumSim,
+
+    int    iCalibShift,
+    double Shift,
+    int    UseVol,
+
+    double** Correl,
+    double*  dPrice);
 
 //--------------------------------------------------------------------
 //---------------I don't like to delete code... ----------------------
@@ -156,131 +151,126 @@ Err		AmortizedSwaptionShiftedLogForMAD_(
 /*
 
 Err		AmortizedSwaptionHeston(
-						 char *cYCname,
-						 char *cVCname,
-						 char *cRefRname,
-						 
-						 long xlStartDate,
-						 long xlEndDate,
-						 
-						 SrtCompounding srtFreq,
-						 SrtBasisCode srtBasis,
-						 
-						 double exer_fee,
+                                                 char *cYCname,
+                                                 char *cVCname,
+                                                 char *cRefRname,
 
-						 long	lNFixNot,
-						 double *dFixNotionals,
-						 double *dFixRates,
+                                                 long xlStartDate,
+                                                 long xlEndDate,
 
-						 long	lNFloatNot,
-						 double *dFloatNotionals,
-						 double *dMargins,
-						 
-						 SrtCallPutType srtCallPut,
-						 
-						 double xlnStdDev,
-						 int xlStudDegree,
-						 int xlNumSim,
-						 int xlNPts,
-						 double xlUpBound,
-						 int xlnClasses,
-						 
-						 int UseVol,
+                                                 SrtCompounding srtFreq,
+                                                 SrtBasisCode srtBasis,
 
-						 double **Correl,
-						 double *dPrice
-			            );
+                                                 double exer_fee,
+
+                                                 long	lNFixNot,
+                                                 double *dFixNotionals,
+                                                 double *dFixRates,
+
+                                                 long	lNFloatNot,
+                                                 double *dFloatNotionals,
+                                                 double *dMargins,
+
+                                                 SrtCallPutType srtCallPut,
+
+                                                 double xlnStdDev,
+                                                 int xlStudDegree,
+                                                 int xlNumSim,
+                                                 int xlNPts,
+                                                 double xlUpBound,
+                                                 int xlnClasses,
+
+                                                 int UseVol,
+
+                                                 double **Correl,
+                                                 double *dPrice
+                                    );
 
 */
 
 /*
 Err		PriceAmortizedSwaptionHeston(
-						 char *cYCname,
-						 char *cVCname,
-						 char *cRefRname,
-						 long xlStartDate,
-						 long xlEndDate,
-						 SrtCompounding srtFreq,
-						 SrtBasisCode srtBasis,
-						 long	lNFixNot,
-						 double *dFixNotionals,
-						 long	lNFloatNot,
-						 double *dFloatNotionals,
-						 double *dFixRates,
-						 SrtCallPutType srtCallPut,
-						 double xlnStdDev,
-						 int xlStudDegree,
-						 int xlNumSim,
-						 char *xlTypeVol,
-						 int xlNPts,
-						 double xlUpBound,
-						 int xlnClasses,
-						 double **Correl,
-						 double *dPrice,
-						 int iPayoffMethod,
-						 int iDistribMethod
-			            );
+                                                 char *cYCname,
+                                                 char *cVCname,
+                                                 char *cRefRname,
+                                                 long xlStartDate,
+                                                 long xlEndDate,
+                                                 SrtCompounding srtFreq,
+                                                 SrtBasisCode srtBasis,
+                                                 long	lNFixNot,
+                                                 double *dFixNotionals,
+                                                 long	lNFloatNot,
+                                                 double *dFloatNotionals,
+                                                 double *dFixRates,
+                                                 SrtCallPutType srtCallPut,
+                                                 double xlnStdDev,
+                                                 int xlStudDegree,
+                                                 int xlNumSim,
+                                                 char *xlTypeVol,
+                                                 int xlNPts,
+                                                 double xlUpBound,
+                                                 int xlnClasses,
+                                                 double **Correl,
+                                                 double *dPrice,
+                                                 int iPayoffMethod,
+                                                 int iDistribMethod
+                                    );
 */
 
-Err		PriceAmortizedSwaptionSABR(
-						 char *cYCname,
-						 char *cVCname,
-						 char *cRefRname,
+Err PriceAmortizedSwaptionSABR(
+    char* cYCname,
+    char* cVCname,
+    char* cRefRname,
 
-						 long xlStartDate,
-						 long xlEndDate,
+    long xlStartDate,
+    long xlEndDate,
 
-						 SrtCompounding srtFreq,
-						 SrtBasisCode srtBasis,
-						 
-						 long	lNFixNot,
-						 double *dFixNotionals,
-						 long	lNFloatNot,
-						 double *dFloatNotionals,
-						 double *dFixRates,
+    SrtCompounding srtFreq,
+    SrtBasisCode   srtBasis,
 
-						 SrtCallPutType srtCallPut,
+    long    lNFixNot,
+    double* dFixNotionals,
+    long    lNFloatNot,
+    double* dFloatNotionals,
+    double* dFixRates,
 
-						 int xlStudDegree,
-						 int xlNumSim,
-						 double xlUpBound,
-						 int xlnClasses,
-						 double **Correl,
-						 double *dPrice,
-						 int iPayoffMethod,
-						 int iDistribMethod
-			            );
+    SrtCallPutType srtCallPut,
 
+    int      xlStudDegree,
+    int      xlNumSim,
+    double   xlUpBound,
+    int      xlnClasses,
+    double** Correl,
+    double*  dPrice,
+    int      iPayoffMethod,
+    int      iDistribMethod);
 
-Err		PriceAmortizedSwaptionShiftedLog(
-						 char *cYCname,
-						 char *cVCname,
-						 char *cRefRname,
+Err PriceAmortizedSwaptionShiftedLog(
+    char* cYCname,
+    char* cVCname,
+    char* cRefRname,
 
-						 long xlStartDate,
-						 long xlEndDate,
+    long xlStartDate,
+    long xlEndDate,
 
-						 SrtCompounding srtFreq,
-						 SrtBasisCode srtBasis,
-						 
-						 long	lNFixNot,
-						 double *dFixNotionals,
-						 long	lNFloatNot,
-						 double *dFloatNotionals,
-						 double *dFixRates,
+    SrtCompounding srtFreq,
+    SrtBasisCode   srtBasis,
 
-						 SrtCallPutType srtCallPut,
+    long    lNFixNot,
+    double* dFixNotionals,
+    long    lNFloatNot,
+    double* dFloatNotionals,
+    double* dFixRates,
 
-						 int xlStudDegree,
-						 int xlNumSim,
-						 double xlUpBound,
-						 int xlnClasses,
-						 double **Correl,
-						 double *dPrice,
-						 int iPayoffMethod,
-						 int iDistribMethod
-			            );
+    SrtCallPutType srtCallPut,
 
-
+    int      xlStudDegree,
+    int      xlNumSim,
+    double   xlUpBound,
+    int      xlnClasses,
+    double** Correl,
+    double*  dPrice,
+    int      iPayoffMethod,
+    int      iDistribMethod);
 
 #endif

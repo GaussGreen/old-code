@@ -1,14 +1,14 @@
 #ifndef __CRIF_PROD_STRUCT_H
 #define __CRIF_PROD_STRUCT_H
 
-#include "srt_h_all.h"
-#include "LGMSVCalibApprox.h"
-#include "CMSSpreadOptions.h"
-#include "MCEBOptimisation.h"
 #include "CMSCTSProdStruct.h"
+#include "CMSSpreadOptions.h"
+#include "LGMSVCalibApprox.h"
+#include "MCEBOptimisation.h"
+#include "srt_h_all.h"
 
-
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------------------------
+ */
 /* Different models */
 
 /* Deal Structures */
@@ -17,75 +17,73 @@
 /* Exotic Coupons */
 typedef enum CRIF_COUPON_TYPE_
 {
-	REGULAR_CRIF = 0,
-	MODIFIED_CRIF
+    REGULAR_CRIF = 0,
+    MODIFIED_CRIF
 } CRIF_COUPON_TYPE;
 
-Err crif_interp_coupon_type(	char				*cCouponType,
-								CRIF_COUPON_TYPE	*eCouponType);
+Err crif_interp_coupon_type(char* cCouponType, CRIF_COUPON_TYPE* eCouponType);
 typedef struct
 {
-	int						iStartIndex;
-	int						iEndIndex;
-	int						iNbUsedCpn;
+    int iStartIndex;
+    int iEndIndex;
+    int iNbUsedCpn;
 
-	int						iNumStartIndex;
-	int						iNbUsedNumCpn;
-	
-	int						*iFloatingType; /* 0: no floating, 1: floating */
+    int iNumStartIndex;
+    int iNbUsedNumCpn;
 
-	/* Coupon Payoff = dAlpha * PreviousCoupon  + dBeta * CMSS + dGamma  */
-	double					*dAlpha;
-	double					*dBeta;
-	double					*dGamma;
+    int* iFloatingType; /* 0: no floating, 1: floating */
 
-	/* For IV control Variate  */
-	double					*dCVStrike;
+    /* Coupon Payoff = dAlpha * PreviousCoupon  + dBeta * CMSS + dGamma  */
+    double* dAlpha;
+    double* dBeta;
+    double* dGamma;
 
-	/* Floor / Cap for Time Swap Coupon */
-	int						*iHasFloorCap;
+    /* For IV control Variate  */
+    double* dCVStrike;
 
-	/* Market Value */
-	double					*dMarketValue;
+    /* Floor / Cap for Time Swap Coupon */
+    int* iHasFloorCap;
 
-	/* Fixed PV*/
-	double					dFixedPV;
-	
+    /* Market Value */
+    double* dMarketValue;
+
+    /* Fixed PV*/
+    double dFixedPV;
+
 } crif_exotic_aux, *CRIF_EXOTIC_AUX;
 
 typedef struct
 {
-	/* Schedule */
-	int						iNbCpn;	
-	long					*lStartDate;
-	long					*lEndDate;
-	long					*lPayDate;
-	double					*dCoverage;
-	double					*dNot;	
-							
-	/* Coupons */			
-	CRIF_COUPON_TYPE		*eCouponType;	
+    /* Schedule */
+    int     iNbCpn;
+    long*   lStartDate;
+    long*   lEndDate;
+    long*   lPayDate;
+    double* dCoverage;
+    double* dNot;
 
-	/* Ratchet gearing */
-	double					*dPrvCpngearing;
+    /* Coupons */
+    CRIF_COUPON_TYPE* eCouponType;
 
-	/* Paid CMS */			
-	int						iFixingLag;
-	long					*lPaidFixingDate;
-	char					**cPaidTenor;
-	char					cPaidFreq[20];
-	char					cPaidBasis[20];
-	char					cPaidRef[20];
-	double					*dPaidGearing;	
-	double					*dPaidMargin;
-	double					*dFloor;
-	double					*dCap;
+    /* Ratchet gearing */
+    double* dPrvCpngearing;
 
-	double					*dPastPaidCpn;
-							
+    /* Paid CMS */
+    int     iFixingLag;
+    long*   lPaidFixingDate;
+    char**  cPaidTenor;
+    char    cPaidFreq[20];
+    char    cPaidBasis[20];
+    char    cPaidRef[20];
+    double* dPaidGearing;
+    double* dPaidMargin;
+    double* dFloor;
+    double* dCap;
 
-	/* calculation aux */
-	CRIF_EXOTIC_AUX		sAux;
+    double* dPastPaidCpn;
+
+    /* calculation aux */
+    CRIF_EXOTIC_AUX sAux;
 
 } crif_exotic, *CRIF_EXOTIC;
 
@@ -94,80 +92,76 @@ void crif_free_exotic(CRIF_EXOTIC sExotic);
 /* Right to Call */
 typedef struct
 {
-	int				iStartIndex;
-	int				iNbUsedCall;
-	
-	/* Calling Details */
-	int				*iStartCpnIdx;
-	int				*iStartFundIdx;
-	
-	/* Exercised Details */
-	int				iIndexExercised;
+    int iStartIndex;
+    int iNbUsedCall;
 
+    /* Calling Details */
+    int* iStartCpnIdx;
+    int* iStartFundIdx;
+
+    /* Exercised Details */
+    int iIndexExercised;
 
 } crif_call_aux, *CRIF_CALL_AUX;
 
 typedef struct
-{	
-	double			dPayRec;	/* -1: Pay, +1: Rec */
+{
+    double dPayRec; /* -1: Pay, +1: Rec */
 
-	int				iNbCall;
-	long			*lExeDate;
-	long			*lSettlDate;
-	double			*dFee;
+    int     iNbCall;
+    long*   lExeDate;
+    long*   lSettlDate;
+    double* dFee;
 
-	/* Exercised */
-	int				iIsExercised;
-	long			lExercisedDate;
-	int				iIsCallable;
+    /* Exercised */
+    int  iIsExercised;
+    long lExercisedDate;
+    int  iIsCallable;
 
-	/* aux for calculation */
-	CRIF_CALL_AUX	sAux;
+    /* aux for calculation */
+    CRIF_CALL_AUX sAux;
 
 } crif_call, *CRIF_CALL;
 
-void crif_free_call(CRIF_CALL	sCall);
+void crif_free_call(CRIF_CALL sCall);
 
-
-Err crif_interp_calib_strat(const char *constStr, CMSCTS_CALIB_STRAT *val);
+Err crif_interp_calib_strat(const char* constStr, CMSCTS_CALIB_STRAT* val);
 
 /* Calibration / Model Parameters */
 
 typedef struct
 {
-	long			lStartDate;
-	long			lTheoEndDate;
-	double			dPayRec;
+    long   lStartDate;
+    long   lTheoEndDate;
+    double dPayRec;
 
-	/* Funding */
-	CMSCTS_FUNDING	sFunding;
+    /* Funding */
+    CMSCTS_FUNDING sFunding;
 
-	/* Exotic */
-	CRIF_EXOTIC	sExotic;
+    /* Exotic */
+    CRIF_EXOTIC sExotic;
 
-	/* Call */
-	CRIF_CALL		sCall;	
+    /* Call */
+    CRIF_CALL sCall;
 
 } crif_deal, *CRIF_DEAL;
 
-
-Err	crif_allocate_deal(CRIF_DEAL sDeal);
+Err  crif_allocate_deal(CRIF_DEAL sDeal);
 void crif_free_deal(CRIF_DEAL sDeal);
 
-/* ------------------------------------------------------------------------------------------------------------------ */
+/* ------------------------------------------------------------------------------------------------------------------
+ */
 /* global variable for CRIF Deal pricing*/
-typedef struct 
+typedef struct
 {
-	double			m_dCouponNotional;
-	double			m_dFundingNotional;
-	double*			m_PreviousCoupon;
-	double*			tempvalue;
+    double  m_dCouponNotional;
+    double  m_dFundingNotional;
+    double* m_PreviousCoupon;
+    double* tempvalue;
 } CRIF_Global_Structure;
 
 void resetCRIF_Global_Structure();
 void freeCRIF_Global_Structure();
-
-
 
 /* All Pricing Params */
 /* ****************** */
@@ -175,73 +169,68 @@ void freeCRIF_Global_Structure();
 /* For Coupon Pricing */
 typedef struct
 {
-	/* Call Params */
-	double		dMCEBCallSpread;
+    /* Call Params */
+    double dMCEBCallSpread;
 } crif_cpn_numparams, *CRIF_CPN_NUMPARAMS;
-
 
 typedef struct
 {
-	CRIF_CPN_NUMPARAMS		sCouponPricingParams;
-	CMSCTS_SIMUL_PARAMS		sSimulParams;
-	CMSCTS_RESERVE_PARAMS		sReserveParams;
+    CRIF_CPN_NUMPARAMS    sCouponPricingParams;
+    CMSCTS_SIMUL_PARAMS   sSimulParams;
+    CMSCTS_RESERVE_PARAMS sReserveParams;
 
 } crif_pricing_params, *CRIF_PRICING_PARAMS;
 
-Err	crif_allocate_pricing_params(CRIF_PRICING_PARAMS sPricingParams);
+Err  crif_allocate_pricing_params(CRIF_PRICING_PARAMS sPricingParams);
 void crif_free_pricing_params(CRIF_PRICING_PARAMS sPricingParams);
 
 /* Function to check and fill the structures */
-Err crif_fill_check_all_struct(	CRIF_DEAL			sDeal,
-								CMSCTS_MARKET			sMarket,
-								CRIF_CPN_NUMPARAMS	sNumerParams);
+Err crif_fill_check_all_struct(
+    CRIF_DEAL sDeal, CMSCTS_MARKET sMarket, CRIF_CPN_NUMPARAMS sNumerParams);
 
 typedef struct
 {
-	long				lNbCall;
-	long				*lExeDates;
-	double				*dMarketIV;
-	double				*dModelIV;
-	double				*dExeProba;
-	double				*dNewModelIV;
-	double				*dFees;
-	double				*dOTCall;
-	double				*dOTCallPartial;
+    long    lNbCall;
+    long*   lExeDates;
+    double* dMarketIV;
+    double* dModelIV;
+    double* dExeProba;
+    double* dNewModelIV;
+    double* dFees;
+    double* dOTCall;
+    double* dOTCallPartial;
 
 } crif_fwdiv, *CRIF_FWDIV;
 
+Err crif_allocate_fwdiv(CRIF_FWDIV sFwdIVInfos, long lNbCall);
 
-Err	crif_allocate_fwdiv(	CRIF_FWDIV		sFwdIVInfos,
-							long			lNbCall);
-
-void crif_free_fwdiv(CRIF_FWDIV	sFwdIVInfos);
+void crif_free_fwdiv(CRIF_FWDIV sFwdIVInfos);
 
 typedef struct
 {
-	double				dFunding;
-	double				dExotic;
-	double				dCall;
-	double				dStd;
+    double dFunding;
+    double dExotic;
+    double dCall;
+    double dStd;
 
-	double				dNewIV;
-	double				dCallInit;
-	double				dSwitchAdjust;
-	double				dGMAInitCall;
+    double dNewIV;
+    double dCallInit;
+    double dSwitchAdjust;
+    double dGMAInitCall;
 
-	CPD_CALIB_INST_DATA sInstDatas;	
-	LGMSV_MODEL			sLGMSVModel;
+    CPD_CALIB_INST_DATA sInstDatas;
+    LGMSV_MODEL         sLGMSVModel;
 
-	int					iCalcExeProbas;	
+    int iCalcExeProbas;
 
-	CRIF_FWDIV		sFwdIVInfos;
-	CPD_CALIB_INST_DATA sSwitchInstDatas;	
+    CRIF_FWDIV          sFwdIVInfos;
+    CPD_CALIB_INST_DATA sSwitchInstDatas;
 
-	CPD_CALIB_INST_DATA sLGM2F_FixedTau_InstDatas;	
-	CPD_CALIB_INST_DATA sLGM2F_TauTs_InstDatas;	
+    CPD_CALIB_INST_DATA sLGM2F_FixedTau_InstDatas;
+    CPD_CALIB_INST_DATA sLGM2F_TauTs_InstDatas;
 } crif_outputs, *CRIF_OUTPUTS;
 
-Err	crif_allocate_outputs(CRIF_OUTPUTS	sOutputs);
+Err  crif_allocate_outputs(CRIF_OUTPUTS sOutputs);
 void crif_free_outputs(CRIF_OUTPUTS sOutputs);
-
 
 #endif

@@ -7,14 +7,12 @@
 #ifndef PDE_H_INTERPOL
 #define PDE_H_INTERPOL
 
-#include "utallhdr.h"
 #include "pde_h_struct.h"
+#include "utallhdr.h"
 
 /* ======================================================================== */
 
-Err pde_interpol(
-						SrtPdeObject	*pde,
-						double   M[2][2], double  M1[2][2]);
+Err pde_interpol(SrtPdeObject* pde, double M[2][2], double M1[2][2]);
 
 #endif
 /*-------------------------------------------------------------------*/

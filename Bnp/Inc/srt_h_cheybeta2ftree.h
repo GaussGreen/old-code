@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------------------------
-  AUTHOR: E. FOURNIE & al 
+  AUTHOR: E. FOURNIE & al
 
   DATE : MARS 98
 
@@ -7,19 +7,16 @@
  ----------------------------------------------------------------------------- */
 
 #ifndef SRT_H_CHEYBETA2DTREE_H
-#define	SRT_H_CHEYBETA2DTREE_H
+#define SRT_H_CHEYBETA2DTREE_H
 
-
-
-Err srt_f_cheybeta2dtree (
-	 SrtUndPtr       und,        /* underlying  pointer*/
-	 SrtGrfnParam   *grfnparam,   /*grfn parameters*/
-	 SrtStpPtr       stp,        /*step pointer*/
-	 GrfnDeal	   *gd,         /*GRFN deal description*/
-	 EvalEventFct    evalcf,     /*cash-flow evaluation function*/
-	 SrtIOStruct    *iolist,    /*list of requests*/ 
-	 SrtUndInfo     *und_info   /*underlying info*/
-	 );
-
+Err srt_f_cheybeta2dtree(
+    SrtUndPtr     und,       /* underlying  pointer*/
+    SrtGrfnParam* grfnparam, /*grfn parameters*/
+    SrtStpPtr     stp,       /*step pointer*/
+    GrfnDeal*     gd,        /*GRFN deal description*/
+    EvalEventFct  evalcf,    /*cash-flow evaluation function*/
+    SrtIOStruct*  iolist,    /*list of requests*/
+    SrtUndInfo*   und_info   /*underlying info*/
+);
 
 #endif

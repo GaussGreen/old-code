@@ -3,17 +3,20 @@
 #ifndef __AFFINEMODELGEN_H__
 #define __AFFINEMODELGEN_H__
 
-typedef struct _SAffineCoef {
-	SFxSVUndFull	*o;
-	double			T_pay;
-	int				idx_d, idx_f, idx_x;
+#include "FxSVCalib.h"
+#include "uterror.h"
 
-	double			**B, ***D;
-	int				n;
+typedef struct _SAffineCoef
+{
+    SFxSVUndFull* o;
+    double        T_pay;
+    int           idx_d, idx_f, idx_x;
+
+    double **B, ***D;
+    int      n;
 } SAffinCoef;
 
-Err AffineCalcPhi(SFxSVComm_InvFT *q, double u_re, double u_im, double *h_re, double *h_im);
-Err AffineCalcMoments(SFxSVComm_InvFT *q, double *mean, double *std);
-
+Err AffineCalcPhi(SFxSVComm_InvFT* q, double u_re, double u_im, double* h_re, double* h_im);
+Err AffineCalcMoments(SFxSVComm_InvFT* q, double* mean, double* std);
 
 #endif  // #ifndef __AFFINEMODELGEN_H__

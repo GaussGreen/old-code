@@ -4,10 +4,10 @@
 #include "utallhdr.h"
 
 /*  Balances a matrix. */
-void balanc(double **a, int n);
+void balanc(double** a, int n);
 
 /*  Transform into Hessenberg. */
-void elmhes(double **a, int n);
+void elmhes(double** a, int n);
 
 /*  QR for Hessenberg matrixes. */
-Err hqr(double **a, int n, double wr[], double wi[]);
+Err hqr(double** a, int n, double wr[], double wi[]);

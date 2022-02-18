@@ -9,31 +9,84 @@
 #ifndef SRT_H_BOND_COX_COMPUTE_H
 #define SRT_H_BOND_COX_COMPUTE_H
 
+double cox_clean_fct(
+    SwapDP         p,
+    double         coupon,
+    double         spot,
+    Date           value_date,
+    Date           opt_mat,
+    double         vol,
+    double         strike,
+    double         step,
+    SrtCallPutType call_put,
+    SrtGreekType   greek,
+    String         swap,
+    String         repo,
+    double         redemption,
+    double         first_coupon);
 
-double cox_clean_fct(SwapDP p,double coupon,double spot,Date value_date,
-			Date opt_mat,double vol,double strike,double step,
-			SrtCallPutType call_put,SrtGreekType greek,String swap,
-			String repo,double redemption,double first_coupon);
-                    
-double cox_fwd_yield_fct(SwapDP p,double coupon,double spot,Date value_date,
-			Date opt_mat,double vol,double strike,double step,
-			SrtCallPutType call_put,SrtGreekType greek,String swap,
-			String repo,double redemption,double first_coupon);
-                    
-double cox_yield_fct(SwapDP p,double coupon,double spot,Date value_date,
-			Date opt_mat,double vol,double strike,double step,
-			SrtCallPutType call_put,SrtGreekType greek,String swap,
-			String repo,double redemption,double first_coupon);
-                    
-double am_cox_clean_fct(SwapDP p,double coupon,double spot,Date value_date,
-			Date opt_mat,double vol,double strike,double step,
-			SrtCallPutType call_put,SrtGreekType greek,String swap,
-			String repo,double redemption,double first_coupon);
-                    
+double cox_fwd_yield_fct(
+    SwapDP         p,
+    double         coupon,
+    double         spot,
+    Date           value_date,
+    Date           opt_mat,
+    double         vol,
+    double         strike,
+    double         step,
+    SrtCallPutType call_put,
+    SrtGreekType   greek,
+    String         swap,
+    String         repo,
+    double         redemption,
+    double         first_coupon);
 
-double am_cox_yield_fct(SwapDP p,double coupon,double spot,Date value_date,
-			Date opt_mat,double vol,double strike,double step,
-			SrtCallPutType call_put,SrtGreekType greek,String swap,
-			String repo,double redemption,double first_coupon);
-                    
+double cox_yield_fct(
+    SwapDP         p,
+    double         coupon,
+    double         spot,
+    Date           value_date,
+    Date           opt_mat,
+    double         vol,
+    double         strike,
+    double         step,
+    SrtCallPutType call_put,
+    SrtGreekType   greek,
+    String         swap,
+    String         repo,
+    double         redemption,
+    double         first_coupon);
+
+double am_cox_clean_fct(
+    SwapDP         p,
+    double         coupon,
+    double         spot,
+    Date           value_date,
+    Date           opt_mat,
+    double         vol,
+    double         strike,
+    double         step,
+    SrtCallPutType call_put,
+    SrtGreekType   greek,
+    String         swap,
+    String         repo,
+    double         redemption,
+    double         first_coupon);
+
+double am_cox_yield_fct(
+    SwapDP         p,
+    double         coupon,
+    double         spot,
+    Date           value_date,
+    Date           opt_mat,
+    double         vol,
+    double         strike,
+    double         step,
+    SrtCallPutType call_put,
+    SrtGreekType   greek,
+    String         swap,
+    String         repo,
+    double         redemption,
+    double         first_coupon);
+
 #endif

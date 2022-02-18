@@ -14,14 +14,6 @@
 #ifndef SRT_H_LGMTREEFCT_H
 #define SRT_H_LGMTREEFCT_H
 
-
-void LGM_calc_delta_x
-( 
-  SrtStpPtr top, 
-  double *delta_x,
-  int und_index
-)
-;
-
+void LGM_calc_delta_x(SrtStpPtr top, double* delta_x, int und_index);
 
 #endif

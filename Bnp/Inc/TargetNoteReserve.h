@@ -1,5 +1,4 @@
 #ifndef _TARGETNOTE_RESERVE_H_
 #define _TARGETNOTE_RESERVE_H_
 
-
 #endif

@@ -1,416 +1,411 @@
 #ifndef FXLGMSVMC
-#define	FXLGMSVMC
+#define FXLGMSVMC
 
-#include "srt_h_all.h"
-#include "math.h"
 #include "LGMSVUtil.h"
+#include "math.h"
+#include "srt_h_all.h"
+#include "McEBOptimisation.h"
 
+Err fxlgmsv_mc_balsam(
+    /*	Time Information  */
+    int     iNbTime,
+    int     iNbEvent,
+    double* dTime,
+    double* dDate,
 
-Err	 fxlgmsv_mc_balsam(	
-					/*	Time Information  */
-					int			iNbTime,
-					int			iNbEvent,
-					double		*dTime,
-					double		*dDate,
-					
-					int			iNumPaths,
+    int iNumPaths,
 
-					//Domestic
-					/*	Model data Information	*/
-					double		ddomLambdaX1,
-					double		ddomLambdaX2,
+    // Domestic
+    /*	Model data Information	*/
+    double ddomLambdaX1,
+    double ddomLambdaX2,
 
-					double		*ddomSigma,
-					double		*ddomAlphaLGM,
-					double		*ddomRhoLGM,
-										
-					double		*ddomAlpha,
-					double		*ddomLambdaEps,
-					double		*ddomLvlEps,
-					double		*ddomRho,
-					double		*ddomRho2,
+    double* ddomSigma,
+    double* ddomAlphaLGM,
+    double* ddomRhoLGM,
 
-					double		*domzcvol1_star,
-					double		*domzcvol2_star,
+    double* ddomAlpha,
+    double* ddomLambdaEps,
+    double* ddomLvlEps,
+    double* ddomRho,
+    double* ddomRho2,
 
-					/* Parameters for DF(t,T*) reconstruction */
-					double		*ddomff_star,
-					double		*domgam1_star,
-					double		*domgam2_star,
-					double		*domgam1_2_star,
-					double		*domgam2_2_star,
-					double		*domgam12_star,
+    double* domzcvol1_star,
+    double* domzcvol2_star,
 
-					//Foreign
-					/*	Model data Information	*/
-					double		dforLambdaX1,
-					double		dforLambdaX2,
+    /* Parameters for DF(t,T*) reconstruction */
+    double* ddomff_star,
+    double* domgam1_star,
+    double* domgam2_star,
+    double* domgam1_2_star,
+    double* domgam2_2_star,
+    double* domgam12_star,
 
-					double		*dforSigma,
-					double		*dforAlphaLGM,
-					double		*dforRhoLGM,
-										
-					double		*dforAlpha,
-					double		*dforLambdaEps,
-					double		*dforLvlEps,
-					double		*dforRho,
-					double		*dforRho2,
+    // Foreign
+    /*	Model data Information	*/
+    double dforLambdaX1,
+    double dforLambdaX2,
 
-					double		*forzcvol1_star,
-					double		*forzcvol2_star,
+    double* dforSigma,
+    double* dforAlphaLGM,
+    double* dforRhoLGM,
 
-					/* Parameters for DF(t,T*) reconstruction */
-					double		*dforff_star,
-					double		*forgam1_star,
-					double		*forgam2_star,
-					double		*forgam1_2_star,
-					double		*forgam2_2_star,
-					double		*forgam12_star,
+    double* dforAlpha,
+    double* dforLambdaEps,
+    double* dforLvlEps,
+    double* dforRho,
+    double* dforRho2,
 
-					//FX
-					double		fwd_fx_TStar,
-					double		*fx_vol,
+    double* forzcvol1_star,
+    double* forzcvol2_star,
 
-					//	Correlation
-					double		***CorrMatrix,
+    /* Parameters for DF(t,T*) reconstruction */
+    double* dforff_star,
+    double* forgam1_star,
+    double* forgam2_star,
+    double* forgam1_2_star,
+    double* forgam2_2_star,
+    double* forgam12_star,
 
-					/*	Product data */
-					void		**func_parm_tab, 
-					int			*EvalEvent,
+    // FX
+    double  fwd_fx_TStar,
+    double* fx_vol,
 
-					/* for Optimisation of exercise boundary */
-					int			do_optimisation,
-					int			*optimise,
-					MCEBPARAMS	params,
-					
-					/*	Initialisation function to be called at the beggining of each path or NULL if none */
-					void		(*init_func)(),
-					
-					/*	Payoff function */
-					Err (*payoff_func)(	long	path_index,
-										double	evt_date,
-										double	evt_time,
-										void	*func_parm,
+    //	Correlation
+    double*** CorrMatrix,
 
-										//Domestic
-										/* Model data	*/
-										double	domft1,
-										double	domft2,
-										double	domphi1,
-										double	domphi2,
-										double	domphi12,
-										double	domv,
-																
-										//Foreign
-										/* Model data	*/
-										double	forft1,
-										double	forft2,
-										double	forphi1,
-										double	forphi2,
-										double	forphi12,
-										double	forv,
+    /*	Product data */
+    void** func_parm_tab,
+    int*   EvalEvent,
 
-										//FX
-										double	fx_spot,
+    /* for Optimisation of exercise boundary */
+    int        do_optimisation,
+    int*       optimise,
+    MCEBPARAMS params,
 
-										/* Vector of results to be updated */
-										int		nprod,
-										/* Result	*/
-										double	*prod_val,
-										int		*stop_path),
-					/*	Result */
-					int			iNbProduct, 
-					double		**res);
+    /*	Initialisation function to be called at the beggining of each path or NULL if none */
+    void (*init_func)(),
 
+    /*	Payoff function */
+    Err (*payoff_func)(
+        long   path_index,
+        double evt_date,
+        double evt_time,
+        void*  func_parm,
 
-Err	 qtolgmsv2f_mc_balsam(	
+        // Domestic
+        /* Model data	*/
+        double domft1,
+        double domft2,
+        double domphi1,
+        double domphi2,
+        double domphi12,
+        double domv,
 
-					int			iNbTime,
-					int			iNbEvent,
-					double		*dTime,
-					double		*dDate,
-					
-					int			iNumPaths,
+        // Foreign
+        /* Model data	*/
+        double forft1,
+        double forft2,
+        double forphi1,
+        double forphi2,
+        double forphi12,
+        double forv,
 
-					//Domestic
+        // FX
+        double fx_spot,
 
-					double		ddomLambdaX,
+        /* Vector of results to be updated */
+        int nprod,
+        /* Result	*/
+        double* prod_val,
+        int*    stop_path),
+    /*	Result */
+    int      iNbProduct,
+    double** res);
 
-					double		*ddomSigma,
+Err qtolgmsv2f_mc_balsam(
 
-					double		*domzcvol_star,
+    int     iNbTime,
+    int     iNbEvent,
+    double* dTime,
+    double* dDate,
 
+    int iNumPaths,
 
-					double		*ddomff_star,
-					double		*domgam1_star,
-					double		*domgam1_2_star,
+    // Domestic
 
-					//Foreign
+    double ddomLambdaX,
 
-					double		dforLambdaX1,
-					double		dforLambdaX2,
+    double* ddomSigma,
 
-					double		*dforSigma,
-					double		*dforAlphaLGM,
-					double		*dforRhoLGM,
-										
-					double		*dforAlpha,
-					double		*dforLambdaEps,
-					double		*dforLvlEps,
-					double		*dforRho,
-					double		*dforRho2,
+    double* domzcvol_star,
 
-					double		*forzcvol1_star,
-					double		*forzcvol2_star,
+    double* ddomff_star,
+    double* domgam1_star,
+    double* domgam1_2_star,
 
+    // Foreign
 
-					double		*dforff_star,
-					double		*forgam1_star,
-					double		*forgam2_star,
-					double		*forgam1_2_star,
-					double		*forgam2_2_star,
-					double		*forgam12_star,
+    double dforLambdaX1,
+    double dforLambdaX2,
 
-					//FX Vol
-					double		*fx_vol,
+    double* dforSigma,
+    double* dforAlphaLGM,
+    double* dforRhoLGM,
 
-					//	Correlation
-					double		***CorrMatrix,
-					/*	0 : Dom
-						1 : For1
-						2 : For2
-						3 : ForSV
-						4 : FX	*/
+    double* dforAlpha,
+    double* dforLambdaEps,
+    double* dforLvlEps,
+    double* dforRho,
+    double* dforRho2,
 
+    double* forzcvol1_star,
+    double* forzcvol2_star,
 
-					void		**func_parm_tab, 
-					int			*EvalEvent,
+    double* dforff_star,
+    double* forgam1_star,
+    double* forgam2_star,
+    double* forgam1_2_star,
+    double* forgam2_2_star,
+    double* forgam12_star,
 
+    // FX Vol
+    double* fx_vol,
 
-					int			do_optimisation,
-					int			*optimise,
-					MCEBPARAMS	params,
-					
-					
-					void		(*init_func)(),
-									
-					// Payoff function of QUANTOLGMSV2F
-					Err (*payoff_func)(	long	path_index,
-										double	evt_date,
-										double	evt_time,
-										void	*func_parm,
+    //	Correlation
+    double*** CorrMatrix,
+    /*	0 : Dom
+            1 : For1
+            2 : For2
+            3 : ForSV
+            4 : FX	*/
 
-										//Domestic
-										double	domft,
-										double	domphi,
-																
-										//Foreign										
-										double	forft1,
-										double	forft2,
-										double	forphi1,
-										double	forphi2,
-										double	forphi12,
-										double	forv,
+    void** func_parm_tab,
+    int*   EvalEvent,
 
-										
-										int		nprod,
-										
-										double	*prod_val,
-										int		*stop_path),
-					
-					int			iNbProduct, 
-					double		**res);
+    int        do_optimisation,
+    int*       optimise,
+    MCEBPARAMS params,
+
+    void (*init_func)(),
+
+    // Payoff function of QUANTOLGMSV2F
+    Err (*payoff_func)(
+        long   path_index,
+        double evt_date,
+        double evt_time,
+        void*  func_parm,
+
+        // Domestic
+        double domft,
+        double domphi,
+
+        // Foreign
+        double forft1,
+        double forft2,
+        double forphi1,
+        double forphi2,
+        double forphi12,
+        double forv,
+
+        int nprod,
+
+        double* prod_val,
+        int*    stop_path),
+
+    int      iNbProduct,
+    double** res);
 
 /* ORIGINAL CALL
-Err	 qtolgmsv2f_mc_balsam(	
-					//	Time Information
-					int			iNbTime,
-					int			iNbEvent,
-					double		*dTime,
-					double		*dDate,
-					
-					int			iNumPaths,
+Err	 qtolgmsv2f_mc_balsam(
+                                        //	Time Information
+                                        int			iNbTime,
+                                        int			iNbEvent,
+                                        double		*dTime,
+                                        double		*dDate,
 
-					//Domestic
-					//	Model data Information
-					double		ddomLambdaX,
+                                        int			iNumPaths,
 
-					double		*ddomSigma,
+                                        //Domestic
+                                        //	Model data Information
+                                        double		ddomLambdaX,
 
-					double		*domzcvol_star,
+                                        double		*ddomSigma,
 
-					// Parameters for DF(t,T*) reconstruction
-					double		*ddomff_star,
-					double		*domgam1_star,
-					double		*domgam1_2_star,
+                                        double		*domzcvol_star,
 
-					//Foreign
-					//	Model data Information
-					double		dforLambdaX1,
-					double		dforLambdaX2,
+                                        // Parameters for DF(t,T*) reconstruction
+                                        double		*ddomff_star,
+                                        double		*domgam1_star,
+                                        double		*domgam1_2_star,
 
-					double		*dforSigma,
-					double		*dforAlphaLGM,
-					double		*dforRhoLGM,
-										
-					double		*dforAlpha,
-					double		*dforLambdaEps,
-					double		*dforLvlEps,
-					double		*dforRho,
-					double		*dforRho2,
+                                        //Foreign
+                                        //	Model data Information
+                                        double		dforLambdaX1,
+                                        double		dforLambdaX2,
 
-					double		*forzcvol1_star,
-					double		*forzcvol2_star,
+                                        double		*dforSigma,
+                                        double		*dforAlphaLGM,
+                                        double		*dforRhoLGM,
 
-					// Parameters for DF(t,T*) reconstruction
-					double		*dforff_star,
-					double		*forgam1_star,
-					double		*forgam2_star,
-					double		*forgam1_2_star,
-					double		*forgam2_2_star,
-					double		*forgam12_star,
+                                        double		*dforAlpha,
+                                        double		*dforLambdaEps,
+                                        double		*dforLvlEps,
+                                        double		*dforRho,
+                                        double		*dforRho2,
 
-					//FX Vol
-					double		*fx_vol,
+                                        double		*forzcvol1_star,
+                                        double		*forzcvol2_star,
 
-					//	Correlation
-					double		***CorrMatrix,
-					//	0 : Dom
-					//	1 : For1
-					//	2 : For2
-					//	3 : ForSV
-					//	4 : FX
+                                        // Parameters for DF(t,T*) reconstruction
+                                        double		*dforff_star,
+                                        double		*forgam1_star,
+                                        double		*forgam2_star,
+                                        double		*forgam1_2_star,
+                                        double		*forgam2_2_star,
+                                        double		*forgam12_star,
 
-					//	Product data
-					void		**func_parm_tab, 
-					int			*EvalEvent,
+                                        //FX Vol
+                                        double		*fx_vol,
 
-					// for Optimisation of exercise boundary
-					int			do_optimisation,
-					int			*optimise,
-					MCEBPARAMS	params,
-					
-					//	Initialisation function to be called at the beggining of each path or NULL if none
-					void		(*init_func)(),
-					
-					//	Payoff function
-					Err (*payoff_func)(	long	path_index,
-										double	evt_date,
-										double	evt_time,
-										void	*func_parm,
+                                        //	Correlation
+                                        double		***CorrMatrix,
+                                        //	0 : Dom
+                                        //	1 : For1
+                                        //	2 : For2
+                                        //	3 : ForSV
+                                        //	4 : FX
 
-										//Domestic
-										// Model data
-										double	domft,
-										double	domphi,
-																
-										//Foreign
-										//Model data
-										double	forft1,
-										double	forft2,
-										double	forphi1,
-										double	forphi2,
-										double	forphi12,
-										double	forv,
+                                        //	Product data
+                                        void		**func_parm_tab,
+                                        int			*EvalEvent,
 
-										//Vector of results to be updated
-										int		nprod,
-										//Result
-										double	*prod_val,
-										int		*stop_path),
-					//Result
-					int			iNbProduct, 
-					double		**res);
-					*/
+                                        // for Optimisation of exercise boundary
+                                        int			do_optimisation,
+                                        int			*optimise,
+                                        MCEBPARAMS	params,
 
+                                        //	Initialisation function to be called at the
+beggining of each path or NULL if none void		(*init_func)(),
 
-Err	 qtolgmsv1f_mc_balsam(	
-					/*	Time Information  */
-					int			iNbTime,
-					int			iNbEvent,
-					double		*dTime,
-					double		*dDate,
-					
-					int			iNumPaths,
+                                        //	Payoff function
+                                        Err (*payoff_func)(	long	path_index,
+                                                                                double	evt_date,
+                                                                                double	evt_time,
+                                                                                void	*func_parm,
 
-					//Domestic
-					/*	Model data Information	*/
-					double		ddomLambdaX,
+                                                                                //Domestic
+                                                                                // Model data
+                                                                                double	domft,
+                                                                                double	domphi,
 
-					double		*ddomSigma,
+                                                                                //Foreign
+                                                                                //Model data
+                                                                                double	forft1,
+                                                                                double	forft2,
+                                                                                double	forphi1,
+                                                                                double	forphi2,
+                                                                                double	forphi12,
+                                                                                double	forv,
 
-					double		*domzcvol_star,
+                                                                                //Vector of results
+to be updated int		nprod,
+                                                                                //Result
+                                                                                double	*prod_val,
+                                                                                int
+*stop_path),
+                                        //Result
+                                        int			iNbProduct,
+                                        double		**res);
+                                        */
 
-					/* Parameters for DF(t,T*) reconstruction */
-					double		*ddomff_star,
-					double		*domgam1_star,
-					double		*domgam1_2_star,
+Err qtolgmsv1f_mc_balsam(
+    /*	Time Information  */
+    int     iNbTime,
+    int     iNbEvent,
+    double* dTime,
+    double* dDate,
 
-					//Foreign
-					/*	Model data Information	*/
-					double		dforLambdaX1,
+    int iNumPaths,
 
-					double		*dforSigma,
-										
-					double		*dforAlpha,
-					double		*dforLambdaEps,
-					double		*dforLvlEps,
-					double		*dforRho,
+    // Domestic
+    /*	Model data Information	*/
+    double ddomLambdaX,
 
-					double		*forzcvol_star,
+    double* ddomSigma,
 
-					/* Parameters for DF(t,T*) reconstruction */
-					double		*dforff_star,
-					double		*forgam1_star,
-					double		*forgam1_2_star,
+    double* domzcvol_star,
 
-					//FX Vol
-					double		*fx_vol,
+    /* Parameters for DF(t,T*) reconstruction */
+    double* ddomff_star,
+    double* domgam1_star,
+    double* domgam1_2_star,
 
-					//	Correlation
-					double		***CorrMatrix,
-					/*	0 : Dom
-						1 : For1
-						2 : ForSV
-						3 : Fx	*/
+    // Foreign
+    /*	Model data Information	*/
+    double dforLambdaX1,
 
-					/*	Product data */
-					void		**func_parm_tab, 
-					int			*EvalEvent,
+    double* dforSigma,
 
-					/* for Optimisation of exercise boundary */
-					int			do_optimisation,
-					int			*optimise,
-					MCEBPARAMS	params,
-					
-					/*	Initialisation function to be called at the beggining of each path or NULL if none */
-					void		(*init_func)(),
-					
-					/*	Payoff function */
-					Err (*payoff_func)(	long	path_index,
-										double	evt_date,
-										double	evt_time,
-										void	*func_parm,
+    double* dforAlpha,
+    double* dforLambdaEps,
+    double* dforLvlEps,
+    double* dforRho,
 
-										//Domestic
-										/* Model data	*/
-										double	domft,
-										double	domphi,
-																
-										//Foreign
-										/* Model data	*/
-										double	forft,
-										double	forphi,
-										double	forv,
+    double* forzcvol_star,
 
-										/* Vector of results to be updated */
-										int		nprod,
-										/* Result	*/
-										double	*prod_val,
-										int		*stop_path),
-					/*	Result */
-					int			iNbProduct, 
-					double		**res);
+    /* Parameters for DF(t,T*) reconstruction */
+    double* dforff_star,
+    double* forgam1_star,
+    double* forgam1_2_star,
 
+    // FX Vol
+    double* fx_vol,
+
+    //	Correlation
+    double*** CorrMatrix,
+    /*	0 : Dom
+            1 : For1
+            2 : ForSV
+            3 : Fx	*/
+
+    /*	Product data */
+    void** func_parm_tab,
+    int*   EvalEvent,
+
+    /* for Optimisation of exercise boundary */
+    int        do_optimisation,
+    int*       optimise,
+    MCEBPARAMS params,
+
+    /*	Initialisation function to be called at the beggining of each path or NULL if none */
+    void (*init_func)(),
+
+    /*	Payoff function */
+    Err (*payoff_func)(
+        long   path_index,
+        double evt_date,
+        double evt_time,
+        void*  func_parm,
+
+        // Domestic
+        /* Model data	*/
+        double domft,
+        double domphi,
+
+        // Foreign
+        /* Model data	*/
+        double forft,
+        double forphi,
+        double forv,
+
+        /* Vector of results to be updated */
+        int nprod,
+        /* Result	*/
+        double* prod_val,
+        int*    stop_path),
+    /*	Result */
+    int      iNbProduct,
+    double** res);
 
 #endif

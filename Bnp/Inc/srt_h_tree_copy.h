@@ -23,10 +23,8 @@
 /*                                                                            */
 /******************************************************************************/
 
-
 #ifndef SRT_H_TREE_COPY_H
 #define SRT_H_TREE_COPY_H
-
 
 /* -------------------------------------------------------------------------- */
 
@@ -34,8 +32,7 @@ Err srt_f_trinfdup(SrtCheTreInf* trinf, SrtCheTreInf** trinf_dup);
 
 /* -------------------------------------------------------------------------- */
 
-SrtStpPtr srt_f_copystp( SrtStpPtr input_dest, SrtStpPtr input_source);
-
+SrtStpPtr srt_f_copystp(SrtStpPtr input_dest, SrtStpPtr input_source);
 
 /* -------------------------------------------------------------------------- */
 
@@ -44,6 +41,5 @@ Err srt_f_stpdup(SrtStpPtr stp, SrtStpPtr* stp_dup);
 /* -------------------------------------------------------------------------- */
 
 void my_print_Step(SrtStpPtr s, char file_name[], int index);
-
 
 #endif

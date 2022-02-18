@@ -1,44 +1,43 @@
 #ifndef SRT_H_STEP_LIST_H
 #define SRT_H_STEP_LIST_H
 
-
 /* -----------------------------------------------------------------------
-  TYPE            :SrtStp,SrtStpPtr 
+  TYPE            :SrtStp,SrtStpPtr
   AUTHOR          :E.Auld
-  DESCRIPTION     :A step contains the information for events at that time and 
+  DESCRIPTION     :A step contains the information for events at that time and
 for the time slice that follows.  It is used for discretizing a stochastic
 differential equation in time.
   DEFINITION      :
 
   ------------------------------------------------------------------------- */
 
+typedef void* SrtEvent;
 
-typedef void    *SrtEvent;
+typedef struct SrtStp
+{
+    /* Linked list definition: pointers to previous and next */
+    struct SrtStp* prev;
+    struct SrtStp* next;
 
-typedef struct SrtStp{
-/* Linked list definition: pointers to previous and next */
-  struct   SrtStp    *prev;
-  struct   SrtStp    *next;
+    /* Time step information : index and date, time,... */
+    long   index;        /* INDEX OF NODE */
+    long   date;         /* INTEGER DATE AT START NODE */
+    double time;         /* TIME IN YEARS FROM TODAY TO NODE */
+    double ddate;        /* DOUBLE DATE AT START NODE DTOL(date) */
+    double delta_t;      /* TIME IN YEARS FROM THIS NODE TO NEXT */
+    double sqrt_delta_t; /* SQUARE ROOT OF delta_t */
 
- /* Time step information : index and date, time,... */
-  long                index;                 /* INDEX OF NODE */
-  long                date;                  /* INTEGER DATE AT START NODE */
-  double              time;                  /* TIME IN YEARS FROM TODAY TO NODE */   
-  double              ddate;                 /* DOUBLE DATE AT START NODE DTOL(date) */   
-  double              delta_t;               /* TIME IN YEARS FROM THIS NODE TO NEXT */   
-  double              sqrt_delta_t;          /* SQUARE ROOT OF delta_t */   
+    /* Market / model / deal specific information */
+    SrtEvent e;     /* financial event */
+    void**   tminf; /* mkt inf : one *tminf for each underlying */
+    void*    trinf; /* tree inf */
 
-/* Market / model / deal specific information */
-  SrtEvent            e;          /* financial event */
-  void              **tminf;        /* mkt inf : one *tminf for each underlying */
-  void               *trinf;         /* tree inf */
-  
-/* Underlyings correlation information */
-  double            **correl;		/* The correlation matrix for the underlyings*/
-  double            **coeff;		/* The linear coefficients used to correlate underlyings */
-  int 	              und_num;       /* The number of underlying involved*/
+    /* Underlyings correlation information */
+    double** correl;  /* The correlation matrix for the underlyings*/
+    double** coeff;   /* The linear coefficients used to correlate underlyings */
+    int      und_num; /* The number of underlying involved*/
 
-} SrtStp,*SrtStpPtr;
+} SrtStp, *SrtStpPtr;
 
 /* ------------------------------------------------------------------------------ */
 SrtStpPtr node_alloc();

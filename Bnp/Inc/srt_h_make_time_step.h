@@ -1,6 +1,6 @@
 /* ========================================================================
 
-  FILENAME:  srt_h_init_time_step.h	
+  FILENAME:  srt_h_init_time_step.h
 
   PURPOSE:   When you want to make time steps for a discretisation using Grfn
 
@@ -13,15 +13,11 @@
 /*=========================================================*/
 
 Err srt_f_make_time_step(
-	long            numeventdates,
-	Date           *eventdates, 
-	SrtUndPtr       und, 
-	SrtStpPtr      *pointer_to_info, 
-	SrtGrfnParam   *grfnparam,
-	SrtUndInfo     *und_info
-	);
-
-
-
+    long          numeventdates,
+    Date*         eventdates,
+    SrtUndPtr     und,
+    SrtStpPtr*    pointer_to_info,
+    SrtGrfnParam* grfnparam,
+    SrtUndInfo*   und_info);
 
 #endif
